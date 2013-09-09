@@ -10,8 +10,8 @@ Require-Bundle: org.adempiere.base;bundle-version="1.0.0",
  org.adempiere.plugin.utils;bundle-version="0.0.0"
 Bundle-ActivationPolicy: lazy
 Export-Package: org.globalqss.model,
- org.globalqss.process
-Service-Component: OSGI-INF/defaultmodelfactory.xml,
- OSGI-INF/lco_calloutswhfactory.xml,
- OSGI-INF/lcovalidatorwh.xml
+ org.globalqss.process,
+ ve.net.dcs.model,
+ ve.net.dcs.process
+Service-Component: OSGI-INF/lco_calloutswhfactory.xml,OSGI-INF/lcovalidatorwh.xml, OSGI-INF/VWTModelFactory.xml
 Import-Package: org.osgi.service.event

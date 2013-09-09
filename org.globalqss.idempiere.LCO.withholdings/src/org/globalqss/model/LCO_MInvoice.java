@@ -33,6 +33,8 @@ import org.compiere.model.Query;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
 
+import ve.net.dcs.model.MLVEVoucherWithholding;
+
 /**
  *	LCO_MInvoice
  *
@@ -50,20 +52,30 @@ public class LCO_MInvoice extends MInvoice
 		super(ctx, C_Invoice_ID, trxName);
 	}
 
-	public int recalcWithholdings() {
+	public int recalcWithholdings(MLVEVoucherWithholding voucher) {
 		
 		MDocType dt = new MDocType(getCtx(), getC_DocTypeTarget_ID(), get_TrxName());
 		String genwh = dt.get_ValueAsString("GenerateWithholding");
-		if (genwh == null || genwh.equals("N"))
+		if (genwh == null || genwh.equals("N") || genwh.equals(""))
 			return 0;
 		
 		int noins = 0;
 		log.info("");
 		BigDecimal totwith = new BigDecimal("0");
+		
+		Object[] param = null;
 
+		String sql = "DELETE FROM LCO_InvoiceWithholding WHERE C_Invoice_ID = ? AND LVE_VoucherWithholding_ID NOT IN (SELECT LVE_VoucherWithholding_ID FROM LVE_VoucherWithholding WHERE DocStatus = 'DR') OR LVE_VoucherWithholding_ID IS NULL";
+		if (voucher != null){
+			param = new Object[]{getC_Invoice_ID(),voucher.getLCO_WithholdingType_ID()};
+			sql += " AND LCO_WithholdingType_ID = ?";
+		}else{
+			param = new Object[]{getC_Invoice_ID()};
+		}
+			
 		int nodel = DB.executeUpdateEx(
-				"DELETE FROM LCO_InvoiceWithholding WHERE C_Invoice_ID = ?",
-				new Object[] { getC_Invoice_ID() },
+				sql,
+				param,
 				get_TrxName());
 		log.config("LCO_InvoiceWithholding deleted="+nodel);
 

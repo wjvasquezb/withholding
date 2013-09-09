@@ -10,4 +10,13 @@
             priority="0">
       </process>
    </extension>
+   <extension
+         id="ve.net.dcs.process.VWT_GenerateInvoiceWithholding"
+         name="VWT_GenerateInvoiceWithholding"
+         point="org.adempiere.base.Process">
+      <process
+            class="ve.net.dcs.process.VWT_GenerateInvoiceWithholding"
+            priority="0">
+      </process>
+   </extension>
 </plugin>
