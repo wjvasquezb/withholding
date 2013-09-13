@@ -13,6 +13,8 @@ Export-Package: org.globalqss.model,
  org.globalqss.process,
  ve.net.dcs.model,
  ve.net.dcs.process
-Service-Component: OSGI-INF/lco_calloutswhfactory.xml,OSGI-INF/lcovalidatorwh.xml, OSGI-INF/VWTModelFactory.xml
+Service-Component: OSGI-INF/lco_calloutswhfactory.xml,OSGI-INF/lcovalidatorwh.xml, OSGI-INF/VWTModelFactory.xml,
+ OSGI-INF/VWTCalloutFactory.xml
 Import-Package: org.osgi.service.event
-Bundle-ClassPath: ., lib/jdom-2.0.5.jar
+Bundle-ClassPath: .,
+ lib/jdom-2.0.5.jar

@@ -46,8 +46,9 @@ import org.xml.sax.InputSource;
  * Seniat Validator
  * 
  * @author Double Click Sistemas C.A. - http://dcs.net.ve
+ * @author Saul Pina - spina@dcs.net.ve
  */
-public class VWT_SeniatValidator implements IColumnCallout {
+public class VWTSeniatValidator implements IColumnCallout {
 
 	/**
 	 * CONFIG => Name: URL_SENIAT, Description: Url para consulta del Rif del
