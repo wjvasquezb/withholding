@@ -24,6 +24,8 @@ import org.compiere.model.GridField;
 import org.compiere.model.GridTab;
 import org.globalqss.model.X_LCO_WithholdingType;
 
+import ve.net.dcs.model.I_LVE_VoucherWithholding;
+
 /**
  * Seniat Validator
  * 
@@ -38,8 +40,8 @@ public class VWTSetIsSOTrx implements IColumnCallout {
 	@Override
 	public String start(Properties ctx, int WindowNo, GridTab mTab, GridField mField, Object value, Object oldValue) {
 
-		//X_LCO_WithholdingType wTypeID = new X_LCO_WithholdingType(ctx, (int) value, null);
-		//mTab.setValue(I_LVE_VoucherWithholding.COLUMNNAME_IsSOTrx, wTypeID.isSOTrx());
+		X_LCO_WithholdingType wTypeID = new X_LCO_WithholdingType(ctx, (int) value, null);
+		mTab.setValue(I_LVE_VoucherWithholding.COLUMNNAME_IsSOTrx, wTypeID.isSOTrx());
 		
 		return null;
 	}
