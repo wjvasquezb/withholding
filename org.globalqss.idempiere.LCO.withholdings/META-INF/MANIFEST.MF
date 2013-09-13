@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Localization Colombia - Withholdings
-Bundle-SymbolicName: org.globalqss.idempiere.LCO.withholdings;singleton:=true
+Bundle-SymbolicName: org.globalqss.idempiere.LCO.withholdings.DCS;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.adempiere.plugin.utils.AdempiereActivator
 Bundle-Vendor: GlobalQSS
@@ -15,3 +15,4 @@ Export-Package: org.globalqss.model,
  ve.net.dcs.process
 Service-Component: OSGI-INF/lco_calloutswhfactory.xml,OSGI-INF/lcovalidatorwh.xml, OSGI-INF/VWTModelFactory.xml
 Import-Package: org.osgi.service.event
+Bundle-ClassPath: ., lib/jdom-2.0.5.jar

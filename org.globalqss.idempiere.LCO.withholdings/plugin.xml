@@ -19,4 +19,19 @@
             priority="0">
       </process>
    </extension>
+   <extension
+         id="ve.net.dcs.process.VWT_ProcessWithholding"
+         point="org.adempiere.base.Process">
+      <process
+            class="ve.net.dcs.process.VWT_ProcessWithholding">
+      </process>
+   </extension>
+   <extension
+         point="org.adempiere.base.IColumnCallout">
+      <callout
+            class="ve.net.dcs.callout.VWT_SeniatValidator"
+            columnName="LVE_SeniatValidator"
+            tableName="C_BPartner">
+      </callout>
+   </extension>
 </plugin>

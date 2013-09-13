@@ -30,6 +30,7 @@ import org.compiere.acct.DocLine;
 import org.compiere.acct.DocTax;
 import org.compiere.acct.Fact;
 import org.compiere.acct.FactLine;
+import org.compiere.model.I_C_BPartner;
 import org.compiere.model.MAcctSchema;
 import org.compiere.model.MAllocationHdr;
 import org.compiere.model.MAllocationLine;
@@ -41,6 +42,7 @@ import org.compiere.model.MInvoiceTax;
 import org.compiere.model.MPayment;
 import org.compiere.model.MPaymentAllocate;
 import org.compiere.model.PO;
+import org.compiere.model.X_C_BPartner;
 import org.compiere.util.CLogger;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
@@ -64,6 +66,8 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 	@Override
 	protected void initialize() {
 		//	Tables to be monitored
+		registerTableEvent(IEventTopics.PO_BEFORE_CHANGE, I_C_BPartner.Table_Name);
+		
 		registerTableEvent(IEventTopics.PO_BEFORE_CHANGE, MInvoice.Table_Name);
 		registerTableEvent(IEventTopics.PO_BEFORE_NEW, MInvoiceLine.Table_Name);
 		registerTableEvent(IEventTopics.PO_BEFORE_CHANGE, MInvoiceLine.Table_Name);
@@ -95,6 +99,13 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 		log.info(po.get_TableName() + " Type: "+type);
 		String msg;
 
+		if (po.get_TableName().equals(I_C_BPartner.Table_Name) && type.equals(IEventTopics.PO_BEFORE_CHANGE)) {
+			
+			if (!((X_C_BPartner) po).getTaxID().matches("[0-9]+"))
+				throw new RuntimeException("Caracteres no válidos en número de identificación");
+			
+		}
+		
 		// Model Events
 		if (po.get_TableName().equals(MInvoice.Table_Name) && type.equals(IEventTopics.PO_BEFORE_CHANGE)) {
 			msg = clearInvoiceWithholdingAmtFromInvoice((MInvoice) po);

@@ -62,11 +62,11 @@ public class VWT_MInvoice extends LCO_MInvoice {
 		
 		sqlwhere += " AND AD_Org_ID = ? AND DOCSTATUS IN ('CO','CL') ";
 		
-		sqlwhere += "AND "+COLUMNNAME_C_Invoice_ID+" NOT IN (SELECT C_Invoice_ID FROM LCO_InvoiceWithholding lw  WHERE lw.lco_withholdingtype_id = ? AND lw.AD_Org_ID = ?) ";
+		sqlwhere += "AND "+COLUMNNAME_C_Invoice_ID+" NOT IN (SELECT lw.C_Invoice_ID FROM LCO_InvoiceWithholding lw JOIN LVE_VoucherWithholding vw ON lw.LVE_VoucherWithholding_ID = vw.LVE_VoucherWithholding_ID WHERE  vw.DocStatus IN ('CO','DR') AND lw.LCO_WithholdingType_ID = ? AND lw.AD_Org_ID = ?) ";
 		
 		parameters.add(voucher.getAD_Org_ID());
-		parameters.add(voucher.getAD_Org_ID());
 		parameters.add(voucher.getLCO_WithholdingType_ID());
+		parameters.add(voucher.getAD_Org_ID());
 		
 		List<MInvoice> list = new Query(ctx, Table_Name, sqlwhere, trxName)
 									.setParameters(parameters)

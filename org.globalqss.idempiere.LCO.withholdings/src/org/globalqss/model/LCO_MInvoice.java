@@ -62,22 +62,6 @@ public class LCO_MInvoice extends MInvoice
 		int noins = 0;
 		log.info("");
 		BigDecimal totwith = new BigDecimal("0");
-		
-		Object[] param = null;
-
-		String sql = "DELETE FROM LCO_InvoiceWithholding WHERE C_Invoice_ID = ? AND LVE_VoucherWithholding_ID NOT IN (SELECT LVE_VoucherWithholding_ID FROM LVE_VoucherWithholding WHERE DocStatus = 'DR') OR LVE_VoucherWithholding_ID IS NULL";
-		if (voucher != null){
-			param = new Object[]{getC_Invoice_ID(),voucher.getLCO_WithholdingType_ID()};
-			sql += " AND LCO_WithholdingType_ID = ?";
-		}else{
-			param = new Object[]{getC_Invoice_ID()};
-		}
-			
-		int nodel = DB.executeUpdateEx(
-				sql,
-				param,
-				get_TrxName());
-		log.config("LCO_InvoiceWithholding deleted="+nodel);
 
 		// Fill variables normally needed
 		// BP variables
@@ -95,13 +79,33 @@ public class LCO_MInvoice extends MInvoice
 		int org_city_id = ol.getC_City_ID();
 
 		// Search withholding types applicable depending on IsSOTrx
-		List<X_LCO_WithholdingType> wts = new Query(getCtx(), X_LCO_WithholdingType.Table_Name, "IsSOTrx=?", get_TrxName())
+		List<Object> params = new ArrayList<Object>();
+		
+		String sqlwhere  = "IsSOTrx=?";
+		params.add(isSOTrx() ? "Y" : "N");
+		if (voucher != null){
+			sqlwhere += " AND LCO_WithholdingType_ID = ?";
+			params.add(voucher.getLCO_WithholdingType_ID());
+		}
+			
+		
+		List<X_LCO_WithholdingType> wts = new Query(getCtx(), X_LCO_WithholdingType.Table_Name, sqlwhere, get_TrxName())
 			.setOnlyActiveRecords(true)
 			.setClient_ID()
-			.setParameters(isSOTrx() ? "Y" : "N")
+			.setParameters(params)
 			.list();
+		
 		for (X_LCO_WithholdingType wt : wts)
 		{
+			
+			String sql = "DELETE FROM LCO_InvoiceWithholding iw USING LVE_VoucherWithholding vw WHERE iw.C_Invoice_ID=? AND (vw.DocStatus = 'DR' OR iw.LVE_VoucherWithholding_ID IS NULL) AND iw.LCO_WithholdingType_ID=? ";
+				
+			int nodel = DB.executeUpdateEx(
+					sql,
+					new Object[]{getC_Invoice_ID(),wt.getLCO_WithholdingType_ID()},
+					get_TrxName());
+			log.config("LCO_InvoiceWithholding deleted="+nodel);
+			
 			// For each applicable withholding
 			log.info("Withholding Type: "+wt.getLCO_WithholdingType_ID()+"/"+wt.getName());
 
@@ -351,7 +355,7 @@ public class LCO_MInvoice extends MInvoice
 					iwh.setLCO_WithholdingType_ID(wt.getLCO_WithholdingType_ID());
 					iwh.setC_Tax_ID(tax.getC_Tax_ID());
 					iwh.setPercent(tax.getRate());
-					iwh.setProcessed(false);
+					iwh.setProcessed(false);					
 					int stdPrecision = MPriceList.getStandardPrecision(getCtx(), getM_PriceList_ID());
 					BigDecimal taxamt = tax.calculateTax(base, false, stdPrecision);
 					if (wc.getAmountRefunded() != null &&
@@ -360,8 +364,11 @@ public class LCO_MInvoice extends MInvoice
 					}
 					iwh.setTaxAmt(taxamt);
 					iwh.setTaxBaseAmt(base);
-					iwh.saveEx();
+
 					totwith = totwith.add(taxamt);
+					if (voucher != null)
+						iwh.set_ValueOfColumn("LVE_VoucherWithholding_ID", voucher.getLVE_VoucherWithholding_ID());
+					iwh.saveEx();
 					noins++;
 					log.info("LCO_InvoiceWithholding saved:"+iwh.getTaxAmt());
 				}
