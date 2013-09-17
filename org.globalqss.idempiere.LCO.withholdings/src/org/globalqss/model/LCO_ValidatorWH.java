@@ -207,7 +207,11 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 						if (genwh.equals("A")) {
 							// document type configured to generate withholdings automatically
 							LCO_MInvoice lcoinv = new LCO_MInvoice(inv.getCtx(), inv.getC_Invoice_ID(), inv.get_TrxName());
-							lcoinv.recalcWithholdings(null);
+							try {
+								lcoinv.recalcWithholdings(null);
+							} catch (SQLException e) {
+								e.printStackTrace();
+							}
 						}
 					}
 				}

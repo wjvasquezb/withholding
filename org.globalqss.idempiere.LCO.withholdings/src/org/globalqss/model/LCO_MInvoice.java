@@ -17,6 +17,9 @@
 package org.globalqss.model;
 
 import java.math.BigDecimal;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -33,6 +36,7 @@ import org.compiere.model.Query;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
 
+import ve.net.dcs.model.MLVETaxUnit;
 import ve.net.dcs.model.MLVEVoucherWithholding;
 
 /**
@@ -52,7 +56,7 @@ public class LCO_MInvoice extends MInvoice
 		super(ctx, C_Invoice_ID, trxName);
 	}
 
-	public int recalcWithholdings(MLVEVoucherWithholding voucher) {
+	public int recalcWithholdings(MLVEVoucherWithholding voucher) throws SQLException {
 		
 		MDocType dt = new MDocType(getCtx(), getC_DocTypeTarget_ID(), get_TrxName());
 		String genwh = dt.get_ValueAsString("GenerateWithholding");
@@ -235,6 +239,11 @@ public class LCO_MInvoice extends MInvoice
 				// calc base
 				// apply rule to calc base
 				BigDecimal base = null;
+				
+				//SUBTRAHEND
+				BigDecimal MinAmount = Env.ZERO;
+				BigDecimal Subtrahend = Env.ZERO;
+				//SUBTRAHEND
 
 				if (wc.getBaseType() == null) {
 					log.severe("Base Type null in calc record "+wr.getLCO_WithholdingCalc_ID());
@@ -244,6 +253,13 @@ public class LCO_MInvoice extends MInvoice
 					List<Object> paramslca = new ArrayList<Object>();
 					paramslca.add(getC_Invoice_ID());
 					String sqllca; 
+					
+					//SUBTRAHEND
+					Integer TaxUnit = MLVETaxUnit.taxUnit(get_TrxName(), getAD_Org_ID(), getDateInvoiced(), getDateInvoiced());
+					BigDecimal Factor = new BigDecimal(wc.get_Value("SubtrahendFactor").toString());
+					MinAmount = Factor.multiply(new BigDecimal(TaxUnit));
+					//SUBTRAHEND
+					
 					if (wrc.isUseWithholdingCategory() && wrc.isUseProductTaxCategory()) {
 						// base = lines of the withholding category and tax category
 						sqllca = 
@@ -313,6 +329,47 @@ public class LCO_MInvoice extends MInvoice
 							+ " WHERE IsActive='Y' AND C_Invoice_ID = ? ";
 					}
 					base = DB.getSQLValueBD(get_TrxName(), sqllca, paramslca);
+					
+					//SUBTRAHEND
+					if (MinAmount.compareTo(Env.ZERO) > 0) {
+						PreparedStatement pstmt2 = null;
+						ResultSet rs2 = null;
+						String sqlsus = "SELECT * FROM LCO_InvoiceWithholding wh "
+								+ " JOIN C_Invoice iv ON wh.C_Invoice_ID = iv.C_Invoice_ID AND "
+								+ " iv.C_BPartner_ID = ? AND "
+								+ " iv.DateInvoiced BETWEEN ? AND ?"
+								+ " WHERE wh.LCO_WithholdingType_ID = ? AND wh.IsActive='Y'";
+
+						pstmt2 = DB.prepareStatement(sqlsus, get_TrxName());
+						pstmt2.setInt(1, getC_BPartner_ID());
+						pstmt2.setTimestamp(2, MLVETaxUnit.firstDayOfMonth(getDateInvoiced()));
+						pstmt2.setTimestamp(3, getDateInvoiced());
+						pstmt2.setInt(4, wt.getLCO_WithholdingType_ID());
+
+						rs2 = pstmt2.executeQuery();
+						BigDecimal Sub = Env.ZERO;
+						BigDecimal BaseWH = Env.ZERO;
+						while (rs2.next()) {
+							MLCOInvoiceWithholding iwhc = new MLCOInvoiceWithholding(
+									getCtx(), rs2, get_TrxName());
+
+							Sub = new BigDecimal(iwhc.get_Value(
+									"Subtrahend").toString());
+
+							BaseWH = BaseWH.add(iwhc.getTaxBaseAmt());
+
+							if (Sub.compareTo(Env.ZERO) > 0)
+								MinAmount = Env.ZERO;
+
+						}
+
+						base = base.subtract(BaseWH);
+					}
+
+					Subtrahend = tax.getRate().divide(Env.ONEHUNDRED)
+							.multiply(MinAmount);
+					//SUBTRAHEND
+					
 				} else if (wc.getBaseType().equals(X_LCO_WithholdingCalc.BASETYPE_Tax)) {
 					// if specific tax
 					if (wc.getC_BaseTax_ID() != 0) {
@@ -362,8 +419,14 @@ public class LCO_MInvoice extends MInvoice
 							wc.getAmountRefunded().compareTo(Env.ZERO) > 0) {
 						taxamt = taxamt.subtract(wc.getAmountRefunded());
 					}
-					iwh.setTaxAmt(taxamt);
+					//iwh.setTaxAmt(taxamt);
+					//iwh.setTaxBaseAmt(base);
+					
+					//SUBTRAHEND
+					iwh.set_ValueOfColumn("Subtrahend", Subtrahend.setScale(stdPrecision, BigDecimal.ROUND_HALF_UP));
+					iwh.setTaxAmt(taxamt.subtract(Subtrahend).setScale(stdPrecision, BigDecimal.ROUND_HALF_UP));
 					iwh.setTaxBaseAmt(base);
+					//SUBTRAHEND
 
 					totwith = totwith.add(taxamt);
 					if (voucher != null)
