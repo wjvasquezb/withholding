@@ -238,11 +238,11 @@ public class LCO_MInvoice extends MInvoice
 
 				// calc base
 				// apply rule to calc base
-				BigDecimal base = null;
+				BigDecimal base = Env.ZERO;
 				
 				//SUBTRAHEND
-				BigDecimal MinAmount = Env.ZERO;
-				BigDecimal Subtrahend = Env.ZERO;
+//				BigDecimal MinAmount = Env.ZERO;
+//				BigDecimal Subtrahend = Env.ZERO;
 				//SUBTRAHEND
 
 				if (wc.getBaseType() == null) {
@@ -255,15 +255,15 @@ public class LCO_MInvoice extends MInvoice
 					String sqllca; 
 					
 					//SUBTRAHEND
-					Integer TaxUnit = MLVETaxUnit.taxUnit(get_TrxName(), getAD_Org_ID(), getDateInvoiced(), getDateInvoiced());
-					BigDecimal Factor = new BigDecimal(wc.get_Value("SubtrahendFactor").toString());
-					MinAmount = Factor.multiply(new BigDecimal(TaxUnit));
+//					Integer TaxUnit = MLVETaxUnit.taxUnit(get_TrxName(), getAD_Org_ID(), getDateInvoiced(), getDateInvoiced());
+//					BigDecimal Factor = new BigDecimal(wc.get_Value("SubtrahendFactor").toString());
+//					MinAmount = Factor.multiply(new BigDecimal(TaxUnit));
 					//SUBTRAHEND
 					
 					if (wrc.isUseWithholdingCategory() && wrc.isUseProductTaxCategory()) {
 						// base = lines of the withholding category and tax category
 						sqllca = 
-							"SELECT SUM (LineNetAmt) "
+							"SELECT COALESCE(SUM (LineNetAmt),0) "
 							+ "  FROM C_InvoiceLine il "
 							+ " WHERE IsActive='Y' AND C_Invoice_ID = ? "
 							+ "   AND (   EXISTS ( "
@@ -286,7 +286,7 @@ public class LCO_MInvoice extends MInvoice
 					} else if (wrc.isUseWithholdingCategory()) {
 						// base = lines of the withholding category
 						sqllca = 
-							"SELECT SUM (LineNetAmt) "
+							"SELECT COALESCE(SUM (LineNetAmt),0) "
 							+ "  FROM C_InvoiceLine il "
 							+ " WHERE IsActive='Y' AND C_Invoice_ID = ? "
 							+ "   AND (   EXISTS ( "
@@ -305,7 +305,7 @@ public class LCO_MInvoice extends MInvoice
 					} else if (wrc.isUseProductTaxCategory()) {
 						// base = lines of the product tax category
 						sqllca = 
-							"SELECT SUM (LineNetAmt) "
+							"SELECT COALESCE(SUM (LineNetAmt),0) "
 							+ "  FROM C_InvoiceLine il "
 							+ " WHERE IsActive='Y' AND C_Invoice_ID = ? "
 							+ "   AND (   EXISTS ( "
@@ -324,50 +324,50 @@ public class LCO_MInvoice extends MInvoice
 					} else {
 						// base = all lines
 						sqllca = 
-							"SELECT SUM (LineNetAmt) "
+							"SELECT COALESCE(SUM (LineNetAmt),0) "
 							+ "  FROM C_InvoiceLine il "
 							+ " WHERE IsActive='Y' AND C_Invoice_ID = ? ";
 					}
 					base = DB.getSQLValueBD(get_TrxName(), sqllca, paramslca);
 					
 					//SUBTRAHEND
-					if (MinAmount.compareTo(Env.ZERO) > 0) {
-						PreparedStatement pstmt2 = null;
-						ResultSet rs2 = null;
-						String sqlsus = "SELECT * FROM LCO_InvoiceWithholding wh "
-								+ " JOIN C_Invoice iv ON wh.C_Invoice_ID = iv.C_Invoice_ID AND "
-								+ " iv.C_BPartner_ID = ? AND "
-								+ " iv.DateInvoiced BETWEEN ? AND ?"
-								+ " WHERE wh.LCO_WithholdingType_ID = ? AND wh.IsActive='Y'";
-
-						pstmt2 = DB.prepareStatement(sqlsus, get_TrxName());
-						pstmt2.setInt(1, getC_BPartner_ID());
-						pstmt2.setTimestamp(2, MLVETaxUnit.firstDayOfMonth(getDateInvoiced()));
-						pstmt2.setTimestamp(3, getDateInvoiced());
-						pstmt2.setInt(4, wt.getLCO_WithholdingType_ID());
-
-						rs2 = pstmt2.executeQuery();
-						BigDecimal Sub = Env.ZERO;
-						BigDecimal BaseWH = Env.ZERO;
-						while (rs2.next()) {
-							MLCOInvoiceWithholding iwhc = new MLCOInvoiceWithholding(
-									getCtx(), rs2, get_TrxName());
-
-							Sub = new BigDecimal(iwhc.get_Value(
-									"Subtrahend").toString());
-
-							BaseWH = BaseWH.add(iwhc.getTaxBaseAmt());
-
-							if (Sub.compareTo(Env.ZERO) > 0)
-								MinAmount = Env.ZERO;
-
-						}
-
-						base = base.subtract(BaseWH);
-					}
-
-					Subtrahend = tax.getRate().divide(Env.ONEHUNDRED)
-							.multiply(MinAmount);
+//					if (MinAmount.compareTo(Env.ZERO) > 0) {
+//						PreparedStatement pstmt2 = null;
+//						ResultSet rs2 = null;
+//						String sqlsus = "SELECT * FROM LCO_InvoiceWithholding wh "
+//								+ " JOIN C_Invoice iv ON wh.C_Invoice_ID = iv.C_Invoice_ID AND "
+//								+ " iv.C_BPartner_ID = ? AND "
+//								+ " iv.DateInvoiced BETWEEN ? AND ?"
+//								+ " WHERE wh.LCO_WithholdingRule_ID = ? AND wh.IsActive='Y'";
+//
+//						pstmt2 = DB.prepareStatement(sqlsus, get_TrxName());
+//						pstmt2.setInt(1, getC_BPartner_ID());
+//						pstmt2.setTimestamp(2, MLVETaxUnit.firstDayOfMonth(getDateInvoiced()));
+//						pstmt2.setTimestamp(3, getDateInvoiced());
+//						pstmt2.setInt(4, wr.get_ID());
+//
+//						rs2 = pstmt2.executeQuery();
+//						BigDecimal Sub = Env.ZERO;
+//						BigDecimal BaseWH = Env.ZERO;
+//						while (rs2.next()) {
+//							MLCOInvoiceWithholding iwhc = new MLCOInvoiceWithholding(
+//									getCtx(), rs2, get_TrxName());
+//
+//							Sub = new BigDecimal(iwhc.get_Value(
+//									"Subtrahend").toString());
+//
+//							BaseWH = BaseWH.add(iwhc.getTaxBaseAmt());
+//
+//							if (Sub.compareTo(Env.ZERO) > 0)
+//								MinAmount = Env.ZERO;
+//
+//						}
+//
+//						base = base.subtract(BaseWH);
+//					}
+//
+//					Subtrahend = tax.getRate().divide(Env.ONEHUNDRED)
+//							.multiply(MinAmount);
 					//SUBTRAHEND
 					
 				} else if (wc.getBaseType().equals(X_LCO_WithholdingCalc.BASETYPE_Tax)) {
@@ -382,7 +382,7 @@ public class LCO_MInvoice extends MInvoice
 					} else {
 						// not specific tax
 						// base = value of all taxes
-						String sqlbsat = "SELECT SUM(TaxAmt) "
+						String sqlbsat = "SELECT COALESCE(SUM(TaxAmt),0) "
 							+ " FROM C_InvoiceTax "
 							+ " WHERE IsActive='Y' AND C_Invoice_ID = ? ";
 						base = DB.getSQLValueBD(get_TrxName(), sqlbsat, new Object[] {getC_Invoice_ID()});
@@ -419,13 +419,13 @@ public class LCO_MInvoice extends MInvoice
 							wc.getAmountRefunded().compareTo(Env.ZERO) > 0) {
 						taxamt = taxamt.subtract(wc.getAmountRefunded());
 					}
-					//iwh.setTaxAmt(taxamt);
-					//iwh.setTaxBaseAmt(base);
+					iwh.setTaxAmt(taxamt);
+					iwh.setTaxBaseAmt(base);
 					
 					//SUBTRAHEND
-					iwh.set_ValueOfColumn("Subtrahend", Subtrahend.setScale(stdPrecision, BigDecimal.ROUND_HALF_UP));
-					iwh.setTaxAmt(taxamt.subtract(Subtrahend).setScale(stdPrecision, BigDecimal.ROUND_HALF_UP));
-					iwh.setTaxBaseAmt(base);
+//					iwh.set_ValueOfColumn("Subtrahend", Subtrahend.setScale(stdPrecision, BigDecimal.ROUND_HALF_UP));
+//					iwh.setTaxAmt(taxamt.subtract(Subtrahend).setScale(stdPrecision, BigDecimal.ROUND_HALF_UP));
+//					iwh.setTaxBaseAmt(base);
 					//SUBTRAHEND
 
 					totwith = totwith.add(taxamt);

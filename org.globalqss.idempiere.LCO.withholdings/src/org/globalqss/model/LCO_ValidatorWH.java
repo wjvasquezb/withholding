@@ -66,7 +66,7 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 	@Override
 	protected void initialize() {
 		//	Tables to be monitored
-		registerTableEvent(IEventTopics.PO_BEFORE_CHANGE, I_C_BPartner.Table_Name);
+		
 		
 		registerTableEvent(IEventTopics.PO_BEFORE_CHANGE, MInvoice.Table_Name);
 		registerTableEvent(IEventTopics.PO_BEFORE_NEW, MInvoiceLine.Table_Name);
@@ -98,13 +98,6 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 		String type = event.getTopic();
 		log.info(po.get_TableName() + " Type: "+type);
 		String msg;
-
-		if (po.get_TableName().equals(I_C_BPartner.Table_Name) && type.equals(IEventTopics.PO_BEFORE_CHANGE)) {
-			
-			if (!((X_C_BPartner) po).getTaxID().matches("[0-9]+"))
-				throw new RuntimeException("Caracteres no válidos en número de identificación");
-			
-		}
 		
 		// Model Events
 		if (po.get_TableName().equals(MInvoice.Table_Name) && type.equals(IEventTopics.PO_BEFORE_CHANGE)) {
