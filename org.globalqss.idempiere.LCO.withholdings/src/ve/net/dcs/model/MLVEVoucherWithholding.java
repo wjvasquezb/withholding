@@ -111,7 +111,7 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 			throw new AdempiereException("@NoLines@");
 		}
 
-		int C_BankAccount_ID = MSysConfig.getIntValue("LVE_Withholding_BankAccount", 0, getAD_Client_ID(), getAD_Org_ID());
+		int C_BankAccount_ID = MSysConfig.getIntValue("LVE_Withholding_BankAccount", 0, getAD_Client_ID());
 
 		if (C_BankAccount_ID == 0) {
 			// m_processMsg =
@@ -129,12 +129,12 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 			throw new AdempiereException("Debe Establecer un Caja para las Retenciones, Configurador del Sistema LVE_Withholding_BankAccount");
 		}
 
-		if (baccount.getAD_Org_ID() != getAD_Org_ID()) {
-			// m_processMsg =
-			// "Debe Establecer un Caja para las Retenciones, Configurador del Sistema LVE_Withholding_BankAccount";
-			// return DocAction.STATUS_Invalid;
-			throw new AdempiereException("Debe Establecer un Caja para las Retenciones, Configurador del Sistema LVE_Withholding_BankAccount");
-		}
+//		if (baccount.getAD_Org_ID() != getAD_Org_ID()) {
+//			// m_processMsg =
+//			// "Debe Establecer un Caja para las Retenciones, Configurador del Sistema LVE_Withholding_BankAccount";
+//			// return DocAction.STATUS_Invalid;
+//			throw new AdempiereException("Debe Establecer un Caja para las Retenciones, Configurador del Sistema LVE_Withholding_BankAccount");
+//		}
 
 		MPayment payment = new MPayment(getCtx(), 0, get_TrxName());
 		payment.setAD_Org_ID(getAD_Org_ID());
@@ -232,10 +232,6 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 			pa.setOverUnderAmt(InvoiceOpenAmt.subtract(pa.getWriteOffAmt()));
 
 			pa.saveEx();
-
-			mWithholding.setC_AllocationLine_ID(pa.getC_AllocationLine_ID());
-
-			mWithholding.saveEx();
 		}
 
 		if (!payment.processIt(MPayment.DOCACTION_Complete)) {

@@ -17,8 +17,6 @@
 package org.globalqss.model;
 
 import java.math.BigDecimal;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +33,6 @@ import org.compiere.model.MTax;
 import org.compiere.model.Query;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
-
-import ve.net.dcs.model.MLVETaxUnit;
 import ve.net.dcs.model.MLVEVoucherWithholding;
 
 /**

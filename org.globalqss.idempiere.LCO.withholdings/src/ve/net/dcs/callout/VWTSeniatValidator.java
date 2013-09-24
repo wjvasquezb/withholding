@@ -75,7 +75,7 @@ public class VWTSeniatValidator implements IColumnCallout {
 		
 		String file = null;
 
-		file = readFile(urlSeniat + taxidType.getName() + taxid);
+		file = readFile(urlSeniat + taxid);
 
 		if (file == null)
 			return "Contribuyente no encontrado en Seniat";

@@ -56,12 +56,12 @@ public class LCO_CalloutWithholding implements IColumnCalloutFactory
 				return new IColumnCallout[]{new FillPercentFromTax()};
 			if (columnName.equalsIgnoreCase(I_LCO_InvoiceWithholding.COLUMNNAME_TaxBaseAmt))
 				return new IColumnCallout[]{new Recalc_TaxAmt()};
-		} else if (tableName.equalsIgnoreCase(I_C_Payment.Table_Name)) {
-			if (columnName.equalsIgnoreCase(I_C_Payment.COLUMNNAME_C_Invoice_ID))
-				return new IColumnCallout[]{new FillWriteOff()};
-		} else if (tableName.equalsIgnoreCase(I_C_PaymentAllocate.Table_Name)) {
-			if (columnName.equalsIgnoreCase(I_C_PaymentAllocate.COLUMNNAME_C_Invoice_ID))
-				return new IColumnCallout[]{new FillWriteOff()};
+//		} else if (tableName.equalsIgnoreCase(I_C_Payment.Table_Name)) {
+//			if (columnName.equalsIgnoreCase(I_C_Payment.COLUMNNAME_C_Invoice_ID))
+//				return new IColumnCallout[]{new FillWriteOff()};
+//		} else if (tableName.equalsIgnoreCase(I_C_PaymentAllocate.Table_Name)) {
+//			if (columnName.equalsIgnoreCase(I_C_PaymentAllocate.COLUMNNAME_C_Invoice_ID))
+//				return new IColumnCallout[]{new FillWriteOff()};
 		// } else if (tableName.equalsIgnoreCase(I_C_CashLine.Table_Name)) {
 		// 	if (columnName.equalsIgnoreCase(I_C_CashLine.COLUMNNAME_C_Invoice_ID))
 		//		return new IColumnCallout[]{new FillWriteOff()};
