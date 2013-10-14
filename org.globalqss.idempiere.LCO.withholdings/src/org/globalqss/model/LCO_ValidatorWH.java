@@ -226,11 +226,11 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 		}
 
 		// before completing the payment - validate that writeoff amount must be greater than sum of payment withholdings  
-//		if (po.get_TableName().equals(MPayment.Table_Name) && type.equals(IEventTopics.DOC_BEFORE_COMPLETE)) {
-//			msg = validateWriteOffVsPaymentWithholdings((MPayment) po);
-//			if (msg != null)
-//				throw new RuntimeException(msg);
-//		}
+		if (po.get_TableName().equals(MPayment.Table_Name) && type.equals(IEventTopics.DOC_BEFORE_COMPLETE)) {
+			msg = validateWriteOffVsPaymentWithholdings((MPayment) po);
+			if (msg != null)
+				throw new RuntimeException(msg);
+		}
 
 		// after completing the allocation - complete the payment withholdings  
 		if (po.get_TableName().equals(MAllocationHdr.Table_Name) && type.equals(IEventTopics.DOC_AFTER_COMPLETE)) {

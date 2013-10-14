@@ -35,11 +35,10 @@ public class VWTModelValidator extends AbstractEventHandler {
 		String type = event.getTopic();
 		log.info(po.get_TableName() + " Type: " + type);
 
-//		if (po.get_TableName().equals(I_C_BPartner.Table_Name) && type.equals(IEventTopics.PO_BEFORE_CHANGE)) {
-//			if (!((X_C_BPartner) po).getTaxID().matches("[0-9]+"))
-//				throw new RuntimeException("Caracteres no válidos en número de identificación");
-//		} else 
-		if (po.get_TableName().equals(I_C_Invoice.Table_Name) && type.equals(IEventTopics.DOC_AFTER_COMPLETE)) {
+		if (po.get_TableName().equals(I_C_BPartner.Table_Name) && type.equals(IEventTopics.PO_BEFORE_CHANGE)) {
+			if (!((X_C_BPartner) po).getTaxID().matches("[0-9]+"))
+				throw new RuntimeException("Caracteres no válidos en número de identificación");
+		} else if (po.get_TableName().equals(I_C_Invoice.Table_Name) && type.equals(IEventTopics.DOC_AFTER_COMPLETE)) {
 
 			MInvoice invoice = (MInvoice) po;
 			String sqlwhere = " C_Invoice_ID = ? AND LVE_VoucherWithholding_ID IS NULL";
