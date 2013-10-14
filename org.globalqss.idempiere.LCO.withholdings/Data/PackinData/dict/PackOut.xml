@@ -294,7 +294,6 @@
         <DocNoSequence_ID reference="uuid" reference-key="AD_Sequence">bbab5311-30db-487a-aed2-67a008dd6a23</DocNoSequence_ID>
         <GL_Category_ID reference="uuid" reference-key="GL_Category">fc137315-012e-4da1-ab66-e4b7f175895b</GL_Category_ID>
         <IsDefault>false</IsDefault>
-        <AD_PrintFormat_ID reference="id"/>
         <DocBaseType>VWT</DocBaseType>
         <IsSOTrx>true</IsSOTrx>
         <DocumentCopies>1</DocumentCopies>
@@ -326,25 +325,12 @@
         <IsChargeOrProductMandatory>false</IsChargeOrProductMandatory>
         <DocSubTypeInv/>
         <GenerateWithholding>N</GenerateWithholding>
-        <DoctypeProducer>false</DoctypeProducer>
-        <C_DocType_Trl type="table">
-            <AD_Org_ID>0</AD_Org_ID>
-            <C_DocType_ID reference="uuid" reference-key="C_DocType">12406276-c0c7-4504-b115-6c31b5b8e14c</C_DocType_ID>
-            <AD_Language>es_VE</AD_Language>
-            <PrintName>Retención IVA en Ventas</PrintName>
-            <Name>Retención IVA en Ventas</Name>
-            <DocumentNote/>
-            <IsTranslated>false</IsTranslated>
-            <C_DocType_Trl_UU>c0e33303-f11b-4736-a29f-3bfcd271a761</C_DocType_Trl_UU>
-            <IsActive>true</IsActive>
-        </C_DocType_Trl>
     </C_DocType>
     <C_DocType type="table">
         <AD_Org_ID>0</AD_Org_ID>
         <DocNoSequence_ID reference="uuid" reference-key="AD_Sequence">4b4359b6-72e6-4218-9415-e7539a5b5df9</DocNoSequence_ID>
         <GL_Category_ID reference="uuid" reference-key="GL_Category">fc137315-012e-4da1-ab66-e4b7f175895b</GL_Category_ID>
         <IsDefault>false</IsDefault>
-        <AD_PrintFormat_ID reference="id"/>
         <DocBaseType>VWT</DocBaseType>
         <IsSOTrx>true</IsSOTrx>
         <DocumentCopies>1</DocumentCopies>
@@ -376,25 +362,12 @@
         <IsChargeOrProductMandatory>false</IsChargeOrProductMandatory>
         <DocSubTypeInv/>
         <GenerateWithholding>N</GenerateWithholding>
-        <DoctypeProducer>false</DoctypeProducer>
-        <C_DocType_Trl type="table">
-            <AD_Org_ID>0</AD_Org_ID>
-            <C_DocType_ID reference="uuid" reference-key="C_DocType">6fcf93c4-1f82-4987-bae7-85c685faa5e1</C_DocType_ID>
-            <AD_Language>es_VE</AD_Language>
-            <PrintName>Retención ISLR en Ventas</PrintName>
-            <Name>Retención ISLR en Ventas</Name>
-            <DocumentNote/>
-            <IsTranslated>false</IsTranslated>
-            <C_DocType_Trl_UU>44c22827-8a60-45c3-a3e1-17673bbe581b</C_DocType_Trl_UU>
-            <IsActive>true</IsActive>
-        </C_DocType_Trl>
     </C_DocType>
     <C_DocType type="table">
         <AD_Org_ID>0</AD_Org_ID>
         <DocNoSequence_ID reference="uuid" reference-key="AD_Sequence">07defb62-c158-4d52-a95a-5e189e389e8c</DocNoSequence_ID>
         <GL_Category_ID reference="uuid" reference-key="GL_Category">fc137315-012e-4da1-ab66-e4b7f175895b</GL_Category_ID>
         <IsDefault>false</IsDefault>
-        <AD_PrintFormat_ID reference="uuid" reference-key="AD_PrintFormat">07c01a1c-753e-47f2-9826-3d4552d1f5de</AD_PrintFormat_ID>
         <DocBaseType>VWT</DocBaseType>
         <IsSOTrx>false</IsSOTrx>
         <DocumentCopies>1</DocumentCopies>
@@ -426,25 +399,12 @@
         <IsChargeOrProductMandatory>false</IsChargeOrProductMandatory>
         <DocSubTypeInv/>
         <GenerateWithholding>N</GenerateWithholding>
-        <DoctypeProducer>false</DoctypeProducer>
-        <C_DocType_Trl type="table">
-            <AD_Org_ID>0</AD_Org_ID>
-            <C_DocType_ID reference="uuid" reference-key="C_DocType">38d8e5b8-1c66-4569-90c7-6c33c1784c8a</C_DocType_ID>
-            <AD_Language>es_VE</AD_Language>
-            <PrintName>Retención IVA en Compras</PrintName>
-            <Name>Retención IVA en Compras</Name>
-            <DocumentNote/>
-            <IsTranslated>false</IsTranslated>
-            <C_DocType_Trl_UU>409bef2a-ca8a-417b-9e2e-ac9e9f95f8ee</C_DocType_Trl_UU>
-            <IsActive>true</IsActive>
-        </C_DocType_Trl>
     </C_DocType>
     <C_DocType type="table">
         <AD_Org_ID>0</AD_Org_ID>
         <DocNoSequence_ID reference="uuid" reference-key="AD_Sequence">9a30fefd-8395-40f6-901e-63c31eac4211</DocNoSequence_ID>
         <GL_Category_ID reference="uuid" reference-key="GL_Category">fc137315-012e-4da1-ab66-e4b7f175895b</GL_Category_ID>
         <IsDefault>false</IsDefault>
-        <AD_PrintFormat_ID reference="uuid" reference-key="AD_PrintFormat">3baa8db0-ac46-45c6-a70c-f9cb94714f93</AD_PrintFormat_ID>
         <DocBaseType>VWT</DocBaseType>
         <IsSOTrx>false</IsSOTrx>
         <DocumentCopies>1</DocumentCopies>
@@ -476,25 +436,12 @@
         <IsChargeOrProductMandatory>false</IsChargeOrProductMandatory>
         <DocSubTypeInv/>
         <GenerateWithholding>N</GenerateWithholding>
-        <DoctypeProducer>false</DoctypeProducer>
-        <C_DocType_Trl type="table">
-            <AD_Org_ID>0</AD_Org_ID>
-            <C_DocType_ID reference="uuid" reference-key="C_DocType">969aae99-a909-496f-8e33-7afd37a46c65</C_DocType_ID>
-            <AD_Language>es_VE</AD_Language>
-            <PrintName>Purchase ISLR Withholding</PrintName>
-            <Name>Purchase ISLR Withholding</Name>
-            <DocumentNote/>
-            <IsTranslated>false</IsTranslated>
-            <C_DocType_Trl_UU>6d3e2c42-a076-4aa0-a2a0-519835ba37dd</C_DocType_Trl_UU>
-            <IsActive>true</IsActive>
-        </C_DocType_Trl>
     </C_DocType>
     <C_DocType type="table">
         <AD_Org_ID>0</AD_Org_ID>
         <DocNoSequence_ID reference="uuid" reference-key="AD_Sequence">b162d40d-d3f8-47c2-bcc8-756fe3d38ff7</DocNoSequence_ID>
         <GL_Category_ID reference="uuid" reference-key="GL_Category">fc137315-012e-4da1-ab66-e4b7f175895b</GL_Category_ID>
         <IsDefault>false</IsDefault>
-        <AD_PrintFormat_ID reference="id"/>
         <DocBaseType>APP</DocBaseType>
         <IsSOTrx>false</IsSOTrx>
         <DocumentCopies>1</DocumentCopies>
@@ -526,25 +473,12 @@
         <IsChargeOrProductMandatory>false</IsChargeOrProductMandatory>
         <DocSubTypeInv/>
         <GenerateWithholding>N</GenerateWithholding>
-        <DoctypeProducer>false</DoctypeProducer>
-        <C_DocType_Trl type="table">
-            <AD_Org_ID>0</AD_Org_ID>
-            <C_DocType_ID reference="uuid" reference-key="C_DocType">a111baaa-123c-4789-a8ce-b9c67e734611</C_DocType_ID>
-            <AD_Language>es_VE</AD_Language>
-            <PrintName>Retención Compra</PrintName>
-            <Name>Retención Compra</Name>
-            <DocumentNote/>
-            <IsTranslated>true</IsTranslated>
-            <C_DocType_Trl_UU>c1842820-c4ca-4e74-bed6-7c6cd1529249</C_DocType_Trl_UU>
-            <IsActive>true</IsActive>
-        </C_DocType_Trl>
     </C_DocType>
     <C_DocType type="table">
         <AD_Org_ID>0</AD_Org_ID>
         <DocNoSequence_ID reference="uuid" reference-key="AD_Sequence">0ed0911c-65b5-41a6-841e-3bbf17d4b698</DocNoSequence_ID>
         <GL_Category_ID reference="uuid" reference-key="GL_Category">fc137315-012e-4da1-ab66-e4b7f175895b</GL_Category_ID>
         <IsDefault>false</IsDefault>
-        <AD_PrintFormat_ID reference="id"/>
         <DocBaseType>ARR</DocBaseType>
         <IsSOTrx>true</IsSOTrx>
         <DocumentCopies>1</DocumentCopies>
@@ -579,19 +513,274 @@
         <IsDocFiscal>false</IsDocFiscal>
         <SerialFiscal/>
         <GenerateWithholding>N</GenerateWithholding>
-        <DoctypeProducer>false</DoctypeProducer>
-        <C_DocType_Trl type="table">
-            <AD_Org_ID>0</AD_Org_ID>
-            <C_DocType_ID reference="uuid" reference-key="C_DocType">2455790f-5db5-44a2-8019-0f9dfa14ebda</C_DocType_ID>
-            <AD_Language>es_VE</AD_Language>
-            <PrintName>Retención Venta</PrintName>
-            <Name>Retención Venta</Name>
-            <DocumentNote/>
-            <IsTranslated>true</IsTranslated>
-            <C_DocType_Trl_UU>be03eaf2-f374-44bb-896a-69bfaba15358</C_DocType_Trl_UU>
-            <IsActive>true</IsActive>
-        </C_DocType_Trl>
     </C_DocType>
+    <C_TaxCategory type="table">
+        <AD_Org_ID>0</AD_Org_ID>
+        <C_TaxCategory_UU>4eb74616-68ba-49e3-b877-046ef351ab0c</C_TaxCategory_UU>
+        <IsDefault>false</IsDefault>
+        <CommodityCode/>
+        <Name>EXENTO</Name>
+        <Description>IMPUESTO EXENTO</Description>
+        <IsActive>true</IsActive>
+        <IsWithholding>false</IsWithholding>
+    </C_TaxCategory>
+    <C_TaxCategory type="table">
+        <AD_Org_ID>0</AD_Org_ID>
+        <C_TaxCategory_UU>429b15f4-7141-4698-b896-2fef6a8372b7</C_TaxCategory_UU>
+        <IsDefault>true</IsDefault>
+        <CommodityCode/>
+        <Name>Retencion ISLR</Name>
+        <Description>IMPUESTO SOBRE LA RENTA</Description>
+        <IsActive>true</IsActive>
+        <IsWithholding>false</IsWithholding>
+    </C_TaxCategory>
+    <C_TaxCategory type="table">
+        <AD_Org_ID>0</AD_Org_ID>
+        <C_TaxCategory_UU>9180dfe3-e520-4695-8813-9d09344c4195</C_TaxCategory_UU>
+        <IsDefault>true</IsDefault>
+        <CommodityCode/>
+        <Name>Retencion IVA</Name>
+        <Description>Retenciones IVA</Description>
+        <IsActive>true</IsActive>
+        <IsWithholding>false</IsWithholding>
+    </C_TaxCategory>
+    <C_TaxCategory type="table">
+        <AD_Org_ID>0</AD_Org_ID>
+        <C_TaxCategory_UU>ecec3c29-48eb-460c-ad49-530affe60106</C_TaxCategory_UU>
+        <IsDefault>false</IsDefault>
+        <CommodityCode/>
+        <Name>% RETENCION</Name>
+        <Description>Usado para Agrupar Todos Los Porcentajes de Retenciones usados.</Description>
+        <IsActive>true</IsActive>
+        <IsWithholding>true</IsWithholding>
+    </C_TaxCategory>
+    <C_TaxCategory type="table">
+        <AD_Org_ID>0</AD_Org_ID>
+        <C_TaxCategory_UU>94fc8fd3-a36c-442c-9e63-92e78f161249</C_TaxCategory_UU>
+        <IsDefault>false</IsDefault>
+        <CommodityCode>IVA</CommodityCode>
+        <Name>IVA 8%</Name>
+        <Description>IVA 8%</Description>
+        <IsActive>true</IsActive>
+        <IsWithholding>false</IsWithholding>
+    </C_TaxCategory>
+    <C_TaxCategory type="table">
+        <AD_Org_ID>0</AD_Org_ID>
+        <C_TaxCategory_UU>18be23e6-dc17-4d55-8d21-1aef3a8f4678</C_TaxCategory_UU>
+        <IsDefault>true</IsDefault>
+        <CommodityCode/>
+        <Name>IVA 12%</Name>
+        <Description>IVA</Description>
+        <IsActive>true</IsActive>
+        <IsWithholding>false</IsWithholding>
+    </C_TaxCategory>
+    <C_Tax type="table">
+        <AD_Org_ID>0</AD_Org_ID>
+        <SOPOType>B</SOPOType>
+        <AD_Rule_ID reference="id"/>
+        <C_TaxCategory_ID reference="uuid" reference-key="C_TaxCategory">ecec3c29-48eb-460c-ad49-530affe60106</C_TaxCategory_ID>
+        <IsDefault>false</IsDefault>
+        <IsDocumentLevel>true</IsDocumentLevel>
+        <IsSummary>false</IsSummary>
+        <Rate>1.0</Rate>
+        <RequiresTaxCertificate>false</RequiresTaxCertificate>
+        <TaxIndicator/>
+        <To_Country_ID reference="id"/>
+        <To_Region_ID reference="id"/>
+        <ValidFrom>2000-01-01 00:00:00.0</ValidFrom>
+        <C_Country_ID reference="id">339</C_Country_ID>
+        <C_Region_ID reference="id">142</C_Region_ID>
+        <IsTaxExempt>false</IsTaxExempt>
+        <IsSalesTax>false</IsSalesTax>
+        <Name>% RETENCION 1%</Name>
+        <Description/>
+        <C_Tax_UU>3ef7369e-0691-479a-87cc-c86a6de25387</C_Tax_UU>
+        <IsActive>true</IsActive>
+    </C_Tax>
+    <C_Tax type="table">
+        <AD_Org_ID>0</AD_Org_ID>
+        <SOPOType>B</SOPOType>
+        <AD_Rule_ID reference="id"/>
+        <C_TaxCategory_ID reference="uuid" reference-key="C_TaxCategory">ecec3c29-48eb-460c-ad49-530affe60106</C_TaxCategory_ID>
+        <IsDefault>false</IsDefault>
+        <IsDocumentLevel>true</IsDocumentLevel>
+        <IsSummary>false</IsSummary>
+        <Rate>100.0</Rate>
+        <RequiresTaxCertificate>false</RequiresTaxCertificate>
+        <TaxIndicator/>
+        <To_Country_ID reference="id"/>
+        <To_Region_ID reference="id"/>
+        <ValidFrom>2013-01-01 00:00:00.0</ValidFrom>
+        <C_Country_ID reference="id">339</C_Country_ID>
+        <C_Region_ID reference="id">142</C_Region_ID>
+        <IsTaxExempt>false</IsTaxExempt>
+        <IsSalesTax>false</IsSalesTax>
+        <Name>% RETENCION 100%</Name>
+        <Description/>
+        <C_Tax_UU>a9df5171-9e7e-4346-8d41-ead60498e934</C_Tax_UU>
+        <IsActive>true</IsActive>
+    </C_Tax>
+    <C_Tax type="table">
+        <AD_Org_ID>0</AD_Org_ID>
+        <SOPOType>B</SOPOType>
+        <AD_Rule_ID reference="id"/>
+        <C_TaxCategory_ID reference="uuid" reference-key="C_TaxCategory">ecec3c29-48eb-460c-ad49-530affe60106</C_TaxCategory_ID>
+        <IsDefault>false</IsDefault>
+        <IsDocumentLevel>true</IsDocumentLevel>
+        <IsSummary>false</IsSummary>
+        <Rate>2.0</Rate>
+        <RequiresTaxCertificate>false</RequiresTaxCertificate>
+        <TaxIndicator/>
+        <To_Country_ID reference="id"/>
+        <To_Region_ID reference="id"/>
+        <ValidFrom>2000-01-01 00:00:00.0</ValidFrom>
+        <C_Country_ID reference="id">339</C_Country_ID>
+        <C_Region_ID reference="id">142</C_Region_ID>
+        <IsTaxExempt>false</IsTaxExempt>
+        <IsSalesTax>false</IsSalesTax>
+        <Name>% RETENCION 2%</Name>
+        <Description/>
+        <C_Tax_UU>06856902-1998-4d8c-90f3-659115164c3c</C_Tax_UU>
+        <IsActive>true</IsActive>
+    </C_Tax>
+    <C_Tax type="table">
+        <AD_Org_ID>0</AD_Org_ID>
+        <SOPOType>B</SOPOType>
+        <AD_Rule_ID reference="id"/>
+        <C_TaxCategory_ID reference="uuid" reference-key="C_TaxCategory">ecec3c29-48eb-460c-ad49-530affe60106</C_TaxCategory_ID>
+        <IsDefault>false</IsDefault>
+        <IsDocumentLevel>true</IsDocumentLevel>
+        <IsSummary>false</IsSummary>
+        <Rate>3.0</Rate>
+        <RequiresTaxCertificate>false</RequiresTaxCertificate>
+        <TaxIndicator/>
+        <To_Country_ID reference="id"/>
+        <To_Region_ID reference="id"/>
+        <ValidFrom>2000-01-01 00:00:00.0</ValidFrom>
+        <C_Country_ID reference="id">339</C_Country_ID>
+        <C_Region_ID reference="id">142</C_Region_ID>
+        <IsTaxExempt>false</IsTaxExempt>
+        <IsSalesTax>false</IsSalesTax>
+        <Name>% RETENCION 3%</Name>
+        <Description/>
+        <C_Tax_UU>8130fee5-1ff8-4e7b-be49-ccb96abc8e14</C_Tax_UU>
+        <IsActive>true</IsActive>
+    </C_Tax>
+    <C_Tax type="table">
+        <AD_Org_ID>0</AD_Org_ID>
+        <SOPOType>B</SOPOType>
+        <AD_Rule_ID reference="id"/>
+        <C_TaxCategory_ID reference="uuid" reference-key="C_TaxCategory">ecec3c29-48eb-460c-ad49-530affe60106</C_TaxCategory_ID>
+        <IsDefault>false</IsDefault>
+        <IsDocumentLevel>true</IsDocumentLevel>
+        <IsSummary>false</IsSummary>
+        <Rate>5.0</Rate>
+        <RequiresTaxCertificate>false</RequiresTaxCertificate>
+        <TaxIndicator/>
+        <To_Country_ID reference="id"/>
+        <To_Region_ID reference="id"/>
+        <ValidFrom>2000-01-01 00:00:00.0</ValidFrom>
+        <C_Country_ID reference="id">339</C_Country_ID>
+        <C_Region_ID reference="id">142</C_Region_ID>
+        <IsTaxExempt>false</IsTaxExempt>
+        <IsSalesTax>false</IsSalesTax>
+        <Name>% RETENCION 5%</Name>
+        <Description/>
+        <C_Tax_UU>0874fd2b-ce52-4d62-bfe1-d8d04c7a7073</C_Tax_UU>
+        <IsActive>true</IsActive>
+    </C_Tax>
+    <C_Tax type="table">
+        <AD_Org_ID>0</AD_Org_ID>
+        <SOPOType>B</SOPOType>
+        <AD_Rule_ID reference="id"/>
+        <C_TaxCategory_ID reference="uuid" reference-key="C_TaxCategory">ecec3c29-48eb-460c-ad49-530affe60106</C_TaxCategory_ID>
+        <IsDefault>false</IsDefault>
+        <IsDocumentLevel>true</IsDocumentLevel>
+        <IsSummary>false</IsSummary>
+        <Rate>75.0</Rate>
+        <RequiresTaxCertificate>false</RequiresTaxCertificate>
+        <TaxIndicator/>
+        <To_Country_ID reference="id"/>
+        <To_Region_ID reference="id"/>
+        <ValidFrom>2009-04-01 00:00:00.0</ValidFrom>
+        <C_Country_ID reference="id">339</C_Country_ID>
+        <C_Region_ID reference="id">142</C_Region_ID>
+        <IsTaxExempt>false</IsTaxExempt>
+        <IsSalesTax>false</IsSalesTax>
+        <Name>% RETENCION 75%</Name>
+        <Description/>
+        <C_Tax_UU>ec4b56f7-da8e-450b-92ba-e48a278ba371</C_Tax_UU>
+        <IsActive>true</IsActive>
+    </C_Tax>
+    <C_Tax type="table">
+        <AD_Org_ID>0</AD_Org_ID>
+        <SOPOType>B</SOPOType>
+        <AD_Rule_ID reference="id"/>
+        <C_TaxCategory_ID reference="uuid" reference-key="C_TaxCategory">4eb74616-68ba-49e3-b877-046ef351ab0c</C_TaxCategory_ID>
+        <IsDefault>false</IsDefault>
+        <IsDocumentLevel>false</IsDocumentLevel>
+        <IsSummary>false</IsSummary>
+        <Rate>0</Rate>
+        <RequiresTaxCertificate>false</RequiresTaxCertificate>
+        <TaxIndicator/>
+        <To_Country_ID reference="id"/>
+        <To_Region_ID reference="id"/>
+        <ValidFrom>2009-04-01 00:00:00.0</ValidFrom>
+        <C_Country_ID reference="id"/>
+        <C_Region_ID reference="id"/>
+        <IsTaxExempt>true</IsTaxExempt>
+        <IsSalesTax>true</IsSalesTax>
+        <Name>EXENTO</Name>
+        <Description/>
+        <C_Tax_UU>176a24d8-187a-4316-8edc-804410c4f76e</C_Tax_UU>
+        <IsActive>true</IsActive>
+    </C_Tax>
+    <C_Tax type="table">
+        <AD_Org_ID>0</AD_Org_ID>
+        <SOPOType>B</SOPOType>
+        <AD_Rule_ID reference="id"/>
+        <C_TaxCategory_ID reference="uuid" reference-key="C_TaxCategory">94fc8fd3-a36c-442c-9e63-92e78f161249</C_TaxCategory_ID>
+        <IsDefault>false</IsDefault>
+        <IsDocumentLevel>true</IsDocumentLevel>
+        <IsSummary>false</IsSummary>
+        <Rate>8.000000000000</Rate>
+        <RequiresTaxCertificate>false</RequiresTaxCertificate>
+        <TaxIndicator/>
+        <To_Country_ID reference="id"/>
+        <To_Region_ID reference="id"/>
+        <ValidFrom>2009-04-01 00:00:00.0</ValidFrom>
+        <C_Country_ID reference="id"/>
+        <C_Region_ID reference="id"/>
+        <IsTaxExempt>false</IsTaxExempt>
+        <IsSalesTax>true</IsSalesTax>
+        <Name>IVA 8%</Name>
+        <Description>IVA 8%</Description>
+        <C_Tax_UU>fb068104-9ffb-4cc1-a1a7-c9bb4bee87ac</C_Tax_UU>
+        <IsActive>true</IsActive>
+    </C_Tax>
+    <C_Tax type="table">
+        <AD_Org_ID>0</AD_Org_ID>
+        <SOPOType>B</SOPOType>
+        <AD_Rule_ID reference="id"/>
+        <C_TaxCategory_ID reference="uuid" reference-key="C_TaxCategory">18be23e6-dc17-4d55-8d21-1aef3a8f4678</C_TaxCategory_ID>
+        <IsDefault>true</IsDefault>
+        <IsDocumentLevel>true</IsDocumentLevel>
+        <IsSummary>false</IsSummary>
+        <Rate>12.0</Rate>
+        <RequiresTaxCertificate>false</RequiresTaxCertificate>
+        <TaxIndicator/>
+        <To_Country_ID reference="id"/>
+        <To_Region_ID reference="id"/>
+        <ValidFrom>2013-01-01 00:00:00.0</ValidFrom>
+        <C_Country_ID reference="id">339</C_Country_ID>
+        <C_Region_ID reference="id">142</C_Region_ID>
+        <IsTaxExempt>false</IsTaxExempt>
+        <IsSalesTax>false</IsSalesTax>
+        <Name>IVA 12%</Name>
+        <Description/>
+        <C_Tax_UU>8d82c652-eae6-49a4-8fb3-2904af429b64</C_Tax_UU>
+        <IsActive>true</IsActive>
+    </C_Tax>
     <LCO_WithholdingType type="table">
         <AD_Org_ID>0</AD_Org_ID>
         <Counter/>
@@ -2070,4 +2259,43 @@
         
         
     </LCO_WithholdingType>
+     <C_Bank type="table">
+        <AD_Org_ID>0</AD_Org_ID>
+        <C_Bank_UU>d1a49509-db16-4a8d-86fb-1fc40bc9b05a</C_Bank_UU>
+        <RoutingNo>RETENCIONES</RoutingNo>
+        <C_Location_ID/>
+        <IsOwnBank>true</IsOwnBank>
+        <SwiftCode/>
+        <Name>RETENCIONES</Name>
+        <Description/>
+        <IsActive>true</IsActive>
+        <C_BankAccount type="table">
+            <AD_Org_ID>0</AD_Org_ID>
+            <CurrentBalance>0</CurrentBalance>
+            <C_Currency_ID reference="id">100</C_Currency_ID>
+            <IsDefault>false</IsDefault>
+            <BankAccountType>B</BankAccountType>
+            <CreditLimit>0</CreditLimit>
+            <BBAN/>
+            <PaymentExportClass/>
+            <Description/>
+            <C_BankAccount_UU>254b787b-30fc-4c72-a64d-f30163c609b1</C_BankAccount_UU>
+            <IsActive>true</IsActive>
+            <AccountNo>1</AccountNo>
+            <C_Bank_ID reference="uuid" reference-key="C_Bank">d1a49509-db16-4a8d-86fb-1fc40bc9b05a</C_Bank_ID>
+            <Value>1000000</Value>
+            <Name>RETENCIONES</Name>
+            <IBAN/>
+        </C_BankAccount>
+    </C_Bank>
+    <AD_SysConfig type="table">
+        <AD_Org_ID>0</AD_Org_ID>
+        <ConfigurationLevel>C</ConfigurationLevel>
+        <Value>1000000</Value>
+        <Description/>
+        <AD_SysConfig_UU>02259efa-3ac8-4092-9987-4854aa0c48e6</AD_SysConfig_UU>
+        <IsActive>true</IsActive>
+        <Name>LVE_Withholding_BankAccount</Name>
+        <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+    </AD_SysConfig>
 </idempiere>
