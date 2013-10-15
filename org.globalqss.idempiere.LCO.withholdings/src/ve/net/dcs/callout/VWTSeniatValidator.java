@@ -56,11 +56,9 @@ public class VWTSeniatValidator implements IColumnCallout {
 	 * http://contribuyente.seniat.gob.ve/getContribuyente/getrif?rif=
 	 */
 	@Override
-	public String start(Properties ctx, int WindowNo, GridTab mTab,
-			GridField mField, Object value, Object oldValue) {
+	public String start(Properties ctx, int WindowNo, GridTab mTab, GridField mField, Object value, Object oldValue) {
 
-		String urlSeniat = MSysConfig.getValue("URL_SENIAT",
-				Env.getAD_Client_ID(Env.getCtx()));
+		String urlSeniat = MSysConfig.getValue("URL_SENIAT", Env.getAD_Client_ID(Env.getCtx()));
 
 		if (urlSeniat == null)
 			return "URL del Seniat no se encuentra en el sistema";
@@ -68,22 +66,19 @@ public class VWTSeniatValidator implements IColumnCallout {
 		if (mTab.getValue("TaxID") == null)
 			return "Número de identificación obligatorio";
 
-		String taxid = mTab.getValue("TaxID").toString().toUpperCase()
-				.replaceAll("[\\-\\ ]", "");
-		X_LCO_TaxIdType taxidType = new X_LCO_TaxIdType(Env.getCtx(),
-				(int) mTab.getValue("LCO_TaxIdType_ID"), null);
-		
+		String taxid = mTab.getValue("TaxID").toString().toUpperCase().replaceAll("[\\-\\ ]", "");
+		X_LCO_TaxIdType taxidType = new X_LCO_TaxIdType(Env.getCtx(), (int) mTab.getValue("LCO_TaxIdType_ID"), null);
+
 		String file = null;
 
-		file = readFile(urlSeniat + taxid);
+		file = searchRif(urlSeniat, taxidType.getName() + taxid);
 
 		if (file == null)
 			return "Contribuyente no encontrado en Seniat";
 
 		Map<String, String> data = readData(file);
 
-		mTab.setValue("Name", data.get("Nombre").replaceAll("\\(.+\\)", "")
-				.trim());
+		mTab.setValue("Name", data.get("Nombre").replaceAll("\\(.+\\)", "").trim());
 
 		int LCO_TaxPayerType_id = 0;
 		String LCO_TaxPayerTypeName = "";
@@ -93,25 +88,19 @@ public class VWTSeniatValidator implements IColumnCallout {
 		} else if (data.get("ContribuyenteIVA").equalsIgnoreCase("NO")) {
 			LCO_TaxPayerTypeName = "EXONERADO";
 		} else if (data.get("numeroRif").matches("[JG][0-9]+")) {
-			LCO_TaxPayerTypeName = String.format("ORDINARIO JURIDICO %s%%",
-					data.get("Tasa"));
+			LCO_TaxPayerTypeName = String.format("ORDINARIO JURIDICO %s%%", data.get("Tasa"));
 		} else if (data.get("numeroRif").matches("[VE][0-9]+")) {
-			LCO_TaxPayerTypeName = String.format("ORDINARIO NATURAL %s%%",
-					data.get("Tasa"));
+			LCO_TaxPayerTypeName = String.format("ORDINARIO NATURAL %s%%", data.get("Tasa"));
 		}
 
-		LCO_TaxPayerType_id = new Query(ctx, I_LCO_TaxPayerType.Table_Name,
-				"trim(Name) = ?", null).setParameters(LCO_TaxPayerTypeName)
-				.firstIdOnly();
+		LCO_TaxPayerType_id = new Query(ctx, I_LCO_TaxPayerType.Table_Name, "trim(Name) = ?", null).setParameters(LCO_TaxPayerTypeName).firstIdOnly();
 		mTab.setValue("LCO_TaxPayerType_ID", LCO_TaxPayerType_id);
 
 		return null;
 	}
 
 	public String addMinus(String string) {
-		return String.format("%s-%s-%s", string.substring(0, 1),
-				string.substring(1, string.length() - 1),
-				string.substring(string.length() - 1));
+		return String.format("%s-%s-%s", string.substring(0, 1), string.substring(1, string.length() - 1), string.substring(string.length() - 1));
 	}
 
 	public String searchRif(String url, String taxid) {
@@ -143,8 +132,7 @@ public class VWTSeniatValidator implements IColumnCallout {
 			URLConnection con = urlInput.openConnection();
 			con.setConnectTimeout(10000);
 			con.setReadTimeout(10000);
-			BufferedReader buffer = new BufferedReader(new InputStreamReader(
-					con.getInputStream(), Charset.forName("ISO-8859-1")));
+			BufferedReader buffer = new BufferedReader(new InputStreamReader(con.getInputStream(), Charset.forName("ISO-8859-1")));
 
 			String temp = "";
 			String file = "";

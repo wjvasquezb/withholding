@@ -417,6 +417,7 @@ public class LCO_MInvoice extends MInvoice
 					}
 					iwh.setTaxAmt(taxamt);
 					iwh.setTaxBaseAmt(base);
+					iwh.set_ValueOfColumn("Subtrahend", wc.getAmountRefunded());
 					
 					//SUBTRAHEND
 //					iwh.set_ValueOfColumn("Subtrahend", Subtrahend.setScale(stdPrecision, BigDecimal.ROUND_HALF_UP));
