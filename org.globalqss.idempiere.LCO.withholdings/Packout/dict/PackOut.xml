@@ -27642,4 +27642,258 @@ There are two reasons for de-activating and not deleting records:
             </AD_Tab>
         </AD_Window>
     </AD_Menu>
+    <AD_Element type="table">
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <ColumnName>LVE_SeniatValidator</ColumnName>
+        <Help/>
+        <PO_Description/>
+        <PO_Help/>
+        <Name>Seniat Validator</Name>
+        <Description/>
+        <PrintName>Seniat Validator</PrintName>
+        <PO_Name/>
+        <PO_PrintName/>
+        <AD_Element_UU>46b35d8d-1140-481a-8b45-1bd6efffa816</AD_Element_UU>
+        <IsActive>true</IsActive>
+        <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+        <AD_Element_Trl type="translation">
+            <Help/>
+            <PO_Description/>
+            <PO_Help/>
+            <Name>Validar Seniat</Name>
+            <Description/>
+            <PrintName>Validar Seniat</PrintName>
+            <PO_Name/>
+            <PO_PrintName/>
+            <AD_Language>es_VE</AD_Language>
+            <IsActive>true</IsActive>
+            <IsTranslated>true</IsTranslated>
+        </AD_Element_Trl>
+    </AD_Element>
+    <AD_Column type="table">
+        <IsSyncDatabase>Y</IsSyncDatabase>
+        <AD_Table_ID reference="id">291</AD_Table_ID>
+        <AD_Reference_Value_ID reference="id"/>
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <SeqNoSelection>0</SeqNoSelection>
+        <Version>0</Version>
+        <ValueMax/>
+        <IsMandatory>false</IsMandatory>
+        <IsTranslated>false</IsTranslated>
+        <IsIdentifier>false</IsIdentifier>
+        <SeqNo>0</SeqNo>
+        <ValueMin/>
+        <IsParent>false</IsParent>
+        <FieldLength>1</FieldLength>
+        <IsSelectionColumn>false</IsSelectionColumn>
+        <AD_Reference_ID reference="id">28</AD_Reference_ID>
+        <AD_Val_Rule_ID reference="id"/>
+        <IsKey>false</IsKey>
+        <AD_Process_ID reference="id"/>
+        <ReadOnlyLogic/>
+        <IsAutocomplete>false</IsAutocomplete>
+        <IsAllowLogging>true</IsAllowLogging>
+        <MandatoryLogic/>
+        <FormatPattern/>
+        <AD_Column_UU>dbd5dcc2-d229-44c7-b94e-e47248139e35</AD_Column_UU>
+        <IsUpdateable>true</IsUpdateable>
+        <Callout/>
+        <ColumnName>LVE_SeniatValidator</ColumnName>
+        <Description/>
+        <ColumnSQL/>
+        <DefaultValue/>
+        <Help/>
+        <Name>Seniat Validator</Name>
+        <IsAllowCopy>true</IsAllowCopy>
+        <IsActive>true</IsActive>
+        <IsToolbarButton>false</IsToolbarButton>
+        <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+        <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+        <AD_Element_ID reference="uuid" reference-key="AD_Element">46b35d8d-1140-481a-8b45-1bd6efffa816</AD_Element_ID>
+        <IsEncrypted>N</IsEncrypted>
+        <IsSecure>false</IsSecure>
+        <VFormat/>
+    </AD_Column>
+    <AD_Field type="table">
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <SortNo>0</SortNo>
+        <IsEncrypted>false</IsEncrypted>
+        <AD_Tab_ID reference="id">220</AD_Tab_ID>
+        <DisplayLength>0</DisplayLength>
+        <IsSameLine>false</IsSameLine>
+        <IsHeading>false</IsHeading>
+        <AD_Column_ID reference="uuid" reference-key="AD_Column">dbd5dcc2-d229-44c7-b94e-e47248139e35</AD_Column_ID>
+        <SeqNo>110</SeqNo>
+        <IsCentrallyMaintained>true</IsCentrallyMaintained>
+        <IsReadOnly>false</IsReadOnly>
+        <Help/>
+        <AD_FieldGroup_ID reference="id"/>
+        <ObscureType/>
+        <DisplayLogic/>
+        <AD_Reference_ID reference="id"/>
+        <IsMandatory/>
+        <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+        <AD_Reference_Value_ID reference="id"/>
+        <AD_Val_Rule_ID reference="id"/>
+        <Included_Tab_ID reference="id"/>
+        <Description/>
+        <Name>Seniat Validator</Name>
+        <AD_Field_UU>216c8961-0ad6-44ba-9099-108e2f5e73ae</AD_Field_UU>
+        <IsDisplayed>true</IsDisplayed>
+        <IsFieldOnly>false</IsFieldOnly>
+        <DefaultValue/>
+        <IsAllowCopy/>
+        <IsActive>true</IsActive>
+        <IsDisplayedGrid>true</IsDisplayedGrid>
+        <SeqNoGrid>460</SeqNoGrid>
+        <XPosition>1</XPosition>
+        <IsQuickEntry>false</IsQuickEntry>
+        <MandatoryLogic/>
+        <IsUpdateable/>
+        <IsAlwaysUpdateable/>
+        <ReadOnlyLogic/>
+        <IsToolbarButton/>
+        <ColumnSpan>2</ColumnSpan>
+        <NumLines>1</NumLines>
+        <IsDefaultFocus>false</IsDefaultFocus>
+        <IsAdvancedField>false</IsAdvancedField>
+        <AD_Field_Trl type="translation">
+            <Help/>
+            <Description/>
+            <Name>Validar Seniat</Name>
+            <AD_Language>es_VE</AD_Language>
+            <IsActive>true</IsActive>
+            <IsTranslated>true</IsTranslated>
+        </AD_Field_Trl>
+    </AD_Field>
+    <AD_Element type="table">
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <ColumnName>LVE_ControlNoSequence_ID</ColumnName>
+        <Help/>
+        <PO_Description/>
+        <PO_Help/>
+        <Name>LVE_ControlNoSequence_ID</Name>
+        <Description/>
+        <PrintName>LVE_ControlNoSequence_ID</PrintName>
+        <PO_Name/>
+        <PO_PrintName/>
+        <AD_Element_UU>410e7245-522c-47ae-b822-194276559c7f</AD_Element_UU>
+        <IsActive>true</IsActive>
+        <EntityType>U</EntityType>
+        <AD_Element_Trl type="translation">
+            <Help/>
+            <PO_Description/>
+            <PO_Help/>
+            <Name>Secuencia Nro. Control</Name>
+            <Description/>
+            <PrintName>Secuencia Nro. Control</PrintName>
+            <PO_Name/>
+            <PO_PrintName/>
+            <AD_Language>es_VE</AD_Language>
+            <IsActive>true</IsActive>
+            <IsTranslated>true</IsTranslated>
+        </AD_Element_Trl>
+    </AD_Element>
+    <AD_Column type="table">
+        <IsSyncDatabase>Y</IsSyncDatabase>
+        <AD_Table_ID reference="id">217</AD_Table_ID>
+        <AD_Reference_Value_ID reference="id">128</AD_Reference_Value_ID>
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <SeqNoSelection>0</SeqNoSelection>
+        <Version>0</Version>
+        <ValueMax/>
+        <IsMandatory>false</IsMandatory>
+        <IsTranslated>false</IsTranslated>
+        <IsIdentifier>false</IsIdentifier>
+        <SeqNo>0</SeqNo>
+        <ValueMin/>
+        <IsParent>false</IsParent>
+        <FieldLength>10</FieldLength>
+        <IsSelectionColumn>false</IsSelectionColumn>
+        <AD_Reference_ID reference="id">18</AD_Reference_ID>
+        <AD_Val_Rule_ID reference="id"/>
+        <IsKey>false</IsKey>
+        <AD_Process_ID reference="id"/>
+        <ReadOnlyLogic/>
+        <IsAutocomplete>false</IsAutocomplete>
+        <IsAllowLogging>true</IsAllowLogging>
+        <MandatoryLogic/>
+        <FormatPattern/>
+        <AD_Column_UU>a5031bc8-0c7c-4fdc-9b9d-b91c7957ef0d</AD_Column_UU>
+        <IsUpdateable>true</IsUpdateable>
+        <Callout/>
+        <ColumnName>LVE_ControlNoSequence_ID</ColumnName>
+        <Description/>
+        <ColumnSQL/>
+        <DefaultValue/>
+        <Help/>
+        <Name>LVE_ControlNoSequence_ID</Name>
+        <IsAllowCopy>true</IsAllowCopy>
+        <IsActive>true</IsActive>
+        <IsToolbarButton>false</IsToolbarButton>
+        <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+        <EntityType>ve.net.dcs</EntityType>
+        <AD_Element_ID reference="uuid" reference-key="AD_Element">410e7245-522c-47ae-b822-194276559c7f</AD_Element_ID>
+        <IsEncrypted>N</IsEncrypted>
+        <IsSecure>false</IsSecure>
+        <VFormat/>
+    </AD_Column>
+    <AD_Field type="table">
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <SortNo/>
+        <IsEncrypted>false</IsEncrypted>
+        <AD_Tab_ID reference="id">167</AD_Tab_ID>
+        <DisplayLength>10</DisplayLength>
+        <IsSameLine>false</IsSameLine>
+        <IsHeading>false</IsHeading>
+        <AD_Column_ID reference="uuid" reference-key="AD_Column">a5031bc8-0c7c-4fdc-9b9d-b91c7957ef0d</AD_Column_ID>
+        <SeqNo>410</SeqNo>
+        <IsCentrallyMaintained>true</IsCentrallyMaintained>
+        <IsReadOnly>false</IsReadOnly>
+        <Help/>
+        <AD_FieldGroup_ID reference="id"/>
+        <ObscureType/>
+        <DisplayLogic/>
+        <AD_Reference_ID reference="id"/>
+        <IsMandatory/>
+        <EntityType>ve.net.dcs</EntityType>
+        <AD_Reference_Value_ID reference="id"/>
+        <AD_Val_Rule_ID reference="id"/>
+        <Included_Tab_ID reference="id"/>
+        <Description/>
+        <Name>LVE_ControlNoSequence_ID</Name>
+        <AD_Field_UU>31655f06-3788-4370-a01e-77a0b01f0d76</AD_Field_UU>
+        <IsDisplayed>true</IsDisplayed>
+        <IsFieldOnly>false</IsFieldOnly>
+        <DefaultValue/>
+        <IsAllowCopy/>
+        <IsActive>true</IsActive>
+        <IsDisplayedGrid>true</IsDisplayedGrid>
+        <SeqNoGrid/>
+        <XPosition>1</XPosition>
+        <IsQuickEntry>false</IsQuickEntry>
+        <MandatoryLogic/>
+        <IsUpdateable/>
+        <IsAlwaysUpdateable/>
+        <ReadOnlyLogic/>
+        <IsToolbarButton/>
+        <ColumnSpan>2</ColumnSpan>
+        <NumLines>1</NumLines>
+        <IsDefaultFocus>false</IsDefaultFocus>
+        <IsAdvancedField>false</IsAdvancedField>
+        <AD_Field_Trl type="translation">
+            <Help/>
+            <Description/>
+            <Name>LVE_ControlNoSequence_ID</Name>
+            <AD_Language>es_VE</AD_Language>
+            <IsActive>true</IsActive>
+            <IsTranslated>false</IsTranslated>
+        </AD_Field_Trl>
+    </AD_Field>
 </idempiere>
