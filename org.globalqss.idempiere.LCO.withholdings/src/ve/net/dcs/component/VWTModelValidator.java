@@ -93,7 +93,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 				if (invoice.isSOTrx()) {
 					String controlSequence = null;
 					if (invoice.get_Value("LVE_controlNumber") == null) {
-						if (docType.get_Value("LVE_ControlNoSequence_ID") == null) {
+						if (docType.get_Value("LVE_ControlNoSequence_ID") == null && docType.get_ValueAsBoolean("isControlNoDocument")) {
 							throw new AdempiereException(msgSeqNotFound);
 						}
 

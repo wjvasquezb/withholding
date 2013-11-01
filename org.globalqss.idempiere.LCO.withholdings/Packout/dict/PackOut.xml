@@ -27896,4 +27896,277 @@ There are two reasons for de-activating and not deleting records:
             <IsTranslated>false</IsTranslated>
         </AD_Field_Trl>
     </AD_Field>
+    <AD_Element type="table">
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <ColumnName>LVE_controlNumber</ColumnName>
+        <Help>LVE_controlNumber</Help>
+        <PO_Description/>
+        <PO_Help/>
+        <Name>LVE_controlNumber</Name>
+        <Description>LVE_controlNumber</Description>
+        <PrintName>LVE_controlNumber</PrintName>
+        <PO_Name/>
+        <PO_PrintName/>
+        <AD_Element_UU>6aa71700-bf12-465d-bb9f-fc9eef90ce73</AD_Element_UU>
+        <IsActive>true</IsActive>
+        <EntityType>ve.net.dcs</EntityType>
+        <AD_Element_Trl type="translation">
+            <Help>LVE_controlNumber</Help>
+            <PO_Description/>
+            <PO_Help/>
+            <Name>Número de Control</Name>
+            <Description>Número de Control</Description>
+            <PrintName>Número de Control</PrintName>
+            <PO_Name/>
+            <PO_PrintName/>
+            <AD_Language>es_VE</AD_Language>
+            <IsActive>true</IsActive>
+            <IsTranslated>true</IsTranslated>
+        </AD_Element_Trl>
+        <AD_Element_Trl type="translation">
+            <Help/>
+            <PO_Description/>
+            <PO_Help/>
+            <Name>Número de Control</Name>
+            <Description/>
+            <PrintName>Número de Control</PrintName>
+            <PO_Name/>
+            <PO_PrintName/>
+            <AD_Language>es_CO</AD_Language>
+            <IsActive>true</IsActive>
+            <IsTranslated>false</IsTranslated>
+        </AD_Element_Trl>
+    </AD_Element>
+    <AD_Column type="table">
+        <IsSyncDatabase>Y</IsSyncDatabase>
+        <AD_Table_ID reference="id">318</AD_Table_ID>
+        <AD_Reference_Value_ID reference="id"/>
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <SeqNoSelection/>
+        <Version>0</Version>
+        <ValueMax/>
+        <IsMandatory>false</IsMandatory>
+        <IsTranslated>false</IsTranslated>
+        <IsIdentifier>false</IsIdentifier>
+        <SeqNo>0</SeqNo>
+        <ValueMin/>
+        <IsParent>false</IsParent>
+        <FieldLength>20</FieldLength>
+        <IsSelectionColumn>true</IsSelectionColumn>
+        <AD_Reference_ID reference="id">10</AD_Reference_ID>
+        <AD_Val_Rule_ID reference="id"/>
+        <IsKey>false</IsKey>
+        <AD_Process_ID reference="id"/>
+        <ReadOnlyLogic/>
+        <IsAutocomplete>false</IsAutocomplete>
+        <IsAllowLogging>true</IsAllowLogging>
+        <MandatoryLogic/>
+        <FormatPattern/>
+        <AD_Column_UU>5811ee15-fcba-4161-8604-a9611f684ea2</AD_Column_UU>
+        <IsUpdateable>true</IsUpdateable>
+        <Callout/>
+        <ColumnName>LVE_controlNumber</ColumnName>
+        <Description>LVE_controlNumber</Description>
+        <ColumnSQL/>
+        <DefaultValue/>
+        <Help>LVE_controlNumber</Help>
+        <Name>LVE_controlNumber</Name>
+        <IsAllowCopy>true</IsAllowCopy>
+        <IsActive>true</IsActive>
+        <IsToolbarButton>false</IsToolbarButton>
+        <IsAlwaysUpdateable>true</IsAlwaysUpdateable>
+        <EntityType>ve.net.dcs</EntityType>
+        <AD_Element_ID reference="uuid" reference-key="AD_Element">6aa71700-bf12-465d-bb9f-fc9eef90ce73</AD_Element_ID>
+        <IsEncrypted>N</IsEncrypted>
+        <IsSecure>false</IsSecure>
+        <VFormat/>
+    </AD_Column>
+    <AD_Field type="table">
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <SortNo>-1</SortNo>
+        <IsEncrypted>false</IsEncrypted>
+        <AD_Tab_ID reference="id">263</AD_Tab_ID>
+        <DisplayLength>20</DisplayLength>
+        <IsSameLine>true</IsSameLine>
+        <IsHeading>false</IsHeading>
+        <AD_Column_ID reference="uuid" reference-key="AD_Column">5811ee15-fcba-4161-8604-a9611f684ea2</AD_Column_ID>
+        <SeqNo>80</SeqNo>
+        <IsCentrallyMaintained>true</IsCentrallyMaintained>
+        <IsReadOnly>false</IsReadOnly>
+        <Help>LVE_controlNumber</Help>
+        <AD_FieldGroup_ID reference="id"/>
+        <ObscureType/>
+        <DisplayLogic/>
+        <AD_Reference_ID reference="id"/>
+        <IsMandatory/>
+        <EntityType>ve.net.dcs</EntityType>
+        <AD_Reference_Value_ID reference="id"/>
+        <AD_Val_Rule_ID reference="id"/>
+        <Included_Tab_ID reference="id"/>
+        <Description>LVE_controlNumber</Description>
+        <Name>LVE_controlNumber</Name>
+        <AD_Field_UU>46239d96-d80f-4fa7-b036-2d34e9dc3464</AD_Field_UU>
+        <IsDisplayed>true</IsDisplayed>
+        <IsFieldOnly>false</IsFieldOnly>
+        <DefaultValue/>
+        <IsAllowCopy/>
+        <IsActive>true</IsActive>
+        <IsDisplayedGrid>false</IsDisplayedGrid>
+        <SeqNoGrid>0</SeqNoGrid>
+        <XPosition>1</XPosition>
+        <IsQuickEntry>false</IsQuickEntry>
+        <MandatoryLogic/>
+        <IsUpdateable/>
+        <IsAlwaysUpdateable/>
+        <ReadOnlyLogic/>
+        <IsToolbarButton/>
+        <ColumnSpan>2</ColumnSpan>
+        <NumLines>1</NumLines>
+        <IsAdvancedField>false</IsAdvancedField>
+        <IsDefaultFocus>false</IsDefaultFocus>
+        <AD_Field_Trl type="translation">
+            <Name>Número de Control</Name>
+            <AD_Language>es_VE</AD_Language>
+            <IsActive>true</IsActive>
+            <IsTranslated>false</IsTranslated>
+        </AD_Field_Trl>
+        <AD_Field_Trl type="translation">
+            <Help/>
+            <Description/>
+            <Name>Número de Control</Name>
+            <AD_Language>es_CO</AD_Language>
+            <IsActive>true</IsActive>
+            <IsTranslated>false</IsTranslated>
+        </AD_Field_Trl>
+    </AD_Field>
+    <AD_Element type="table">
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <ColumnName>isControlNoDocument</ColumnName>
+        <Help/>
+        <PO_Description/>
+        <PO_Help/>
+        <Name>Is Control No Document</Name>
+        <Description/>
+        <PrintName>Is Control No Document</PrintName>
+        <PO_Name/>
+        <PO_PrintName/>
+        <AD_Element_UU>b5d84230-b24f-4777-9c6d-eaaffa06784a</AD_Element_UU>
+        <IsActive>true</IsActive>
+        <EntityType>ve.net.dcs</EntityType>
+        <AD_Element_Trl type="translation">
+            <Help/>
+            <PO_Description/>
+            <PO_Help/>
+            <Name>Maneja Nro. de Control Automático</Name>
+            <Description/>
+            <PrintName>Maneja Nro. de Control Automático</PrintName>
+            <PO_Name/>
+            <PO_PrintName/>
+            <AD_Language>es_VE</AD_Language>
+            <IsActive>true</IsActive>
+            <IsTranslated>true</IsTranslated>
+        </AD_Element_Trl>
+    </AD_Element>
+    <AD_Column type="table">
+        <IsSyncDatabase>Y</IsSyncDatabase>
+        <AD_Table_ID reference="id">217</AD_Table_ID>
+        <AD_Reference_Value_ID reference="id"/>
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <SeqNoSelection>0</SeqNoSelection>
+        <Version>0</Version>
+        <ValueMax/>
+        <IsMandatory>true</IsMandatory>
+        <IsTranslated>false</IsTranslated>
+        <IsIdentifier>false</IsIdentifier>
+        <SeqNo>0</SeqNo>
+        <ValueMin/>
+        <IsParent>false</IsParent>
+        <FieldLength>1</FieldLength>
+        <IsSelectionColumn>false</IsSelectionColumn>
+        <AD_Reference_ID reference="id">20</AD_Reference_ID>
+        <AD_Val_Rule_ID reference="id"/>
+        <IsKey>false</IsKey>
+        <AD_Process_ID reference="id"/>
+        <ReadOnlyLogic/>
+        <IsAutocomplete>false</IsAutocomplete>
+        <IsAllowLogging>true</IsAllowLogging>
+        <MandatoryLogic/>
+        <FormatPattern/>
+        <AD_Column_UU>57cf2272-b033-4e11-86d3-a3d6742b03fc</AD_Column_UU>
+        <IsUpdateable>true</IsUpdateable>
+        <Callout/>
+        <ColumnName>isControlNoDocument</ColumnName>
+        <Description/>
+        <ColumnSQL/>
+        <DefaultValue>N</DefaultValue>
+        <Help/>
+        <Name>Is Control No Document</Name>
+        <IsAllowCopy>true</IsAllowCopy>
+        <IsActive>true</IsActive>
+        <IsToolbarButton>false</IsToolbarButton>
+        <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+        <EntityType>ve.net.dcs</EntityType>
+        <AD_Element_ID reference="uuid" reference-key="AD_Element">b5d84230-b24f-4777-9c6d-eaaffa06784a</AD_Element_ID>
+        <IsEncrypted>N</IsEncrypted>
+        <IsSecure>false</IsSecure>
+        <VFormat/>
+    </AD_Column>
+    <AD_Field type="table">
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <SortNo/>
+        <IsEncrypted>false</IsEncrypted>
+        <AD_Tab_ID reference="id">167</AD_Tab_ID>
+        <DisplayLength>1</DisplayLength>
+        <IsSameLine>false</IsSameLine>
+        <IsHeading>false</IsHeading>
+        <AD_Column_ID reference="uuid" reference-key="AD_Column">57cf2272-b033-4e11-86d3-a3d6742b03fc</AD_Column_ID>
+        <SeqNo>230</SeqNo>
+        <IsCentrallyMaintained>true</IsCentrallyMaintained>
+        <IsReadOnly>false</IsReadOnly>
+        <Help/>
+        <AD_FieldGroup_ID reference="id"/>
+        <ObscureType/>
+        <DisplayLogic/>
+        <AD_Reference_ID reference="id"/>
+        <IsMandatory/>
+        <EntityType>ve.net.dcs</EntityType>
+        <AD_Reference_Value_ID reference="id"/>
+        <AD_Val_Rule_ID reference="id"/>
+        <Included_Tab_ID reference="id"/>
+        <Description/>
+        <Name>Is Control No Document</Name>
+        <AD_Field_UU>ea408a96-c46d-453f-8cd9-f10a0ba3cd0b</AD_Field_UU>
+        <IsDisplayed>true</IsDisplayed>
+        <IsFieldOnly>false</IsFieldOnly>
+        <DefaultValue/>
+        <IsAllowCopy/>
+        <IsActive>true</IsActive>
+        <IsDisplayedGrid>true</IsDisplayedGrid>
+        <SeqNoGrid/>
+        <XPosition>2</XPosition>
+        <IsQuickEntry>false</IsQuickEntry>
+        <MandatoryLogic/>
+        <IsUpdateable/>
+        <IsAlwaysUpdateable/>
+        <ReadOnlyLogic/>
+        <IsToolbarButton/>
+        <ColumnSpan>2</ColumnSpan>
+        <NumLines>1</NumLines>
+        <IsAdvancedField>false</IsAdvancedField>
+        <IsDefaultFocus>false</IsDefaultFocus>
+        <AD_Field_Trl type="translation">
+            <Help/>
+            <Description/>
+            <Name>Is Control No Document</Name>
+            <AD_Language>es_VE</AD_Language>
+            <IsActive>true</IsActive>
+            <IsTranslated>false</IsTranslated>
+        </AD_Field_Trl>
+    </AD_Field>
 </idempiere>
