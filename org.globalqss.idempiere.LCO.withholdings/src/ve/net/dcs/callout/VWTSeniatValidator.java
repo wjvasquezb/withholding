@@ -51,12 +51,10 @@ import org.xml.sax.InputSource;
 public class VWTSeniatValidator implements IColumnCallout {
 
 	/**
-	 * CONFIGURATION 1: Name: URL_SENIAT Description: Url para consulta del Rif
-	 * del Seniat Configured Value:
-	 * http://contribuyente.seniat.gob.ve/getContribuyente/getrif?rif=
-	 * 
-	 * CONFIGURATION 2: Name: PARENTHESIS_SENIAT Description: Dejar parentesis
-	 * Configured Value: (Y,N)
+	 * CONFIGURATION: 
+	 * Name: URL_SENIAT 
+	 * Description: Url para consulta del Rif del Seniat Configured 
+	 * Value: http://contribuyente.seniat.gob.ve/getContribuyente/getrif?rif=
 	 */
 	@Override
 	public String start(Properties ctx, int WindowNo, GridTab mTab, GridField mField, Object value, Object oldValue) {
