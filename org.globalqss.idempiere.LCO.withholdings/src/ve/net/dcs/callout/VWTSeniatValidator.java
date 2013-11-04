@@ -51,14 +51,17 @@ import org.xml.sax.InputSource;
 public class VWTSeniatValidator implements IColumnCallout {
 
 	/**
-	 * CONFIG => Name: URL_SENIAT, Description: Url para consulta del Rif del
-	 * Seniat, Configured Value:
+	 * CONFIGURATION 1: Name: URL_SENIAT Description: Url para consulta del Rif
+	 * del Seniat Configured Value:
 	 * http://contribuyente.seniat.gob.ve/getContribuyente/getrif?rif=
+	 * 
+	 * CONFIGURATION 2: Name: PARENTHESIS_SENIAT Description: Dejar parentesis
+	 * Configured Value: (Y,N)
 	 */
 	@Override
 	public String start(Properties ctx, int WindowNo, GridTab mTab, GridField mField, Object value, Object oldValue) {
 
-		String urlSeniat = MSysConfig.getValue("URL_SENIAT", Env.getAD_Client_ID(Env.getCtx()));
+		String urlSeniat = MSysConfig.getValue("URL_SENIAT", "http://contribuyente.seniat.gob.ve/getContribuyente/getrif?rif=", Env.getAD_Client_ID(Env.getCtx()));
 
 		if (urlSeniat == null)
 			return "URL del Seniat no se encuentra en el sistema";
@@ -78,7 +81,13 @@ public class VWTSeniatValidator implements IColumnCallout {
 
 		Map<String, String> data = readData(file);
 
-		mTab.setValue("Name", data.get("Nombre").replaceAll("\\(.+\\)", "").trim());
+		String name = "";
+		if (data.get("numeroRif").matches("[VE][0-9]+"))
+			name = data.get("Nombre").trim();
+		else
+			name = data.get("Nombre").replaceAll("\\(.+\\)", "").trim();
+		
+		mTab.setValue("Name", name);
 
 		int LCO_TaxPayerType_id = 0;
 		String LCO_TaxPayerTypeName = "";
