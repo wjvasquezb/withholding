@@ -121,12 +121,9 @@ public class VWTModelValidator extends AbstractEventHandler {
 					} else if (invoice.get_Value("LVE_POInvoiceNo") == null) {
 						throw new AdempiereException(msgMandataryINo);
 					} else {
-						boolean existCN = new Query(Env.getCtx(), MInvoice.Table_Name, where + "AND LVE_controlNumber=?", po.get_TrxName()).setParameters(invoice.getAD_Org_ID(), invoice.getC_BPartner_ID(), invoice.get_ID(), invoice.isSOTrx(), invoice.get_Value("LVE_controlNumber")).count() > 0;
-						boolean existINo = new Query(Env.getCtx(), MInvoice.Table_Name, where + "AND LVE_POInvoiceNo=?", po.get_TrxName()).setParameters(invoice.getAD_Org_ID(), invoice.getC_BPartner_ID(), invoice.get_ID(), invoice.isSOTrx(), invoice.get_Value("LVE_POInvoiceNo")).count() > 0;
+						boolean existCN = new Query(Env.getCtx(), MInvoice.Table_Name, where + "AND LVE_controlNumber=? AND LVE_POInvoiceNo=?", po.get_TrxName()).setParameters(invoice.getAD_Org_ID(), invoice.getC_BPartner_ID(), invoice.get_ID(), invoice.isSOTrx(), invoice.get_Value("LVE_controlNumber"), invoice.get_Value("LVE_POInvoiceNo")).count() > 0;
 						if (existCN) {
 							throw new AdempiereException(msgExistCN);
-						} else if (existINo) {
-							throw new AdempiereException(msgExistINo);
 						}
 					}
 				}
