@@ -52,36 +52,39 @@ public class VWTModelValidator extends AbstractEventHandler {
 		} else if (po.get_TableName().equals(I_C_Invoice.Table_Name) && type.equals(IEventTopics.DOC_AFTER_COMPLETE)) {
 
 			MInvoice invoice = (MInvoice) po;
+			
+			if (!invoice.isReversal()){
+				String sqlwhere = " C_Invoice_ID = ? AND LVE_VoucherWithholding_ID IS NULL";
+				List<MLCOInvoiceWithholding> invoiceW = new Query(po.getCtx(), X_LCO_InvoiceWithholding.Table_Name, sqlwhere, po.get_TrxName()).setOnlyActiveRecords(true).setParameters(invoice.get_ID()).setOrderBy("LCO_WithholdingType_ID").list();
 
-			String sqlwhere = " C_Invoice_ID = ? AND LVE_VoucherWithholding_ID IS NULL";
-			List<MLCOInvoiceWithholding> invoiceW = new Query(po.getCtx(), X_LCO_InvoiceWithholding.Table_Name, sqlwhere, po.get_TrxName()).setOnlyActiveRecords(true).setParameters(invoice.get_ID()).setOrderBy("LCO_WithholdingType_ID").list();
+				int LCO_WithholdingType_ID = 0;
+				MLVEVoucherWithholding voucher = null;
+				List<MLVEVoucherWithholding> listVoucher = new ArrayList<MLVEVoucherWithholding>();
 
-			int LCO_WithholdingType_ID = 0;
-			MLVEVoucherWithholding voucher = null;
-			List<MLVEVoucherWithholding> listVoucher = new ArrayList<MLVEVoucherWithholding>();
+				for (MLCOInvoiceWithholding iw : invoiceW) {
+					if (LCO_WithholdingType_ID != iw.getLCO_WithholdingType_ID()) {
+						LCO_WithholdingType_ID = iw.getLCO_WithholdingType_ID();
+						voucher = new MLVEVoucherWithholding(po.getCtx(), 0, po.get_TrxName());
+						voucher.setAD_Org_ID(po.getAD_Org_ID());
+						voucher.set_ValueOfColumn("AD_Client_ID", po.getAD_Client_ID());
+						voucher.setDateTrx(invoice.getDateInvoiced());
+						voucher.setC_BPartner_ID(invoice.getC_BPartner_ID());
+						voucher.setLCO_WithholdingType_ID(LCO_WithholdingType_ID);
+						voucher.setC_Invoice_ID(iw.getC_Invoice_ID());
+						voucher.saveEx();
+						listVoucher.add(voucher);
+					}
 
-			for (MLCOInvoiceWithholding iw : invoiceW) {
-				if (LCO_WithholdingType_ID != iw.getLCO_WithholdingType_ID()) {
-					LCO_WithholdingType_ID = iw.getLCO_WithholdingType_ID();
-					voucher = new MLVEVoucherWithholding(po.getCtx(), 0, po.get_TrxName());
-					voucher.setAD_Org_ID(po.getAD_Org_ID());
-					voucher.set_ValueOfColumn("AD_Client_ID", po.getAD_Client_ID());
-					voucher.setDateTrx(invoice.getDateInvoiced());
-					voucher.setC_BPartner_ID(invoice.getC_BPartner_ID());
-					voucher.setLCO_WithholdingType_ID(LCO_WithholdingType_ID);
-					voucher.setC_Invoice_ID(iw.getC_Invoice_ID());
-					voucher.saveEx();
-					listVoucher.add(voucher);
+					iw.set_ValueOfColumn("LVE_VoucherWithholding_ID", voucher.get_ID());
+					iw.saveEx();
 				}
 
-				iw.set_ValueOfColumn("LVE_VoucherWithholding_ID", voucher.get_ID());
-				iw.saveEx();
+				for (MLVEVoucherWithholding v : listVoucher) {
+					v.completeIt();
+					v.saveEx();
+				}
 			}
-
-			for (MLVEVoucherWithholding v : listVoucher) {
-				v.completeIt();
-				v.saveEx();
-			}
+			
 
 		} else if (po.get_TableName().equals(I_C_Invoice.Table_Name) && (type.equals(IEventTopics.DOC_BEFORE_VOID) || type.equals(IEventTopics.DOC_BEFORE_REACTIVATE) || type.equals(IEventTopics.DOC_BEFORE_REVERSEACCRUAL) || type.equals(IEventTopics.DOC_BEFORE_REVERSECORRECT))) {
 			MInvoice invoice = (MInvoice) po;
