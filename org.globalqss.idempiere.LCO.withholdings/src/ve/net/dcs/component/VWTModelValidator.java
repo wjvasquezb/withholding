@@ -14,6 +14,7 @@ import org.compiere.model.MSequence;
 import org.compiere.model.PO;
 import org.compiere.model.Query;
 import org.compiere.model.X_C_BPartner;
+import org.compiere.process.DocAction;
 import org.compiere.util.CLogger;
 import org.compiere.util.Env;
 import org.compiere.util.Msg;
@@ -31,6 +32,10 @@ public class VWTModelValidator extends AbstractEventHandler {
 	protected void initialize() {
 		registerTableEvent(IEventTopics.DOC_AFTER_COMPLETE, I_C_Invoice.Table_Name);
 		registerTableEvent(IEventTopics.DOC_BEFORE_COMPLETE, I_C_Invoice.Table_Name);
+		registerTableEvent(IEventTopics.DOC_BEFORE_VOID, I_C_Invoice.Table_Name);
+		registerTableEvent(IEventTopics.DOC_BEFORE_REACTIVATE, I_C_Invoice.Table_Name);
+		registerTableEvent(IEventTopics.DOC_BEFORE_REVERSEACCRUAL, I_C_Invoice.Table_Name);
+		registerTableEvent(IEventTopics.DOC_BEFORE_REVERSECORRECT, I_C_Invoice.Table_Name);
 		registerTableEvent(IEventTopics.PO_BEFORE_CHANGE, I_C_BPartner.Table_Name);
 	}
 
@@ -64,6 +69,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 					voucher.setDateTrx(invoice.getDateInvoiced());
 					voucher.setC_BPartner_ID(invoice.getC_BPartner_ID());
 					voucher.setLCO_WithholdingType_ID(LCO_WithholdingType_ID);
+					voucher.setC_Invoice_ID(iw.getC_Invoice_ID());
 					voucher.saveEx();
 					listVoucher.add(voucher);
 				}
@@ -77,7 +83,25 @@ public class VWTModelValidator extends AbstractEventHandler {
 				v.saveEx();
 			}
 
-		} else if (po.get_TableName().equals(I_C_Invoice.Table_Name) && type.equals(IEventTopics.DOC_BEFORE_COMPLETE)) {
+		} else if (po.get_TableName().equals(I_C_Invoice.Table_Name) && (type.equals(IEventTopics.DOC_BEFORE_VOID) || type.equals(IEventTopics.DOC_BEFORE_REACTIVATE) || type.equals(IEventTopics.DOC_BEFORE_REVERSEACCRUAL) || type.equals(IEventTopics.DOC_BEFORE_REVERSECORRECT))) {
+			MInvoice invoice = (MInvoice) po;
+			
+			List<MLCOInvoiceWithholding> list = new Query(invoice.getCtx(), MLCOInvoiceWithholding.Table_Name, " C_Invoice_ID = ? ", invoice.get_TrxName()).setParameters(invoice.getC_Invoice_ID()).setOrderBy(MLCOInvoiceWithholding.COLUMNNAME_C_Invoice_ID).list();
+			
+			if (list.size() > 0){
+				for (MLCOInvoiceWithholding mlcoInvoiceWithholding : list) {
+					if (mlcoInvoiceWithholding.get_ValueAsInt("LVE_VoucherWithholding_ID") > 0){
+						MLVEVoucherWithholding vw = new MLVEVoucherWithholding(invoice.getCtx(), mlcoInvoiceWithholding.get_ValueAsInt("LVE_VoucherWithholding_ID"), invoice.get_TrxName());
+						if (vw.getDocStatus().equalsIgnoreCase(DocAction.STATUS_Completed) || vw.getDocStatus().equalsIgnoreCase(DocAction.STATUS_Drafted)){
+							throw new AdempiereException("Factura esta asociada en una Retención. "+vw.getWithholdingNo());
+						}
+					}else{
+						mlcoInvoiceWithholding.deleteEx(true);
+					}
+				}
+			}
+		}
+		else if (po.get_TableName().equals(I_C_Invoice.Table_Name) && type.equals(IEventTopics.DOC_BEFORE_COMPLETE)) {
 
 			String msgExistCN = Msg.translate(Env.getCtx(), "AlreadyExists") + ": " + Msg.getElement(Env.getCtx(), "LVE_controlNumber");
 			String msgExistINo = Msg.translate(Env.getCtx(), "AlreadyExists") + ": " + Msg.getElement(Env.getCtx(), "LVE_POInvoiceNo");
