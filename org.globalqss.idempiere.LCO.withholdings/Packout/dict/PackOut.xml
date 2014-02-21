@@ -31175,6 +31175,107 @@ There are two reasons for de-activating and not deleting records:
             <IsTranslated>true</IsTranslated>
         </AD_Field_Trl>
     </AD_Field>
+    <AD_Reference type="table">
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <Help/>
+        <Name>Withholding Type</Name>
+        <EntityType>ve.net.dcs</EntityType>
+        <AD_Reference_UU>f44582d1-b8cb-4099-87cb-d3014567a8af</AD_Reference_UU>
+        <IsOrderByValue>false</IsOrderByValue>
+        <Description/>
+        <VFormat/>
+        <ValidationType>L</ValidationType>
+        <IsActive>true</IsActive>
+        <AD_Reference_Trl type="translation">
+            <Help/>
+            <Name>Withholding Type</Name>
+            <Description/>
+            <AD_Language>es_VE</AD_Language>
+            <IsActive>true</IsActive>
+            <IsTranslated>false</IsTranslated>
+        </AD_Reference_Trl>
+        <AD_Ref_List type="table">
+            <AD_Client_ID>0</AD_Client_ID>
+            <AD_Org_ID>0</AD_Org_ID>
+            <ValidFrom/>
+            <AD_Reference_ID reference="uuid" reference-key="AD_Reference">f44582d1-b8cb-4099-87cb-d3014567a8af</AD_Reference_ID>
+            <ValidTo/>
+            <Description/>
+            <Name>ISLR</Name>
+            <AD_Ref_List_UU>dcd785f3-ef64-4800-8b2a-b57ee8452781</AD_Ref_List_UU>
+            <Value>ISLR</Value>
+            <IsActive>true</IsActive>
+            <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+            <AD_Ref_List_Trl type="translation">
+                <Description/>
+                <Name>ISLR</Name>
+                <AD_Language>es_VE</AD_Language>
+                <IsActive>true</IsActive>
+                <IsTranslated>false</IsTranslated>
+            </AD_Ref_List_Trl>
+        </AD_Ref_List>
+        <AD_Ref_List type="table">
+            <AD_Client_ID>0</AD_Client_ID>
+            <AD_Org_ID>0</AD_Org_ID>
+            <ValidFrom/>
+            <AD_Reference_ID reference="uuid" reference-key="AD_Reference">f44582d1-b8cb-4099-87cb-d3014567a8af</AD_Reference_ID>
+            <ValidTo/>
+            <Description/>
+            <Name>IVA</Name>
+            <AD_Ref_List_UU>f60f36a5-491c-4f84-9e8a-97b8c642cc4f</AD_Ref_List_UU>
+            <Value>IVA</Value>
+            <IsActive>true</IsActive>
+            <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+            <AD_Ref_List_Trl type="translation">
+                <Description/>
+                <Name>IVA</Name>
+                <AD_Language>es_VE</AD_Language>
+                <IsActive>true</IsActive>
+                <IsTranslated>false</IsTranslated>
+            </AD_Ref_List_Trl>
+        </AD_Ref_List>
+        <AD_Ref_List type="table">
+            <AD_Client_ID>0</AD_Client_ID>
+            <AD_Org_ID>0</AD_Org_ID>
+            <ValidFrom/>
+            <AD_Reference_ID reference="uuid" reference-key="AD_Reference">f44582d1-b8cb-4099-87cb-d3014567a8af</AD_Reference_ID>
+            <ValidTo/>
+            <Description/>
+            <Name>Other</Name>
+            <AD_Ref_List_UU>3c5cfdc2-df93-457f-a5a9-c7d13992b5ed</AD_Ref_List_UU>
+            <Value>Other</Value>
+            <IsActive>true</IsActive>
+            <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+            <AD_Ref_List_Trl type="translation">
+                <Description/>
+                <Name>Otro</Name>
+                <AD_Language>es_VE</AD_Language>
+                <IsActive>true</IsActive>
+                <IsTranslated>true</IsTranslated>
+            </AD_Ref_List_Trl>
+        </AD_Ref_List>
+        <AD_Ref_List type="table">
+            <AD_Client_ID>0</AD_Client_ID>
+            <AD_Org_ID>0</AD_Org_ID>
+            <ValidFrom/>
+            <AD_Reference_ID reference="uuid" reference-key="AD_Reference">f44582d1-b8cb-4099-87cb-d3014567a8af</AD_Reference_ID>
+            <ValidTo/>
+            <Description/>
+            <Name>Economic Activity (Municipal)</Name>
+            <AD_Ref_List_UU>4a6ee6f2-4cc3-4256-94db-dec6bb00f6e7</AD_Ref_List_UU>
+            <Value>IAE</Value>
+            <IsActive>true</IsActive>
+            <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+            <AD_Ref_List_Trl type="translation">
+                <Description/>
+                <Name>Actividad Económica (Municipal)</Name>
+                <AD_Language>es_VE</AD_Language>
+                <IsActive>true</IsActive>
+                <IsTranslated>false</IsTranslated>
+            </AD_Ref_List_Trl>
+        </AD_Ref_List>
+    </AD_Reference>
     <AD_Column type="table">
         <IsSyncDatabase>Y</IsSyncDatabase>
         <AD_Table_ID reference="uuid" reference-key="AD_Table">67180e35-e23d-4a74-8ac4-4298a4c7dfee</AD_Table_ID>
