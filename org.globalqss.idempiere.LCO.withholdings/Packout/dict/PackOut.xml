@@ -28169,4 +28169,3111 @@ There are two reasons for de-activating and not deleting records:
             <IsTranslated>false</IsTranslated>
         </AD_Field_Trl>
     </AD_Field>
+    <AD_Element type="table">
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <ColumnName>LVE_POInvoiceNo</ColumnName>
+        <Help/>
+        <PO_Description/>
+        <PO_Help/>
+        <Name>PO Invoice No</Name>
+        <Description/>
+        <PrintName trim="false">PO Invoice No</PrintName>
+        <PO_Name/>
+        <PO_PrintName/>
+        <AD_Element_UU>eb129832-5694-41be-8b59-5e05d661a956</AD_Element_UU>
+        <IsActive>true</IsActive>
+        <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+        <AD_Element_Trl type="translation">
+            <Help/>
+            <PO_Description/>
+            <PO_Help/>
+            <Name>Número Factura en Compras</Name>
+            <Description/>
+            <PrintName trim="false">Número Factura en Compras</PrintName>
+            <PO_Name/>
+            <PO_PrintName/>
+            <AD_Language>es_CO</AD_Language>
+            <IsActive>true</IsActive>
+            <IsTranslated>false</IsTranslated>
+        </AD_Element_Trl>
+        <AD_Element_Trl type="translation">
+            <Help/>
+            <PO_Description/>
+            <PO_Help/>
+            <Name>Número Factura en Compras</Name>
+            <Description/>
+            <PrintName trim="false">Número Factura en Compras</PrintName>
+            <PO_Name/>
+            <PO_PrintName/>
+            <AD_Language>es_VE</AD_Language>
+            <IsActive>true</IsActive>
+            <IsTranslated>false</IsTranslated>
+        </AD_Element_Trl>
+    </AD_Element>
+    <AD_Column type="table">
+        <IsSyncDatabase>Y</IsSyncDatabase>
+        <AD_Table_ID reference="id">318</AD_Table_ID>
+        <AD_Reference_Value_ID reference="id"/>
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <SeqNoSelection/>
+        <Version>0</Version>
+        <ValueMax/>
+        <IsMandatory>false</IsMandatory>
+        <IsTranslated>false</IsTranslated>
+        <IsIdentifier>false</IsIdentifier>
+        <SeqNo>3</SeqNo>
+        <ValueMin/>
+        <IsParent>false</IsParent>
+        <FieldLength>100</FieldLength>
+        <IsSelectionColumn>true</IsSelectionColumn>
+        <IsKey>false</IsKey>
+        <AD_Process_ID reference="id"/>
+        <ReadOnlyLogic/>
+        <IsAutocomplete>false</IsAutocomplete>
+        <IsAllowLogging>true</IsAllowLogging>
+        <MandatoryLogic/>
+        <FormatPattern/>
+        <AD_Column_UU>e636faad-8123-4c43-97ef-e928d7b81026</AD_Column_UU>
+        <IsUpdateable>true</IsUpdateable>
+        <Callout/>
+        <ColumnName>LVE_POInvoiceNo</ColumnName>
+        <Description/>
+        <ColumnSQL/>
+        <DefaultValue/>
+        <Help/>
+        <Name>PO Invoice No</Name>
+        <IsAllowCopy>true</IsAllowCopy>
+        <IsActive>true</IsActive>
+        <IsToolbarButton>false</IsToolbarButton>
+        <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+        <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+        <IsEncrypted>N</IsEncrypted>
+        <VFormat/>
+        <IsSecure>false</IsSecure>
+        <AD_Chart_ID reference="id"/>
+        <FKConstraintName/>
+        <FKConstraintType/>
+        <AD_Element_ID reference="uuid" reference-key="AD_Element">eb129832-5694-41be-8b59-5e05d661a956</AD_Element_ID>
+        <AD_Reference_ID reference="id">10</AD_Reference_ID>
+        <AD_Val_Rule_ID reference="id"/>
+    </AD_Column>
+    <AD_Field type="table">
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <SortNo>0</SortNo>
+        <IsEncrypted>false</IsEncrypted>
+        <AD_Tab_ID reference="id">290</AD_Tab_ID>
+        <DisplayLength>0</DisplayLength>
+        <IsSameLine>false</IsSameLine>
+        <IsHeading>false</IsHeading>
+        <SeqNo>70</SeqNo>
+        <IsCentrallyMaintained>true</IsCentrallyMaintained>
+        <IsReadOnly>false</IsReadOnly>
+        <Help/>
+        <ObscureType/>
+        <DisplayLogic/>
+        <IsMandatory>Y</IsMandatory>
+        <Description/>
+        <Name>PO Invoice No</Name>
+        <AD_Field_UU>2ebd1f69-5112-4e9e-8885-0e585a942cce</AD_Field_UU>
+        <IsDisplayed>true</IsDisplayed>
+        <IsFieldOnly>false</IsFieldOnly>
+        <DefaultValue/>
+        <IsAllowCopy/>
+        <IsActive>true</IsActive>
+        <IsDisplayedGrid>true</IsDisplayedGrid>
+        <SeqNoGrid>20</SeqNoGrid>
+        <XPosition>1</XPosition>
+        <IsQuickEntry>false</IsQuickEntry>
+        <MandatoryLogic/>
+        <IsUpdateable/>
+        <IsAlwaysUpdateable/>
+        <ReadOnlyLogic/>
+        <IsToolbarButton/>
+        <ColumnSpan>2</ColumnSpan>
+        <NumLines>1</NumLines>
+        <IsAdvancedField>false</IsAdvancedField>
+        <IsDefaultFocus>false</IsDefaultFocus>
+        <AD_Column_ID reference="uuid" reference-key="AD_Column">e636faad-8123-4c43-97ef-e928d7b81026</AD_Column_ID>
+        <AD_FieldGroup_ID reference="id"/>
+        <AD_Reference_ID reference="id"/>
+        <AD_Reference_Value_ID reference="id"/>
+        <AD_Val_Rule_ID reference="id"/>
+        <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+        <Included_Tab_ID reference="id"/>
+        <AD_Field_Trl type="translation">
+            <Help/>
+            <Description/>
+            <Name>Número Factura en Compraso</Name>
+            <AD_Language>es_CO</AD_Language>
+            <IsActive>true</IsActive>
+            <IsTranslated>false</IsTranslated>
+        </AD_Field_Trl>
+        <AD_Field_Trl type="translation">
+            <Help/>
+            <Description/>
+            <Name>Número Factura en Compras</Name>
+            <AD_Language>es_VE</AD_Language>
+            <IsActive>true</IsActive>
+            <IsTranslated>false</IsTranslated>
+        </AD_Field_Trl>
+    </AD_Field>
+    <AD_Element type="table">
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <ColumnName>LVE_invoiceAffected_ID</ColumnName>
+        <Help>LVE_invoiceAffected_ID</Help>
+        <PO_Description/>
+        <PO_Help/>
+        <Name>LVE_invoiceAffected_ID</Name>
+        <Description>LVE_invoiceAffected_ID</Description>
+        <PrintName trim="false">LVE_invoiceAffected_ID</PrintName>
+        <PO_Name/>
+        <PO_PrintName/>
+        <AD_Element_UU>8a7b9af6-1d27-4e9e-9bbc-4ac72ccc1370</AD_Element_UU>
+        <IsActive>true</IsActive>
+        <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+        <AD_Element_Trl type="translation">
+            <Help>Factura Afectada</Help>
+            <PO_Description/>
+            <PO_Help/>
+            <Name>Factura Afectada</Name>
+            <Description>Factura Afectada</Description>
+            <PrintName trim="false">Factura Afectada</PrintName>
+            <PO_Name/>
+            <PO_PrintName/>
+            <AD_Language>es_CO</AD_Language>
+            <IsActive>true</IsActive>
+            <IsTranslated>false</IsTranslated>
+        </AD_Element_Trl>
+        <AD_Element_Trl type="translation">
+            <Help>Factura Afectada</Help>
+            <PO_Description/>
+            <PO_Help/>
+            <Name>Factura Afectada</Name>
+            <Description>LVE_invoiceAffected_ID</Description>
+            <PrintName trim="false">Factura Afectada</PrintName>
+            <PO_Name/>
+            <PO_PrintName/>
+            <AD_Language>es_VE</AD_Language>
+            <IsActive>true</IsActive>
+            <IsTranslated>false</IsTranslated>
+        </AD_Element_Trl>
+    </AD_Element>
+    <AD_Column type="table">
+        <IsSyncDatabase>Y</IsSyncDatabase>
+        <AD_Table_ID reference="id">318</AD_Table_ID>
+        <AD_Reference_Value_ID reference="id">336</AD_Reference_Value_ID>
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <SeqNoSelection/>
+        <Version>0</Version>
+        <ValueMax/>
+        <IsMandatory>false</IsMandatory>
+        <IsTranslated>false</IsTranslated>
+        <IsIdentifier>false</IsIdentifier>
+        <SeqNo>0</SeqNo>
+        <ValueMin/>
+        <IsParent>false</IsParent>
+        <FieldLength>10</FieldLength>
+        <IsSelectionColumn>false</IsSelectionColumn>
+        <IsKey>false</IsKey>
+        <AD_Process_ID reference="id"/>
+        <ReadOnlyLogic/>
+        <IsAutocomplete>false</IsAutocomplete>
+        <IsAllowLogging>true</IsAllowLogging>
+        <MandatoryLogic>@C_DocTypeTarget_ID=1000004 | @C_DocTypeTarget_ID=1000170 | @C_DocTypeTarget_ID=1000006 | @C_DocTypeTarget_ID=1000169</MandatoryLogic>
+        <FormatPattern/>
+        <AD_Column_UU>ec390223-ba0c-4ab6-9f35-7402c16cb5c1</AD_Column_UU>
+        <IsUpdateable>true</IsUpdateable>
+        <Callout/>
+        <ColumnName>LVE_invoiceAffected_ID</ColumnName>
+        <Description>LVE_invoiceAffected_ID</Description>
+        <ColumnSQL/>
+        <DefaultValue/>
+        <Help>LVE_invoiceAffected_ID</Help>
+        <Name>LVE_invoiceAffected_ID</Name>
+        <IsAllowCopy>true</IsAllowCopy>
+        <IsActive>true</IsActive>
+        <IsToolbarButton>false</IsToolbarButton>
+        <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+        <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+        <IsEncrypted>N</IsEncrypted>
+        <VFormat/>
+        <IsSecure>false</IsSecure>
+        <AD_Chart_ID reference="id"/>
+        <FKConstraintName/>
+        <FKConstraintType/>
+        <AD_Element_ID reference="uuid" reference-key="AD_Element">8a7b9af6-1d27-4e9e-9bbc-4ac72ccc1370</AD_Element_ID>
+        <AD_Reference_ID reference="id">30</AD_Reference_ID>
+        <AD_Val_Rule_ID reference="id"/>
+    </AD_Column>
+    <AD_Field type="table">
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <SortNo>0</SortNo>
+        <IsEncrypted>false</IsEncrypted>
+        <AD_Tab_ID reference="id">290</AD_Tab_ID>
+        <DisplayLength>10</DisplayLength>
+        <IsSameLine>false</IsSameLine>
+        <IsHeading>false</IsHeading>
+        <SeqNo>480</SeqNo>
+        <IsCentrallyMaintained>false</IsCentrallyMaintained>
+        <IsReadOnly>false</IsReadOnly>
+        <Help/>
+        <ObscureType/>
+        <DisplayLogic/>
+        <IsMandatory/>
+        <Description/>
+        <Name>LVE_invoiceAffected_ID</Name>
+        <AD_Field_UU>7ef55a06-027c-4a95-af9c-7317eba50bde</AD_Field_UU>
+        <IsDisplayed>true</IsDisplayed>
+        <IsFieldOnly>false</IsFieldOnly>
+        <DefaultValue/>
+        <IsAllowCopy/>
+        <IsActive>true</IsActive>
+        <IsDisplayedGrid>true</IsDisplayedGrid>
+        <SeqNoGrid>460</SeqNoGrid>
+        <XPosition>1</XPosition>
+        <IsQuickEntry>false</IsQuickEntry>
+        <MandatoryLogic/>
+        <IsUpdateable/>
+        <IsAlwaysUpdateable/>
+        <ReadOnlyLogic/>
+        <IsToolbarButton/>
+        <ColumnSpan>2</ColumnSpan>
+        <NumLines>1</NumLines>
+        <IsAdvancedField>false</IsAdvancedField>
+        <IsDefaultFocus>false</IsDefaultFocus>
+        <AD_Column_ID reference="uuid" reference-key="AD_Column">ec390223-ba0c-4ab6-9f35-7402c16cb5c1</AD_Column_ID>
+        <AD_FieldGroup_ID reference="id"/>
+        <AD_Reference_ID reference="id"/>
+        <AD_Reference_Value_ID reference="id"/>
+        <AD_Val_Rule_ID reference="id"/>
+        <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+        <Included_Tab_ID reference="id"/>
+        <AD_Field_Trl type="translation">
+            <Help/>
+            <Description/>
+            <Name>Factura Afectada</Name>
+            <AD_Language>es_CO</AD_Language>
+            <IsActive>true</IsActive>
+            <IsTranslated>false</IsTranslated>
+        </AD_Field_Trl>
+        <AD_Field_Trl type="translation">
+            <Help/>
+            <Description/>
+            <Name>Factura Afectada</Name>
+            <AD_Language>es_VE</AD_Language>
+            <IsActive>true</IsActive>
+            <IsTranslated>true</IsTranslated>
+        </AD_Field_Trl>
+    </AD_Field>
+     <AD_Menu type="table">
+        <SeqNo>30</SeqNo>
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <Description/>
+        <AD_Form_ID reference="id"/>
+        <AD_Task_ID reference="id"/>
+        <AD_Window_ID reference="uuid" reference-key="AD_Window">7219d5fd-b8fc-43a7-ac35-4e56a2b4ebd4</AD_Window_ID>
+        <AD_Workflow_ID reference="id"/>
+        <IsSummary>false</IsSummary>
+        <IsSOTrx>false</IsSOTrx>
+        <AD_Process_ID reference="id"/>
+        <AD_Menu_UU>ab5ef489-2379-49ee-acaf-93bf7dabf991</AD_Menu_UU>
+        <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+        <IsCentrallyMaintained>false</IsCentrallyMaintained>
+        <Name>Generar TXT SENIAT</Name>
+        <Action>W</Action>
+        <IsReadOnly>false</IsReadOnly>
+        <AD_InfoWindow_ID reference="id"/>
+        <IsActive>true</IsActive>
+        <AD_Menu_Trl type="translation">
+            <Description/>
+            <Name>Generar TXT SENIAT</Name>
+            <AD_Language>es_VE</AD_Language>
+            <IsActive>true</IsActive>
+            <IsTranslated>false</IsTranslated>
+        </AD_Menu_Trl>
+        <AD_Window type="table">
+            <AD_Client_ID>0</AD_Client_ID>
+            <AD_Org_ID>0</AD_Org_ID>
+            <TitleLogic/>
+            <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+            <WinHeight>0</WinHeight>
+            <AD_Window_UU>7219d5fd-b8fc-43a7-ac35-4e56a2b4ebd4</AD_Window_UU>
+            <Processing>false</Processing>
+            <AD_Image_ID reference="id"/>
+            <WindowType>M</WindowType>
+            <AD_Color_ID reference="id"/>
+            <Help/>
+            <IsSOTrx>true</IsSOTrx>
+            <IsDefault>false</IsDefault>
+            <IsBetaFunctionality>false</IsBetaFunctionality>
+            <Name>LVE_GenerateTXT</Name>
+            <WinWidth>0</WinWidth>
+            <Description/>
+            <IsActive>true</IsActive>
+            <AD_Window_Trl type="translation">
+                <Help/>
+                <Name>Generar TXT Seniat</Name>
+                <Description/>
+                <AD_Language>es_VE</AD_Language>
+                <IsActive>true</IsActive>
+                <IsTranslated>true</IsTranslated>
+            </AD_Window_Trl>
+            <AD_Table type="table">
+                <AD_Client_ID>0</AD_Client_ID>
+                <AD_Org_ID>0</AD_Org_ID>
+                <Name>Generate TXT Seniat</Name>
+                <DatabaseViewDrop/>
+                <AD_Val_Rule_ID reference="id"/>
+                <AD_Window_ID reference="id"/>
+                <IsView>false</IsView>
+                <CopyColumnsFromTable>N</CopyColumnsFromTable>
+                <IsSecurityEnabled>false</IsSecurityEnabled>
+                <ImportTable>N</ImportTable>
+                <Processing/>
+                <AccessLevel>6</AccessLevel>
+                <Help/>
+                <LoadSeq>0</LoadSeq>
+                <IsHighVolume>false</IsHighVolume>
+                <IsChangeLog>true</IsChangeLog>
+                <AD_Table_UU>0cf604f7-4b72-4c58-8f7c-9a8080634d74</AD_Table_UU>
+                <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                <IsCentrallyMaintained>true</IsCentrallyMaintained>
+                <Description/>
+                <TableName>LVE_generateTXT</TableName>
+                <IsDeleteable>true</IsDeleteable>
+                <PO_Window_ID reference="id"/>
+                <ReplicationType>L</ReplicationType>
+                <IsActive>true</IsActive>
+                <AD_Element type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <PO_Description/>
+                    <AD_Element_UU>691863d2-e9d6-476c-b32d-8bbc611fa06d</AD_Element_UU>
+                    <PO_Name/>
+                    <PO_Help/>
+                    <ColumnName>LVE_generateTXT_ID</ColumnName>
+                    <Help/>
+                    <Name>Generate TXT Seniat</Name>
+                    <Description/>
+                    <PrintName trim="false">Generate TXT Seniat</PrintName>
+                    <PO_PrintName/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsActive>true</IsActive>
+                    <AD_Element_Trl type="translation">
+                        <PO_Description/>
+                        <PO_Name/>
+                        <PO_Help/>
+                        <Help/>
+                        <Name>Generar TXT Seniat</Name>
+                        <Description/>
+                        <PrintName trim="false">Generar TXT Seniat</PrintName>
+                        <PO_PrintName/>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>true</IsTranslated>
+                    </AD_Element_Trl>
+                </AD_Element>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">0cf604f7-4b72-4c58-8f7c-9a8080634d74</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">13</AD_Reference_ID>
+                    <IsUpdateable>false</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>false</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>false</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="uuid" reference-key="AD_Element">691863d2-e9d6-476c-b32d-8bbc611fa06d</AD_Element_ID>
+                    <DefaultValue/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>0</Version>
+                    <IsMandatory>true</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo>0</SeqNo>
+                    <Help/>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>10</FieldLength>
+                    <IsKey>true</IsKey>
+                    <AD_Process_ID reference="id"/>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>9553b089-44a0-4a73-adeb-5bc122634b83</AD_Column_UU>
+                    <Description/>
+                    <Name>Generate TXT Seniat</Name>
+                    <ColumnName>LVE_generateTXT_ID</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType/>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">0cf604f7-4b72-4c58-8f7c-9a8080634d74</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">19</AD_Reference_ID>
+                    <IsUpdateable>false</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>false</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>false</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="id">102</AD_Element_ID>
+                    <DefaultValue/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>0</Version>
+                    <IsMandatory>true</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo>0</SeqNo>
+                    <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>10</FieldLength>
+                    <IsKey>false</IsKey>
+                    <AD_Process_ID reference="id"/>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>43721cd1-4e5b-488a-8452-6e252057d519</AD_Column_UU>
+                    <Description>Client/Tenant for this installation.</Description>
+                    <Name>Client</Name>
+                    <ColumnName>AD_Client_ID</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id">129</AD_Val_Rule_ID>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType/>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">0cf604f7-4b72-4c58-8f7c-9a8080634d74</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">19</AD_Reference_ID>
+                    <IsUpdateable>false</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>false</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>false</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="id">113</AD_Element_ID>
+                    <DefaultValue/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>0</Version>
+                    <IsMandatory>false</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo>0</SeqNo>
+                    <Help>An organization is a unit of your client or legal entity - examples are store, department. You can share data between organizations.</Help>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>10</FieldLength>
+                    <IsKey>false</IsKey>
+                    <AD_Process_ID reference="id"/>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>6edec63b-dbae-49fa-ba6f-17147f017e0d</AD_Column_UU>
+                    <Description>Organizational entity within client</Description>
+                    <Name>Organization</Name>
+                    <ColumnName>AD_Org_ID</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType/>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">0cf604f7-4b72-4c58-8f7c-9a8080634d74</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">15</AD_Reference_ID>
+                    <IsUpdateable>false</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>false</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>false</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="id">245</AD_Element_ID>
+                    <DefaultValue/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>0</Version>
+                    <IsMandatory>true</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo>0</SeqNo>
+                    <Help>The Created field indicates the date that this record was created.</Help>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>7</FieldLength>
+                    <IsKey>false</IsKey>
+                    <AD_Process_ID reference="id"/>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>505559ac-6c77-4fd9-997b-4f9576fa442f</AD_Column_UU>
+                    <Description>Date this record was created</Description>
+                    <Name>Created</Name>
+                    <ColumnName>Created</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType/>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">0cf604f7-4b72-4c58-8f7c-9a8080634d74</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">15</AD_Reference_ID>
+                    <IsUpdateable>true</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>false</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>false</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="id">607</AD_Element_ID>
+                    <DefaultValue/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>0</Version>
+                    <IsMandatory>false</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo>0</SeqNo>
+                    <Help>The Updated field indicates the date that this record was updated.</Help>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>7</FieldLength>
+                    <IsKey>false</IsKey>
+                    <AD_Process_ID reference="id"/>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>996d5002-c44b-4e8b-be7c-8779f26dde0b</AD_Column_UU>
+                    <Description>Date this record was updated</Description>
+                    <Name>Updated</Name>
+                    <ColumnName>Updated</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType/>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">0cf604f7-4b72-4c58-8f7c-9a8080634d74</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">19</AD_Reference_ID>
+                    <IsUpdateable>false</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>false</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>false</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="id">608</AD_Element_ID>
+                    <DefaultValue/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>0</Version>
+                    <IsMandatory>true</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo>0</SeqNo>
+                    <Help>The Updated By field indicates the user who updated this record.</Help>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>10</FieldLength>
+                    <IsKey>false</IsKey>
+                    <AD_Process_ID reference="id"/>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>5f26320b-6707-435c-a271-cf419f3d544f</AD_Column_UU>
+                    <Description>User who updated this records</Description>
+                    <Name>Updated By</Name>
+                    <ColumnName>UpdatedBy</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType/>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">0cf604f7-4b72-4c58-8f7c-9a8080634d74</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">19</AD_Reference_ID>
+                    <IsUpdateable>false</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>false</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>false</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="id">246</AD_Element_ID>
+                    <DefaultValue/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>0</Version>
+                    <IsMandatory>true</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo>0</SeqNo>
+                    <Help>The Created By field indicates the user who created this record.</Help>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>10</FieldLength>
+                    <IsKey>false</IsKey>
+                    <AD_Process_ID reference="id"/>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>78d8d093-49fb-47ca-af41-b23ed7677a89</AD_Column_UU>
+                    <Description>User who created this records</Description>
+                    <Name>Created By</Name>
+                    <ColumnName>CreatedBy</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType/>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">0cf604f7-4b72-4c58-8f7c-9a8080634d74</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">20</AD_Reference_ID>
+                    <IsUpdateable>true</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>false</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>false</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="id">348</AD_Element_ID>
+                    <DefaultValue/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>0</Version>
+                    <IsMandatory>true</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo>0</SeqNo>
+                    <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Business Partner, if there are invoices for this partner record existing. You de-activate the Business Partner and prevent that this record is used for future entries.</Help>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>1</FieldLength>
+                    <IsKey>false</IsKey>
+                    <AD_Process_ID reference="id"/>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>ef309649-1bd9-47eb-812f-d5d0fb078246</AD_Column_UU>
+                    <Description>The record is active in the system</Description>
+                    <Name>Active</Name>
+                    <ColumnName>IsActive</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType/>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">0cf604f7-4b72-4c58-8f7c-9a8080634d74</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">15</AD_Reference_ID>
+                    <IsUpdateable>false</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>true</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>false</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="id">617</AD_Element_ID>
+                    <DefaultValue/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>0</Version>
+                    <IsMandatory>true</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo>0</SeqNo>
+                    <Help>The Valid From date indicates the first day of a date range</Help>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>7</FieldLength>
+                    <IsKey>false</IsKey>
+                    <AD_Process_ID reference="id"/>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>a0385276-6be4-4a15-8268-d4ac7553d164</AD_Column_UU>
+                    <Description>Valid from including this date (first day)</Description>
+                    <Name>Valid from</Name>
+                    <ColumnName>ValidFrom</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType/>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">0cf604f7-4b72-4c58-8f7c-9a8080634d74</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">15</AD_Reference_ID>
+                    <IsUpdateable>false</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>false</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>false</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="id">618</AD_Element_ID>
+                    <DefaultValue/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>0</Version>
+                    <IsMandatory>true</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo>0</SeqNo>
+                    <Help>The Valid To date indicates the last day of a date range</Help>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>7</FieldLength>
+                    <IsKey>false</IsKey>
+                    <AD_Process_ID reference="id"/>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>b00abbd5-fd28-4436-b576-088991c88e9b</AD_Column_UU>
+                    <Description>Valid to including this date (last day)</Description>
+                    <Name>Valid to</Name>
+                    <ColumnName>ValidTo</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType/>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+                <AD_Element type="table">
+			<AD_Client_ID>0</AD_Client_ID>
+			<AD_Org_ID>0</AD_Org_ID>
+			<PO_Description/>
+			<AD_Element_UU>92654fec-491a-4b67-87d2-5b7129a38965</AD_Element_UU>
+			<PO_Name/>
+			<PO_Help/>
+			<ColumnName>GenerateTxtSeniat</ColumnName>
+			<Help/>
+			<Name>Generate TXT Seniat</Name>
+			<Description/>
+			<PrintName trim="false">Generate TXT Seniat</PrintName>
+			<PO_PrintName/>
+			 <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+			<IsActive>true</IsActive>
+			<AD_Element_Trl type="translation">
+			    <PO_Description/>
+			    <PO_Name/>
+			    <PO_Help/>
+			    <Help/>
+			    <Name>Generar TXT Seniat</Name>
+			    <Description/>
+			    <PrintName trim="false">Generar TXT Seniat</PrintName>
+			    <PO_PrintName/>
+			    <AD_Language>es_VE</AD_Language>
+			    <IsActive>true</IsActive>
+			    <IsTranslated>true</IsTranslated>
+			</AD_Element_Trl>
+		    </AD_Element>
+                <AD_Column type="table">
+        <IsSyncDatabase>Y</IsSyncDatabase>
+        <AD_Table_ID reference="uuid" reference-key="AD_Table">0cf604f7-4b72-4c58-8f7c-9a8080634d74</AD_Table_ID>
+        <AD_Reference_Value_ID reference="id"/>
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <VFormat/>
+        <AD_Reference_ID reference="id">28</AD_Reference_ID>
+        <IsUpdateable>true</IsUpdateable>
+        <IsEncrypted>N</IsEncrypted>
+        <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+        <IsAllowCopy>true</IsAllowCopy>
+        <MandatoryLogic/>
+        <IsToolbarButton>true</IsToolbarButton>
+        <SeqNoSelection/>
+        <AD_Element_ID reference="uuid" reference-key="AD_Element">92654fec-491a-4b67-87d2-5b7129a38965</AD_Element_ID>
+        <DefaultValue/>
+        <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+        <IsSelectionColumn>false</IsSelectionColumn>
+        <ReadOnlyLogic/>
+        <ValueMax/>
+        <Version>0</Version>
+        <IsMandatory>false</IsMandatory>
+        <IsTranslated>false</IsTranslated>
+        <IsIdentifier>false</IsIdentifier>
+        <SeqNo>0</SeqNo>
+        <Help>You find the current status in the Document Status field. The options are listed in a popup</Help>
+        <ValueMin/>
+        <IsParent>false</IsParent>
+        <FieldLength>1</FieldLength>
+        <IsKey>false</IsKey>
+        <AD_Process_ID reference="uuid" reference-key="AD_Process">c7b11d8a-efd9-428a-a79d-a8e4f71bdd02</AD_Process_ID>
+        <IsAutocomplete>false</IsAutocomplete>
+        <IsAllowLogging>true</IsAllowLogging>
+        <FormatPattern/>
+        <AD_Column_UU>2e6c0b8b-e0c0-4bef-95d7-d9feee58d8fc</AD_Column_UU>
+        <Description>The targeted status of the document</Description>
+        <Name>Generate TXT Seniat</Name>
+        <ColumnName>LVE_generateTXT</ColumnName>
+        <ColumnSQL/>
+        <AD_Val_Rule_ID reference="id"/>
+        <Callout/>
+        <IsSecure>false</IsSecure>
+        <AD_Chart_ID reference="id"/>
+        <FKConstraintType/>
+        <FKConstraintName/>
+        <IsActive>true</IsActive>
+    </AD_Column>
+                <AD_Element type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <PO_Description/>
+                    <AD_Element_UU>df37fd25-5abe-4bbb-a4f5-13213688cacb</AD_Element_UU>
+                    <PO_Name/>
+                    <PO_Help/>
+                    <ColumnName>LVE_TypeOperation</ColumnName>
+                    <Help/>
+                    <Name>Type Operation</Name>
+                    <Description/>
+                    <PrintName trim="false">Type Operation</PrintName>
+                    <PO_PrintName/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsActive>true</IsActive>
+                    <AD_Element_Trl type="translation">
+                        <PO_Description/>
+                        <PO_Name/>
+                        <PO_Help/>
+                        <Help/>
+                        <Name>Tipo Operación</Name>
+                        <Description/>
+                        <PrintName trim="false">Tipo Operación</PrintName>
+                        <PO_PrintName/>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>true</IsTranslated>
+                    </AD_Element_Trl>
+                </AD_Element>
+                <AD_Reference type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <Name>LVE_TypeOperation</Name>
+                    <IsOrderByValue>false</IsOrderByValue>
+                    <Help/>
+                    <ValidationType>L</ValidationType>
+                    <AD_Reference_UU>d8ecf10e-d55d-48b9-9014-5b6c23b24f7d</AD_Reference_UU>
+                    <Description/>
+                    <VFormat/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsActive>true</IsActive>
+                    <AD_Reference_Trl type="translation">
+                        <Name>LVE_TypeOperation</Name>
+                        <Help/>
+                        <Description/>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>false</IsTranslated>
+                    </AD_Reference_Trl>
+                    <AD_Ref_List type="table">
+                        <AD_Client_ID>0</AD_Client_ID>
+                        <AD_Org_ID>0</AD_Org_ID>
+                        <Value>V</Value>
+                        <ValidFrom/>
+                        <AD_Reference_ID reference="uuid" reference-key="AD_Reference">d8ecf10e-d55d-48b9-9014-5b6c23b24f7d</AD_Reference_ID>
+                        <ValidTo/>
+                        <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                        <Description/>
+                        <Name>Sales</Name>
+                        <AD_Ref_List_UU>1192d2cf-8edc-4afa-8953-cc5636642f41</AD_Ref_List_UU>
+                        <IsActive>true</IsActive>
+                        <AD_Ref_List_Trl type="translation">
+                            <Description/>
+                            <Name>Ventas</Name>
+                            <AD_Language>es_VE</AD_Language>
+                            <IsActive>true</IsActive>
+                            <IsTranslated>true</IsTranslated>
+                        </AD_Ref_List_Trl>
+                    </AD_Ref_List>
+                    <AD_Ref_List type="table">
+                        <AD_Client_ID>0</AD_Client_ID>
+                        <AD_Org_ID>0</AD_Org_ID>
+                        <Value>C</Value>
+                        <ValidFrom/>
+                        <AD_Reference_ID reference="uuid" reference-key="AD_Reference">d8ecf10e-d55d-48b9-9014-5b6c23b24f7d</AD_Reference_ID>
+                        <ValidTo/>
+                        <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                        <Description/>
+                        <Name>Purchase</Name>
+                        <AD_Ref_List_UU>70264d9d-aa33-4ef0-b677-583cd1b4e313</AD_Ref_List_UU>
+                        <IsActive>true</IsActive>
+                        <AD_Ref_List_Trl type="translation">
+                            <Description/>
+                            <Name>Compras</Name>
+                            <AD_Language>es_VE</AD_Language>
+                            <IsActive>true</IsActive>
+                            <IsTranslated>true</IsTranslated>
+                        </AD_Ref_List_Trl>
+                    </AD_Ref_List>
+                </AD_Reference>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">0cf604f7-4b72-4c58-8f7c-9a8080634d74</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="uuid" reference-key="AD_Reference">d8ecf10e-d55d-48b9-9014-5b6c23b24f7d</AD_Reference_Value_ID>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">17</AD_Reference_ID>
+                    <IsUpdateable>true</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>true</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>false</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="uuid" reference-key="AD_Element">df37fd25-5abe-4bbb-a4f5-13213688cacb</AD_Element_ID>
+                    <DefaultValue>C</DefaultValue>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>0</Version>
+                    <IsMandatory>true</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo>0</SeqNo>
+                    <Help/>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>1</FieldLength>
+                    <IsKey>false</IsKey>
+                    <AD_Process_ID reference="id"/>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>8f56d5b7-ade6-42cb-897b-37d63b038bca</AD_Column_UU>
+                    <Description/>
+                    <Name>Type Operation</Name>
+                    <ColumnName>LVE_TypeOperation</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType/>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+                <AD_Process type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <Classname>ve.net.dcs.process.LVE_GenerateTxtSeniat</Classname>
+                    <Value>LVE_GenerateTxtSeniat</Value>
+                    <AD_ReportView_ID reference="id"/>
+                    <AD_Form_ID reference="id"/>
+                    <WorkflowValue/>
+                    <AD_Process_UU>c7b11d8a-efd9-428a-a79d-a8e4f71bdd02</AD_Process_UU>
+                    <CopyFromProcess/>
+                    <AD_PrintFormat_ID reference="id"/>
+                    <IsBetaFunctionality>false</IsBetaFunctionality>
+                    <ShowHelp>S</ShowHelp>
+                    <AD_Workflow_ID reference="id"/>
+                    <Help>Generate Txt Seniat</Help>
+                    <Description>Generate Txt Seniat</Description>
+                    <IsDirectPrint>false</IsDirectPrint>
+                    <AccessLevel>3</AccessLevel>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <Statistic_Seconds>16</Statistic_Seconds>
+                    <Statistic_Count>16</Statistic_Count>
+                    <JasperReport/>
+                    <IsReport>false</IsReport>
+                    <IsServerProcess>false</IsServerProcess>
+                    <AD_CtxHelp_ID reference="id"/>
+                    <Name>Generate Txt Seniat</Name>
+                    <ProcedureName/>
+                    <IsActive>true</IsActive>
+                    <AD_Process_Trl type="translation">
+                        <Help>Generate Txt Seniat</Help>
+                        <Description>Generate Txt Seniat</Description>
+                        <Name>Generate Txt Seniat</Name>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>false</IsTranslated>
+                    </AD_Process_Trl>
+                </AD_Process>
+                <AD_Element type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <PO_Description/>
+                    <AD_Element_UU>f9182111-8fd8-4b91-8bdb-715e02a1041e</AD_Element_UU>
+                    <PO_Name/>
+                    <PO_Help/>
+                    <ColumnName>LVE_generateTXT_UU</ColumnName>
+                    <Help/>
+                    <Name>LVE_generateTXT_UU</Name>
+                    <Description/>
+                    <PrintName trim="false">LVE_generateTXT_UU</PrintName>
+                    <PO_PrintName/>
+                    <EntityType>U</EntityType>
+                    <IsActive>true</IsActive>
+                    <AD_Element_Trl type="translation">
+                        <PO_Description/>
+                        <PO_Name/>
+                        <PO_Help/>
+                        <Help/>
+                        <Name>LVE_generateTXT_UU</Name>
+                        <Description/>
+                        <PrintName trim="false">LVE_generateTXT_UU</PrintName>
+                        <PO_PrintName/>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>false</IsTranslated>
+                    </AD_Element_Trl>
+                </AD_Element>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">0cf604f7-4b72-4c58-8f7c-9a8080634d74</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">10</AD_Reference_ID>
+                    <IsUpdateable>true</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>true</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>true</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="uuid" reference-key="AD_Element">f9182111-8fd8-4b91-8bdb-715e02a1041e</AD_Element_ID>
+                    <DefaultValue/>
+                    <EntityType>U</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>1.0</Version>
+                    <IsMandatory>false</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo/>
+                    <Help/>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>36</FieldLength>
+                    <IsKey>false</IsKey>
+                    <AD_Process_ID reference="id"/>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>6105c406-c4a7-467c-9b92-638f390a545f</AD_Column_UU>
+                    <Description/>
+                    <Name>LVE_generateTXT_UU</Name>
+                    <ColumnName>LVE_generateTXT_UU</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType>N</FKConstraintType>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+            </AD_Table>
+            <AD_Tab type="table">
+                <AD_Client_ID>0</AD_Client_ID>
+                <AD_Org_ID>0</AD_Org_ID>
+                <AD_Column_ID reference="id"/>
+                <AD_ColumnSortOrder_ID reference="id"/>
+                <AD_Image_ID reference="id"/>
+                <AD_Process_ID reference="id"/>
+                <Parent_Column_ID reference="id"/>
+                <IsSortTab>false</IsSortTab>
+                <IsAdvancedTab>false</IsAdvancedTab>
+                <SeqNo>10</SeqNo>
+                <Included_Tab_ID reference="id"/>
+                <AD_Window_ID reference="uuid" reference-key="AD_Window">7219d5fd-b8fc-43a7-ac35-4e56a2b4ebd4</AD_Window_ID>
+                <Processing>false</Processing>
+                <ImportFields>N</ImportFields>
+                <TabLevel>0</TabLevel>
+                <Help/>
+                <IsTranslationTab>false</IsTranslationTab>
+                <OrderByClause/>
+                <AD_Table_ID reference="uuid" reference-key="AD_Table">0cf604f7-4b72-4c58-8f7c-9a8080634d74</AD_Table_ID>
+                <CommitWarning/>
+                <HasTree>false</HasTree>
+                <IsInfoTab>false</IsInfoTab>
+                <IsReadOnly>false</IsReadOnly>
+                <IsInsertRecord>true</IsInsertRecord>
+                <DisplayLogic/>
+                <AD_Tab_UU>eed2b23b-bde1-41a8-8cc1-3e506e5496f0</AD_Tab_UU>
+                <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                <Name>LVE_GenerateTXT</Name>
+                <Description/>
+                <IsSingleRow>true</IsSingleRow>
+                <WhereClause/>
+                <AD_CtxHelp_ID reference="id"/>
+                <AD_ColumnSortYesNo_ID reference="id"/>
+                <ReadOnlyLogic/>
+                <IsActive>true</IsActive>
+                <AD_Tab_Trl type="translation">
+                    <Help/>
+                    <CommitWarning/>
+                    <Name>Generar TXT Seniat</Name>
+                    <Description/>
+                    <AD_Language>es_VE</AD_Language>
+                    <IsActive>true</IsActive>
+                    <IsTranslated>true</IsTranslated>
+                </AD_Tab_Trl>
+                <AD_Field type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <IsAlwaysUpdateable/>
+                    <AD_Column_ID reference="uuid" reference-key="AD_Column">43721cd1-4e5b-488a-8452-6e252057d519</AD_Column_ID>
+                    <AD_FieldGroup_ID reference="id"/>
+                    <DisplayLogic/>
+                    <DefaultValue/>
+                    <IsMandatory/>
+                    <IsDisplayedGrid>true</IsDisplayedGrid>
+                    <SeqNoGrid>10</SeqNoGrid>
+                    <XPosition>1</XPosition>
+                    <NumLines>1</NumLines>
+                    <IsQuickEntry>false</IsQuickEntry>
+                    <IsUpdateable/>
+                    <IsDefaultFocus>false</IsDefaultFocus>
+                    <IsSameLine>false</IsSameLine>
+                    <IsDisplayed>true</IsDisplayed>
+                    <IsHeading>false</IsHeading>
+                    <IsFieldOnly>false</IsFieldOnly>
+                    <SeqNo>10</SeqNo>
+                    <IsReadOnly>true</IsReadOnly>
+                    <ObscureType/>
+                    <AD_Reference_ID reference="id"/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Included_Tab_ID reference="id"/>
+                    <AD_Field_UU>b37fe229-b5d5-4192-ab13-97ea59f8e949</AD_Field_UU>
+                    <IsAllowCopy/>
+                    <Name>Client</Name>
+                    <IsEncrypted>false</IsEncrypted>
+                    <DisplayLength>10</DisplayLength>
+                    <AD_Tab_ID reference="uuid" reference-key="AD_Tab">eed2b23b-bde1-41a8-8cc1-3e506e5496f0</AD_Tab_ID>
+                    <IsCentrallyMaintained>true</IsCentrallyMaintained>
+                    <Description>Client/Tenant for this installation.</Description>
+                    <MandatoryLogic/>
+                    <ReadOnlyLogic/>
+                    <IsToolbarButton/>
+                    <ColumnSpan>2</ColumnSpan>
+                    <IsAdvancedField>false</IsAdvancedField>
+                    <SortNo/>
+                    <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+                    <IsActive>true</IsActive>
+                    <AD_Field_Trl type="translation">
+                        <Name>Grupo Empresarial</Name>
+                        <Description>Grupo Empresarial para esta instalación</Description>
+                        <Help>Grupo Empresarial. No se pueden compartir datos entre diferentes grupos empresariales.</Help>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>true</IsTranslated>
+                    </AD_Field_Trl>
+                </AD_Field>
+                <AD_Field type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <IsAlwaysUpdateable/>
+                    <AD_Column_ID reference="uuid" reference-key="AD_Column">6edec63b-dbae-49fa-ba6f-17147f017e0d</AD_Column_ID>
+                    <AD_FieldGroup_ID reference="id"/>
+                    <DisplayLogic/>
+                    <DefaultValue/>
+                    <IsMandatory/>
+                    <IsDisplayedGrid>true</IsDisplayedGrid>
+                    <SeqNoGrid>20</SeqNoGrid>
+                    <XPosition>4</XPosition>
+                    <NumLines>1</NumLines>
+                    <IsQuickEntry>false</IsQuickEntry>
+                    <IsUpdateable/>
+                    <IsDefaultFocus>false</IsDefaultFocus>
+                    <IsSameLine>true</IsSameLine>
+                    <IsDisplayed>true</IsDisplayed>
+                    <IsHeading>false</IsHeading>
+                    <IsFieldOnly>false</IsFieldOnly>
+                    <SeqNo>20</SeqNo>
+                    <IsReadOnly>false</IsReadOnly>
+                    <ObscureType/>
+                    <AD_Reference_ID reference="id"/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Included_Tab_ID reference="id"/>
+                    <AD_Field_UU>a6a88601-561b-4cf9-96ed-edb3c8a7fb68</AD_Field_UU>
+                    <IsAllowCopy>Y</IsAllowCopy>
+                    <Name>Organization</Name>
+                    <IsEncrypted>false</IsEncrypted>
+                    <DisplayLength>10</DisplayLength>
+                    <AD_Tab_ID reference="uuid" reference-key="AD_Tab">eed2b23b-bde1-41a8-8cc1-3e506e5496f0</AD_Tab_ID>
+                    <IsCentrallyMaintained>true</IsCentrallyMaintained>
+                    <Description>Organizational entity within client</Description>
+                    <MandatoryLogic/>
+                    <ReadOnlyLogic/>
+                    <IsToolbarButton/>
+                    <ColumnSpan>2</ColumnSpan>
+                    <IsAdvancedField>false</IsAdvancedField>
+                    <SortNo/>
+                    <Help>An organization is a unit of your client or legal entity - examples are store, department. You can share data between organizations.</Help>
+                    <IsActive>true</IsActive>
+                    <AD_Field_Trl type="translation">
+                        <Name>Organización</Name>
+                        <Description>Entidad organizacional dentro del grupo empresarial</Description>
+                        <Help>Una organización es una unidad del grupo empresarial o entidad legal - Ej. Tiendas y departamentos. Es posible compartir datos entre organizaciones.</Help>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>true</IsTranslated>
+                    </AD_Field_Trl>
+                </AD_Field>
+                <AD_Field type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <IsAlwaysUpdateable/>
+                    <AD_Column_ID reference="uuid" reference-key="AD_Column">a0385276-6be4-4a15-8268-d4ac7553d164</AD_Column_ID>
+                    <AD_FieldGroup_ID reference="id"/>
+                    <DisplayLogic/>
+                    <DefaultValue/>
+                    <IsMandatory/>
+                    <IsDisplayedGrid>true</IsDisplayedGrid>
+                    <SeqNoGrid>30</SeqNoGrid>
+                    <XPosition>1</XPosition>
+                    <NumLines>1</NumLines>
+                    <IsQuickEntry>false</IsQuickEntry>
+                    <IsUpdateable/>
+                    <IsDefaultFocus>false</IsDefaultFocus>
+                    <IsSameLine>false</IsSameLine>
+                    <IsDisplayed>true</IsDisplayed>
+                    <IsHeading>false</IsHeading>
+                    <IsFieldOnly>false</IsFieldOnly>
+                    <SeqNo>30</SeqNo>
+                    <IsReadOnly>false</IsReadOnly>
+                    <ObscureType/>
+                    <AD_Reference_ID reference="id"/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Included_Tab_ID reference="id"/>
+                    <AD_Field_UU>8573cbc2-d2ef-4fa0-9e35-0c8edca032b5</AD_Field_UU>
+                    <IsAllowCopy/>
+                    <Name>Valid from</Name>
+                    <IsEncrypted>false</IsEncrypted>
+                    <DisplayLength>7</DisplayLength>
+                    <AD_Tab_ID reference="uuid" reference-key="AD_Tab">eed2b23b-bde1-41a8-8cc1-3e506e5496f0</AD_Tab_ID>
+                    <IsCentrallyMaintained>true</IsCentrallyMaintained>
+                    <Description>Valid from including this date (first day)</Description>
+                    <MandatoryLogic/>
+                    <ReadOnlyLogic/>
+                    <IsToolbarButton/>
+                    <ColumnSpan>2</ColumnSpan>
+                    <IsAdvancedField>false</IsAdvancedField>
+                    <SortNo/>
+                    <Help>The Valid From date indicates the first day of a date range</Help>
+                    <IsActive>true</IsActive>
+                    <AD_Field_Trl type="translation">
+                        <Name>Válido Desde</Name>
+                        <Description>Válido desde; incluyendo esta fecha (primer día)</Description>
+                        <Help>La fecha válida desde indica el primer día de un rango de fechas</Help>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>true</IsTranslated>
+                    </AD_Field_Trl>
+                </AD_Field>
+                <AD_Field type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <IsAlwaysUpdateable/>
+                    <AD_Column_ID reference="uuid" reference-key="AD_Column">b00abbd5-fd28-4436-b576-088991c88e9b</AD_Column_ID>
+                    <AD_FieldGroup_ID reference="id"/>
+                    <DisplayLogic/>
+                    <DefaultValue/>
+                    <IsMandatory/>
+                    <IsDisplayedGrid>true</IsDisplayedGrid>
+                    <SeqNoGrid>40</SeqNoGrid>
+                    <XPosition>4</XPosition>
+                    <NumLines>1</NumLines>
+                    <IsQuickEntry>false</IsQuickEntry>
+                    <IsUpdateable/>
+                    <IsDefaultFocus>false</IsDefaultFocus>
+                    <IsSameLine>true</IsSameLine>
+                    <IsDisplayed>true</IsDisplayed>
+                    <IsHeading>false</IsHeading>
+                    <IsFieldOnly>false</IsFieldOnly>
+                    <SeqNo>40</SeqNo>
+                    <IsReadOnly>false</IsReadOnly>
+                    <ObscureType/>
+                    <AD_Reference_ID reference="id"/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Included_Tab_ID reference="id"/>
+                    <AD_Field_UU>9fbdcaf5-ce65-4afa-b9df-f356594372f3</AD_Field_UU>
+                    <IsAllowCopy/>
+                    <Name>Valid to</Name>
+                    <IsEncrypted>false</IsEncrypted>
+                    <DisplayLength>7</DisplayLength>
+                    <AD_Tab_ID reference="uuid" reference-key="AD_Tab">eed2b23b-bde1-41a8-8cc1-3e506e5496f0</AD_Tab_ID>
+                    <IsCentrallyMaintained>true</IsCentrallyMaintained>
+                    <Description>Valid to including this date (last day)</Description>
+                    <MandatoryLogic/>
+                    <ReadOnlyLogic/>
+                    <IsToolbarButton/>
+                    <ColumnSpan>2</ColumnSpan>
+                    <IsAdvancedField>false</IsAdvancedField>
+                    <SortNo/>
+                    <Help>The Valid To date indicates the last day of a date range</Help>
+                    <IsActive>true</IsActive>
+                    <AD_Field_Trl type="translation">
+                        <Name>Válido Hasta</Name>
+                        <Description>Válido hasta; incluyendo esta fecha (ultimo día)</Description>
+                        <Help>La fecha válida hasta indica el último día de un rango de fechas</Help>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>true</IsTranslated>
+                    </AD_Field_Trl>
+                </AD_Field>
+                <AD_Field type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <IsAlwaysUpdateable/>
+                    <AD_Column_ID reference="uuid" reference-key="AD_Column">8f56d5b7-ade6-42cb-897b-37d63b038bca</AD_Column_ID>
+                    <AD_FieldGroup_ID reference="id"/>
+                    <DisplayLogic/>
+                    <DefaultValue/>
+                    <IsMandatory/>
+                    <IsDisplayedGrid>true</IsDisplayedGrid>
+                    <SeqNoGrid>50</SeqNoGrid>
+                    <XPosition>1</XPosition>
+                    <NumLines>1</NumLines>
+                    <IsQuickEntry>false</IsQuickEntry>
+                    <IsUpdateable/>
+                    <IsDefaultFocus>false</IsDefaultFocus>
+                    <IsSameLine>false</IsSameLine>
+                    <IsDisplayed>true</IsDisplayed>
+                    <IsHeading>false</IsHeading>
+                    <IsFieldOnly>false</IsFieldOnly>
+                    <SeqNo>50</SeqNo>
+                    <IsReadOnly>false</IsReadOnly>
+                    <ObscureType/>
+                    <AD_Reference_ID reference="id"/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Included_Tab_ID reference="id"/>
+                    <AD_Field_UU>a630b4a2-08cb-4af6-9096-aef352f0b0e6</AD_Field_UU>
+                    <IsAllowCopy/>
+                    <Name>Type Operation</Name>
+                    <IsEncrypted>false</IsEncrypted>
+                    <DisplayLength>1</DisplayLength>
+                    <AD_Tab_ID reference="uuid" reference-key="AD_Tab">eed2b23b-bde1-41a8-8cc1-3e506e5496f0</AD_Tab_ID>
+                    <IsCentrallyMaintained>true</IsCentrallyMaintained>
+                    <Description/>
+                    <MandatoryLogic/>
+                    <ReadOnlyLogic/>
+                    <IsToolbarButton/>
+                    <ColumnSpan>2</ColumnSpan>
+                    <IsAdvancedField>false</IsAdvancedField>
+                    <SortNo/>
+                    <Help/>
+                    <IsActive>true</IsActive>
+                    <AD_Field_Trl type="translation">
+                        <Name>Tipo Operación</Name>
+                        <Description/>
+                        <Help/>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>true</IsTranslated>
+                    </AD_Field_Trl>
+                </AD_Field>
+                <AD_Field type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <IsAlwaysUpdateable/>
+                    <AD_Column_ID reference="uuid" reference-key="AD_Column">ef309649-1bd9-47eb-812f-d5d0fb078246</AD_Column_ID>
+                    <AD_FieldGroup_ID reference="id"/>
+                    <DisplayLogic/>
+                    <DefaultValue/>
+                    <IsMandatory/>
+                    <IsDisplayedGrid>true</IsDisplayedGrid>
+                    <SeqNoGrid>60</SeqNoGrid>
+                    <XPosition>2</XPosition>
+                    <NumLines>1</NumLines>
+                    <IsQuickEntry>false</IsQuickEntry>
+                    <IsUpdateable/>
+                    <IsDefaultFocus>false</IsDefaultFocus>
+                    <IsSameLine>false</IsSameLine>
+                    <IsDisplayed>true</IsDisplayed>
+                    <IsHeading>false</IsHeading>
+                    <IsFieldOnly>false</IsFieldOnly>
+                    <SeqNo>60</SeqNo>
+                    <IsReadOnly>false</IsReadOnly>
+                    <ObscureType/>
+                    <AD_Reference_ID reference="id"/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Included_Tab_ID reference="id"/>
+                    <AD_Field_UU>abb85b7c-2e60-4e37-acba-e20a1cf39ab2</AD_Field_UU>
+                    <IsAllowCopy/>
+                    <Name>Active</Name>
+                    <IsEncrypted>false</IsEncrypted>
+                    <DisplayLength>1</DisplayLength>
+                    <AD_Tab_ID reference="uuid" reference-key="AD_Tab">eed2b23b-bde1-41a8-8cc1-3e506e5496f0</AD_Tab_ID>
+                    <IsCentrallyMaintained>true</IsCentrallyMaintained>
+                    <Description>The record is active in the system</Description>
+                    <MandatoryLogic/>
+                    <ReadOnlyLogic/>
+                    <IsToolbarButton/>
+                    <ColumnSpan>2</ColumnSpan>
+                    <IsAdvancedField>false</IsAdvancedField>
+                    <SortNo/>
+                    <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Business Partner, if there are invoices for this partner record existing. You de-activate the Business Partner and prevent that this record is used for future entries.</Help>
+                    <IsActive>true</IsActive>
+                    <AD_Field_Trl type="translation">
+                        <Name>Activo</Name>
+                        <Description>El registro está activo en el sistema</Description>
+                        <Help>Hay dos métodos para que los registros no estén disponibles en el sistema: Uno es eliminar el registro; el otro es desactivarlo. Un registro desactivado no está disponible para selección; pero está disponible para Informes</Help>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>true</IsTranslated>
+                    </AD_Field_Trl>
+                </AD_Field>
+                <AD_Field type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <IsAlwaysUpdateable/>
+                    <AD_Column_ID reference="uuid" reference-key="AD_Column">2e6c0b8b-e0c0-4bef-95d7-d9feee58d8fc</AD_Column_ID>
+                    <AD_FieldGroup_ID reference="id"/>
+                    <DisplayLogic/>
+                    <DefaultValue/>
+                    <IsMandatory/>
+                    <IsDisplayedGrid>true</IsDisplayedGrid>
+                    <SeqNoGrid>70</SeqNoGrid>
+                    <XPosition>2</XPosition>
+                    <NumLines>1</NumLines>
+                    <IsQuickEntry>false</IsQuickEntry>
+                    <IsUpdateable/>
+                    <IsDefaultFocus>false</IsDefaultFocus>
+                    <IsSameLine>false</IsSameLine>
+                    <IsDisplayed>true</IsDisplayed>
+                    <IsHeading>false</IsHeading>
+                    <IsFieldOnly>false</IsFieldOnly>
+                    <SeqNo>70</SeqNo>
+                    <IsReadOnly>false</IsReadOnly>
+                    <ObscureType/>
+                    <AD_Reference_ID reference="id"/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Included_Tab_ID reference="id"/>
+                    <AD_Field_UU>d23189f4-cd9b-4dc4-9b27-f2ecd49dcf7e</AD_Field_UU>
+                    <IsAllowCopy/>
+                    <Name>Generate Txt Seniat</Name>
+                    <IsEncrypted>false</IsEncrypted>
+                    <DisplayLength>1</DisplayLength>
+                    <AD_Tab_ID reference="uuid" reference-key="AD_Tab">eed2b23b-bde1-41a8-8cc1-3e506e5496f0</AD_Tab_ID>
+                    <IsCentrallyMaintained>true</IsCentrallyMaintained>
+                    <Description>Generate Txt Seniat</Description>
+                    <MandatoryLogic/>
+                    <ReadOnlyLogic/>
+                    <IsToolbarButton/>
+                    <ColumnSpan>2</ColumnSpan>
+                    <IsAdvancedField>false</IsAdvancedField>
+                    <SortNo/>
+                    <Help>Generate Txt Seniat</Help>
+                    <IsActive>true</IsActive>
+                    <AD_Field_Trl type="translation">
+                        <Name>Generate Txt Seniat</Name>
+                        <Description>Generate Txt Seniat</Description>
+                        <Help>Generate Txt Seniat</Help>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>false</IsTranslated>
+                    </AD_Field_Trl>
+                </AD_Field>
+                <AD_Field type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <IsAlwaysUpdateable/>
+                    <AD_Column_ID reference="uuid" reference-key="AD_Column">9553b089-44a0-4a73-adeb-5bc122634b83</AD_Column_ID>
+                    <AD_FieldGroup_ID reference="id"/>
+                    <DisplayLogic/>
+                    <DefaultValue/>
+                    <IsMandatory/>
+                    <IsDisplayedGrid>false</IsDisplayedGrid>
+                    <SeqNoGrid/>
+                    <XPosition>1</XPosition>
+                    <NumLines>1</NumLines>
+                    <IsQuickEntry>false</IsQuickEntry>
+                    <IsUpdateable/>
+                    <IsDefaultFocus>false</IsDefaultFocus>
+                    <IsSameLine>false</IsSameLine>
+                    <IsDisplayed>false</IsDisplayed>
+                    <IsHeading>false</IsHeading>
+                    <IsFieldOnly>false</IsFieldOnly>
+                    <SeqNo/>
+                    <IsReadOnly>false</IsReadOnly>
+                    <ObscureType/>
+                    <AD_Reference_ID reference="id"/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Included_Tab_ID reference="id"/>
+                    <AD_Field_UU>a7fba7d0-34ff-4a9e-8ab6-17e831b5a70c</AD_Field_UU>
+                    <IsAllowCopy/>
+                    <Name>Generate TXT Seniat</Name>
+                    <IsEncrypted>false</IsEncrypted>
+                    <DisplayLength>10</DisplayLength>
+                    <AD_Tab_ID reference="uuid" reference-key="AD_Tab">eed2b23b-bde1-41a8-8cc1-3e506e5496f0</AD_Tab_ID>
+                    <IsCentrallyMaintained>true</IsCentrallyMaintained>
+                    <Description/>
+                    <MandatoryLogic/>
+                    <ReadOnlyLogic/>
+                    <IsToolbarButton/>
+                    <ColumnSpan>2</ColumnSpan>
+                    <IsAdvancedField>false</IsAdvancedField>
+                    <SortNo/>
+                    <Help/>
+                    <IsActive>true</IsActive>
+                    <AD_Field_Trl type="translation">
+                        <Name>Generar TXT Seniat</Name>
+                        <Description/>
+                        <Help/>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>true</IsTranslated>
+                    </AD_Field_Trl>
+                </AD_Field>
+            </AD_Tab>
+        </AD_Window>
+    </AD_Menu>
+    <AD_Menu type="table">
+        <SeqNo>29</SeqNo>
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <Description/>
+        <AD_Form_ID reference="id"/>
+        <AD_Task_ID reference="id"/>
+        <AD_Window_ID reference="uuid" reference-key="AD_Window">628f4f2b-5ec4-4b61-9139-3a755ac5431a</AD_Window_ID>
+        <AD_Workflow_ID reference="id"/>
+        <IsSummary>false</IsSummary>
+        <IsSOTrx>false</IsSOTrx>
+        <AD_Process_ID reference="id"/>
+        <AD_Menu_UU>ec230d0f-a687-4a07-8901-a59fee88d36e</AD_Menu_UU>
+        <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+        <IsCentrallyMaintained>false</IsCentrallyMaintained>
+        <Name>Generate XML SENIAT</Name>
+        <Action>W</Action>
+        <IsReadOnly>false</IsReadOnly>
+        <AD_InfoWindow_ID reference="id"/>
+        <IsActive>true</IsActive>
+        <AD_Menu_Trl type="translation">
+            <Description/>
+            <Name>Generar XML SENIAT</Name>
+            <AD_Language>es_VE</AD_Language>
+            <IsActive>true</IsActive>
+            <IsTranslated>true</IsTranslated>
+        </AD_Menu_Trl>
+        <AD_Window type="table">
+            <AD_Client_ID>0</AD_Client_ID>
+            <AD_Org_ID>0</AD_Org_ID>
+            <TitleLogic/>
+            <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+            <WinHeight>0</WinHeight>
+            <AD_Window_UU>628f4f2b-5ec4-4b61-9139-3a755ac5431a</AD_Window_UU>
+            <Processing>false</Processing>
+            <AD_Image_ID reference="id"/>
+            <WindowType>M</WindowType>
+            <AD_Color_ID reference="id"/>
+            <Help/>
+            <IsSOTrx>true</IsSOTrx>
+            <IsDefault>false</IsDefault>
+            <IsBetaFunctionality>false</IsBetaFunctionality>
+            <Name>LVE_GenerateXML</Name>
+            <WinWidth>0</WinWidth>
+            <Description/>
+            <IsActive>true</IsActive>
+            <AD_Window_Trl type="translation">
+                <Help/>
+                <Name>Generar XML Seniat</Name>
+                <Description/>
+                <AD_Language>es_VE</AD_Language>
+                <IsActive>true</IsActive>
+                <IsTranslated>true</IsTranslated>
+            </AD_Window_Trl>
+            <AD_Table type="table">
+                <AD_Client_ID>0</AD_Client_ID>
+                <AD_Org_ID>0</AD_Org_ID>
+                <Name>Generate XML Seniat</Name>
+                <DatabaseViewDrop/>
+                <AD_Val_Rule_ID reference="id"/>
+                <AD_Window_ID reference="id"/>
+                <IsView>false</IsView>
+                <CopyColumnsFromTable>N</CopyColumnsFromTable>
+                <IsSecurityEnabled>false</IsSecurityEnabled>
+                <ImportTable>N</ImportTable>
+                <Processing/>
+                <AccessLevel>6</AccessLevel>
+                <Help/>
+                <LoadSeq>0</LoadSeq>
+                <IsHighVolume>false</IsHighVolume>
+                <IsChangeLog>true</IsChangeLog>
+                <AD_Table_UU>70c12af7-a2a5-491f-8668-bc00ad84d84e</AD_Table_UU>
+                <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                <IsCentrallyMaintained>true</IsCentrallyMaintained>
+                <Description/>
+                <TableName>LVE_generateXML</TableName>
+                <IsDeleteable>true</IsDeleteable>
+                <PO_Window_ID reference="id"/>
+                <ReplicationType>L</ReplicationType>
+                <IsActive>true</IsActive>
+                <AD_Element type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <PO_Description/>
+                    <AD_Element_UU>11a22e1d-29dc-432c-9202-fcff1c262029</AD_Element_UU>
+                    <PO_Name/>
+                    <PO_Help/>
+                    <ColumnName>LVE_generateXML_ID</ColumnName>
+                    <Help/>
+                    <Name>Generate XML Seniat</Name>
+                    <Description/>
+                    <PrintName trim="false">Generate XML Seniat</PrintName>
+                    <PO_PrintName/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsActive>true</IsActive>
+                    <AD_Element_Trl type="translation">
+                        <PO_Description/>
+                        <PO_Name/>
+                        <PO_Help/>
+                        <Help/>
+                        <Name>Generar XML Seniat</Name>
+                        <Description/>
+                        <PrintName trim="false">Generar XML Seniat</PrintName>
+                        <PO_PrintName/>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>true</IsTranslated>
+                    </AD_Element_Trl>
+                </AD_Element>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">70c12af7-a2a5-491f-8668-bc00ad84d84e</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">13</AD_Reference_ID>
+                    <IsUpdateable>false</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>false</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>false</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="uuid" reference-key="AD_Element">11a22e1d-29dc-432c-9202-fcff1c262029</AD_Element_ID>
+                    <DefaultValue/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>0</Version>
+                    <IsMandatory>true</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo>0</SeqNo>
+                    <Help/>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>10</FieldLength>
+                    <IsKey>true</IsKey>
+                    <AD_Process_ID reference="id"/>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>26be1507-e97d-40bc-9312-bfc22b77fbc4</AD_Column_UU>
+                    <Description/>
+                    <Name>Generate XML Seniat</Name>
+                    <ColumnName>LVE_generateXML_ID</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType/>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">70c12af7-a2a5-491f-8668-bc00ad84d84e</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">19</AD_Reference_ID>
+                    <IsUpdateable>false</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>false</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>false</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="id">102</AD_Element_ID>
+                    <DefaultValue/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>0</Version>
+                    <IsMandatory>true</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo>0</SeqNo>
+                    <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>10</FieldLength>
+                    <IsKey>false</IsKey>
+                    <AD_Process_ID reference="id"/>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>026784db-2338-4b1c-ada2-74678bd8f91a</AD_Column_UU>
+                    <Description>Client/Tenant for this installation.</Description>
+                    <Name>Client</Name>
+                    <ColumnName>AD_Client_ID</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id">129</AD_Val_Rule_ID>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType/>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">70c12af7-a2a5-491f-8668-bc00ad84d84e</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">19</AD_Reference_ID>
+                    <IsUpdateable>false</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>false</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>false</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="id">113</AD_Element_ID>
+                    <DefaultValue/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>0</Version>
+                    <IsMandatory>false</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo>0</SeqNo>
+                    <Help>An organization is a unit of your client or legal entity - examples are store, department. You can share data between organizations.</Help>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>10</FieldLength>
+                    <IsKey>false</IsKey>
+                    <AD_Process_ID reference="id"/>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>aec63157-4593-4cc1-b7b4-a7a08791b612</AD_Column_UU>
+                    <Description>Organizational entity within client</Description>
+                    <Name>Organization</Name>
+                    <ColumnName>AD_Org_ID</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType/>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">70c12af7-a2a5-491f-8668-bc00ad84d84e</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">15</AD_Reference_ID>
+                    <IsUpdateable>false</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>false</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>false</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="id">245</AD_Element_ID>
+                    <DefaultValue/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>0</Version>
+                    <IsMandatory>true</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo>0</SeqNo>
+                    <Help>The Created field indicates the date that this record was created.</Help>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>7</FieldLength>
+                    <IsKey>false</IsKey>
+                    <AD_Process_ID reference="id"/>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>fcd7be5e-9254-4c12-a4ef-64a57598b871</AD_Column_UU>
+                    <Description>Date this record was created</Description>
+                    <Name>Created</Name>
+                    <ColumnName>Created</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType/>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">70c12af7-a2a5-491f-8668-bc00ad84d84e</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">15</AD_Reference_ID>
+                    <IsUpdateable>true</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>false</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>false</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="id">607</AD_Element_ID>
+                    <DefaultValue/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>0</Version>
+                    <IsMandatory>false</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo>0</SeqNo>
+                    <Help>The Updated field indicates the date that this record was updated.</Help>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>7</FieldLength>
+                    <IsKey>false</IsKey>
+                    <AD_Process_ID reference="id"/>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>c004eeb2-3cff-4961-add9-1951d7da53fa</AD_Column_UU>
+                    <Description>Date this record was updated</Description>
+                    <Name>Updated</Name>
+                    <ColumnName>Updated</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType/>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">70c12af7-a2a5-491f-8668-bc00ad84d84e</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">19</AD_Reference_ID>
+                    <IsUpdateable>false</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>false</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>false</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="id">608</AD_Element_ID>
+                    <DefaultValue/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>0</Version>
+                    <IsMandatory>true</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo>0</SeqNo>
+                    <Help>The Updated By field indicates the user who updated this record.</Help>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>10</FieldLength>
+                    <IsKey>false</IsKey>
+                    <AD_Process_ID reference="id"/>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>536e3ffe-807c-497b-a6ff-6cc7c0f39c04</AD_Column_UU>
+                    <Description>User who updated this records</Description>
+                    <Name>Updated By</Name>
+                    <ColumnName>UpdatedBy</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType/>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">70c12af7-a2a5-491f-8668-bc00ad84d84e</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">19</AD_Reference_ID>
+                    <IsUpdateable>false</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>false</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>false</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="id">246</AD_Element_ID>
+                    <DefaultValue/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>0</Version>
+                    <IsMandatory>true</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo>0</SeqNo>
+                    <Help>The Created By field indicates the user who created this record.</Help>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>10</FieldLength>
+                    <IsKey>false</IsKey>
+                    <AD_Process_ID reference="id"/>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>fa588e4c-aa9a-4eed-8a57-72b59e6ff5d7</AD_Column_UU>
+                    <Description>User who created this records</Description>
+                    <Name>Created By</Name>
+                    <ColumnName>CreatedBy</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType/>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">70c12af7-a2a5-491f-8668-bc00ad84d84e</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">20</AD_Reference_ID>
+                    <IsUpdateable>true</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>false</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>false</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="id">348</AD_Element_ID>
+                    <DefaultValue/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>0</Version>
+                    <IsMandatory>true</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo>0</SeqNo>
+                    <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Business Partner, if there are invoices for this partner record existing. You de-activate the Business Partner and prevent that this record is used for future entries.</Help>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>1</FieldLength>
+                    <IsKey>false</IsKey>
+                    <AD_Process_ID reference="id"/>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>f344c1b4-760b-46f4-b08e-9b26a1c19e43</AD_Column_UU>
+                    <Description>The record is active in the system</Description>
+                    <Name>Active</Name>
+                    <ColumnName>IsActive</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType/>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">70c12af7-a2a5-491f-8668-bc00ad84d84e</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">15</AD_Reference_ID>
+                    <IsUpdateable>false</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>true</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>false</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="id">617</AD_Element_ID>
+                    <DefaultValue/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>0</Version>
+                    <IsMandatory>true</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo>0</SeqNo>
+                    <Help>The Valid From date indicates the first day of a date range</Help>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>7</FieldLength>
+                    <IsKey>false</IsKey>
+                    <AD_Process_ID reference="id"/>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>03603723-b7f9-4d3c-a1cc-09134ee655f5</AD_Column_UU>
+                    <Description>Valid from including this date (first day)</Description>
+                    <Name>Valid from</Name>
+                    <ColumnName>ValidFrom</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType/>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">70c12af7-a2a5-491f-8668-bc00ad84d84e</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">15</AD_Reference_ID>
+                    <IsUpdateable>false</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>false</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>false</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="id">618</AD_Element_ID>
+                    <DefaultValue/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>0</Version>
+                    <IsMandatory>true</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo>0</SeqNo>
+                    <Help>The Valid To date indicates the last day of a date range</Help>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>7</FieldLength>
+                    <IsKey>false</IsKey>
+                    <AD_Process_ID reference="id"/>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>6996153f-d435-4e3d-a731-928050d7f918</AD_Column_UU>
+                    <Description>Valid to including this date (last day)</Description>
+                    <Name>Valid to</Name>
+                    <ColumnName>ValidTo</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType/>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+                <AD_Element type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <PO_Description/>
+                    <AD_Element_UU>193477a2-b278-4de3-a9b5-6c237c563e04</AD_Element_UU>
+                    <PO_Name/>
+                    <PO_Help/>
+                    <ColumnName>LVE_generateXML</ColumnName>
+                    <Help/>
+                    <Name>Generate XML Seniat</Name>
+                    <Description/>
+                    <PrintName trim="false">Generate XML Seniat</PrintName>
+                    <PO_PrintName/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsActive>true</IsActive>
+                    <AD_Element_Trl type="translation">
+                        <PO_Description/>
+                        <PO_Name/>
+                        <PO_Help/>
+                        <Help/>
+                        <Name>Generar XML Seniat</Name>
+                        <Description/>
+                        <PrintName trim="false">Generar XML Seniat</PrintName>
+                        <PO_PrintName/>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>true</IsTranslated>
+                    </AD_Element_Trl>
+                </AD_Element>
+                <AD_Process type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <Classname>ve.net.dcs.process.LVE_GenerateXmlSeniat</Classname>
+                    <Value>LVE_GenerateXmlSeniat</Value>
+                    <AD_ReportView_ID reference="id"/>
+                    <AD_Form_ID reference="id"/>
+                    <WorkflowValue/>
+                    <AD_Process_UU>f96b598d-1eaf-4109-8ef1-c47d28990a59</AD_Process_UU>
+                    <CopyFromProcess/>
+                    <AD_PrintFormat_ID reference="id"/>
+                    <IsBetaFunctionality>false</IsBetaFunctionality>
+                    <ShowHelp>S</ShowHelp>
+                    <AD_Workflow_ID reference="id"/>
+                    <Help>Generate Xml Seniat</Help>
+                    <Description>Generate Xml Seniat</Description>
+                    <IsDirectPrint>false</IsDirectPrint>
+                    <AccessLevel>3</AccessLevel>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <Statistic_Seconds>1</Statistic_Seconds>
+                    <Statistic_Count>1</Statistic_Count>
+                    <JasperReport/>
+                    <IsReport>false</IsReport>
+                    <IsServerProcess>false</IsServerProcess>
+                    <AD_CtxHelp_ID reference="id"/>
+                    <Name>Generate Xml Seniat</Name>
+                    <ProcedureName/>
+                    <IsActive>true</IsActive>
+                    <AD_Process_Trl type="translation">
+                        <Help>Generate Xml Seniat</Help>
+                        <Description>Generate Xml Seniat</Description>
+                        <Name>Generate Xml Seniat</Name>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>false</IsTranslated>
+                    </AD_Process_Trl>
+                </AD_Process>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">70c12af7-a2a5-491f-8668-bc00ad84d84e</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">28</AD_Reference_ID>
+                    <IsUpdateable>true</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>true</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>true</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="uuid" reference-key="AD_Element">193477a2-b278-4de3-a9b5-6c237c563e04</AD_Element_ID>
+                    <DefaultValue/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>0</Version>
+                    <IsMandatory>false</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo>0</SeqNo>
+                    <Help>You find the current status in the Document Status field. The options are listed in a popup</Help>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>1</FieldLength>
+                    <IsKey>false</IsKey>
+                    <AD_Process_ID reference="uuid" reference-key="AD_Process">f96b598d-1eaf-4109-8ef1-c47d28990a59</AD_Process_ID>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>bf6bb418-eaa0-4e16-92e6-67789a87c80a</AD_Column_UU>
+                    <Description>The targeted status of the document</Description>
+                    <Name>Generate XML Seniat</Name>
+                    <ColumnName>LVE_generateXML</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType/>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+                <AD_Element type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <PO_Description/>
+                    <AD_Element_UU>09df485a-26ab-4bb5-a897-2c04dcaaff97</AD_Element_UU>
+                    <PO_Name/>
+                    <PO_Help/>
+                    <ColumnName>LVE_generateXML_UU</ColumnName>
+                    <Help/>
+                    <Name>LVE_generateXML_UU</Name>
+                    <Description/>
+                    <PrintName trim="false">LVE_generateXML_UU</PrintName>
+                    <PO_PrintName/>
+                    <EntityType>U</EntityType>
+                    <IsActive>true</IsActive>
+                    <AD_Element_Trl type="translation">
+                        <PO_Description/>
+                        <PO_Name/>
+                        <PO_Help/>
+                        <Help/>
+                        <Name>LVE_generateXML_UU</Name>
+                        <Description/>
+                        <PrintName trim="false">LVE_generateXML_UU</PrintName>
+                        <PO_PrintName/>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>false</IsTranslated>
+                    </AD_Element_Trl>
+                </AD_Element>
+                <AD_Column type="table">
+                    <IsSyncDatabase>Y</IsSyncDatabase>
+                    <AD_Table_ID reference="uuid" reference-key="AD_Table">70c12af7-a2a5-491f-8668-bc00ad84d84e</AD_Table_ID>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <VFormat/>
+                    <AD_Reference_ID reference="id">10</AD_Reference_ID>
+                    <IsUpdateable>true</IsUpdateable>
+                    <IsEncrypted>N</IsEncrypted>
+                    <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+                    <IsAllowCopy>true</IsAllowCopy>
+                    <MandatoryLogic/>
+                    <IsToolbarButton>true</IsToolbarButton>
+                    <SeqNoSelection/>
+                    <AD_Element_ID reference="uuid" reference-key="AD_Element">09df485a-26ab-4bb5-a897-2c04dcaaff97</AD_Element_ID>
+                    <DefaultValue/>
+                    <EntityType>U</EntityType>
+                    <IsSelectionColumn>false</IsSelectionColumn>
+                    <ReadOnlyLogic/>
+                    <ValueMax/>
+                    <Version>1.0</Version>
+                    <IsMandatory>false</IsMandatory>
+                    <IsTranslated>false</IsTranslated>
+                    <IsIdentifier>false</IsIdentifier>
+                    <SeqNo/>
+                    <Help/>
+                    <ValueMin/>
+                    <IsParent>false</IsParent>
+                    <FieldLength>36</FieldLength>
+                    <IsKey>false</IsKey>
+                    <AD_Process_ID reference="id"/>
+                    <IsAutocomplete>false</IsAutocomplete>
+                    <IsAllowLogging>true</IsAllowLogging>
+                    <FormatPattern/>
+                    <AD_Column_UU>0c9d64c0-8b6f-4e53-9611-fb389bc59ac2</AD_Column_UU>
+                    <Description/>
+                    <Name>LVE_generateXML_UU</Name>
+                    <ColumnName>LVE_generateXML_UU</ColumnName>
+                    <ColumnSQL/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Callout/>
+                    <IsSecure>false</IsSecure>
+                    <AD_Chart_ID reference="id"/>
+                    <FKConstraintType>N</FKConstraintType>
+                    <FKConstraintName/>
+                    <IsActive>true</IsActive>
+                </AD_Column>
+            </AD_Table>
+            <AD_Tab type="table">
+                <AD_Client_ID>0</AD_Client_ID>
+                <AD_Org_ID>0</AD_Org_ID>
+                <AD_Column_ID reference="id"/>
+                <AD_ColumnSortOrder_ID reference="id"/>
+                <AD_Image_ID reference="id"/>
+                <AD_Process_ID reference="id"/>
+                <Parent_Column_ID reference="id"/>
+                <IsSortTab>false</IsSortTab>
+                <IsAdvancedTab>false</IsAdvancedTab>
+                <SeqNo>10</SeqNo>
+                <Included_Tab_ID reference="id"/>
+                <AD_Window_ID reference="uuid" reference-key="AD_Window">628f4f2b-5ec4-4b61-9139-3a755ac5431a</AD_Window_ID>
+                <Processing>false</Processing>
+                <ImportFields>N</ImportFields>
+                <TabLevel>0</TabLevel>
+                <Help/>
+                <IsTranslationTab>false</IsTranslationTab>
+                <OrderByClause/>
+                <AD_Table_ID reference="uuid" reference-key="AD_Table">70c12af7-a2a5-491f-8668-bc00ad84d84e</AD_Table_ID>
+                <CommitWarning/>
+                <HasTree>false</HasTree>
+                <IsInfoTab>false</IsInfoTab>
+                <IsReadOnly>false</IsReadOnly>
+                <IsInsertRecord>true</IsInsertRecord>
+                <DisplayLogic/>
+                <AD_Tab_UU>3f8e347e-3de5-4891-8896-a7e7aafca61c</AD_Tab_UU>
+                <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                <Name>LVE_GenerateXML</Name>
+                <Description/>
+                <IsSingleRow>true</IsSingleRow>
+                <WhereClause/>
+                <AD_CtxHelp_ID reference="id"/>
+                <AD_ColumnSortYesNo_ID reference="id"/>
+                <ReadOnlyLogic/>
+                <IsActive>true</IsActive>
+                <AD_Tab_Trl type="translation">
+                    <Help/>
+                    <CommitWarning/>
+                    <Name>Generar XML Seniat</Name>
+                    <Description/>
+                    <AD_Language>es_VE</AD_Language>
+                    <IsActive>true</IsActive>
+                    <IsTranslated>true</IsTranslated>
+                </AD_Tab_Trl>
+                <AD_Field type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <IsAlwaysUpdateable/>
+                    <AD_Column_ID reference="uuid" reference-key="AD_Column">026784db-2338-4b1c-ada2-74678bd8f91a</AD_Column_ID>
+                    <AD_FieldGroup_ID reference="id"/>
+                    <DisplayLogic/>
+                    <DefaultValue/>
+                    <IsMandatory/>
+                    <IsDisplayedGrid>true</IsDisplayedGrid>
+                    <SeqNoGrid>10</SeqNoGrid>
+                    <XPosition>1</XPosition>
+                    <NumLines>1</NumLines>
+                    <IsQuickEntry>false</IsQuickEntry>
+                    <IsUpdateable/>
+                    <IsDefaultFocus>false</IsDefaultFocus>
+                    <IsSameLine>false</IsSameLine>
+                    <IsDisplayed>true</IsDisplayed>
+                    <IsHeading>false</IsHeading>
+                    <IsFieldOnly>false</IsFieldOnly>
+                    <SeqNo>10</SeqNo>
+                    <IsReadOnly>true</IsReadOnly>
+                    <ObscureType/>
+                    <AD_Reference_ID reference="id"/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Included_Tab_ID reference="id"/>
+                    <AD_Field_UU>33eeb244-cccd-4c77-8218-ab05ad850378</AD_Field_UU>
+                    <IsAllowCopy/>
+                    <Name>Client</Name>
+                    <IsEncrypted>false</IsEncrypted>
+                    <DisplayLength>10</DisplayLength>
+                    <AD_Tab_ID reference="uuid" reference-key="AD_Tab">3f8e347e-3de5-4891-8896-a7e7aafca61c</AD_Tab_ID>
+                    <IsCentrallyMaintained>true</IsCentrallyMaintained>
+                    <Description>Client/Tenant for this installation.</Description>
+                    <MandatoryLogic/>
+                    <ReadOnlyLogic/>
+                    <IsToolbarButton/>
+                    <ColumnSpan>2</ColumnSpan>
+                    <IsAdvancedField>false</IsAdvancedField>
+                    <SortNo/>
+                    <Help>A Client is a company or a legal entity. You cannot share data between Clients. Tenant is a synonym for Client.</Help>
+                    <IsActive>true</IsActive>
+                    <AD_Field_Trl type="translation">
+                        <Name>Grupo Empresarial</Name>
+                        <Description>Grupo Empresarial para esta instalación</Description>
+                        <Help>Grupo Empresarial. No se pueden compartir datos entre diferentes grupos empresariales.</Help>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>true</IsTranslated>
+                    </AD_Field_Trl>
+                </AD_Field>
+                <AD_Field type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <IsAlwaysUpdateable/>
+                    <AD_Column_ID reference="uuid" reference-key="AD_Column">aec63157-4593-4cc1-b7b4-a7a08791b612</AD_Column_ID>
+                    <AD_FieldGroup_ID reference="id"/>
+                    <DisplayLogic/>
+                    <DefaultValue/>
+                    <IsMandatory/>
+                    <IsDisplayedGrid>true</IsDisplayedGrid>
+                    <SeqNoGrid>20</SeqNoGrid>
+                    <XPosition>4</XPosition>
+                    <NumLines>1</NumLines>
+                    <IsQuickEntry>false</IsQuickEntry>
+                    <IsUpdateable/>
+                    <IsDefaultFocus>false</IsDefaultFocus>
+                    <IsSameLine>true</IsSameLine>
+                    <IsDisplayed>true</IsDisplayed>
+                    <IsHeading>false</IsHeading>
+                    <IsFieldOnly>false</IsFieldOnly>
+                    <SeqNo>20</SeqNo>
+                    <IsReadOnly>false</IsReadOnly>
+                    <ObscureType/>
+                    <AD_Reference_ID reference="id"/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Included_Tab_ID reference="id"/>
+                    <AD_Field_UU>6d03ff9f-abac-4908-ba51-0797d27ee0d5</AD_Field_UU>
+                    <IsAllowCopy>Y</IsAllowCopy>
+                    <Name>Organization</Name>
+                    <IsEncrypted>false</IsEncrypted>
+                    <DisplayLength>10</DisplayLength>
+                    <AD_Tab_ID reference="uuid" reference-key="AD_Tab">3f8e347e-3de5-4891-8896-a7e7aafca61c</AD_Tab_ID>
+                    <IsCentrallyMaintained>true</IsCentrallyMaintained>
+                    <Description>Organizational entity within client</Description>
+                    <MandatoryLogic/>
+                    <ReadOnlyLogic/>
+                    <IsToolbarButton/>
+                    <ColumnSpan>2</ColumnSpan>
+                    <IsAdvancedField>false</IsAdvancedField>
+                    <SortNo/>
+                    <Help>An organization is a unit of your client or legal entity - examples are store, department. You can share data between organizations.</Help>
+                    <IsActive>true</IsActive>
+                    <AD_Field_Trl type="translation">
+                        <Name>Organización</Name>
+                        <Description>Entidad organizacional dentro del grupo empresarial</Description>
+                        <Help>Una organización es una unidad del grupo empresarial o entidad legal - Ej. Tiendas y departamentos. Es posible compartir datos entre organizaciones.</Help>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>true</IsTranslated>
+                    </AD_Field_Trl>
+                </AD_Field>
+                <AD_Field type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <IsAlwaysUpdateable/>
+                    <AD_Column_ID reference="uuid" reference-key="AD_Column">03603723-b7f9-4d3c-a1cc-09134ee655f5</AD_Column_ID>
+                    <AD_FieldGroup_ID reference="id"/>
+                    <DisplayLogic/>
+                    <DefaultValue/>
+                    <IsMandatory/>
+                    <IsDisplayedGrid>true</IsDisplayedGrid>
+                    <SeqNoGrid>30</SeqNoGrid>
+                    <XPosition>1</XPosition>
+                    <NumLines>1</NumLines>
+                    <IsQuickEntry>false</IsQuickEntry>
+                    <IsUpdateable/>
+                    <IsDefaultFocus>false</IsDefaultFocus>
+                    <IsSameLine>false</IsSameLine>
+                    <IsDisplayed>true</IsDisplayed>
+                    <IsHeading>false</IsHeading>
+                    <IsFieldOnly>false</IsFieldOnly>
+                    <SeqNo>30</SeqNo>
+                    <IsReadOnly>false</IsReadOnly>
+                    <ObscureType/>
+                    <AD_Reference_ID reference="id"/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Included_Tab_ID reference="id"/>
+                    <AD_Field_UU>4421193a-9ba3-4212-b5ec-8cce9cd2b68c</AD_Field_UU>
+                    <IsAllowCopy/>
+                    <Name>Valid from</Name>
+                    <IsEncrypted>false</IsEncrypted>
+                    <DisplayLength>7</DisplayLength>
+                    <AD_Tab_ID reference="uuid" reference-key="AD_Tab">3f8e347e-3de5-4891-8896-a7e7aafca61c</AD_Tab_ID>
+                    <IsCentrallyMaintained>true</IsCentrallyMaintained>
+                    <Description>Valid from including this date (first day)</Description>
+                    <MandatoryLogic/>
+                    <ReadOnlyLogic/>
+                    <IsToolbarButton/>
+                    <ColumnSpan>2</ColumnSpan>
+                    <IsAdvancedField>false</IsAdvancedField>
+                    <SortNo/>
+                    <Help>The Valid From date indicates the first day of a date range</Help>
+                    <IsActive>true</IsActive>
+                    <AD_Field_Trl type="translation">
+                        <Name>Válido Desde</Name>
+                        <Description>Válido desde; incluyendo esta fecha (primer día)</Description>
+                        <Help>La fecha válida desde indica el primer día de un rango de fechas</Help>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>true</IsTranslated>
+                    </AD_Field_Trl>
+                </AD_Field>
+                <AD_Field type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <IsAlwaysUpdateable/>
+                    <AD_Column_ID reference="uuid" reference-key="AD_Column">6996153f-d435-4e3d-a731-928050d7f918</AD_Column_ID>
+                    <AD_FieldGroup_ID reference="id"/>
+                    <DisplayLogic/>
+                    <DefaultValue/>
+                    <IsMandatory/>
+                    <IsDisplayedGrid>true</IsDisplayedGrid>
+                    <SeqNoGrid>40</SeqNoGrid>
+                    <XPosition>4</XPosition>
+                    <NumLines>1</NumLines>
+                    <IsQuickEntry>false</IsQuickEntry>
+                    <IsUpdateable/>
+                    <IsDefaultFocus>false</IsDefaultFocus>
+                    <IsSameLine>true</IsSameLine>
+                    <IsDisplayed>true</IsDisplayed>
+                    <IsHeading>false</IsHeading>
+                    <IsFieldOnly>false</IsFieldOnly>
+                    <SeqNo>40</SeqNo>
+                    <IsReadOnly>false</IsReadOnly>
+                    <ObscureType/>
+                    <AD_Reference_ID reference="id"/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Included_Tab_ID reference="id"/>
+                    <AD_Field_UU>7a707410-f907-499e-a5c8-b407f9f4c154</AD_Field_UU>
+                    <IsAllowCopy/>
+                    <Name>Valid to</Name>
+                    <IsEncrypted>false</IsEncrypted>
+                    <DisplayLength>7</DisplayLength>
+                    <AD_Tab_ID reference="uuid" reference-key="AD_Tab">3f8e347e-3de5-4891-8896-a7e7aafca61c</AD_Tab_ID>
+                    <IsCentrallyMaintained>true</IsCentrallyMaintained>
+                    <Description>Valid to including this date (last day)</Description>
+                    <MandatoryLogic/>
+                    <ReadOnlyLogic/>
+                    <IsToolbarButton/>
+                    <ColumnSpan>2</ColumnSpan>
+                    <IsAdvancedField>false</IsAdvancedField>
+                    <SortNo/>
+                    <Help>The Valid To date indicates the last day of a date range</Help>
+                    <IsActive>true</IsActive>
+                    <AD_Field_Trl type="translation">
+                        <Name>Válido Hasta</Name>
+                        <Description>Válido hasta; incluyendo esta fecha (ultimo día)</Description>
+                        <Help>La fecha válida hasta indica el último día de un rango de fechas</Help>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>true</IsTranslated>
+                    </AD_Field_Trl>
+                </AD_Field>
+                <AD_Field type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <IsAlwaysUpdateable/>
+                    <AD_Column_ID reference="uuid" reference-key="AD_Column">f344c1b4-760b-46f4-b08e-9b26a1c19e43</AD_Column_ID>
+                    <AD_FieldGroup_ID reference="id"/>
+                    <DisplayLogic/>
+                    <DefaultValue/>
+                    <IsMandatory/>
+                    <IsDisplayedGrid>true</IsDisplayedGrid>
+                    <SeqNoGrid>50</SeqNoGrid>
+                    <XPosition>2</XPosition>
+                    <NumLines>1</NumLines>
+                    <IsQuickEntry>false</IsQuickEntry>
+                    <IsUpdateable/>
+                    <IsDefaultFocus>false</IsDefaultFocus>
+                    <IsSameLine>false</IsSameLine>
+                    <IsDisplayed>true</IsDisplayed>
+                    <IsHeading>false</IsHeading>
+                    <IsFieldOnly>false</IsFieldOnly>
+                    <SeqNo>50</SeqNo>
+                    <IsReadOnly>false</IsReadOnly>
+                    <ObscureType/>
+                    <AD_Reference_ID reference="id"/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Included_Tab_ID reference="id"/>
+                    <AD_Field_UU>20b5970a-b37e-4003-b2cb-0fca1c3157cc</AD_Field_UU>
+                    <IsAllowCopy/>
+                    <Name>Active</Name>
+                    <IsEncrypted>false</IsEncrypted>
+                    <DisplayLength>1</DisplayLength>
+                    <AD_Tab_ID reference="uuid" reference-key="AD_Tab">3f8e347e-3de5-4891-8896-a7e7aafca61c</AD_Tab_ID>
+                    <IsCentrallyMaintained>true</IsCentrallyMaintained>
+                    <Description>The record is active in the system</Description>
+                    <MandatoryLogic/>
+                    <ReadOnlyLogic/>
+                    <IsToolbarButton/>
+                    <ColumnSpan>2</ColumnSpan>
+                    <IsAdvancedField>false</IsAdvancedField>
+                    <SortNo/>
+                    <Help>There are two methods of making records unavailable in the system: One is to delete the record, the other is to de-activate the record. A de-activated record is not available for selection, but available for reports.
+There are two reasons for de-activating and not deleting records:
+(1) The system requires the record for audit purposes.
+(2) The record is referenced by other records. E.g., you cannot delete a Business Partner, if there are invoices for this partner record existing. You de-activate the Business Partner and prevent that this record is used for future entries.</Help>
+                    <IsActive>true</IsActive>
+                    <AD_Field_Trl type="translation">
+                        <Name>Activo</Name>
+                        <Description>El registro está activo en el sistema</Description>
+                        <Help>Hay dos métodos para que los registros no estén disponibles en el sistema: Uno es eliminar el registro; el otro es desactivarlo. Un registro desactivado no está disponible para selección; pero está disponible para Informes</Help>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>true</IsTranslated>
+                    </AD_Field_Trl>
+                </AD_Field>
+                <AD_Field type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <IsAlwaysUpdateable/>
+                    <AD_Column_ID reference="uuid" reference-key="AD_Column">bf6bb418-eaa0-4e16-92e6-67789a87c80a</AD_Column_ID>
+                    <AD_FieldGroup_ID reference="id"/>
+                    <DisplayLogic/>
+                    <DefaultValue/>
+                    <IsMandatory/>
+                    <IsDisplayedGrid>true</IsDisplayedGrid>
+                    <SeqNoGrid>60</SeqNoGrid>
+                    <XPosition>2</XPosition>
+                    <NumLines>1</NumLines>
+                    <IsQuickEntry>false</IsQuickEntry>
+                    <IsUpdateable/>
+                    <IsDefaultFocus>false</IsDefaultFocus>
+                    <IsSameLine>false</IsSameLine>
+                    <IsDisplayed>true</IsDisplayed>
+                    <IsHeading>false</IsHeading>
+                    <IsFieldOnly>false</IsFieldOnly>
+                    <SeqNo>60</SeqNo>
+                    <IsReadOnly>false</IsReadOnly>
+                    <ObscureType/>
+                    <AD_Reference_ID reference="id"/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Included_Tab_ID reference="id"/>
+                    <AD_Field_UU>d1fc3dec-c28f-4e04-af69-826986dec4cc</AD_Field_UU>
+                    <IsAllowCopy/>
+                    <Name>Generate Xml Seniat</Name>
+                    <IsEncrypted>false</IsEncrypted>
+                    <DisplayLength>1</DisplayLength>
+                    <AD_Tab_ID reference="uuid" reference-key="AD_Tab">3f8e347e-3de5-4891-8896-a7e7aafca61c</AD_Tab_ID>
+                    <IsCentrallyMaintained>true</IsCentrallyMaintained>
+                    <Description>Generate Xml Seniat</Description>
+                    <MandatoryLogic/>
+                    <ReadOnlyLogic/>
+                    <IsToolbarButton/>
+                    <ColumnSpan>2</ColumnSpan>
+                    <IsAdvancedField>false</IsAdvancedField>
+                    <SortNo/>
+                    <Help>Generate Xml Seniat</Help>
+                    <IsActive>true</IsActive>
+                    <AD_Field_Trl type="translation">
+                        <Name>Generate Xml Seniat</Name>
+                        <Description>Generate Xml Seniat</Description>
+                        <Help>Generate Xml Seniat</Help>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>false</IsTranslated>
+                    </AD_Field_Trl>
+                </AD_Field>
+                <AD_Field type="table">
+                    <AD_Client_ID>0</AD_Client_ID>
+                    <AD_Org_ID>0</AD_Org_ID>
+                    <IsAlwaysUpdateable/>
+                    <AD_Column_ID reference="uuid" reference-key="AD_Column">26be1507-e97d-40bc-9312-bfc22b77fbc4</AD_Column_ID>
+                    <AD_FieldGroup_ID reference="id"/>
+                    <DisplayLogic/>
+                    <DefaultValue/>
+                    <IsMandatory/>
+                    <IsDisplayedGrid>false</IsDisplayedGrid>
+                    <SeqNoGrid/>
+                    <XPosition>1</XPosition>
+                    <NumLines>1</NumLines>
+                    <IsQuickEntry>false</IsQuickEntry>
+                    <IsUpdateable/>
+                    <IsDefaultFocus>false</IsDefaultFocus>
+                    <IsSameLine>false</IsSameLine>
+                    <IsDisplayed>false</IsDisplayed>
+                    <IsHeading>false</IsHeading>
+                    <IsFieldOnly>false</IsFieldOnly>
+                    <SeqNo/>
+                    <IsReadOnly>false</IsReadOnly>
+                    <ObscureType/>
+                    <AD_Reference_ID reference="id"/>
+                    <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+                    <AD_Reference_Value_ID reference="id"/>
+                    <AD_Val_Rule_ID reference="id"/>
+                    <Included_Tab_ID reference="id"/>
+                    <AD_Field_UU>afb92356-35cf-4642-9fb3-aead56ab6f37</AD_Field_UU>
+                    <IsAllowCopy/>
+                    <Name>Generate XML Seniat</Name>
+                    <IsEncrypted>false</IsEncrypted>
+                    <DisplayLength>10</DisplayLength>
+                    <AD_Tab_ID reference="uuid" reference-key="AD_Tab">3f8e347e-3de5-4891-8896-a7e7aafca61c</AD_Tab_ID>
+                    <IsCentrallyMaintained>true</IsCentrallyMaintained>
+                    <Description/>
+                    <MandatoryLogic/>
+                    <ReadOnlyLogic/>
+                    <IsToolbarButton/>
+                    <ColumnSpan>2</ColumnSpan>
+                    <IsAdvancedField>false</IsAdvancedField>
+                    <SortNo/>
+                    <Help/>
+                    <IsActive>true</IsActive>
+                    <AD_Field_Trl type="translation">
+                        <Name>Generar XML Seniat</Name>
+                        <Description/>
+                        <Help/>
+                        <AD_Language>es_VE</AD_Language>
+                        <IsActive>true</IsActive>
+                        <IsTranslated>true</IsTranslated>
+                    </AD_Field_Trl>
+                </AD_Field>
+            </AD_Tab>
+        </AD_Window>
+    </AD_Menu>
+    <AD_Column type="table">
+        <IsSyncDatabase>Y</IsSyncDatabase>
+        <AD_Table_ID reference="uuid" reference-key="AD_Table">028cffa3-8758-462e-ad52-2937a6aa2d9a</AD_Table_ID>
+        <AD_Reference_Value_ID reference="id"/>
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <VFormat/>
+        <AD_Reference_ID reference="id">10</AD_Reference_ID>
+        <IsUpdateable>true</IsUpdateable>
+        <IsEncrypted>N</IsEncrypted>
+        <IsAlwaysUpdateable>true</IsAlwaysUpdateable>
+        <IsAllowCopy>true</IsAllowCopy>
+        <MandatoryLogic/>
+        <IsToolbarButton>false</IsToolbarButton>
+        <SeqNoSelection/>
+        <AD_Element_ID reference="id">227</AD_Element_ID>
+        <DefaultValue/>
+        <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+        <IsSelectionColumn>false</IsSelectionColumn>
+        <ReadOnlyLogic/>
+        <ValueMax/>
+        <Version>1</Version>
+        <IsMandatory>false</IsMandatory>
+        <IsTranslated>false</IsTranslated>
+        <IsIdentifier>false</IsIdentifier>
+        <SeqNo/>
+        <Help>The Validation Code displays the date, time and message of the error.</Help>
+        <ValueMin/>
+        <IsParent>false</IsParent>
+        <FieldLength>22</FieldLength>
+        <IsKey>false</IsKey>
+        <AD_Process_ID reference="id"/>
+        <IsAutocomplete>false</IsAutocomplete>
+        <IsAllowLogging>true</IsAllowLogging>
+        <FormatPattern/>
+        <AD_Column_UU>5e4bb1d5-44d0-4964-9d9c-a6cbf9e83fb0</AD_Column_UU>
+        <Description>Validation Code</Description>
+        <Name>Validation code</Name>
+        <ColumnName>Code</ColumnName>
+        <ColumnSQL/>
+        <AD_Val_Rule_ID reference="id"/>
+        <Callout/>
+        <IsSecure>false</IsSecure>
+        <AD_Chart_ID reference="id"/>
+        <FKConstraintType/>
+        <FKConstraintName/>
+        <IsActive>true</IsActive>
+    </AD_Column>
+    <AD_Field type="table">
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <IsAlwaysUpdateable/>
+        <AD_Column_ID reference="uuid" reference-key="AD_Column">5e4bb1d5-44d0-4964-9d9c-a6cbf9e83fb0</AD_Column_ID>
+        <AD_FieldGroup_ID reference="id"/>
+        <DisplayLogic/>
+        <DefaultValue/>
+        <IsMandatory/>
+        <IsDisplayedGrid>true</IsDisplayedGrid>
+        <SeqNoGrid>160</SeqNoGrid>
+        <XPosition>1</XPosition>
+        <NumLines>1</NumLines>
+        <IsQuickEntry>false</IsQuickEntry>
+        <IsUpdateable/>
+        <IsDefaultFocus>false</IsDefaultFocus>
+        <IsSameLine>false</IsSameLine>
+        <IsDisplayed>true</IsDisplayed>
+        <IsHeading>false</IsHeading>
+        <IsFieldOnly>false</IsFieldOnly>
+        <SeqNo>160</SeqNo>
+        <IsReadOnly>false</IsReadOnly>
+        <ObscureType/>
+        <AD_Reference_ID reference="id"/>
+        <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+        <AD_Reference_Value_ID reference="id"/>
+        <AD_Val_Rule_ID reference="id"/>
+        <Included_Tab_ID reference="id"/>
+        <AD_Field_UU>cabf23a7-f0ec-4d18-a7a5-f70847f98a2b</AD_Field_UU>
+        <IsAllowCopy/>
+        <Name>Validation code</Name>
+        <IsEncrypted>false</IsEncrypted>
+        <DisplayLength>40</DisplayLength>
+        <AD_Tab_ID reference="uuid" reference-key="AD_Tab">9f296b72-8716-4151-82a9-50d1590b7c50</AD_Tab_ID>
+        <IsCentrallyMaintained>true</IsCentrallyMaintained>
+        <Description>Validation Code</Description>
+        <MandatoryLogic/>
+        <ReadOnlyLogic/>
+        <IsToolbarButton/>
+        <ColumnSpan>5</ColumnSpan>
+        <IsAdvancedField>false</IsAdvancedField>
+        <SortNo>0</SortNo>
+        <Help>The Validation Code displays the date, time and message of the error.</Help>
+        <IsActive>true</IsActive>
+        <AD_Field_Trl type="translation">
+            <Name>Código de Validación</Name>
+            <Description>Código de Validación</Description>
+            <Help>El código validación despliega la fecha; hora y mensaje del error</Help>
+            <AD_Language>es_VE</AD_Language>
+            <IsActive>true</IsActive>
+            <IsTranslated>true</IsTranslated>
+        </AD_Field_Trl>
+    </AD_Field>
+    <AD_Column type="table">
+        <IsSyncDatabase>Y</IsSyncDatabase>
+        <AD_Table_ID reference="uuid" reference-key="AD_Table">67180e35-e23d-4a74-8ac4-4298a4c7dfee</AD_Table_ID>
+        <AD_Reference_Value_ID reference="uuid" reference-key="AD_Reference">f44582d1-b8cb-4099-87cb-d3014567a8af</AD_Reference_Value_ID>
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <SeqNoSelection>0</SeqNoSelection>
+        <Version>0</Version>
+        <ValueMax/>
+        <IsMandatory>true</IsMandatory>
+        <IsTranslated>false</IsTranslated>
+        <IsIdentifier>false</IsIdentifier>
+        <SeqNo>0</SeqNo>
+        <ValueMin/>
+        <IsParent>false</IsParent>
+        <FieldLength>10</FieldLength>
+        <IsSelectionColumn>false</IsSelectionColumn>
+        <IsKey>false</IsKey>
+        <AD_Process_ID reference="id"/>
+        <ReadOnlyLogic/>
+        <IsAutocomplete>false</IsAutocomplete>
+        <IsAllowLogging>true</IsAllowLogging>
+        <MandatoryLogic/>
+        <FormatPattern/>
+        <AD_Column_UU>1e0e66bf-8e70-4ec0-b1ed-5e63ae158e81</AD_Column_UU>
+        <IsUpdateable>true</IsUpdateable>
+        <Callout/>
+        <ColumnName>Type</ColumnName>
+        <Description>Type of Validation (SQL, Java Script, Java Language)</Description>
+        <ColumnSQL/>
+        <DefaultValue>Other</DefaultValue>
+        <Help>The Type indicates the type of validation that will occur.  This can be SQL, Java Script or Java Language.</Help>
+        <Name>Type</Name>
+        <IsAllowCopy>true</IsAllowCopy>
+        <IsActive>true</IsActive>
+        <IsToolbarButton>false</IsToolbarButton>
+        <IsAlwaysUpdateable>false</IsAlwaysUpdateable>
+        <VFormat/>
+        <IsEncrypted>N</IsEncrypted>
+        <AD_Chart_ID reference="id"/>
+        <FKConstraintName/>
+        <FKConstraintType>N</FKConstraintType>
+        <IsSecure>false</IsSecure>
+        <AD_Element_ID reference="id">600</AD_Element_ID>
+        <AD_Reference_ID reference="id">17</AD_Reference_ID>
+        <AD_Val_Rule_ID reference="id"/>
+        <EntityType>ve.net.dcs</EntityType>
+    </AD_Column>
+    <AD_Field type="table">
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <SortNo/>
+        <IsEncrypted>false</IsEncrypted>
+        <AD_Tab_ID reference="uuid" reference-key="AD_Tab">62848fe5-62f8-4ebf-a5b3-4818ffc78293</AD_Tab_ID>
+        <DisplayLength>10</DisplayLength>
+        <IsSameLine>false</IsSameLine>
+        <IsHeading>false</IsHeading>
+        <SeqNo>40</SeqNo>
+        <IsCentrallyMaintained>true</IsCentrallyMaintained>
+        <IsReadOnly>false</IsReadOnly>
+        <Help>The Type indicates the type of validation that will occur.  This can be SQL, Java Script or Java Language.</Help>
+        <ObscureType/>
+        <DisplayLogic/>
+        <IsMandatory/>
+        <EntityType>ve.net.dcs</EntityType>
+        <AD_Val_Rule_ID reference="id"/>
+        <Included_Tab_ID reference="id"/>
+        <Description>Type of Validation (SQL, Java Script, Java Language)</Description>
+        <Name>Type</Name>
+        <AD_Field_UU>f2e88f3c-a5b9-405e-8cfc-f5896a126fcf</AD_Field_UU>
+        <IsFieldOnly>false</IsFieldOnly>
+        <IsDisplayed>true</IsDisplayed>
+        <DefaultValue/>
+        <IsAllowCopy/>
+        <IsActive>true</IsActive>
+        <IsDisplayedGrid>true</IsDisplayedGrid>
+        <SeqNoGrid/>
+        <XPosition>1</XPosition>
+        <IsQuickEntry>false</IsQuickEntry>
+        <MandatoryLogic/>
+        <IsUpdateable/>
+        <IsAlwaysUpdateable/>
+        <ReadOnlyLogic/>
+        <IsToolbarButton/>
+        <ColumnSpan>2</ColumnSpan>
+        <NumLines>1</NumLines>
+        <IsAdvancedField>false</IsAdvancedField>
+        <IsDefaultFocus>false</IsDefaultFocus>
+        <AD_Column_ID reference="uuid" reference-key="AD_Column">1e0e66bf-8e70-4ec0-b1ed-5e63ae158e81</AD_Column_ID>
+        <AD_FieldGroup_ID reference="id"/>
+        <AD_Reference_ID reference="id"/>
+        <AD_Reference_Value_ID reference="id"/>
+        <AD_Field_Trl type="translation">
+            <Help>Indica el tipo de validación que ocurrirá. Esto puede ser SQL; Java Script o Java Language.</Help>
+            <Description>Tipo de validación (SQL; Java Script; Java Language)</Description>
+            <Name>Tipo</Name>
+            <AD_Language>es_VE</AD_Language>
+            <IsActive>true</IsActive>
+            <IsTranslated>true</IsTranslated>
+        </AD_Field_Trl>
+    </AD_Field>
 </idempiere>

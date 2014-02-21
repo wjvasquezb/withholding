@@ -26,4 +26,18 @@
             class="ve.net.dcs.process.VWT_ProcessWithholding">
       </process>
    </extension>
+   <extension
+         id="ve.net.dcs.process.LVE_GenerateTxtSeniat"
+         point="org.adempiere.base.Process">
+      <process
+            class="ve.net.dcs.process.LVE_GenerateTxtSeniat">
+      </process>
+   </extension>
+   <extension
+         id="ve.net.dcs.process.LVE_GenerateXmlSeniat"
+         point="org.adempiere.base.Process">
+      <process
+            class="ve.net.dcs.process.LVE_GenerateXmlSeniat">
+      </process>
+   </extension>
 </plugin>
