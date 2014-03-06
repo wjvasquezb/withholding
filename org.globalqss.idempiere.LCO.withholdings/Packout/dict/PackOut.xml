@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <idempiere Name="org.globalqss.idempiere.LCO.withholdings" Version="1.0" idempiereVersion="" DataBaseVersion="" Description="Localization Colombia - Withholdings" Author="" AuthorEmail="info@globalqss.com" CreatedDate="2013-08-08 02:18:28.391" UpdatedDate="2013-08-08 02:18:28.391" PackOutVersion="100" Client="0-SYSTEM-System">
+    <SQLStatement type="custom">
+        <DBType>Postgres</DBType>
+        <statement><![CDATA[UPDATE AD_Field SET AD_Field_UU = '46239d96-d80f-4fa7-b036-2d34e9dc3464'  WHERE NAME = 'LVE_controlNumber' AND AD_Tab_ID = 263;
+UPDATE AD_Column SET AD_Column_UU = '5811ee15-fcba-4161-8604-a9611f684ea2' WHERE Columnname = 'LVE_controlNumber';
+UPDATE AD_Reference SET AD_Reference_UU = 'f44582d1-b8cb-4099-87cb-d3014567a8af' WHERE Name = 'Withholding Type';
+UPDATE AD_Ref_List SET AD_ReferenceList_UU = 'dcd785f3-ef64-4800-8b2a-b57ee8452781' WHERE Value = 'ISLR';
+UPDATE AD_Ref_List SET AD_ReferenceList_UU = 'f60f36a5-491c-4f84-9e8a-97b8c642cc4f' WHERE Value = 'IVA';
+UPDATE AD_Ref_List SET AD_ReferenceList_UU = '3c5cfdc2-df93-457f-a5a9-c7d13992b5ed' WHERE Value = 'Other';
+UPDATE AD_Ref_List SET AD_ReferenceList_UU = '4a6ee6f2-4cc3-4256-94db-dec6bb00f6e7' WHERE Value = 'IAE';]]></statement>
+    </SQLStatement>
     <AD_EntityType type="table">
         <AD_Client_ID>0</AD_Client_ID>
         <AD_Org_ID>0</AD_Org_ID>
