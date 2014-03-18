@@ -71,7 +71,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 						voucher = new MLVEVoucherWithholding(po.getCtx(), 0, po.get_TrxName());
 						voucher.setAD_Org_ID(po.getAD_Org_ID());
 						voucher.set_ValueOfColumn("AD_Client_ID", po.getAD_Client_ID());
-						voucher.setDateTrx(invoice.getDateInvoiced());
+						voucher.setDateTrx(invoice.getDateAcct());
 						voucher.setC_BPartner_ID(invoice.getC_BPartner_ID());
 						voucher.setLCO_WithholdingType_ID(LCO_WithholdingType_ID);
 						voucher.setC_Invoice_ID(iw.getC_Invoice_ID());
