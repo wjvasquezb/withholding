@@ -31435,4 +31435,94 @@ There are two reasons for de-activating and not deleting records:
         <AD_Val_Rule_ID reference="id"/>
         <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
     </AD_Column>
+    <SQLStatement type="custom">
+        <DBType>Postgres</DBType>
+        <statement><![CDATA[CREATE OR REPLACE VIEW lve_txtiva AS 
+ SELECT replace(ainf.taxid::text, '-'::text, ''::text) AS rifempresa, 
+    btrim(to_char(date_part('year'::text, iw.dateacct), '0000'::text)) || btrim(to_char(date_part('month'::text, iw.dateacct), '00'::text)) AS periodo, 
+    (((to_char(date_part('year'::text, ci.dateinvoiced), '0000'::text) || '-'::text) || btrim(to_char(date_part('month'::text, ci.dateinvoiced), '00'::text))) || '-'::text) || btrim(to_char(date_part('day'::text, ci.dateinvoiced), '00'::text)) AS fechadocumento, 
+        CASE
+            WHEN dt.docbasetype = ANY (ARRAY['API'::bpchar, 'APC'::bpchar, 'APD'::bpchar]) THEN 'C'::text
+            WHEN dt.docbasetype = ANY (ARRAY['ARI'::bpchar, 'ARC'::bpchar, 'ARD'::bpchar]) THEN 'V'::text
+            ELSE ''::text
+        END AS tipooperacion, 
+        CASE
+            WHEN dt.docbasetype = ANY (ARRAY['API'::bpchar, 'ARI'::bpchar]) THEN '01'::text
+            WHEN dt.docbasetype = ANY (ARRAY['APD'::bpchar, 'ARD'::bpchar]) THEN '02'::text
+            WHEN dt.docbasetype = ANY (ARRAY['APC'::bpchar, 'ARC'::bpchar]) THEN '03'::text
+            ELSE ''::text
+        END AS tipodocumento, 
+    replace(bp.taxid::text, '-'::text, ''::text) AS riftercero, 
+        CASE
+            WHEN dt.docbasetype = ANY (ARRAY['API'::bpchar, 'APC'::bpchar, 'APD'::bpchar]) THEN ci.lve_poinvoiceno
+            WHEN dt.docbasetype = ANY (ARRAY['ARI'::bpchar, 'ARC'::bpchar, 'ARD'::bpchar]) THEN ci.documentno
+            ELSE ''::character varying
+        END AS numerodocumento, 
+    ci.lve_controlnumber AS control, ci.grandtotal::text AS montodocumento, 
+    to_char(lve_impbase('bf'::bpchar, ci.c_invoice_id, ct.rate), '9999999.99'::text) AS baseimponible, 
+    to_char(abs(iw.taxamt), '9999999.99'::text) AS montoiva, 
+    "isnull"((( SELECT 
+                CASE
+                    WHEN dt2.docbasetype = ANY (ARRAY['API'::bpchar, 'APC'::bpchar, 'APD'::bpchar]) THEN ci2.lve_poinvoiceno
+                    WHEN dt.docbasetype = ANY (ARRAY['ARI'::bpchar, 'ARC'::bpchar, 'ARD'::bpchar]) THEN ci2.documentno
+                    ELSE ''::character varying
+                END AS documentoafectado
+           FROM c_invoice ci2
+      JOIN c_doctype dt2 ON dt2.c_doctype_id = ci2.c_doctype_id
+     WHERE ci2.c_invoice_id = ci.lve_invoiceaffected_id AND (btrim(to_char(date_part('year'::text, ci2.dateacct), '0000'::text)) || btrim(to_char(date_part('month'::text, ci2.dateacct), '00'::text))) = (btrim(to_char(date_part('year'::text, iw.dateacct), '0000'::text)) || btrim(to_char(date_part('month'::text, iw.dateacct), '00'::text))) AND (date_part('day'::text, ci2.dateacct) >= 1::double precision AND date_part('day'::text, ci2.dateacct) <= 15::double precision AND date_part('day'::text, iw.dateacct) >= 1::double precision AND date_part('day'::text, iw.dateacct) <= 15::double precision OR date_part('day'::text, ci2.dateacct) >= 16::double precision AND date_part('day'::text, ci2.dateacct) <= 31::double precision AND date_part('day'::text, iw.dateacct) >= 16::double precision AND date_part('day'::text, iw.dateacct) <= 31::double precision)))::text, '0'::text) AS documentoafectado, 
+    vw.withholdingno AS numerocomprobante, 
+    lve_calcexento(ci.c_invoice_id) AS exento, 
+    to_char(ct.rate, '99.99'::text) AS alic, '0' AS expediente, 
+    iw.dateacct AS fechareten, iw.ad_org_id AS org, iw.ad_client_id AS client
+   FROM c_invoice ci
+   JOIN lco_invoicewithholding iw ON ci.c_invoice_id = iw.c_invoice_id
+   JOIN lve_voucherwithholding vw ON vw.lve_voucherwithholding_id = iw.lve_voucherwithholding_id
+   JOIN lco_withholdingtype wt ON iw.lco_withholdingtype_id = wt.lco_withholdingtype_id AND wt.type::bpchar = 'IVA'::bpchar
+   JOIN lco_withholdingrule wr ON iw.lco_withholdingrule_id = wr.lco_withholdingrule_id
+   JOIN lco_withholdingcalc wc ON wc.lco_withholdingcalc_id = wr.lco_withholdingcalc_id
+   JOIN c_tax ct ON ct.c_tax_id = wc.c_basetax_id
+   JOIN c_doctype dt ON ci.c_doctype_id = dt.c_doctype_id AND (dt.docbasetype = ANY (ARRAY['API'::bpchar, 'APC'::bpchar, 'APD'::bpchar, 'ARI'::bpchar, 'ARD'::bpchar, 'ARC'::bpchar]))
+   JOIN c_bpartner bp ON bp.c_bpartner_id = ci.c_bpartner_id
+   JOIN ad_org ao ON ao.ad_org_id = ci.ad_org_id
+   JOIN ad_orginfo ainf ON ainf.ad_org_id = ci.ad_org_id;]]></statement>
+    </SQLStatement>
+    <SQLStatement type="custom">
+        <DBType>Postgres</DBType>
+        <statement><![CDATA[CREATE OR REPLACE VIEW lve_xmlislr AS 
+         SELECT upper(replace(replace(cb.taxid::text, '-'::text, ''::text), '.'::text, ''::text)) AS rifretenido, 
+            ci.lve_poinvoiceno AS numerofactura, 
+            replace(ci.lve_controlnumber::text, '-'::text, ''::text) AS numerocontrol, 
+            wr.code AS codigoconcepto, iw.taxbaseamt AS montooperacion, 
+            iw.percent AS porcentajeretencion, iw.dateacct AS fecha, 
+            upper(replace(replace(aoi.taxid::text, '-'::text, ''::text), '.'::text, ''::text)) AS rifagente, 
+            btrim(to_char(date_part('year'::text, iw.dateacct), '0000'::text)) || btrim(to_char(date_part('month'::text, iw.dateacct), '00'::text)) AS periodo, 
+            iw.ad_org_id AS org
+           FROM lco_invoicewithholding iw
+      JOIN lco_withholdingtype wt ON iw.lco_withholdingtype_id = wt.lco_withholdingtype_id
+   JOIN c_invoice ci ON ci.c_invoice_id = iw.c_invoice_id
+   JOIN ad_org ao ON ao.ad_org_id = ci.ad_org_id
+   JOIN ad_orginfo aoi ON aoi.ad_org_id = ao.ad_org_id
+   JOIN c_bpartner cb ON cb.c_bpartner_id = ci.c_bpartner_id
+   JOIN lco_withholdingrule wr ON iw.lco_withholdingrule_id = wr.lco_withholdingrule_id
+  WHERE wt.type::bpchar = 'ISLR'::bpchar AND wt.issotrx = 'N'::bpchar
+UNION ALL 
+         SELECT upper(replace(replace(cb.taxid::text, '-'::text, ''::text), '.'::text, ''::text)) AS rifretenido, 
+            '0'::character varying AS numerofactura, 
+            'N/A'::text AS numerocontrol, 
+            '001'::character varying AS codigoconcepto, 
+            mov.amount AS montooperacion, 
+            ( SELECT round(a.amount, 2) AS round
+                   FROM hr_attribute a
+              JOIN hr_concept c ON c.hr_concept_id = a.hr_concept_id
+             WHERE a.c_bpartner_id = cb.c_bpartner_id AND c.value::text = 'A_FACTOR_ISLR'::text AND a.ad_org_id = mov.ad_org_id AND (a.validto IS NULL OR a.validto >= mov.validto) AND a.validfrom <= mov.validto) AS porcentajeretencion, 
+            mov.validto AS fecha, 
+            upper(replace(replace(aoi.taxid::text, '-'::text, ''::text), '.'::text, ''::text)) AS rifagente, 
+            btrim(to_char(date_part('year'::text, mov.validto), '0000'::text)) || btrim(to_char(date_part('month'::text, mov.validto), '00'::text)) AS periodo, 
+            mov.ad_org_id AS org
+           FROM hr_movement mov
+      JOIN c_bpartner cb ON cb.c_bpartner_id = mov.c_bpartner_id
+   JOIN ad_org ao ON ao.ad_org_id = mov.ad_org_id
+   JOIN ad_orginfo aoi ON aoi.ad_org_id = ao.ad_org_id
+   JOIN hr_concept c ON c.hr_concept_id = mov.hr_concept_id AND c.value::text = 'CC_IMPUESTO_SOBRE_LA_RENTA'::text;]]></statement>
+    </SQLStatement>
 </idempiere>
