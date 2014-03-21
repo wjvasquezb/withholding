@@ -422,23 +422,26 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 				String sql = 
 					"SELECT LCO_InvoiceWithholding_ID " +
 					"FROM LCO_InvoiceWithholding " +
-					"WHERE C_Invoice_ID = ? AND " +
-					"IsActive = 'Y' AND " +
+					"JOIN LVE_VoucherWithholding ON LVE_VoucherWithholding.LVE_VoucherWithholding_ID = LCO_InvoiceWithholding.LVE_VoucherWithholding_ID " +
+					"WHERE LCO_InvoiceWithholding.C_Invoice_ID = ? AND " +
+					"LCO_InvoiceWithholding.IsActive = 'Y' AND " +
 					"IsCalcOnPayment = 'Y' AND " +
-					"Processed = 'N' AND " +
-					"C_AllocationLine_ID IS NULL";
+					"LCO_InvoiceWithholding.Processed = 'N' AND " +
+					"C_AllocationLine_ID IS NULL AND " +
+					"LCO_InvoiceWithholding.C_Payment_ID = ?";
 				PreparedStatement pstmt = DB.prepareStatement(sql, ah.get_TrxName());
 				ResultSet rs = null;
 				try {
 					pstmt.setInt(1, al.getC_Invoice_ID());
+					pstmt.setInt(2, al.getC_Payment_ID());
 					rs = pstmt.executeQuery();
 					while (rs.next()) {
 						int iwhid = rs.getInt(1);
 						MLCOInvoiceWithholding iwh = new MLCOInvoiceWithholding(
 								ah.getCtx(), iwhid, ah.get_TrxName());
 						iwh.setC_AllocationLine_ID(al.getC_AllocationLine_ID());
-						iwh.setDateAcct(ah.getDateAcct());
-						iwh.setDateTrx(ah.getDateTrx());
+//						iwh.setDateAcct(ah.getDateAcct());
+//						iwh.setDateTrx(ah.getDateTrx());
 						iwh.setProcessed(true);
 						if (!iwh.save())
 							return "Error saving LCO_InvoiceWithholding completePaymentWithholdings";

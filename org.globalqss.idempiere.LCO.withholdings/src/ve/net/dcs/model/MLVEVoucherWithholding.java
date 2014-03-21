@@ -34,6 +34,7 @@ import org.compiere.util.CLogger;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
 import org.compiere.util.Msg;
+import org.compiere.util.Trx;
 import org.globalqss.model.MLCOInvoiceWithholding;
 import org.globalqss.model.X_LCO_WithholdingCalc;
 import org.globalqss.model.X_LCO_WithholdingRule;
@@ -233,7 +234,9 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 
 			pa.saveEx();
 		}
-
+		
+		setC_Payment_ID(payment.getC_Payment_ID());
+		
 		if (!payment.processIt(MPayment.DOCACTION_Complete)) {
 			log.warning("Payment Process Failed: " + payment + " - " + payment.getProcessMsg());
 			throw new AdempiereException("Payment Process Failed: " + payment + " - " + payment.getProcessMsg());
@@ -241,7 +244,7 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 
 		payment.saveEx();
 
-		setC_Payment_ID(payment.getC_Payment_ID());
+		
 		setProcessed(true);
 		// setDocAction(DOCACTION_Close);
 		setDocStatus(DOCSTATUS_Completed);
@@ -280,11 +283,23 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 			ArrayList<Integer> allhs = new ArrayList<Integer>();
 			for (MLCOInvoiceWithholding mlcoInvoiceWithholding : wth) {
 				if (mlcoInvoiceWithholding.getC_AllocationLine().getC_AllocationHdr_ID() > 0) {
+					
 					allhs.add(mlcoInvoiceWithholding.getC_AllocationLine().getC_AllocationHdr_ID());
-					mlcoInvoiceWithholding.setC_AllocationLine_ID(0);
+					List<MLCOInvoiceWithholding> iw = new Query(getCtx(), MLCOInvoiceWithholding.Table_Name, "C_AllocationLine_ID = ?", get_TrxName()).setParameters(mlcoInvoiceWithholding.getC_AllocationLine_ID()).list();
+					for (MLCOInvoiceWithholding mlcoInvoiceWithholding2 : iw) {
+						mlcoInvoiceWithholding2.setC_AllocationLine_ID(0);
+						if (mlcoInvoiceWithholding2.get_ValueAsInt("LVE_VoucherWithholding_ID") != getLVE_VoucherWithholding_ID())
+							mlcoInvoiceWithholding2.setProcessed(false);
+						mlcoInvoiceWithholding2.saveEx();
+					}
+//					mlcoInvoiceWithholding.setC_AllocationLine_ID(0);
+//					mlcoInvoiceWithholding.setProcessed(false);
+//					mlcoInvoiceWithholding.saveEx();
+					VWT_MInvoice.updateHeaderWithholding(mlcoInvoiceWithholding.getC_Invoice_ID(), get_TrxName());
+				}
+				else if (mlcoInvoiceWithholding.isProcessed()) {
 					mlcoInvoiceWithholding.setProcessed(false);
 					mlcoInvoiceWithholding.saveEx();
-					VWT_MInvoice.updateHeaderWithholding(mlcoInvoiceWithholding.getC_Invoice_ID(), get_TrxName());
 				}
 			}
 
@@ -292,6 +307,16 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 				MAllocationHdr ah = new MAllocationHdr(getCtx(), allh.intValue(), get_TrxName());
 				MFactAcct.deleteEx(MAllocationHdr.Table_ID, allh.intValue(), get_TrxName());
 				ah.delete(true);
+			}
+			
+			MAllocationHdr[] allocations = MAllocationHdr.getOfPayment(getCtx(), 
+					getC_Payment_ID(), get_TrxName());
+			
+			if (allocations.length > 0){
+				for (MAllocationHdr mAllocationHdr : allocations) {
+					MFactAcct.deleteEx(MAllocationHdr.Table_ID, mAllocationHdr.get_ID(), get_TrxName());
+					mAllocationHdr.delete(true);
+				}
 			}
 
 			MPayment pay = new MPayment(getCtx(), getC_Payment_ID(), get_TrxName());
@@ -337,11 +362,32 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 			ArrayList<Integer> allhs = new ArrayList<Integer>();
 			for (MLCOInvoiceWithholding mlcoInvoiceWithholding : wth) {
 				if (mlcoInvoiceWithholding.getC_AllocationLine().getC_AllocationHdr_ID() > 0) {
+					
+					/** Transaction				*/
+					//Trx	m_trx = Trx.get(Trx.createTrxName("Prueba"), true);
 					allhs.add(mlcoInvoiceWithholding.getC_AllocationLine().getC_AllocationHdr_ID());
-					mlcoInvoiceWithholding.setC_AllocationLine_ID(0);
+					List<MLCOInvoiceWithholding> iw = new Query(getCtx(), MLCOInvoiceWithholding.Table_Name, "C_AllocationLine_ID = ?", get_TrxName()).setParameters(mlcoInvoiceWithholding.getC_AllocationLine_ID()).list();
+					for (MLCOInvoiceWithholding mlcoInvoiceWithholding2 : iw) {
+						mlcoInvoiceWithholding2.setC_AllocationLine_ID(0);
+						if (mlcoInvoiceWithholding2.get_ValueAsInt("LVE_VoucherWithholding_ID") != getLVE_VoucherWithholding_ID())
+							mlcoInvoiceWithholding2.setProcessed(false);
+						mlcoInvoiceWithholding2.saveEx();
+					}
+					//mlcoInvoiceWithholding.set_TrxName(m_trx.getTrxName());
+					
+//					if (mlcoInvoiceWithholding.save()){
+//						m_trx.commit();
+//					}
+//					else{
+//						m_trx.rollback();
+//						throw new AdempiereException("Error al Anular las Retenciones");
+//					}
+//					m_trx.close();						
+					VWT_MInvoice.updateHeaderWithholding(mlcoInvoiceWithholding.getC_Invoice_ID(), get_TrxName());
+				}
+				else if (mlcoInvoiceWithholding.isProcessed()) {
 					mlcoInvoiceWithholding.setProcessed(false);
 					mlcoInvoiceWithholding.saveEx();
-					VWT_MInvoice.updateHeaderWithholding(mlcoInvoiceWithholding.getC_Invoice_ID(), get_TrxName());
 				}
 			}
 
@@ -349,6 +395,16 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 				MAllocationHdr ah = new MAllocationHdr(getCtx(), allh.intValue(), get_TrxName());
 				MFactAcct.deleteEx(MAllocationHdr.Table_ID, allh.intValue(), get_TrxName());
 				ah.delete(true);
+			}
+			
+			MAllocationHdr[] allocations = MAllocationHdr.getOfPayment(getCtx(), 
+					getC_Payment_ID(), get_TrxName());
+			
+			if (allocations.length > 0){
+				for (MAllocationHdr mAllocationHdr : allocations) {
+					MFactAcct.deleteEx(MAllocationHdr.Table_ID, mAllocationHdr.get_ID(), get_TrxName());
+					mAllocationHdr.delete(true);
+				}
 			}
 
 			MPayment pay = new MPayment(getCtx(), getC_Payment_ID(), get_TrxName());
