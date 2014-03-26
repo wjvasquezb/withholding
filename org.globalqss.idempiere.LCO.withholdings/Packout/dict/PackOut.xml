@@ -3,12 +3,54 @@
     <SQLStatement type="custom">
         <DBType>Postgres</DBType>
         <statement><![CDATA[UPDATE AD_Field SET AD_Field_UU = '46239d96-d80f-4fa7-b036-2d34e9dc3464'  WHERE NAME = 'LVE_controlNumber' AND AD_Tab_ID = 263;
-UPDATE AD_Column SET AD_Column_UU = '5811ee15-fcba-4161-8604-a9611f684ea2' WHERE Columnname = 'LVE_controlNumber';
+]]></statement>
+    </SQLStatement>
+    <SQLStatement type="custom">
+        <DBType>Postgres</DBType>
+        <statement><![CDATA[UPDATE AD_Column SET AD_Column_UU = '5811ee15-fcba-4161-8604-a9611f684ea2' WHERE Columnname = 'LVE_controlNumber';
+]]></statement>
+    </SQLStatement>
+<SQLStatement type="custom">
+        <DBType>Postgres</DBType>
+        <statement><![CDATA[
 UPDATE AD_Reference SET AD_Reference_UU = 'f44582d1-b8cb-4099-87cb-d3014567a8af' WHERE Name = 'Withholding Type';
+]]></statement>
+    </SQLStatement>
+<SQLStatement type="custom">
+        <DBType>Postgres</DBType>
+        <statement><![CDATA[
 UPDATE AD_Ref_List SET AD_ReferenceList_UU = 'dcd785f3-ef64-4800-8b2a-b57ee8452781' WHERE Value = 'ISLR';
+]]></statement>
+    </SQLStatement>
+<SQLStatement type="custom">
+        <DBType>Postgres</DBType>
+        <statement><![CDATA[
 UPDATE AD_Ref_List SET AD_ReferenceList_UU = 'f60f36a5-491c-4f84-9e8a-97b8c642cc4f' WHERE Value = 'IVA';
+]]></statement>
+    </SQLStatement>
+<SQLStatement type="custom">
+        <DBType>Postgres</DBType>
+        <statement><![CDATA[
 UPDATE AD_Ref_List SET AD_ReferenceList_UU = '3c5cfdc2-df93-457f-a5a9-c7d13992b5ed' WHERE Value = 'Other';
-UPDATE AD_Ref_List SET AD_ReferenceList_UU = '4a6ee6f2-4cc3-4256-94db-dec6bb00f6e7' WHERE Value = 'IAE';]]></statement>
+]]></statement>
+    </SQLStatement>
+<SQLStatement type="custom">
+        <DBType>Postgres</DBType>
+        <statement><![CDATA[
+UPDATE AD_Ref_List SET AD_ReferenceList_UU = '4a6ee6f2-4cc3-4256-94db-dec6bb00f6e7' WHERE Value = 'IAE';
+]]></statement>
+    </SQLStatement>
+<SQLStatement type="custom">
+        <DBType>Postgres</DBType>
+        <statement><![CDATA[
+UPDATE AD_Column SET AD_Column_UU = '99195851-6d76-4e9b-be07-fe8fa304a4f4' WHERE ColumnName = 'LCO_WithholdingType_ID' AND EntityType = 've.net.dcs.VoucherWithholdingTax';
+]]></statement>
+    </SQLStatement>
+<SQLStatement type="custom">
+        <DBType>Postgres</DBType>
+        <statement><![CDATA[
+UPDATE AD_Field SET AD_Field_UU = '9bee2383-e097-4a49-b62d-826e1511a228' WHERE AD_Column_ID = (SELECT AD_Column_ID FROM AD_Column WHERE ColumnName = 'LCO_WithholdingType_ID' AND EntityType = 've.net.dcs.VoucherWithholdingTax');
+]]></statement>
     </SQLStatement>
     <AD_EntityType type="table">
         <AD_Client_ID>0</AD_Client_ID>
@@ -26468,7 +26510,7 @@ There are two reasons for de-activating and not deleting records:
                     <MandatoryLogic/>
                     <FormatPattern/>
                     <AD_Column_UU>8bf0e798-2fbb-4c50-825c-54117297db97</AD_Column_UU>
-                    <IsUpdateable>false</IsUpdateable>
+                    <IsUpdateable>true</IsUpdateable>
                     <Callout/>
                     <Description/>
                     <ColumnName>LVE_VoucherWithholding_ID</ColumnName>
