@@ -19,25 +19,25 @@ UPDATE AD_Reference SET AD_Reference_UU = 'f44582d1-b8cb-4099-87cb-d3014567a8af'
 <SQLStatement type="custom">
         <DBType>Postgres</DBType>
         <statement><![CDATA[
-UPDATE AD_Ref_List SET AD_ReferenceList_UU = 'dcd785f3-ef64-4800-8b2a-b57ee8452781' WHERE Value = 'ISLR';
+UPDATE AD_Ref_List SET AD_Ref_List_UU  = 'dcd785f3-ef64-4800-8b2a-b57ee8452781' WHERE Value = 'ISLR';
 ]]></statement>
     </SQLStatement>
 <SQLStatement type="custom">
         <DBType>Postgres</DBType>
         <statement><![CDATA[
-UPDATE AD_Ref_List SET AD_ReferenceList_UU = 'f60f36a5-491c-4f84-9e8a-97b8c642cc4f' WHERE Value = 'IVA';
+UPDATE AD_Ref_List SET AD_Ref_List_UU  = 'f60f36a5-491c-4f84-9e8a-97b8c642cc4f' WHERE Value = 'IVA';
 ]]></statement>
     </SQLStatement>
 <SQLStatement type="custom">
         <DBType>Postgres</DBType>
         <statement><![CDATA[
-UPDATE AD_Ref_List SET AD_ReferenceList_UU = '3c5cfdc2-df93-457f-a5a9-c7d13992b5ed' WHERE Value = 'Other';
+UPDATE AD_Ref_List SET AD_Ref_List_UU  = '3c5cfdc2-df93-457f-a5a9-c7d13992b5ed' WHERE Value = 'Other';
 ]]></statement>
     </SQLStatement>
 <SQLStatement type="custom">
         <DBType>Postgres</DBType>
         <statement><![CDATA[
-UPDATE AD_Ref_List SET AD_ReferenceList_UU = '4a6ee6f2-4cc3-4256-94db-dec6bb00f6e7' WHERE Value = 'IAE';
+UPDATE AD_Ref_List SET AD_Ref_List_UU  = '4a6ee6f2-4cc3-4256-94db-dec6bb00f6e7' WHERE Value = 'IAE';
 ]]></statement>
     </SQLStatement>
 <SQLStatement type="custom">
