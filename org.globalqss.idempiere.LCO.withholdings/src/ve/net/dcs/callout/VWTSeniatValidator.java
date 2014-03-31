@@ -18,6 +18,8 @@
 package ve.net.dcs.callout;
 
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.URL;
@@ -72,7 +74,7 @@ public class VWTSeniatValidator implements IColumnCallout {
 
 		String file = null;
 
-		file = searchRif(urlSeniat, taxidType.getName() + taxid);
+		file = searchRif(urlSeniat, taxidType.getName() + taxid,taxidType.getName());
 
 		if (file == null)
 			return "Contribuyente no encontrado en Seniat";
@@ -110,19 +112,27 @@ public class VWTSeniatValidator implements IColumnCallout {
 		return String.format("%s-%s-%s", string.substring(0, 1), string.substring(1, string.length() - 1), string.substring(string.length() - 1));
 	}
 
-	public String searchRif(String url, String taxid) {
+	public String searchRif(String url, String taxid, String type){
 		if (url == null)
 			return null;
 
-		String file = readFile(url + taxid);
+		String file = null;
+		for (int i = 1; i <= 2; i++) {
+			file = readFile(url + taxid);
 
-		if (file != null)
-			return file;
-
-		for (int i = 0; i <= 9; i++) {
-			file = readFile(url + taxid + i);
-			if (file != null) {
+			if (file != null)
 				return file;
+
+		}
+		
+		if (type.equalsIgnoreCase("V")){
+			for (int i = 0; i <= 9; i++) {
+				for (int j = 1; j <= 2; i++) {
+					file = readFile(url + taxid + i);
+					if (file != null) {
+						return file;
+					}
+				}
 			}
 		}
 
@@ -141,6 +151,7 @@ public class VWTSeniatValidator implements IColumnCallout {
 			con.setReadTimeout(10000);
 			BufferedReader buffer = new BufferedReader(new InputStreamReader(con.getInputStream(), Charset.forName("ISO-8859-1")));
 
+			
 			String temp = "";
 			String file = "";
 			while ((temp = buffer.readLine()) != null) {
