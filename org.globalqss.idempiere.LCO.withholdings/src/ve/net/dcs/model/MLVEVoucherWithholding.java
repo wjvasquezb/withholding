@@ -408,7 +408,8 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 			}
 
 			MPayment pay = new MPayment(getCtx(), getC_Payment_ID(), get_TrxName());
-			pay.delete(true);
+			pay.voidIt();
+			pay.saveEx();
 
 		} else {
 			// setDocAction(DOCACTION_None);

@@ -38,6 +38,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 		registerTableEvent(IEventTopics.DOC_BEFORE_REVERSEACCRUAL, I_C_Invoice.Table_Name);
 		registerTableEvent(IEventTopics.DOC_BEFORE_REVERSECORRECT, I_C_Invoice.Table_Name);
 		registerTableEvent(IEventTopics.PO_BEFORE_CHANGE, I_C_BPartner.Table_Name);
+		registerTableEvent(IEventTopics.PO_AFTER_CHANGE, MLVEVoucherWithholding.Table_Name);
 	}
 
 	@Override
@@ -46,6 +47,19 @@ public class VWTModelValidator extends AbstractEventHandler {
 		PO po = getPO(event);
 		String type = event.getTopic();
 		log.info(po.get_TableName() + " Type: " + type);
+		
+		if (po.get_TableName().equals(MLVEVoucherWithholding.Table_Name) && type.equals(IEventTopics.PO_AFTER_CHANGE)) {
+			MLVEVoucherWithholding voucher = (MLVEVoucherWithholding) po;
+			String sqlwhere = " LVE_VoucherWithholding_ID = ?";
+			List<MLCOInvoiceWithholding> invoiceW = new Query(po.getCtx(), X_LCO_InvoiceWithholding.Table_Name, sqlwhere, po.get_TrxName()).setOnlyActiveRecords(true).setParameters(voucher.get_ID()).list();
+			
+			for (MLCOInvoiceWithholding mlcoInvoiceWithholding : invoiceW) {
+				mlcoInvoiceWithholding.setDateAcct(voucher.getDateTrx());
+				mlcoInvoiceWithholding.setDateTrx(voucher.getDateTrx());
+				mlcoInvoiceWithholding.saveEx();
+			}
+		
+		}
 
 		if (po.get_TableName().equals(I_C_BPartner.Table_Name) && type.equals(IEventTopics.PO_BEFORE_CHANGE)) {
 			X_C_BPartner partner = (X_C_BPartner) po;
