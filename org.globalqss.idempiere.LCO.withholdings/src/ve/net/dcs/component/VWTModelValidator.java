@@ -1,5 +1,6 @@
 package ve.net.dcs.component;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +55,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 			List<MLCOInvoiceWithholding> invoiceW = new Query(po.getCtx(), X_LCO_InvoiceWithholding.Table_Name, sqlwhere, po.get_TrxName()).setOnlyActiveRecords(true).setParameters(voucher.get_ID()).list();
 			
 			for (MLCOInvoiceWithholding mlcoInvoiceWithholding : invoiceW) {
-				mlcoInvoiceWithholding.setDateAcct(voucher.getDateTrx());
+				mlcoInvoiceWithholding.setDateAcct((Timestamp)voucher.get_Value("DateAcct"));
 				mlcoInvoiceWithholding.setDateTrx(voucher.getDateTrx());
 				mlcoInvoiceWithholding.saveEx();
 			}
@@ -85,6 +86,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 						voucher = new MLVEVoucherWithholding(po.getCtx(), 0, po.get_TrxName());
 						voucher.setAD_Org_ID(po.getAD_Org_ID());
 						voucher.set_ValueOfColumn("AD_Client_ID", po.getAD_Client_ID());
+						voucher.set_ValueOfColumn("DateAcct", invoice.getDateAcct());
 						voucher.setDateTrx(invoice.getDateAcct());
 						voucher.setC_BPartner_ID(invoice.getC_BPartner_ID());
 						voucher.setLCO_WithholdingType_ID(LCO_WithholdingType_ID);

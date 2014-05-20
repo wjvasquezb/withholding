@@ -17,6 +17,7 @@
 package org.globalqss.model;
 
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.Properties;
 
 import org.compiere.model.MInvoice;
@@ -75,7 +76,7 @@ public class MLCOInvoiceWithholding extends X_LCO_InvoiceWithholding
 		int LVE_VoucherWithholding_ID = ((Integer)get_Value("LVE_VoucherWithholding_ID")).intValue();
 		if (LVE_VoucherWithholding_ID > 0){
 			MLVEVoucherWithholding voucher = new MLVEVoucherWithholding(getCtx(), LVE_VoucherWithholding_ID, get_TrxName());
-			setDateAcct(voucher.getDateTrx());
+			setDateAcct((Timestamp)voucher.get_Value("DateAcct"));
 			setDateTrx(voucher.getDateTrx());
 		}else{
 			if (inv.getReversal_ID() <= 0) {

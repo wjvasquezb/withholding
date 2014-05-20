@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -183,6 +184,7 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 
 			mWithholding.set_ValueOfColumn("NroReten", getWithholdingNo());
 			mWithholding.set_ValueOfColumn("C_Payment_ID", payment.getC_Payment_ID());
+			mWithholding.setDateAcct((Timestamp)get_Value("DateAcct"));
 			if (!mWithholding.save()) {
 				// m_processMsg = "Could not update Withholding Line";
 				// return DocAction.STATUS_Invalid;
