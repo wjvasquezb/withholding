@@ -73,7 +73,10 @@ public class MLCOInvoiceWithholding extends X_LCO_InvoiceWithholding
 	{
 		log.fine("New=" + newRecord);
 		MInvoice inv = new MInvoice(getCtx(), getC_Invoice_ID(), get_TrxName());
-		int LVE_VoucherWithholding_ID = ((Integer)get_Value("LVE_VoucherWithholding_ID")).intValue();
+		int LVE_VoucherWithholding_ID = 0;
+		if (get_Value("LVE_VoucherWithholding_ID") != null){
+			LVE_VoucherWithholding_ID = ((Integer)get_Value("LVE_VoucherWithholding_ID")).intValue();
+		}
 		if (LVE_VoucherWithholding_ID > 0){
 			MLVEVoucherWithholding voucher = new MLVEVoucherWithholding(getCtx(), LVE_VoucherWithholding_ID, get_TrxName());
 			setDateAcct((Timestamp)voucher.get_Value("DateAcct"));
