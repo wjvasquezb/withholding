@@ -19358,6 +19358,20 @@ There are two reasons for de-activating and not deleting records:
         <IsActive>true</IsActive>
         <Name>DCS Voucher Withholding Tax</Name>
     </AD_EntityType>
+    <AD_EntityType type="table">
+        <AD_Client_ID>0</AD_Client_ID>
+        <AD_Org_ID>0</AD_Org_ID>
+        <Processing>false</Processing>
+        <ModelPackage>ve.net.dcs.model</ModelPackage>
+        <Version>1.0</Version>
+        <Help/>
+        <EntityType>ve.net.dcs</EntityType>
+        <Classpath/>
+        <Description/>
+        <AD_EntityType_UU>6e7fd696-1e6b-4dc6-b5cb-bf3027dc39ff</AD_EntityType_UU>
+        <IsActive>true</IsActive>
+        <Name>Double Click Sistemas C.A.</Name>
+    </AD_EntityType>
 <AD_Val_Rule type="table">
         <AD_Client_ID>0</AD_Client_ID>
         <AD_Org_ID>0</AD_Org_ID>
@@ -31476,7 +31490,87 @@ There are two reasons for de-activating and not deleting records:
         <AD_Reference_ID reference="id">19</AD_Reference_ID>
         <AD_Val_Rule_ID reference="id"/>
         <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
-    </AD_Column>
+    </AD_Column>  
+  <SQLStatement type="custom">
+        <DBType>Postgres</DBType>
+        <statement><![CDATA[CREATE OR REPLACE FUNCTION "isnull"(text, text)
+  RETURNS text AS
+$BODY$
+SELECT (CASE (SELECT $1
+is null) WHEN true THEN $2 ELSE $1 END) AS RESULT
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100;]]></statement>
+    </SQLStatement>
+    <SQLStatement type="custom">
+        <DBType>Postgres</DBType>
+        <statement><![CDATA[CREATE OR REPLACE FUNCTION lve_calcexento(p_c_invoice_id numeric)
+  RETURNS numeric AS
+$BODY$
+DECLARE valor numeric;
+BEGIN	
+    select into valor sum(a.linetotalamt)  from c_invoiceline a, c_tax b 
+    where b.rate=0 and a.c_tax_id=b.c_tax_id and a.c_invoice_id=p_c_invoice_id and b.istaxexempt = 'Y' group by a.c_tax_id;
+       IF valor is null then 
+           valor:=0.00;
+           
+     END IF ;
+     return valor;
+END;	
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;]]></statement>
+    </SQLStatement>
+    <SQLStatement type="custom">
+        <DBType>Postgres</DBType>
+        <statement><![CDATA[CREATE OR REPLACE FUNCTION lve_calcexentoline(p_c_invoiceline_id numeric)
+  RETURNS numeric AS
+$BODY$
+DECLARE valor numeric;
+BEGIN	
+    select into valor sum(a.linetotalamt)  from c_invoiceline a, c_tax b 
+    where b.rate=0 and a.c_tax_id=b.c_tax_id and a.c_invoiceline_id=p_c_invoiceline_id and b.istaxexempt = 'Y' group by a.c_tax_id;
+       IF valor is null then 
+           valor:=0.00;
+           
+     END IF ;
+     return valor;
+END;	
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;]]></statement>
+    </SQLStatement>
+    <SQLStatement type="custom">
+        <DBType>Postgres</DBType>
+        <statement><![CDATA[CREATE OR REPLACE FUNCTION lve_impbase(tipo character, p_c_invoice_id numeric, p_rate numeric)
+  RETURNS numeric AS
+$BODY$
+DECLARE 
+    valor numeric;
+BEGIN	
+    if tipo='bf' then 
+        select into valor a.taxbaseamt from c_invoicetax a, c_tax b where a.c_tax_id=b.c_tax_id and a.c_invoice_id=p_c_invoice_id and b.rate=p_rate;
+    elsif tipo='if' then 
+        select into valor a.taxamt from c_invoicetax a, c_tax b where a.c_tax_id=b.c_tax_id and a.c_invoice_id=p_c_invoice_id and b.rate=p_rate;
+    elsif tipo='tf' then 
+        select into valor b.rate from c_invoicetax a, c_tax b where a.c_tax_id=b.c_tax_id and a.c_invoice_id=p_c_invoice_id and b.rate=p_rate;
+    elsif tipo='bo' then 
+        select into valor a.taxbaseamt from c_ordertax a, c_tax b where a.c_tax_id=b.c_tax_id and a.c_order_id=p_c_invoice_id and b.rate=p_rate;
+    elsif tipo='io' then 
+        select into valor a.taxamt from c_ordertax a, c_tax b where a.c_tax_id=b.c_tax_id and a.c_order_id=p_c_invoice_id and b.rate=p_rate;
+    elsif tipo='to' then 
+        select into valor b.rate from c_ordertax a, c_tax b where a.c_tax_id=b.c_tax_id and a.c_order_id=p_c_invoice_id and b.rate=p_rate;
+    end if ;
+
+     IF valor is null then 
+           valor:=0;
+     END IF ;
+     return valor;
+END;	
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;]]></statement>
+    </SQLStatement>
     <SQLStatement type="custom">
         <DBType>Postgres</DBType>
         <statement><![CDATA[CREATE OR REPLACE VIEW lve_txtiva AS 
