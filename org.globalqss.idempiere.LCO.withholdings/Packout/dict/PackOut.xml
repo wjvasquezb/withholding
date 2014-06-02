@@ -7,6 +7,11 @@
     </SQLStatement>
     <SQLStatement type="custom">
         <DBType>Postgres</DBType>
+        <statement><![CDATA[UPDATE AD_Column SET AD_Column_UU = '77ccdb4c-b733-4b5f-a048-12f64567fda8' WHERE AD_Table_ID = (SELECT AD_Table_ID FROM AD_Table WHERE AD_Table_UU = 'ee26ff25-19d0-44a6-ab6a-9587f1ff5c55') AND Name = 'Payment';
+]]></statement>
+    </SQLStatement>
+    <SQLStatement type="custom">
+        <DBType>Postgres</DBType>
         <statement><![CDATA[UPDATE AD_Column SET AD_Column_UU = '5811ee15-fcba-4161-8604-a9611f684ea2' WHERE Columnname = 'LVE_controlNumber';
 ]]></statement>
     </SQLStatement>
