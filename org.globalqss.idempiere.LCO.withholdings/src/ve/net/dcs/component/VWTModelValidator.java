@@ -18,6 +18,7 @@ import org.compiere.model.Query;
 import org.compiere.model.X_C_BPartner;
 import org.compiere.process.DocAction;
 import org.compiere.util.CLogger;
+import org.compiere.util.DB;
 import org.compiere.util.Env;
 import org.compiere.util.Msg;
 import org.globalqss.model.MLCOInvoiceWithholding;
@@ -38,6 +39,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 		registerTableEvent(IEventTopics.DOC_BEFORE_REACTIVATE, I_C_Invoice.Table_Name);
 		registerTableEvent(IEventTopics.DOC_BEFORE_REVERSEACCRUAL, I_C_Invoice.Table_Name);
 		registerTableEvent(IEventTopics.DOC_BEFORE_REVERSECORRECT, I_C_Invoice.Table_Name);
+		registerTableEvent(IEventTopics.PO_BEFORE_NEW, I_C_BPartner.Table_Name);
 		registerTableEvent(IEventTopics.PO_BEFORE_CHANGE, I_C_BPartner.Table_Name);
 		registerTableEvent(IEventTopics.PO_AFTER_CHANGE, MLVEVoucherWithholding.Table_Name);
 	}
@@ -60,6 +62,16 @@ public class VWTModelValidator extends AbstractEventHandler {
 				mlcoInvoiceWithholding.saveEx();
 			}
 		
+		}
+		
+		if (po.get_TableName().equals(I_C_BPartner.Table_Name) && (type.equals(IEventTopics.PO_BEFORE_CHANGE) || type.equals(IEventTopics.PO_BEFORE_NEW))) {
+			X_C_BPartner partner = (X_C_BPartner) po;
+			if(partner.is_ValueChanged("TaxID")){
+				int value = 0;
+				value = DB.getSQLValue(partner.get_TrxName(), "SELECT 1 FROM C_BPartner WHERE LCO_taxIDType_ID = ? AND TaxID = ? AND C_BPartner_ID != ?", partner.get_ValueAsInt("LCO_TaxIDType_ID"),partner.getTaxID(),partner.get_ID());
+				if (value > 0)
+					throw new RuntimeException("Tercero Ya Existe");	
+			}
 		}
 
 		if (po.get_TableName().equals(I_C_BPartner.Table_Name) && type.equals(IEventTopics.PO_BEFORE_CHANGE)) {
