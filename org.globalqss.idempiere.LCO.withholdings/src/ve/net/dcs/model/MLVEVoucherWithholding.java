@@ -373,6 +373,8 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 						mlcoInvoiceWithholding2.setC_AllocationLine_ID(0);
 						if (mlcoInvoiceWithholding2.get_ValueAsInt("LVE_VoucherWithholding_ID") != getLVE_VoucherWithholding_ID())
 							mlcoInvoiceWithholding2.setProcessed(false);
+						else
+							mlcoInvoiceWithholding2.setProcessed(false);
 						mlcoInvoiceWithholding2.saveEx();
 					}
 					//mlcoInvoiceWithholding.set_TrxName(m_trx.getTrxName());
