@@ -22,6 +22,7 @@ import org.compiere.util.DB;
 import org.compiere.util.Env;
 import org.compiere.util.Msg;
 import org.globalqss.model.MLCOInvoiceWithholding;
+import org.globalqss.model.MLCOWithholdingType;
 import org.globalqss.model.X_LCO_InvoiceWithholding;
 import org.osgi.service.event.Event;
 
@@ -42,6 +43,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 		registerTableEvent(IEventTopics.PO_BEFORE_NEW, I_C_BPartner.Table_Name);
 		registerTableEvent(IEventTopics.PO_BEFORE_CHANGE, I_C_BPartner.Table_Name);
 		registerTableEvent(IEventTopics.PO_AFTER_CHANGE, MLVEVoucherWithholding.Table_Name);
+		registerTableEvent(IEventTopics.PO_BEFORE_NEW, MLVEVoucherWithholding.Table_Name);
 	}
 
 	@Override
@@ -51,16 +53,27 @@ public class VWTModelValidator extends AbstractEventHandler {
 		String type = event.getTopic();
 		log.info(po.get_TableName() + " Type: " + type);
 		
-		if (po.get_TableName().equals(MLVEVoucherWithholding.Table_Name) && type.equals(IEventTopics.PO_AFTER_CHANGE)) {
-			MLVEVoucherWithholding voucher = (MLVEVoucherWithholding) po;
-			String sqlwhere = " LVE_VoucherWithholding_ID = ?";
-			List<MLCOInvoiceWithholding> invoiceW = new Query(po.getCtx(), X_LCO_InvoiceWithholding.Table_Name, sqlwhere, po.get_TrxName()).setOnlyActiveRecords(true).setParameters(voucher.get_ID()).list();
+		if (po.get_TableName().equals(MLVEVoucherWithholding.Table_Name) ) {
 			
-			for (MLCOInvoiceWithholding mlcoInvoiceWithholding : invoiceW) {
-				mlcoInvoiceWithholding.setDateAcct((Timestamp)voucher.get_Value("DateAcct"));
-				mlcoInvoiceWithholding.setDateTrx(voucher.getDateTrx());
-				mlcoInvoiceWithholding.saveEx();
+			MLVEVoucherWithholding voucher = (MLVEVoucherWithholding) po;
+			
+			if(type.equals(IEventTopics.PO_AFTER_CHANGE)){
+				if(validateWithholdingNo(voucher)){
+					String sqlwhere = " LVE_VoucherWithholding_ID = ?";
+					List<MLCOInvoiceWithholding> invoiceW = new Query(po.getCtx(), X_LCO_InvoiceWithholding.Table_Name, sqlwhere, po.get_TrxName()).setOnlyActiveRecords(true).setParameters(voucher.get_ID()).list();
+					
+					for (MLCOInvoiceWithholding mlcoInvoiceWithholding : invoiceW) {
+						mlcoInvoiceWithholding.setDateAcct((Timestamp)voucher.get_Value("DateAcct"));
+						mlcoInvoiceWithholding.setDateTrx(voucher.getDateTrx());
+						mlcoInvoiceWithholding.saveEx();
+					}
+				}
 			}
+			if(type.equals(IEventTopics.PO_BEFORE_NEW)){
+				validateWithholdingNo(voucher);
+
+			}
+			    
 		
 		}
 		
@@ -191,5 +204,28 @@ public class VWTModelValidator extends AbstractEventHandler {
 					}
 				}
 		}
+	}
+
+	private boolean validateWithholdingNo(MLVEVoucherWithholding voucher) {
+		
+		MLCOWithholdingType withHoldingType = new MLCOWithholdingType(voucher.getCtx(), voucher.getLCO_WithholdingType_ID(), voucher.get_TrxName());	
+		MLVEVoucherWithholding voucherWithHolding = null;
+		boolean isValidate = false;
+		if(withHoldingType.isSOTrx())
+			voucherWithHolding  = new Query(voucher.getCtx(), MLVEVoucherWithholding.Table_Name, "withholdingno= ? AND LCO_WithholdingType_ID =? AND C_Bpartner_ID = ? AND docstatus = 'CO'", voucher.get_TrxName())
+		                         .setOnlyActiveRecords(true).setParameters(voucher.getWithholdingNo(),voucher.getLCO_WithholdingType_ID(),voucher.getC_BPartner_ID()).first();
+		else
+			voucherWithHolding  = new Query(voucher.getCtx(), MLVEVoucherWithholding.Table_Name, "withholdingno= ? AND LCO_WithholdingType_ID=? AND docstatus = 'CO'", voucher.get_TrxName())
+                               .setOnlyActiveRecords(true).setParameters(voucher.getWithholdingNo(),voucher.getLCO_WithholdingType_ID()).first();
+		
+		if (voucherWithHolding ==null)
+			isValidate = true;
+		else{ 
+			String msj = "El nro de retención "+voucher.getWithholdingNo()+ " ya existe para este tipo de retención"; 
+			if(withHoldingType.isSOTrx())
+				msj = msj + " y este tercero";
+		    throw new RuntimeException(msj); 
+		}
+		return isValidate;
 	}
 }
