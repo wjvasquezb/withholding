@@ -1,8 +1,12 @@
 package ve.net.dcs.component;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import org.adempiere.base.event.AbstractEventHandler;
 import org.adempiere.base.event.IEventTopics;
@@ -209,23 +213,37 @@ public class VWTModelValidator extends AbstractEventHandler {
 	private boolean validateWithholdingNo(MLVEVoucherWithholding voucher) {
 		
 		MLCOWithholdingType withHoldingType = new MLCOWithholdingType(voucher.getCtx(), voucher.getLCO_WithholdingType_ID(), voucher.get_TrxName());	
-		MLVEVoucherWithholding voucherWithHolding = null;
+		PreparedStatement pst = null;
 		boolean isValidate = false;
+		String sql  = "";
 		if(withHoldingType.isSOTrx())
-			voucherWithHolding  = new Query(voucher.getCtx(), MLVEVoucherWithholding.Table_Name, "withholdingno= ? AND LCO_WithholdingType_ID =? AND C_Bpartner_ID = ? AND docstatus = 'CO'", voucher.get_TrxName())
-		                         .setOnlyActiveRecords(true).setParameters(voucher.getWithholdingNo(),voucher.getLCO_WithholdingType_ID(),voucher.getC_BPartner_ID()).first();
+			sql = "Select LVE_VoucherWithholding_ID from LVE_VoucherWithholding where  withholdingno= '"+voucher.getWithholdingNo()+"' AND LCO_WithholdingType_ID="+voucher.getLCO_WithholdingType_ID()+" AND C_Bpartner_ID ="+voucher.getC_BPartner_ID()+" AND docstatus = 'CO'";
+
 		else
-			voucherWithHolding  = new Query(voucher.getCtx(), MLVEVoucherWithholding.Table_Name, "withholdingno= ? AND LCO_WithholdingType_ID=? AND docstatus = 'CO'", voucher.get_TrxName())
-                               .setOnlyActiveRecords(true).setParameters(voucher.getWithholdingNo(),voucher.getLCO_WithholdingType_ID()).first();
+			sql = "Select LVE_VoucherWithholding_ID from LVE_VoucherWithholding where  withholdingno= '"+voucher.getWithholdingNo()+"' AND LCO_WithholdingType_ID="+voucher.getLCO_WithholdingType_ID()+" AND docstatus = 'CO'";	
 		
-		if (voucherWithHolding ==null)
-			isValidate = true;
-		else{ 
-			String msj = "El nro de retención "+voucher.getWithholdingNo()+ " ya existe para este tipo de retención"; 
-			if(withHoldingType.isSOTrx())
-				msj = msj + " y este tercero";
-		    throw new RuntimeException(msj); 
+		
+		 sql = "Select LVE_VoucherWithholding_ID from LVE_VoucherWithholding where  withholdingno= '"+voucher.getWithholdingNo()+"' AND LCO_WithholdingType_ID="+voucher.getLCO_WithholdingType_ID()+" AND docstatus = 'CO'";
+		try {
+			 pst = DB.prepareStatement(sql, null);
+			ResultSet rs = pst.executeQuery();
+			if (!rs.next()) {
+				isValidate = true;
+			}
+			else{ 
+				String msj = "El nro de retención "+voucher.getWithholdingNo()+ " ya existe para este tipo de retención"; 
+				if(withHoldingType.isSOTrx())
+					msj = msj + " y este tercero";
+			    throw new RuntimeException(msj); 
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+    	finally{
+    		DB.close(pst);
+    		pst = null;
+    	}	
+
 		return isValidate;
 	}
 }
