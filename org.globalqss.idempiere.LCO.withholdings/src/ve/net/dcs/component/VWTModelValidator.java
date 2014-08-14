@@ -217,10 +217,10 @@ public class VWTModelValidator extends AbstractEventHandler {
 		boolean isValidate = false;
 		String sql  = "";
 		if(withHoldingType.isSOTrx())
-			sql = "Select LVE_VoucherWithholding_ID from LVE_VoucherWithholding where  withholdingno= '"+voucher.getWithholdingNo()+"' AND LCO_WithholdingType_ID="+voucher.getLCO_WithholdingType_ID()+" AND C_Bpartner_ID ="+voucher.getC_BPartner_ID()+" AND LVE_VoucherWithholding_ID != "+voucher.getLVE_VoucherWithholding_ID()+" AND docstatus = 'CO' AND AD_Org_ID = "+voucher.getAD_Org_ID();
+			sql = "Select LVE_VoucherWithholding_ID from LVE_VoucherWithholding where  withholdingno= '"+voucher.getWithholdingNo()+"' AND LCO_WithholdingType_ID="+voucher.getLCO_WithholdingType_ID()+" AND C_Bpartner_ID ="+voucher.getC_BPartner_ID()+" AND LVE_VoucherWithholding_ID != "+voucher.getLVE_VoucherWithholding_ID()+" AND docstatus = 'CO'";
 
 		else
-			sql = "Select LVE_VoucherWithholding_ID from LVE_VoucherWithholding where  withholdingno= '"+voucher.getWithholdingNo()+"' AND LCO_WithholdingType_ID="+voucher.getLCO_WithholdingType_ID()+" AND LVE_VoucherWithholding_ID != "+voucher.getLVE_VoucherWithholding_ID()+" AND docstatus = 'CO' AND AD_Org_ID = "+voucher.getAD_Org_ID();	
+			sql = "Select LVE_VoucherWithholding_ID from LVE_VoucherWithholding where  withholdingno= '"+voucher.getWithholdingNo()+"' AND LCO_WithholdingType_ID="+voucher.getLCO_WithholdingType_ID()+" AND LVE_VoucherWithholding_ID != "+voucher.getLVE_VoucherWithholding_ID()+" AND docstatus = 'CO' AND AD_Client_ID = "+voucher.getAD_Org_ID();	
 		
 		try {
 			 pst = DB.prepareStatement(sql, null);
