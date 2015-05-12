@@ -111,7 +111,7 @@ public class LVE_GenerateXmlSeniat extends SvrProcess {
 		
 		FileOutputStream file=new FileOutputStream(fileNameXML);
 	   
-		sql=("SELECT *"
+		sql=("SELECT *, to_char(fecha,'DD/MM/YYYY') as fechaoperacion "
 				+ " FROM lve_xmlislr " 
 				+ " WHERE " 
 				+ " lve_xmlislr.org = '" + p_AD_Org_ID + "' AND "
@@ -146,6 +146,11 @@ public class LVE_GenerateXmlSeniat extends SvrProcess {
 					 detalleRetencion.addContent(new Element("NumeroControl").setText(rs.getString(3).trim()));
 				 else
 					 detalleRetencion.addContent(new Element("NumeroControl").setText("Vacio"));
+				 
+				 if (rs.getString(13) != null)
+					 detalleRetencion.addContent(new Element("FechaOperacion").setText(rs.getString(13).trim()));
+				 else
+					 detalleRetencion.addContent(new Element("FechaOperacion").setText("Vacio"));
 			    
 				 if (rs.getString(4) != null)
 					 detalleRetencion.addContent(new Element("CodigoConcepto").setText(rs.getString(4).trim()));
