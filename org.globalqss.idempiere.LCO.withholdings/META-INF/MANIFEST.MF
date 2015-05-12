@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.globalqss.idempiere.LCO.withholdings.DCS;singleton:=tru
 Bundle-Version: 1.0.35.qualifier
 Bundle-Activator: org.adempiere.plugin.utils.AdempiereActivator
 Bundle-Vendor: GlobalQSS
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.adempiere.base;bundle-version="1.0.0",
  org.adempiere.plugin.utils;bundle-version="0.0.0"
 Bundle-ActivationPolicy: lazy

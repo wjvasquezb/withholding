@@ -527,16 +527,32 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 				invoice = new MInvoice (ah.getCtx(), alloc_line.getC_Invoice_ID(), ah.get_TrxName());
 				if (invoice == null || invoice.getC_Invoice_ID() == 0)
 					continue;
-				String sql = 
-					  "SELECT i.C_Tax_ID, NVL(SUM(i.TaxBaseAmt),0) AS TaxBaseAmt, NVL(SUM(i.TaxAmt),0) AS TaxAmt, t.Name, t.Rate, t.IsSalesTax "
-					 + " FROM LCO_InvoiceWithholding i, C_Tax t "
+				/*String sql = 
+				  "SELECT i.C_Tax_ID, NVL(SUM(i.TaxBaseAmt),0) AS TaxBaseAmt, NVL(SUM(i.TaxAmt),0) AS TaxAmt, t.Name, t.Rate, t.IsSalesTax "
+				 + " FROM LCO_InvoiceWithholding i, C_Tax t "
+				+ " WHERE i.C_Invoice_ID = ? AND " +
+						 "i.IsCalcOnPayment = 'Y' AND " +
+						 "i.IsActive = 'Y' AND " +
+						 "i.Processed = 'Y' AND " +
+						 "i.C_AllocationLine_ID = ? AND " +
+						 "i.C_Tax_ID = t.C_Tax_ID "
+				+ "GROUP BY i.C_Tax_ID, t.Name, t.Rate, t.IsSalesTax";
+				*/
+			String sql = 
+					  "SELECT i.C_Tax_ID,NVL(SUM(i.TaxBaseAmt),0) AS TaxBaseAmt, NVL(SUM(i.TaxAmt),0) AS TaxAmt, " +
+					"COALESCE(SUM( currencyconvert(i.TaxBaseAmt,ci.c_currency_id, 205, " +
+					  "i.dateacct, ci.c_conversiontype_id, i.ad_client_id, i.ad_org_id) ),0) AS TaxBaseAmtVE, " +
+					  "COALESCE(SUM(currencyconvert(i.TaxAmt ,ci.c_currency_id, 205, " +
+					  "i.dateacct, ci.c_conversiontype_id, i.ad_client_id, i.ad_org_id)),0) AS TaxAmtVE, t.Name, t.Rate, t.IsSalesTax "
+					 + " FROM LCO_InvoiceWithholding i, C_Tax t, C_Invoice ci "
 					+ " WHERE i.C_Invoice_ID = ? AND " +
 							 "i.IsCalcOnPayment = 'Y' AND " +
 							 "i.IsActive = 'Y' AND " +
 							 "i.Processed = 'Y' AND " +
 							 "i.C_AllocationLine_ID = ? AND " +
-							 "i.C_Tax_ID = t.C_Tax_ID "
-					+ "GROUP BY i.C_Tax_ID, t.Name, t.Rate, t.IsSalesTax";
+							 "i.C_Tax_ID = t.C_Tax_ID AND " +
+							 "i.C_Invoice_ID = ci.C_Invoice_ID "
+					+ "GROUP BY i.C_Tax_ID, t.Name, t.Rate, t.IsSalesTax ";
 				PreparedStatement pstmt = null;
 				ResultSet rs = null;
 				try
@@ -549,14 +565,18 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 						int tax_ID = rs.getInt(1);
 						BigDecimal taxBaseAmt = rs.getBigDecimal(2);
 						BigDecimal amount = rs.getBigDecimal(3);
-						String name = rs.getString(4);
-						BigDecimal rate = rs.getBigDecimal(5);
-						boolean salesTax = rs.getString(6).equals("Y") ? true : false;
-						
+						//String name = rs.getString(4);
+						//BigDecimal rate = rs.getBigDecimal(5);
+						//boolean salesTax = rs.getString(6).equals("Y") ? true : false;
+						BigDecimal taxBaseAmtVE = rs.getBigDecimal(4);
+						BigDecimal amountVE = rs.getBigDecimal(5);
+						String name = rs.getString(6);
+						BigDecimal rate = rs.getBigDecimal(7);
+						boolean salesTax = rs.getString(8).equals("Y") ? true : false;
 						DocTax taxLine = new DocTax(tax_ID, name, rate, 
 								taxBaseAmt, amount, salesTax);
 						
-						if (amount != null && amount.signum() != 0)
+						/*if (amount != null && amount.signum() != 0)
 						{
 							FactLine tl = null;
 							if (invoice.isSOTrx()) {
@@ -565,6 +585,20 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 							} else {
 								tl = fact.createLine(null, taxLine.getAccount(taxLine.getAPTaxType(), as),
 										as.getC_Currency_ID(), null, amount);
+							}
+							if (tl != null)
+								tl.setC_Tax_ID(taxLine.getC_Tax_ID());
+							tottax = tottax.add(amount);
+						}*/
+						if (amount != null && amount.signum() != 0)
+						{
+							FactLine tl = null;
+							if ((invoice.isSOTrx() && invoice.getC_DocTypeTarget().getDocBaseType().compareTo("ARI")==0) || (!invoice.isSOTrx() && invoice.getC_DocTypeTarget().getDocBaseType().compareTo("APC")==0)) {
+								tl = fact.createLine(null, taxLine.getAccount(DocTax.ACCTTYPE_TaxDue, as),
+										as.getC_Currency_ID(), amountVE, null);
+							} else {
+								tl = fact.createLine(null, taxLine.getAccount(taxLine.getAPTaxType(), as),
+										as.getC_Currency_ID(), null, amountVE);
 							}
 							if (tl != null)
 								tl.setC_Tax_ID(taxLine.getC_Tax_ID());
@@ -634,6 +668,7 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 
 		return null;
 	}
+
 
 	private String completeInvoiceWithholding(MInvoice inv) {
 		
