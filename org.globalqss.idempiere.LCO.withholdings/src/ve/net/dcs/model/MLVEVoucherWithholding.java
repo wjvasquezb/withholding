@@ -96,11 +96,13 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 		// return DocAction.STATUS_NotApproved;
 
 		X_LCO_WithholdingType wt = new X_LCO_WithholdingType(getCtx(), getLCO_WithholdingType_ID(), get_TrxName());
+		
+		String type=(String)wt.get_Value("type");
 		if (!wt.isSOTrx() && getWithholdingNo() == null)
 			createWithholdingNo(wt);
 		else if (wt.isSOTrx() && wt.getName() != "Sales IVA Withholding") {
 			createWithholdingNo(wt);
-		} else if (wt.isSOTrx() && wt.getName().equals("Sales IVA Withholding")) {
+		} else if (wt.isSOTrx() && getWithholdingNo() == null && type.compareTo("IVA")==0){
 			// m_processMsg = "Asigne un Numero de Comprobante a la Retención";
 			// return DocAction.STATUS_Invalid;
 			throw new AdempiereException("Asigne un Numero de Comprobante a la Retención");
@@ -249,6 +251,7 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 		
 		setProcessed(true);
 		// setDocAction(DOCACTION_Close);
+		setProcessed(true);
 		setDocStatus(DOCSTATUS_Completed);
 		saveEx();
 
