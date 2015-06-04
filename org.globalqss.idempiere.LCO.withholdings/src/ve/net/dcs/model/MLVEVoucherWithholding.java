@@ -100,7 +100,7 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 		String type=(String)wt.get_Value("type");
 		if (!wt.isSOTrx() && getWithholdingNo() == null)
 			createWithholdingNo(wt);
-		else if (wt.isSOTrx() && wt.getName() != "Sales IVA Withholding") {
+		else if (wt.isSOTrx() && wt.getName() != "Sales IVA Withholding" && type.compareTo("IVA")!=0) {
 			createWithholdingNo(wt);
 		} else if (wt.isSOTrx() && getWithholdingNo() == null && type.compareTo("IVA")==0){
 			// m_processMsg = "Asigne un Numero de Comprobante a la Retención";
