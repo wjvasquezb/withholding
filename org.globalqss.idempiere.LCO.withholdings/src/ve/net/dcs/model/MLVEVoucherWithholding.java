@@ -100,7 +100,7 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 		String type=(String)wt.get_Value("type");
 		if (!wt.isSOTrx() && getWithholdingNo() == null)
 			createWithholdingNo(wt);
-		else if (wt.isSOTrx() && wt.getName() != "Sales IVA Withholding" && type.compareTo("IVA")!=0) {
+		else if (wt.isSOTrx() && wt.getName() != "Sales IVA Withholding" && type.compareTo("IVA")!=0 && type.compareTo("ISLR")!=0) {
 			createWithholdingNo(wt);
 		} else if (wt.isSOTrx() && getWithholdingNo() == null && type.compareTo("IVA")==0){
 			// m_processMsg = "Asigne un Numero de Comprobante a la Retención";
@@ -186,6 +186,7 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 
 			mWithholding.set_ValueOfColumn("NroReten", getWithholdingNo());
 			mWithholding.set_ValueOfColumn("C_Payment_ID", payment.getC_Payment_ID());
+			mWithholding.setProcessed(true);
 			mWithholding.setDateAcct((Timestamp)get_Value("DateAcct"));
 			if (!mWithholding.save()) {
 				// m_processMsg = "Could not update Withholding Line";
