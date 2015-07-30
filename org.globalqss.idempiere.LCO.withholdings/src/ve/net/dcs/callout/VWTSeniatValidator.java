@@ -61,7 +61,7 @@ public class VWTSeniatValidator implements IColumnCallout {
 	@Override
 	public String start(Properties ctx, int WindowNo, GridTab mTab, GridField mField, Object value, Object oldValue) {
 
-		String urlSeniat = MSysConfig.getValue("URL_SENIAT", "http://contribuyente.seniat.gob.ve/getContribuyente/getrif?rif=", Env.getAD_Client_ID(Env.getCtx()));
+		String urlSeniat = MSysConfig.getValue("URL_SENIAT", MSysConfig.getValue("URL_SENIAT"), Env.getAD_Client_ID(Env.getCtx()));
 
 		if (urlSeniat == null)
 			return "URL del Seniat no se encuentra en el sistema";
@@ -87,7 +87,13 @@ public class VWTSeniatValidator implements IColumnCallout {
 		else
 			name = data.get("Nombre").replaceAll("\\(.+\\)", "").trim();
 		
-		mTab.setValue("Name", name);
+		if(MSysConfig.getValue("ReplaceTaxInfoSeniat").compareTo("Y")==0){
+			mTab.setValue("TaxID", name);
+			mTab.setValue("Name", name);
+		}else{
+			mTab.setValue("LVE_nameSeniat", name);
+			mTab.setValue("LVE_rifSeniat", data.get("numeroRif"));
+		}
 
 		int LCO_TaxPayerType_id = 0;
 		String LCO_TaxPayerTypeName = "";

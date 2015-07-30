@@ -85,7 +85,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 			X_C_BPartner partner = (X_C_BPartner) po;
 			if(partner.is_ValueChanged("TaxID")){
 				int value = 0;
-				String cadena = partner.getTaxID().replaceAll("/^\\w+", "");
+				String cadena = partner.getTaxID();
 				
 				value = DB.getSQLValue(partner.get_TrxName(), "SELECT 1 FROM C_BPartner WHERE LCO_taxIDType_ID = ? AND TaxID = ? AND C_BPartner_ID != ?", partner.get_ValueAsInt("LCO_TaxIDType_ID"),cadena,partner.get_ID());
 				
@@ -96,11 +96,11 @@ public class VWTModelValidator extends AbstractEventHandler {
 		}
 
 		if (po.get_TableName().equals(I_C_BPartner.Table_Name) && type.equals(IEventTopics.PO_BEFORE_CHANGE)) {
-			X_C_BPartner partner = (X_C_BPartner) po;
-			if (partner.getTaxID().equalsIgnoreCase((String)partner.get_ValueOld("TaxId"))){
-				if (!((X_C_BPartner) po).getTaxID().matches("\\w+"))
-					throw new RuntimeException("Caracteres no válidos en número de identificación");	
-			}
+			
+				if ( ((X_C_BPartner) po).getTaxID().replaceAll("[\\w\\-]+","").matches("[\\W\\s]+") ){
+					throw new RuntimeException("Caracteres no válidos en número de identificación");
+				}
+
 		} else if (po.get_TableName().equals(I_C_Invoice.Table_Name) && type.equals(IEventTopics.DOC_AFTER_COMPLETE)) {
 
 			MInvoice invoice = (MInvoice) po;
