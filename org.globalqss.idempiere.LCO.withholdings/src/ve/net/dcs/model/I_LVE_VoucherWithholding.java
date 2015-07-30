@@ -302,4 +302,10 @@ public interface I_LVE_VoucherWithholding
 
 	/** Get Withholding No	  */
 	public String getWithholdingNo();
+	
+    /** Column name C_DocType_ID */
+    public static final String COLUMNNAME_C_DocType_ID = "C_DocType_ID";
+    
+    /** Column name DocumentNo */
+    public static final String COLUMNNAME_DocumentNo = "DocumentNo";
 }

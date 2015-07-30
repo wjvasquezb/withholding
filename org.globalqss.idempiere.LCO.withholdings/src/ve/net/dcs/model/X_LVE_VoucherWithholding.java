@@ -453,4 +453,20 @@ public class X_LVE_VoucherWithholding extends PO implements I_LVE_VoucherWithhol
 	{
 		return (String)get_Value(COLUMNNAME_WithholdingNo);
 	}
+	
+	/** Get Document Type.
+	@return Document type or rules
+  */
+	public int getC_DocType_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_C_DocType_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+	
+	public String getDocumentNo () 
+	{
+		return (String)get_Value(COLUMNNAME_DocumentNo);
+	}
 }

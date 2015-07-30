@@ -23,6 +23,7 @@ import org.compiere.model.I_C_BPartner;
 import org.compiere.util.CLogger;
 
 import ve.net.dcs.callout.VWTSeniatValidator;
+import ve.net.dcs.callout.VWTSetDocumentNo;
 import ve.net.dcs.callout.VWTSetIsSOTrx;
 import ve.net.dcs.model.I_LVE_VoucherWithholding;
 
@@ -48,7 +49,10 @@ public class VWTCalloutFactory implements IColumnCalloutFactory {
 				return new IColumnCallout[] { new VWTSeniatValidator() };
 		} else if (tableName.equalsIgnoreCase(I_LVE_VoucherWithholding.Table_Name)) {
 			if (columnName.equalsIgnoreCase(I_LVE_VoucherWithholding.COLUMNNAME_LCO_WithholdingType_ID))
-				return new IColumnCallout[] { new VWTSetIsSOTrx() };
+				return new IColumnCallout[] { new VWTSetIsSOTrx(), new VWTSetDocumentNo()};
+			if (columnName.equalsIgnoreCase(I_LVE_VoucherWithholding.COLUMNNAME_WithholdingNo))
+				return new IColumnCallout[] { new VWTSetDocumentNo() };
+
 		}
 		return null;
 	}

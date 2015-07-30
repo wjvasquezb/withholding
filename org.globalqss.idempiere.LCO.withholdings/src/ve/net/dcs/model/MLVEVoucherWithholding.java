@@ -1,5 +1,6 @@
 package ve.net.dcs.model;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,19 +31,24 @@ import org.compiere.model.MTax;
 import org.compiere.model.ModelValidationEngine;
 import org.compiere.model.ModelValidator;
 import org.compiere.model.Query;
+import org.compiere.print.MPrintFormat;
+import org.compiere.print.ReportEngine;
 import org.compiere.process.DocAction;
+import org.compiere.process.DocOptions;
+import org.compiere.process.DocumentEngine;
+import org.compiere.process.ProcessInfo;
+import org.compiere.process.ServerProcessCtl;
 import org.compiere.util.CLogger;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
 import org.compiere.util.Msg;
-import org.compiere.util.Trx;
 import org.globalqss.model.MLCOInvoiceWithholding;
 import org.globalqss.model.X_LCO_WithholdingCalc;
 import org.globalqss.model.X_LCO_WithholdingRule;
 import org.globalqss.model.X_LCO_WithholdingRuleConf;
 import org.globalqss.model.X_LCO_WithholdingType;
 
-public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
+public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements DocAction,DocOptions{
 
 	/**
 	 * 
@@ -68,6 +74,8 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 	public String prepareIt() {
 		log.info(toString());
 		m_processMsg = ModelValidationEngine.get().fireDocValidate(this, ModelValidator.TIMING_BEFORE_PREPARE);
+//		setDocStatus(DOCSTATUS_Drafted);
+//		setDocAction (DOCACTION_Prepare);
 		if (m_processMsg != null)
 			return DocAction.STATUS_Invalid;
 
@@ -81,9 +89,9 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 		m_processMsg = ModelValidationEngine.get().fireDocValidate(this, ModelValidator.TIMING_AFTER_PREPARE);
 		if (m_processMsg != null)
 			return DocAction.STATUS_Invalid;
-
-		if (!DOCACTION_Complete.equals(getDocAction()))
-			setDocAction(DOCACTION_Complete);
+		m_justPrepared = true;
+		//if (!DOCACTION_Complete.equals(getDocAction()))
+		//	setDocAction(DOCACTION_Complete);
 		return DocAction.STATUS_InProgress;
 	}
 
@@ -94,7 +102,21 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 		// ModelValidator.TIMING_BEFORE_COMPLETE);
 		// if (m_processMsg != null)
 		// return DocAction.STATUS_NotApproved;
+		System.out.println(getDocAction());
 
+		if (DOCACTION_Prepare.equals(getDocAction()) || DOCACTION_Re_Activate.equals(getDocAction()))
+		{
+			setProcessed(false);
+			return DocAction.STATUS_InProgress;
+		}
+		
+		if (!m_justPrepared)
+		{
+			String status = prepareIt();
+			if (!DocAction.STATUS_InProgress.equals(status))
+				return status;
+		}
+		
 		X_LCO_WithholdingType wt = new X_LCO_WithholdingType(getCtx(), getLCO_WithholdingType_ID(), get_TrxName());
 		
 		String type=(String)wt.get_Value("type");
@@ -110,27 +132,27 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 
 		MLCOInvoiceWithholding[] lines = getLines(null);
 		if (lines.length == 0) {
-			// m_processMsg = "@NoLines@";
-			// return DocAction.STATUS_Invalid;
-			throw new AdempiereException("@NoLines@");
+			m_processMsg = "@NoLines@";
+			return DocAction.STATUS_Invalid;
+			//throw new AdempiereException("@NoLines@");
 		}
 
 		int C_BankAccount_ID = MSysConfig.getIntValue("LVE_Withholding_BankAccount", 0, getAD_Client_ID());
 
 		if (C_BankAccount_ID == 0) {
-			// m_processMsg =
-			// "Debe Establecer un Caja para las Retenciones, Configurador del Sistema LVE_Withholding_BankAccount";
-			// return DocAction.STATUS_Invalid;
-			throw new AdempiereException("Debe Establecer un Caja para las Retenciones, Configurador del Sistema LVE_Withholding_BankAccount");
+			m_processMsg =
+			"Debe Establecer un Caja para las Retenciones, Configurador del Sistema LVE_Withholding_BankAccount";
+			return DocAction.STATUS_Invalid;
+			//throw new AdempiereException("Debe Establecer un Caja para las Retenciones, Configurador del Sistema LVE_Withholding_BankAccount");
 		}
 
 		MBankAccount baccount = new MBankAccount(getCtx(), C_BankAccount_ID, get_TrxName());
 
 		if (baccount.getC_BankAccount_ID() == 0) {
-			// m_processMsg =
-			// "Debe Establecer un Caja para las Retenciones, Configurador del Sistema LVE_Withholding_BankAccount";
-			// return DocAction.STATUS_Invalid;
-			throw new AdempiereException("Debe Establecer un Caja para las Retenciones, Configurador del Sistema LVE_Withholding_BankAccount");
+			m_processMsg =
+			"Debe Establecer un Caja para las Retenciones, Configurador del Sistema LVE_Withholding_BankAccount";
+			return DocAction.STATUS_Invalid;
+			//throw new AdempiereException("Debe Establecer un Caja para las Retenciones, Configurador del Sistema LVE_Withholding_BankAccount");
 		}
 
 //		if (baccount.getAD_Org_ID() != getAD_Org_ID()) {
@@ -251,9 +273,9 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 
 		
 		setProcessed(true);
-		// setDocAction(DOCACTION_Close);
-		setProcessed(true);
-		setDocStatus(DOCSTATUS_Completed);
+		//setDocAction(DOCACTION_Close);
+		//setProcessed(true);
+		//setDocStatus(DOCSTATUS_Completed);
 		saveEx();
 
 		// User Validation
@@ -265,12 +287,12 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 		// return valid;
 		// }
 		//
-
-		// return DocAction.STATUS_Completed;
-		return "@completed@";
+		setDocAction(DOCACTION_Close);
+		return DocAction.STATUS_Completed;
+		//return "@completed@";
 	}
 
-	public String voidIt() {
+	public boolean voidIt() {
 		log.info(toString());
 		// Before Void
 		// m_processMsg = ModelValidationEngine.get().fireDocValidate(this,
@@ -343,10 +365,15 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 		// ModelValidator.TIMING_AFTER_VOID);
 		// if (m_processMsg != null)
 		// return false;
+		/*
 		setDocStatus(DOCSTATUS_Voided);
 		setC_Payment_ID(0);
 		saveEx();
-		return "@Voided@";
+		return true;
+		*/
+		setProcessed(true);
+		setDocAction(DOCACTION_None);
+		return true;
 	}
 
 	public String reActiveIt() {
@@ -786,4 +813,245 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding {
 		return taxamttotal;
 	}
 
+	@Override
+	public boolean processIt(String processAction) throws Exception {
+		m_processMsg = null;
+		DocumentEngine engine = new DocumentEngine (this, getDocStatus());
+		return engine.processIt (processAction, getDocAction());
+	}
+
+	/**	Just Prepared Flag			*/
+	private boolean		m_justPrepared = false;
+	
+	@Override
+	public boolean unlockIt() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean invalidateIt() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean approveIt() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean rejectIt() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean closeIt() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean reverseCorrectIt() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean reverseAccrualIt() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean reActivateIt() {
+		log.info(toString());
+		// Before reActivate
+		m_processMsg = ModelValidationEngine.get().fireDocValidate(this,ModelValidator.TIMING_BEFORE_REACTIVATE);
+		if (m_processMsg != null)
+			return false;
+
+		if (getC_Payment_ID() > 0 && getDocStatus().equals(DOCSTATUS_Completed)) {
+			/*
+			 * globalqss - 2317928 - Reactivating/Voiding order must reset
+			 * posted
+			 */
+			MFactAcct.deleteEx(MPayment.Table_ID, getC_Payment_ID(), get_TrxName());
+
+			MLCOInvoiceWithholding[] wth = getLines(null);
+			ArrayList<Integer> allhs = new ArrayList<Integer>();
+			for (MLCOInvoiceWithholding mlcoInvoiceWithholding : wth) {
+				if (mlcoInvoiceWithholding.getC_AllocationLine().getC_AllocationHdr_ID() > 0) {
+					
+					/** Transaction				*/
+					//Trx	m_trx = Trx.get(Trx.createTrxName("Prueba"), true);
+					allhs.add(mlcoInvoiceWithholding.getC_AllocationLine().getC_AllocationHdr_ID());
+					List<MLCOInvoiceWithholding> iw = new Query(getCtx(), MLCOInvoiceWithholding.Table_Name, "C_AllocationLine_ID = ?", get_TrxName()).setParameters(mlcoInvoiceWithholding.getC_AllocationLine_ID()).list();
+					for (MLCOInvoiceWithholding mlcoInvoiceWithholding2 : iw) {
+						mlcoInvoiceWithholding2.setC_AllocationLine_ID(0);
+						if (mlcoInvoiceWithholding2.get_ValueAsInt("LVE_VoucherWithholding_ID") != getLVE_VoucherWithholding_ID())
+							mlcoInvoiceWithholding2.setProcessed(false);
+						else
+							mlcoInvoiceWithholding2.setProcessed(false);
+						mlcoInvoiceWithholding2.saveEx();
+					}
+					//mlcoInvoiceWithholding.set_TrxName(m_trx.getTrxName());
+					
+//					if (mlcoInvoiceWithholding.save()){
+//						m_trx.commit();
+//					}
+//					else{
+//						m_trx.rollback();
+//						throw new AdempiereException("Error al Anular las Retenciones");
+//					}
+//					m_trx.close();						
+					VWT_MInvoice.updateHeaderWithholding(mlcoInvoiceWithholding.getC_Invoice_ID(), get_TrxName());
+				}
+				else if (mlcoInvoiceWithholding.isProcessed()) {
+					mlcoInvoiceWithholding.setProcessed(false);
+					mlcoInvoiceWithholding.saveEx();
+				}
+			}
+
+			for (Integer allh : allhs) {
+				MAllocationHdr ah = new MAllocationHdr(getCtx(), allh.intValue(), get_TrxName());
+				MFactAcct.deleteEx(MAllocationHdr.Table_ID, allh.intValue(), get_TrxName());
+				ah.delete(true);
+			}
+			
+			MAllocationHdr[] allocations = MAllocationHdr.getOfPayment(getCtx(), 
+					getC_Payment_ID(), get_TrxName());
+			
+			if (allocations.length > 0){
+				for (MAllocationHdr mAllocationHdr : allocations) {
+					MFactAcct.deleteEx(MAllocationHdr.Table_ID, mAllocationHdr.get_ID(), get_TrxName());
+					mAllocationHdr.delete(true);
+				}
+			}
+
+			MPayment pay = new MPayment(getCtx(), getC_Payment_ID(), get_TrxName());
+			pay.voidIt();
+			pay.saveEx();
+
+		} else {
+			// setDocAction(DOCACTION_None);
+			// setProcessed(false);
+			throw new AdempiereException("Documento no completado");
+		}
+
+		// After reActivate
+		m_processMsg = ModelValidationEngine.get().fireDocValidate(this,ModelValidator.TIMING_AFTER_REACTIVATE);
+		if (m_processMsg != null)
+			return false;
+		
+		setDocAction(DOCACTION_Re_Activate);
+		setProcessed(false);
+		return true;
+	}
+
+	@Override
+	public String getSummary() {
+		// TODO Auto-generated method stub
+		//return null;
+		return "";
+	}
+
+	@Override
+	public String getDocumentInfo() {
+		MDocType dt = MDocType.get(getCtx(),getC_DocType_ID());
+		return dt.getNameTrl() + " " + getDocumentNo();
+	}
+
+	@Override
+	public File createPDF() {
+		try
+		{
+			File temp = File.createTempFile(get_TableName()+get_ID()+"_", ".pdf");
+			return createPDF (temp);
+		}
+		catch (Exception e)
+		{
+			log.severe("Could not create PDF - " + e.getMessage());
+		}
+		return null;
+	}
+
+	@Override
+	public String getProcessMsg()
+	{
+		return m_processMsg;
+	}	//	getProcessMsg
+
+	@Override
+	public int getDoc_User_ID() {
+
+		return getCreatedBy();
+	}
+
+	@Override
+	public int getC_Currency_ID() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public BigDecimal getApprovalAmt() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int customizeValidActions(String docStatus, Object processing,
+			String orderType, String isSOTrx, int AD_Table_ID,
+			String[] docAction, String[] options, int index) {
+		if (options == null)
+			throw new IllegalArgumentException("Option array parameter is null");
+		if (docAction == null)
+			throw new IllegalArgumentException("Doc action array parameter is null");
+
+		// If a document is drafted or invalid, the users are able to complete, prepare or void
+		if (docStatus.equals(DocumentEngine.STATUS_Drafted) || docStatus.equals(DocumentEngine.STATUS_Invalid)) {
+			options[index++] = DocumentEngine.ACTION_Complete;
+			options[index++] = DocumentEngine.ACTION_Prepare;
+			options[index++] = DocumentEngine.ACTION_Void;
+
+			// If the document is already completed, we also want to be able to reactivate or void it instead of only closing it
+		} else if (docStatus.equals(DocumentEngine.STATUS_Completed)) {
+			options[index++] = DocumentEngine.ACTION_Void;
+			options[index++] = DocumentEngine.ACTION_ReActivate;
+		}
+
+		return index;
+	}
+
+
+	/**
+	 * 	Create PDF file
+	 *	@param file output file
+	 *	@return file if success
+	 */
+	public File createPDF (File file)
+	{
+		ReportEngine re = ReportEngine.get (getCtx(), ReportEngine.ORDER, getLVE_VoucherWithholding_ID(), get_TrxName());
+		if (re == null)
+			return null;
+		MPrintFormat format = re.getPrintFormat();
+		// We have a Jasper Print Format
+		// ==============================
+		if(format.getJasperProcess_ID() > 0)
+		{
+			ProcessInfo pi = new ProcessInfo ("", format.getJasperProcess_ID());
+			pi.setRecord_ID ( getLVE_VoucherWithholding_ID());
+			pi.setIsBatch(true);
+			
+			ServerProcessCtl.process(pi, null);
+			
+			return pi.getPDFReport();
+		}
+		// Standard Print Format (Non-Jasper)
+		// ==================================
+		return re.getPDF(file);
+	}	//	createPDF
 }

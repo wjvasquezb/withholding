@@ -46,8 +46,11 @@ public class VWT_ProcessWithholding extends SvrProcess {
 				return "El Comprobante no tiene Línea de Retenciones Asociadas.";
 			}
 		}
-		else if (docAction.equals("VO"))
-			return voucher.voidIt();
+		else if (docAction.equals("VO")){
+			voucher.voidIt();
+			return "@Voided@";
+		}
+			
 		else if (docAction.equals("RE"))
 			return voucher.reActiveIt();
 		else
