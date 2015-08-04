@@ -98,11 +98,11 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 	public String completeIt() {
 
 		log.info(toString());
-		// m_processMsg = ModelValidationEngine.get().fireDocValidate(this,
-		// ModelValidator.TIMING_BEFORE_COMPLETE);
-		// if (m_processMsg != null)
-		// return DocAction.STATUS_NotApproved;
-		System.out.println(getDocAction());
+		m_processMsg = ModelValidationEngine.get().fireDocValidate(this,
+		ModelValidator.TIMING_BEFORE_COMPLETE);
+		if (m_processMsg != null)
+			return DocAction.STATUS_NotApproved;
+		//System.out.println("ENTRÓ A FUNCION COMPLETEIT"+getDocAction());
 
 		if (DOCACTION_Prepare.equals(getDocAction()) || DOCACTION_Re_Activate.equals(getDocAction()))
 		{
@@ -279,13 +279,13 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		saveEx();
 
 		// User Validation
-		// String valid = ModelValidationEngine.get().fireDocValidate(this,
-		// ModelValidator.TIMING_AFTER_COMPLETE);
-		// if (valid != null) {
-		// m_processMsg = valid;
-		// return DocAction.STATUS_Invalid;
+		String valid = ModelValidationEngine.get().fireDocValidate(this,
+		ModelValidator.TIMING_AFTER_COMPLETE);
+		if (valid != null) {
+			m_processMsg = valid;
+			return DocAction.STATUS_Invalid;
 		// return valid;
-		// }
+		 }
 		//
 		setDocAction(DOCACTION_Close);
 		return DocAction.STATUS_Completed;
@@ -295,10 +295,10 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 	public boolean voidIt() {
 		log.info(toString());
 		// Before Void
-		// m_processMsg = ModelValidationEngine.get().fireDocValidate(this,
-		// ModelValidator.TIMING_BEFORE_VOID);
-		// if (m_processMsg != null)
-		// return false;
+		m_processMsg = ModelValidationEngine.get().fireDocValidate(this,
+		ModelValidator.TIMING_BEFORE_VOID);
+		if (m_processMsg != null)
+			return false;
 
 		if (getC_Payment_ID() > 0 && getDocStatus().equals(DOCSTATUS_Completed)) {
 			/*
@@ -361,17 +361,18 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		}
 
 		// After Void
-		// m_processMsg = ModelValidationEngine.get().fireDocValidate(this,
-		// ModelValidator.TIMING_AFTER_VOID);
-		// if (m_processMsg != null)
-		// return false;
+		m_processMsg = ModelValidationEngine.get().fireDocValidate(this,ModelValidator.TIMING_AFTER_VOID);
+		if (m_processMsg != null)
+			return false;
 		/*
 		setDocStatus(DOCSTATUS_Voided);
 		setC_Payment_ID(0);
 		saveEx();
 		return true;
 		*/
+		m_processMsg = Msg.getMsg(getCtx(), "Voided");
 		setProcessed(true);
+		//saveEx();
 		setDocAction(DOCACTION_None);
 		return true;
 	}
@@ -955,7 +956,7 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 	public String getSummary() {
 		// TODO Auto-generated method stub
 		//return null;
-		return "";
+		return "Ok";
 	}
 
 	@Override
@@ -1026,7 +1027,10 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		return index;
 	}
 
-
+	public void setProcessMessage(String processMsg)
+	{
+		m_processMsg = processMsg;
+	}
 	/**
 	 * 	Create PDF file
 	 *	@param file output file
