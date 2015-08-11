@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Properties;
 
 import org.compiere.model.MInvoice;
+import org.compiere.model.MSysConfig;
 import org.compiere.model.Query;
 import org.globalqss.model.LCO_MInvoice;
 import org.globalqss.model.X_LCO_WithholdingType;
@@ -60,9 +61,13 @@ public class VWT_MInvoice extends LCO_MInvoice {
 			parameters.add(voucher.getDateTo());
 		}
 		
-		sqlwhere += " AND AD_Org_ID = ? AND DOCSTATUS IN ('CO','CL') ";//AND ISPaid = 'N' ";
+		sqlwhere += " AND AD_Org_ID = ? AND DOCSTATUS IN ('CO','CL') ";
 		
-		sqlwhere += "AND "+COLUMNNAME_C_Invoice_ID+" NOT IN (SELECT lw.C_Invoice_ID FROM LCO_InvoiceWithholding lw JOIN LVE_VoucherWithholding vw ON lw.LVE_VoucherWithholding_ID = vw.LVE_VoucherWithholding_ID WHERE  vw.DocStatus IN ('CO','DR') AND lw.LCO_WithholdingType_ID = ? AND lw.AD_Org_ID = ?) ";
+		if(MSysConfig.getValue("GenerateInvoiceWithholdingIsPaid").compareTo("N")==0){
+			sqlwhere += " AND ISPaid = 'N' ";
+		}
+		
+		sqlwhere += " AND "+COLUMNNAME_C_Invoice_ID+" NOT IN (SELECT lw.C_Invoice_ID FROM LCO_InvoiceWithholding lw JOIN LVE_VoucherWithholding vw ON lw.LVE_VoucherWithholding_ID = vw.LVE_VoucherWithholding_ID WHERE  vw.DocStatus IN ('CO','DR') AND lw.LCO_WithholdingType_ID = ? AND lw.AD_Org_ID = ?) ";
 		
 		parameters.add(voucher.getAD_Org_ID());
 		parameters.add(voucher.getLCO_WithholdingType_ID());
