@@ -63,7 +63,7 @@ public class VWT_MInvoice extends LCO_MInvoice {
 		
 		sqlwhere += " AND AD_Org_ID = ? AND DOCSTATUS IN ('CO','CL') ";
 		
-		if(MSysConfig.getValue("GenerateInvoiceWithholdingIsPaid").compareTo("N")==0){
+		if(MSysConfig.getValue("LVE_GenerateInvoiceWithholdingIsPaid").compareTo("N")==0){
 			sqlwhere += " AND ISPaid = 'N' ";
 		}
 		
