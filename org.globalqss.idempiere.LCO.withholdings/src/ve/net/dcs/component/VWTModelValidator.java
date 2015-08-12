@@ -17,6 +17,7 @@ import org.compiere.model.MBPartner;
 import org.compiere.model.MDocType;
 import org.compiere.model.MInvoice;
 import org.compiere.model.MSequence;
+import org.compiere.model.MSysConfig;
 import org.compiere.model.PO;
 import org.compiere.model.Query;
 import org.compiere.model.X_C_BPartner;
@@ -170,40 +171,42 @@ public class VWTModelValidator extends AbstractEventHandler {
 			MDocType docType = (MDocType) invoice.getC_DocType();
 
 			if (invoice.getReversal_ID() == 0)
-				if (invoice.isSOTrx()) {
-					String controlSequence = null;
-					if (invoice.get_Value("LVE_controlNumber") == null) {
-						if (docType.get_Value("LVE_ControlNoSequence_ID") == null && docType.get_ValueAsBoolean("isControlNoDocument")) {
-							throw new AdempiereException(msgSeqNotFound);
-						}
-
-						MSequence seq = new MSequence(Env.getCtx(), (int) docType.get_Value("LVE_ControlNoSequence_ID"), po.get_TrxName());
-						controlSequence = MSequence.getDocumentNoFromSeq(seq, po.get_TrxName(), invoice);
-
-						Query query = new Query(Env.getCtx(), MInvoice.Table_Name, where + "AND LVE_controlNumber=?", po.get_TrxName());
-
-						while (query.setParameters(invoice.getAD_Org_ID(), invoice.getC_BPartner_ID(), invoice.get_ID(), invoice.isSOTrx(), controlSequence).count() > 0) {
-							seq.setCurrentNext(seq.getCurrentNext() + 1);
-							seq.saveEx();
+				if(MSysConfig.getValue("LVE_ValidateControlNumber", "Y", invoice.getAD_Client_ID()).compareTo("Y")==0){
+					if (invoice.isSOTrx()) {
+						String controlSequence = null;
+						if (invoice.get_Value("LVE_controlNumber") == null) {
+							if (docType.get_Value("LVE_ControlNoSequence_ID") == null && docType.get_ValueAsBoolean("isControlNoDocument")) {
+								throw new AdempiereException(msgSeqNotFound);
+							}
+	
+							MSequence seq = new MSequence(Env.getCtx(), (int) docType.get_Value("LVE_ControlNoSequence_ID"), po.get_TrxName());
 							controlSequence = MSequence.getDocumentNoFromSeq(seq, po.get_TrxName(), invoice);
+	
+							Query query = new Query(Env.getCtx(), MInvoice.Table_Name, where + "AND LVE_controlNumber=?", po.get_TrxName());
+	
+							while (query.setParameters(invoice.getAD_Org_ID(), invoice.getC_BPartner_ID(), invoice.get_ID(), invoice.isSOTrx(), controlSequence).count() > 0) {
+								seq.setCurrentNext(seq.getCurrentNext() + 1);
+								seq.saveEx();
+								controlSequence = MSequence.getDocumentNoFromSeq(seq, po.get_TrxName(), invoice);
+							}
+							invoice.set_ValueOfColumn("LVE_controlNumber", controlSequence);
+							invoice.saveEx();
+						} else {
+							boolean existCN = new Query(Env.getCtx(), MInvoice.Table_Name, where + "AND LVE_controlNumber=?", po.get_TrxName()).setParameters(invoice.getAD_Org_ID(), invoice.getC_BPartner_ID(), invoice.get_ID(), invoice.isSOTrx(), invoice.get_Value("LVE_controlNumber")).count() > 0;
+							if (existCN) {
+								throw new AdempiereException(msgExistCN);
+							}
 						}
-						invoice.set_ValueOfColumn("LVE_controlNumber", controlSequence);
-						invoice.saveEx();
 					} else {
-						boolean existCN = new Query(Env.getCtx(), MInvoice.Table_Name, where + "AND LVE_controlNumber=?", po.get_TrxName()).setParameters(invoice.getAD_Org_ID(), invoice.getC_BPartner_ID(), invoice.get_ID(), invoice.isSOTrx(), invoice.get_Value("LVE_controlNumber")).count() > 0;
-						if (existCN) {
-							throw new AdempiereException(msgExistCN);
-						}
-					}
-				} else {
-					if (invoice.get_Value("LVE_controlNumber") == null) {
-						throw new AdempiereException(msgMandataryCN);
-					} else if (invoice.get_Value("LVE_POInvoiceNo") == null) {
-						throw new AdempiereException(msgMandataryINo);
-					} else {
-						boolean existCN = new Query(Env.getCtx(), MInvoice.Table_Name, where + "AND LVE_controlNumber=? AND LVE_POInvoiceNo=?", po.get_TrxName()).setParameters(invoice.getAD_Org_ID(), invoice.getC_BPartner_ID(), invoice.get_ID(), invoice.isSOTrx(), invoice.get_Value("LVE_controlNumber"), invoice.get_Value("LVE_POInvoiceNo")).count() > 0;
-						if (existCN) {
-							throw new AdempiereException(msgExistCN);
+						if (invoice.get_Value("LVE_controlNumber") == null) {
+							throw new AdempiereException(msgMandataryCN);
+						} else if (invoice.get_Value("LVE_POInvoiceNo") == null) {
+							throw new AdempiereException(msgMandataryINo);
+						} else {
+							boolean existCN = new Query(Env.getCtx(), MInvoice.Table_Name, where + "AND LVE_controlNumber=? AND LVE_POInvoiceNo=?", po.get_TrxName()).setParameters(invoice.getAD_Org_ID(), invoice.getC_BPartner_ID(), invoice.get_ID(), invoice.isSOTrx(), invoice.get_Value("LVE_controlNumber"), invoice.get_Value("LVE_POInvoiceNo")).count() > 0;
+							if (existCN) {
+								throw new AdempiereException(msgExistCN);
+							}
 						}
 					}
 				}
