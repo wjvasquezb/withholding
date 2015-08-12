@@ -180,7 +180,8 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		payment.setOverUnderAmt(Env.ZERO);
 		payment.setWriteOffAmt(Env.ZERO);
 
-		String dtname = isSOTrx() ? "AR Withholding" : "AP Withholding";
+		/*String dtname = isSOTrx() ? "AR Withholding" : "AP Withholding";
+		
 		String sql = "SELECT C_Doctype_ID FROM C_Doctype WHERE Name = '" + dtname + "' AND AD_Client_ID = " + getAD_Client_ID();
 
 		PreparedStatement pstmt = null;
@@ -198,11 +199,16 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 			rs = null;
 			pstmt = null;
 		}
-
+		*/
+		int C_Doctype_ID = 0;
+		C_Doctype_ID = isSOTrx() ? MSysConfig.getIntValue("LVE_ARWithholdingDocTypeId",0,getAD_Client_ID()) : MSysConfig.getIntValue("LVE_APWithholdingDocTypeId",0,getAD_Client_ID());
 		payment.setC_DocType_ID(C_Doctype_ID);
 
 		payment.saveEx();
+		String sql = null;
 
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		int id_aux = -1;
 		for (MLCOInvoiceWithholding mWithholding : lines) {
 
