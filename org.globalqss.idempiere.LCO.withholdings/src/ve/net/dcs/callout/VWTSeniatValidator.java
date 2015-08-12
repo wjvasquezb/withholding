@@ -87,7 +87,7 @@ public class VWTSeniatValidator implements IColumnCallout {
 		else
 			name = data.get("Nombre").replaceAll("\\(.+\\)", "").trim();
 		
-		if(MSysConfig.getValue("ReplaceTaxInfoSeniat").compareTo("Y")==0){
+		if(MSysConfig.getValue("LVE_ReplaceTaxInfoSeniat","Y",(Integer)mTab.getValue("AD_Client_ID")).compareTo("Y")==0){
 			mTab.setValue("TaxID", name);
 			mTab.setValue("Name", name);
 		}else{
