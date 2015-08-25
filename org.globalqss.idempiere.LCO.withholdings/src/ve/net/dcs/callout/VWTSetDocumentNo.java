@@ -28,10 +28,17 @@ public class VWTSetDocumentNo implements IColumnCallout {
 	private String getDocNo(Properties ctx, int windowNo, GridTab mTab,
 			GridField mField, Object value, Object oldValue) {
 		String DocumentNo= (String)value;
+		int LVE_WithholdingNoLength=MSysConfig.getIntValue("LVE_WithholdingNoLength",0,(Integer)mTab.getValue("AD_Client_ID"));
+		if (LVE_WithholdingNoLength!=0){
+			DocumentNo=String.format("%0" + String.valueOf(LVE_WithholdingNoLength) +"d", 
+					Long.valueOf( DocumentNo.substring(DocumentNo.length()-LVE_WithholdingNoLength<=0 ? 0 : DocumentNo.length()-LVE_WithholdingNoLength,
+							DocumentNo.length())));
+		}
 		if(DocumentNo.length()>0){
+			mTab.setValue(I_LVE_VoucherWithholding.COLUMNNAME_WithholdingNo, DocumentNo);
 			mTab.setValue(I_LVE_VoucherWithholding.COLUMNNAME_DocumentNo, DocumentNo);
 		}
-		//	return 
+		
 		return null;
 	}
 	
