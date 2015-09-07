@@ -7,6 +7,7 @@ import org.compiere.model.GridField;
 import org.compiere.model.GridTab;
 import org.compiere.model.MSysConfig;
 import org.globalqss.model.MLCOWithholdingType;
+import org.jfree.util.Log;
 
 import ve.net.dcs.model.I_LVE_VoucherWithholding;
 
@@ -30,9 +31,15 @@ public class VWTSetDocumentNo implements IColumnCallout {
 		String DocumentNo= (String)value;
 		int LVE_WithholdingNoLength=MSysConfig.getIntValue("LVE_WithholdingNoLength",0,(Integer)mTab.getValue("AD_Client_ID"));
 		if (LVE_WithholdingNoLength!=0){
+			if (DocumentNo.length()>LVE_WithholdingNoLength){
+				mTab.setValue(I_LVE_VoucherWithholding.COLUMNNAME_WithholdingNo, "");
+				Log.error("El numero de retencion supera la cantidad de caracteres permitidos"+DocumentNo);
+				return "Error:El numero de retencion supera la cantidad de caracteres permitidos, por favor corregir";
+			}
 			DocumentNo=String.format("%0" + String.valueOf(LVE_WithholdingNoLength) +"d", 
 					Long.valueOf( DocumentNo.substring(DocumentNo.length()-LVE_WithholdingNoLength<=0 ? 0 : DocumentNo.length()-LVE_WithholdingNoLength,
-							DocumentNo.length())));
+						DocumentNo.length())));
+			
 		}
 		if(DocumentNo.length()>0){
 			mTab.setValue(I_LVE_VoucherWithholding.COLUMNNAME_WithholdingNo, DocumentNo);
