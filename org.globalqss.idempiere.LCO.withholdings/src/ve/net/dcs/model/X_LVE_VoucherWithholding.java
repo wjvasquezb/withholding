@@ -469,4 +469,11 @@ public class X_LVE_VoucherWithholding extends PO implements I_LVE_VoucherWithhol
 	{
 		return (String)get_Value(COLUMNNAME_DocumentNo);
 	}
+	/** Set Withholding No.
+	@param WithholdingNo Withholding No	  */
+	public void setDocumentNo (String DocumentNo)
+	{
+		set_Value (COLUMNNAME_DocumentNo, DocumentNo);
+	}
+	
 }

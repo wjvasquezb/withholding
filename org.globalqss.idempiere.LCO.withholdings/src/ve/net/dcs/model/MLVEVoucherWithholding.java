@@ -120,9 +120,9 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		X_LCO_WithholdingType wt = new X_LCO_WithholdingType(getCtx(), getLCO_WithholdingType_ID(), get_TrxName());
 		
 		String type=(String)wt.get_Value("type");
-		if (!wt.isSOTrx() && getWithholdingNo() == null)
+		if (!wt.isSOTrx() && type.compareTo("IVA")==0){
 			createWithholdingNo(wt);
-		else if (wt.isSOTrx() && type.compareTo("IVA")!=0 && type.compareTo("ISLR")!=0) {
+		}else if (wt.isSOTrx() && type.compareTo("IVA")!=0 && type.compareTo("ISLR")!=0) {
 			createWithholdingNo(wt);
 		} else if (wt.isSOTrx() && getWithholdingNo() == null && type.compareTo("IVA")==0){
 			// m_processMsg = "Asigne un Numero de Comprobante a la Retención";
@@ -494,15 +494,17 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		MDocType dt = new MDocType(getCtx(), wt.get_ValueAsInt("C_DocType_ID"), get_TrxName());
 		String value = DB.getDocumentNo(dt.getC_DocType_ID(), get_TrxName(), false, this);
 
-		if (dt.getName().equals("Purchase IVA Withholding")) {
+		//if (dt.getName().equals("Purchase IVA Withholding")) {
 			String month = new SimpleDateFormat("MM").format(getDateTrx());
 			String year = new SimpleDateFormat("yyyy").format(getDateTrx());
 
 			value = year + month + value;
-		}
+		//}
 
-		if (value != null)
+		if (value != null){
 			setWithholdingNo(value);
+			setDocumentNo(value);
+		}
 
 	}
 
