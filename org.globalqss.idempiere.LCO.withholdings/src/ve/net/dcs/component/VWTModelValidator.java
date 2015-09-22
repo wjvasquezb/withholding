@@ -95,13 +95,16 @@ public class VWTModelValidator extends AbstractEventHandler {
 				partner.setTaxID(cadena);
 			}
 		}
+		
 
 		if (po.get_TableName().equals(I_C_BPartner.Table_Name) && type.equals(IEventTopics.PO_BEFORE_CHANGE)) {
-			
-				if ( ((X_C_BPartner) po).getTaxID().replaceAll("[\\w\\-]+","").matches("[\\W\\s]+") ){
-					throw new RuntimeException("Caracteres no válidos en número de identificación");
+			if(((X_C_BPartner) po).getTaxID()!=null){
+				if(!((X_C_BPartner) po).getTaxID().equals("")){
+					if (((X_C_BPartner) po).getTaxID().replaceAll("[\\w\\-]+","").matches("[\\W\\s]+") ){
+						throw new RuntimeException("Caracteres no válidos en número de identificación");
+					}
 				}
-
+			}
 		} else if (po.get_TableName().equals(I_C_Invoice.Table_Name) && type.equals(IEventTopics.DOC_AFTER_COMPLETE)) {
 
 			MInvoice invoice = (MInvoice) po;
@@ -247,4 +250,5 @@ public class VWTModelValidator extends AbstractEventHandler {
 
 		return isValidate;
 	}
+	
 }

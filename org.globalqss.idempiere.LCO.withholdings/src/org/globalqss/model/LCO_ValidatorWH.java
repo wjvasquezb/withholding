@@ -82,6 +82,7 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 		registerTableEvent(IEventTopics.DOC_BEFORE_COMPLETE, MPayment.Table_Name);
 		registerTableEvent(IEventTopics.DOC_AFTER_COMPLETE, MAllocationHdr.Table_Name);
 		registerTableEvent(IEventTopics.DOC_BEFORE_POST, MAllocationHdr.Table_Name);
+		registerTableEvent(IEventTopics.DOC_AFTER_POST, MAllocationHdr.Table_Name);
 		registerTableEvent(IEventTopics.DOC_AFTER_VOID, MAllocationHdr.Table_Name);
 		registerTableEvent(IEventTopics.DOC_AFTER_REVERSECORRECT, MAllocationHdr.Table_Name);
 		registerTableEvent(IEventTopics.DOC_AFTER_REVERSEACCRUAL, MAllocationHdr.Table_Name);
@@ -423,18 +424,18 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 				String sql = 
 					"SELECT LCO_InvoiceWithholding_ID " +
 					"FROM LCO_InvoiceWithholding " +
-					"JOIN LVE_VoucherWithholding ON LVE_VoucherWithholding.LVE_VoucherWithholding_ID = LCO_InvoiceWithholding.LVE_VoucherWithholding_ID " +
+					"LEFT JOIN LVE_VoucherWithholding ON LVE_VoucherWithholding.LVE_VoucherWithholding_ID = LCO_InvoiceWithholding.LVE_VoucherWithholding_ID " +
 					"WHERE LCO_InvoiceWithholding.C_Invoice_ID = ? AND " +
 					"LCO_InvoiceWithholding.IsActive = 'Y' AND " +
 					"IsCalcOnPayment = 'Y' AND " +
 					"LCO_InvoiceWithholding.Processed = 'N' AND " +
-					"C_AllocationLine_ID IS NULL AND " +
-					"LCO_InvoiceWithholding.C_Payment_ID = ?";
+					"C_AllocationLine_ID IS NULL  "; //AND " + 
+					//"LCO_InvoiceWithholding.C_Payment_ID = ?)";
 				PreparedStatement pstmt = DB.prepareStatement(sql, ah.get_TrxName());
 				ResultSet rs = null;
 				try {
 					pstmt.setInt(1, al.getC_Invoice_ID());
-					pstmt.setInt(2, al.getC_Payment_ID());
+					//pstmt.setInt(2, al.getC_Payment_ID());
 					rs = pstmt.executeQuery();
 					while (rs.next()) {
 						int iwhid = rs.getInt(1);
@@ -458,6 +459,7 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 		}
 		return null;
 	}
+	
 
 	private String reversePaymentWithholdings(MAllocationHdr ah) {
 		MAllocationLine[] als = ah.getLines(true);
@@ -541,7 +543,7 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 				*/
 			String sql = 
 					  "SELECT i.C_Tax_ID,NVL(SUM(i.TaxBaseAmt),0) AS TaxBaseAmt, NVL(SUM(i.TaxAmt),0) AS TaxAmt, " +
-					"COALESCE(SUM( currencyconvert(i.TaxBaseAmt,ci.c_currency_id, 205, " +
+					  "COALESCE(SUM( currencyconvert(i.TaxBaseAmt,ci.c_currency_id, 205, " +
 					  "i.dateacct, ci.c_conversiontype_id, i.ad_client_id, i.ad_org_id) ),0) AS TaxBaseAmtVE, " +
 					  "COALESCE(SUM(currencyconvert(i.TaxAmt ,ci.c_currency_id, 205, " +
 					  "i.dateacct, ci.c_conversiontype_id, i.ad_client_id, i.ad_org_id)),0) AS TaxAmtVE, t.Name, t.Rate, t.IsSalesTax "
