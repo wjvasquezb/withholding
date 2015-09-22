@@ -221,7 +221,7 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 				// return DocAction.STATUS_Invalid;
 				throw new AdempiereException("Could not update Withholding Line");
 			}
-
+			
 			if (id_aux != mWithholding.getC_Invoice_ID()) {
 				id_aux = mWithholding.getC_Invoice_ID();
 				pa = new MPaymentAllocate(getCtx(), 0, get_TrxName());
@@ -504,7 +504,7 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 
 		if (value != null){
 			setWithholdingNo(value);
-			setDocumentNo(value);
+			//setDocumentNo(value);
 		}
 
 	}
