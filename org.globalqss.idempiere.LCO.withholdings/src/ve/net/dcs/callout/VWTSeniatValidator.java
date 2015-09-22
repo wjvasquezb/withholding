@@ -74,7 +74,8 @@ public class VWTSeniatValidator implements IColumnCallout {
 
 		String file = null;
 
-		file = searchRif(urlSeniat, taxidType.getName() + taxid,taxidType.getName());
+		//file = searchRif(urlSeniat, taxidType.getName() + taxid,taxidType.getName());
+		file = searchRif(urlSeniat, taxid,taxidType.getName());
 
 		if (file == null)
 			return "Contribuyente no encontrado en Seniat";
@@ -88,7 +89,7 @@ public class VWTSeniatValidator implements IColumnCallout {
 			name = data.get("Nombre").replaceAll("\\(.+\\)", "").trim();
 		
 		if(MSysConfig.getValue("LVE_ReplaceTaxInfoSeniat","Y",(Integer)mTab.getValue("AD_Client_ID")).compareTo("Y")==0){
-			mTab.setValue("TaxID", name);
+			mTab.setValue("TaxID", data.get("numeroRif"));
 			mTab.setValue("Name", name);
 		}else{
 			mTab.setValue("LVE_nameSeniat", name);
