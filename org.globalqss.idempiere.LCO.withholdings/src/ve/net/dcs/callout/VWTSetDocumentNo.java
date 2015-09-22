@@ -39,13 +39,11 @@ public class VWTSetDocumentNo implements IColumnCallout {
 			DocumentNo=String.format("%0" + String.valueOf(LVE_WithholdingNoLength) +"d", 
 					Long.valueOf( DocumentNo.substring(DocumentNo.length()-LVE_WithholdingNoLength<=0 ? 0 : DocumentNo.length()-LVE_WithholdingNoLength,
 						DocumentNo.length())));
-			
+			if(DocumentNo.length()>0){
+				mTab.setValue(I_LVE_VoucherWithholding.COLUMNNAME_WithholdingNo, DocumentNo);
+				//mTab.setValue(I_LVE_VoucherWithholding.COLUMNNAME_DocumentNo, DocumentNo);
+			}
 		}
-		if(DocumentNo.length()>0){
-			mTab.setValue(I_LVE_VoucherWithholding.COLUMNNAME_WithholdingNo, DocumentNo);
-			mTab.setValue(I_LVE_VoucherWithholding.COLUMNNAME_DocumentNo, DocumentNo);
-		}
-		
 		return null;
 	}
 	
