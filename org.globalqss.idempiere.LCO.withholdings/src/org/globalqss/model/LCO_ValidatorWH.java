@@ -357,6 +357,7 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 			// validate vs invoice of payment
 			BigDecimal wo = pay.getWriteOffAmt();
 			BigDecimal sumwhamt = Env.ZERO;
+			
 			sumwhamt = DB.getSQLValueBD(
 					pay.get_TrxName(),
 					"SELECT COALESCE (SUM (TaxAmt), 0) " +

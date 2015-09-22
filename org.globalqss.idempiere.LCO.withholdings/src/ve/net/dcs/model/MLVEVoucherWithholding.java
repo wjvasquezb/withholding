@@ -492,8 +492,9 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 	private void createWithholdingNo(X_LCO_WithholdingType wt) {
 
 		MDocType dt = new MDocType(getCtx(), wt.get_ValueAsInt("C_DocType_ID"), get_TrxName());
-		String value = DB.getDocumentNo(dt.getC_DocType_ID(), get_TrxName(), false, this);
-
+		
+		//String value = DB.getDocumentNo(dt.getC_DocType_ID(), get_TrxName(), false, this);
+		String value = getDocumentNo();
 		//if (dt.getName().equals("Purchase IVA Withholding")) {
 			String month = new SimpleDateFormat("MM").format(getDateTrx());
 			String year = new SimpleDateFormat("yyyy").format(getDateTrx());
