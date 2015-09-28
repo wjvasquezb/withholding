@@ -23,7 +23,7 @@ import org.compiere.util.KeyNamePair;
 
 /** Generated Interface for LCO_InvoiceWithholding
  *  @author iDempiere (generated) 
- *  @version Release 1.0c
+ *  @version Release 2.1
  */
 @SuppressWarnings("all")
 public interface I_LCO_InvoiceWithholding 
@@ -32,7 +32,7 @@ public interface I_LCO_InvoiceWithholding
     /** TableName=LCO_InvoiceWithholding */
     public static final String Table_Name = "LCO_InvoiceWithholding";
 
-    /** AD_Table_ID=1000007 */
+    /** AD_Table_ID=1000001 */
     public static final int Table_ID = MTable.getTable_ID(Table_Name);
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
@@ -93,6 +93,21 @@ public interface I_LCO_InvoiceWithholding
 	public int getC_Invoice_ID();
 
 	public org.compiere.model.I_C_Invoice getC_Invoice() throws RuntimeException;
+
+    /** Column name C_Payment_ID */
+    public static final String COLUMNNAME_C_Payment_ID = "C_Payment_ID";
+
+	/** Set Payment.
+	  * Payment identifier
+	  */
+	public void setC_Payment_ID (int C_Payment_ID);
+
+	/** Get Payment.
+	  * Payment identifier
+	  */
+	public int getC_Payment_ID();
+
+	public org.compiere.model.I_C_Payment getC_Payment() throws RuntimeException;
 
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";
@@ -226,6 +241,15 @@ public interface I_LCO_InvoiceWithholding
 
 	public org.globalqss.model.I_LCO_WithholdingType getLCO_WithholdingType() throws RuntimeException;
 
+    /** Column name LVE_VoucherWithholding_ID */
+    public static final String COLUMNNAME_LVE_VoucherWithholding_ID = "LVE_VoucherWithholding_ID";
+
+	/** Set Voucher Withholding	  */
+	public void setLVE_VoucherWithholding_ID (int LVE_VoucherWithholding_ID);
+
+	/** Get Voucher Withholding	  */
+	public int getLVE_VoucherWithholding_ID();
+
     /** Column name Percent */
     public static final String COLUMNNAME_Percent = "Percent";
 
@@ -251,6 +275,15 @@ public interface I_LCO_InvoiceWithholding
 	  * The document has been processed
 	  */
 	public boolean isProcessed();
+
+    /** Column name Subtrahend */
+    public static final String COLUMNNAME_Subtrahend = "Subtrahend";
+
+	/** Set Subtrahend	  */
+	public void setSubtrahend (BigDecimal Subtrahend);
+
+	/** Get Subtrahend	  */
+	public BigDecimal getSubtrahend();
 
     /** Column name TaxAmt */
     public static final String COLUMNNAME_TaxAmt = "TaxAmt";
