@@ -1,5 +1,6 @@
 package ve.net.dcs.component;
 
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,13 +8,21 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
 
 import org.adempiere.base.event.AbstractEventHandler;
 import org.adempiere.base.event.IEventTopics;
 import org.adempiere.exceptions.AdempiereException;
+import org.compiere.acct.Doc;
+import org.compiere.acct.DocLine;
+import org.compiere.acct.DocTax;
+import org.compiere.acct.Fact;
+import org.compiere.acct.FactLine;
 import org.compiere.model.I_C_BPartner;
 import org.compiere.model.I_C_Invoice;
-import org.compiere.model.MBPartner;
+import org.compiere.model.MAcctSchema;
+import org.compiere.model.MAllocationHdr;
+import org.compiere.model.MAllocationLine;
 import org.compiere.model.MDocType;
 import org.compiere.model.MInvoice;
 import org.compiere.model.MSequence;
@@ -31,6 +40,7 @@ import org.globalqss.model.MLCOWithholdingType;
 import org.globalqss.model.X_LCO_InvoiceWithholding;
 import org.osgi.service.event.Event;
 
+import ve.net.dcs.model.I_LVE_VoucherWithholding;
 import ve.net.dcs.model.MLVEVoucherWithholding;
 
 public class VWTModelValidator extends AbstractEventHandler {
@@ -49,6 +59,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 		registerTableEvent(IEventTopics.PO_BEFORE_CHANGE, I_C_BPartner.Table_Name);
 		registerTableEvent(IEventTopics.PO_AFTER_CHANGE, MLVEVoucherWithholding.Table_Name);
 		registerTableEvent(IEventTopics.PO_BEFORE_NEW, MLVEVoucherWithholding.Table_Name);
+		registerTableEvent(IEventTopics.DOC_AFTER_COMPLETE, I_LVE_VoucherWithholding.Table_Name);
 	}
 
 	@Override
@@ -214,6 +225,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 					}
 				}
 		}
+
 	}
 
 	private boolean validateWithholdingNo(MLVEVoucherWithholding voucher) {
@@ -250,5 +262,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 
 		return isValidate;
 	}
+
+	
 	
 }
