@@ -214,8 +214,8 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 
 			mWithholding.set_ValueOfColumn("NroReten", getWithholdingNo());
 			mWithholding.set_ValueOfColumn("C_Payment_ID", payment.getC_Payment_ID());
-			mWithholding.set_ValueOfColumn("lve_voucherwithholding_id", getLVE_VoucherWithholding_ID());
-			mWithholding.setProcessed(true);
+			//mWithholding.set_ValueOfColumn("lve_voucherwithholding_id", getLVE_VoucherWithholding_ID());
+			//mWithholding.setProcessed(true);
 			mWithholding.setDateAcct((Timestamp)get_Value("DateAcct"));
 			
 			if (!mWithholding.save()) {
