@@ -428,9 +428,9 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 					"WHERE LCO_InvoiceWithholding.C_Invoice_ID = ? AND " +
 					"LCO_InvoiceWithholding.IsActive = 'Y' AND " +
 					"IsCalcOnPayment = 'Y' AND " +
-					"LCO_InvoiceWithholding.Processed = 'Y' AND " +
-					"C_AllocationLine_ID IS NULL  " +//; //AND " + 
-					"AND LCO_InvoiceWithholding.C_Payment_ID = ?";
+					"LCO_InvoiceWithholding.Processed = 'N' AND " +
+					"C_AllocationLine_ID IS NULL  " + 
+					"AND (LCO_InvoiceWithholding.C_Payment_ID = ? OR LCO_InvoiceWithholding.C_Payment_ID IS NULL)";
 				PreparedStatement pstmt = DB.prepareStatement(sql, ah.get_TrxName());
 				ResultSet rs = null;
 				try {
@@ -442,8 +442,8 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 						MLCOInvoiceWithholding iwh = new MLCOInvoiceWithholding(
 								ah.getCtx(), iwhid, ah.get_TrxName());
 						iwh.setC_AllocationLine_ID(al.getC_AllocationLine_ID());
-//						iwh.setDateAcct(ah.getDateAcct());
-//						iwh.setDateTrx(ah.getDateTrx());
+						iwh.setDateAcct(ah.getDateAcct());
+						iwh.setDateTrx(ah.getDateTrx());
 						iwh.setProcessed(true);
 						if (!iwh.save())
 							return "Error saving LCO_InvoiceWithholding completePaymentWithholdings";
