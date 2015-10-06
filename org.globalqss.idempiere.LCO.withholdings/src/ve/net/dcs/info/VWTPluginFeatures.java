@@ -7,7 +7,7 @@ public class VWTPluginFeatures {
 
 	public static final String[] rootPackage = new String[] {"ve.net.dcs.model","org.globalqss.model"};
 	
-	public static final String[] entityType =  new String[]  {"ve.net.dcs.VoucherWithholdingTax","QSS_LCO"};
+	public static final String[] entityType =  new String[]  {"ve.net.dcs.VoucherWithholdingTax","QSS_LCO", "GHWithHoldings"};
 
 	public static final String id = "ve.net.dcs.VoucherWithholdingTax";
 	public static final String name = "Voucher Withholding Tax";
