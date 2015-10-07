@@ -132,7 +132,7 @@ public class VWTSeniatValidator implements IColumnCallout {
 
 		}
 		
-		if (type.equalsIgnoreCase("V")){
+		if (type.equalsIgnoreCase("V") || type.equalsIgnoreCase("CI")){
 			for (int i = 0; i <= 9; i++) {
 				for (int j = 1; j <= 2; j++) {
 					file = readFile(url + taxid + i);
