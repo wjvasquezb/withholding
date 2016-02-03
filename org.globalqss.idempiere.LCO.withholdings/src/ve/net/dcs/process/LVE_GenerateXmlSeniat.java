@@ -147,7 +147,7 @@ public class LVE_GenerateXmlSeniat extends SvrProcess {
 				 else
 					 detalleRetencion.addContent(new Element("NumeroControl").setText("Vacio"));
 				 
-				 if (rs.getString(13) != null)
+				 if (rs.getString(11) != null)
 					 detalleRetencion.addContent(new Element("FechaOperacion").setText(rs.getString(13).trim()));
 				 else
 					 detalleRetencion.addContent(new Element("FechaOperacion").setText("Vacio"));
