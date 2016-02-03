@@ -109,7 +109,7 @@ public class VWTSeniatValidator implements IColumnCallout {
 			LCO_TaxPayerTypeName = String.format("ORDINARIO NATURAL %s%%", data.get("Tasa"));
 		}
 
-		LCO_TaxPayerType_id = new Query(ctx, I_LCO_TaxPayerType.Table_Name, "trim(Name) = ?", null).setParameters(LCO_TaxPayerTypeName).firstIdOnly();
+		LCO_TaxPayerType_id = new Query(ctx, I_LCO_TaxPayerType.Table_Name, "trim(Name) = ? AND AD_Client_ID = ? ",null).setParameters(LCO_TaxPayerTypeName,(Integer)mTab.getValue("AD_Client_ID")).firstIdOnly();
 		mTab.setValue("LCO_TaxPayerType_ID", LCO_TaxPayerType_id);
 
 		return null;
