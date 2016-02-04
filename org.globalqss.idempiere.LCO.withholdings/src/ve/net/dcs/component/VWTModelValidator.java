@@ -139,6 +139,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 						voucher.setC_BPartner_ID(invoice.getC_BPartner_ID());
 						voucher.setLCO_WithholdingType_ID(LCO_WithholdingType_ID);
 						voucher.setC_Invoice_ID(iw.getC_Invoice_ID());
+						voucher.setIsSOTrx(invoice.isSOTrx());
 						voucher.saveEx();
 						listVoucher.add(voucher);
 					}
