@@ -218,13 +218,14 @@ public class LCO_MInvoice extends MInvoice
 				// for each applicable rule
 				// bring record for withholding calculation
 				X_LCO_WithholdingCalc wc = null;
-				
-				//Modificaciones para que tome LCO_WithholdingCalc_ID desde la ventana de comprobante de retencion
-				try{
-					wc = new X_LCO_WithholdingCalc(getCtx(), voucher.get_ValueAsInt("LCO_WithholdingCalc_ID"), get_TrxName());
-				}
-				catch(NullPointerException e){
-					//No hago nada
+				if(voucher!=null){
+					//Modificaciones para que tome LCO_WithholdingCalc_ID desde la ventana de comprobante de retencion
+					try{
+						wc = new X_LCO_WithholdingCalc(getCtx(), voucher.get_ValueAsInt("LCO_WithholdingCalc_ID"), get_TrxName());
+					}
+					catch(NullPointerException e){
+						//No hago nada
+					}
 				}
 				if(wc==null)
 					wc = (X_LCO_WithholdingCalc) wr.getLCO_WithholdingCalc();
