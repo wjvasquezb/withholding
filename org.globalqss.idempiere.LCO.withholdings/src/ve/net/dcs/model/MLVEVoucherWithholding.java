@@ -58,7 +58,7 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 	/** Logger */
 	private static CLogger s_log = CLogger.getCLogger(MLVEVoucherWithholding.class);
 	private MPaymentAllocate pa = null;
-	BigDecimal InvoiceOpenAmt = null;
+	BigDecimal InvoiceOpenAmt = null; 
 
 	public MLVEVoucherWithholding(Properties ctx, int LVE_VoucherWithholding_ID, String trxName) {
 		super(ctx, LVE_VoucherWithholding_ID, trxName);
