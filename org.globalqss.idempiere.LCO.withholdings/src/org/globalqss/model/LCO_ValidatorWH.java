@@ -596,10 +596,17 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 						if (amount != null && amount.signum() != 0)
 						{
 							FactLine tl = null;
-							if ((invoice.isSOTrx() && invoice.getC_DocTypeTarget().getDocBaseType().compareTo("ARI")==0) || (!invoice.isSOTrx() && invoice.getC_DocTypeTarget().getDocBaseType().compareTo("APC")==0)) {
+							if ((invoice.isSOTrx() && invoice.getC_DocTypeTarget().getDocBaseType().compareTo("ARI")==0)){
+							//if ((invoice.isSOTrx() && invoice.getC_DocTypeTarget().getDocBaseType().compareTo("ARI")==0) || (!invoice.isSOTrx() && invoice.getC_DocTypeTarget().getDocBaseType().compareTo("APC")==0)) {
 								tl = fact.createLine(null, taxLine.getAccount(DocTax.ACCTTYPE_TaxDue, as),
 										as.getC_Currency_ID(), amountVE, null);
-							} else {
+							} 
+							//** si es NC proveedor es un iva en compras
+							else if (!invoice.isSOTrx() && invoice.getC_DocTypeTarget().getDocBaseType().compareTo("APC")==0){
+								tl = fact.createLine(null, taxLine.getAccount(taxLine.getAPTaxType(), as),
+										as.getC_Currency_ID(), null, amountVE);
+							}
+							else {
 								tl = fact.createLine(null, taxLine.getAccount(taxLine.getAPTaxType(), as),
 										as.getC_Currency_ID(), null, amountVE);
 							}
@@ -632,6 +639,8 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 							BigDecimal newbalamt = Env.ZERO;
 							if (invoice.isSOTrx())
 								newbalamt = balamt.subtract(tottax);
+							else if (!invoice.isSOTrx() && invoice.getC_DocTypeTarget().getDocBaseType().compareTo("APC")==0)
+								newbalamt = balamt.subtract(tottax);
 							else
 								newbalamt = balamt.add(tottax);
 							if (Env.ZERO.compareTo(newbalamt) == 0) {
@@ -655,7 +664,9 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 						if (invoice.isSOTrx()) {
 							fl = fact.createLine (line, doc.getAccount(Doc.ACCTTYPE_WriteOff, as),
 									as.getC_Currency_ID(), null, tottax);
-						} else {
+						} 
+
+						else {
 							fl = fact.createLine (line, doc.getAccount(Doc.ACCTTYPE_WriteOff, as),
 									as.getC_Currency_ID(), tottax, null);
 						}
