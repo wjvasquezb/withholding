@@ -140,6 +140,8 @@ public class VWTModelValidator extends AbstractEventHandler {
 						voucher.setLCO_WithholdingType_ID(LCO_WithholdingType_ID);
 						voucher.setC_Invoice_ID(iw.getC_Invoice_ID());
 						voucher.setIsSOTrx(invoice.isSOTrx());
+						MDocType doctype = new Query(po.getCtx(), MDocType.Table_Name, "C_DocType_ID IN (SELECT C_DocType_ID FROM LCO_WithholdingType WHERE LCO_WithholdingType_ID = "+iw.getLCO_WithholdingType_ID()+" ) ", po.get_TrxName()).first();
+						voucher.set_ValueOfColumn("C_DocType_ID", doctype.getC_DocType_ID());
 						voucher.saveEx();
 						listVoucher.add(voucher);
 					}
