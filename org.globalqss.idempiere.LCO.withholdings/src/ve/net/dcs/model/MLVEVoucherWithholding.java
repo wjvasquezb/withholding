@@ -281,9 +281,9 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 
 		
 		setProcessed(true);
-		//setDocAction(DOCACTION_Close);
-		//setProcessed(true);
-		//setDocStatus(DOCSTATUS_Completed);
+		setDocAction(DOCACTION_Close);
+		setProcessed(true);
+		setDocStatus(DOCSTATUS_Completed);
 		saveEx();
 
 		// User Validation
