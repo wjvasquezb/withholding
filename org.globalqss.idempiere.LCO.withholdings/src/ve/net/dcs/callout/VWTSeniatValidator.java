@@ -68,14 +68,17 @@ public class VWTSeniatValidator implements IColumnCallout {
 
 		if (mTab.getValue("TaxID") == null)
 			return "Número de identificación obligatorio";
+		
+		if (mTab.getValue("LCO_TaxIdType_ID") == null)
+			return "Tipo de Identificación Obligatoria";
 
 		String taxid = mTab.getValue("TaxID").toString().toUpperCase().replaceAll("[\\-\\ ]", "");
 		X_LCO_TaxIdType taxidType = new X_LCO_TaxIdType(Env.getCtx(), (int) mTab.getValue("LCO_TaxIdType_ID"), null);
 
 		String file = null;
 
-		//file = searchRif(urlSeniat, taxidType.getName() + taxid,taxidType.getName());
-		file = searchRif(urlSeniat, taxid,taxidType.getName());
+		file = searchRif(urlSeniat, taxidType.getName() + taxid,taxidType.getName());
+		//file = searchRif(urlSeniat, taxid,taxidType.getName());
 
 		if (file == null)
 			return "Contribuyente no encontrado en Seniat";
