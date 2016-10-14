@@ -31,10 +31,11 @@ public class VWTSetDocumentNo implements IColumnCallout {
 		String DocumentNo= (String)value;
 		int LVE_WithholdingNoLength=MSysConfig.getIntValue("LVE_WithholdingNoLength",0,(Integer)mTab.getValue("AD_Client_ID"));
 		if (LVE_WithholdingNoLength!=0){
-			if (DocumentNo.length()>LVE_WithholdingNoLength){
-				mTab.setValue(I_LVE_VoucherWithholding.COLUMNNAME_WithholdingNo, "");
-				Log.error("El numero de retencion supera la cantidad de caracteres permitidos"+DocumentNo);
-				return "Error:El numero de retencion supera la cantidad de caracteres permitidos, por favor corregir";
+			if(DocumentNo != null){
+				if (DocumentNo.length()>LVE_WithholdingNoLength){
+					mTab.setValue(I_LVE_VoucherWithholding.COLUMNNAME_WithholdingNo, "");
+					Log.error("El numero de retencion supera la cantidad de caracteres permitidos"+DocumentNo);
+					return "Error:El numero de retencion supera la cantidad de caracteres permitidos, por favor corregir";
 			}
 			DocumentNo=String.format("%0" + String.valueOf(LVE_WithholdingNoLength) +"d", 
 					Long.valueOf( DocumentNo.substring(DocumentNo.length()-LVE_WithholdingNoLength<=0 ? 0 : DocumentNo.length()-LVE_WithholdingNoLength,
@@ -43,17 +44,20 @@ public class VWTSetDocumentNo implements IColumnCallout {
 				mTab.setValue(I_LVE_VoucherWithholding.COLUMNNAME_WithholdingNo, DocumentNo);
 				//mTab.setValue(I_LVE_VoucherWithholding.COLUMNNAME_DocumentNo, DocumentNo);
 			}
+			}
 		}
 		return null;
 	}
 	
 	private String SetDocTypeID(Properties ctx, int windowNo, GridTab mTab,
 			GridField mField, Object value, Object oldValue) {
-		Integer WHtype= (Integer)value;
-		if(WHtype.intValue()>0){
-			MLCOWithholdingType WithholdingType = new MLCOWithholdingType(ctx, WHtype, null);  
-			mTab.setValue(I_LVE_VoucherWithholding.COLUMNNAME_C_DocType_ID, WithholdingType.get_ValueAsInt("C_Doctype_ID"));
-			}
+		if(value != null){
+			Integer WHtype= (Integer)value;
+			if(WHtype.intValue()>0){
+				MLCOWithholdingType WithholdingType = new MLCOWithholdingType(ctx, WHtype, null);  
+				mTab.setValue(I_LVE_VoucherWithholding.COLUMNNAME_C_DocType_ID, WithholdingType.get_ValueAsInt("C_Doctype_ID"));
+				}
+		}
 		//	return 
 		return null;
 	}

@@ -21,60 +21,55 @@ public class CalloutVoucherWithholding implements IColumnCallout{
 	@Override
 	public String start(Properties ctx, int WindowNo, GridTab mTab,
 			GridField mField, Object value, Object oldValue) {
-		// TODO Auto-generated method stub
-		if (mField.getColumnName().equals(I_LVE_VoucherWithholding.COLUMNNAME_LCO_WithholdingType_ID)){
-			return docType(ctx, WindowNo, mTab, mField, value);
-		}
-		return null;
+			if (mField.getColumnName().equals(I_LVE_VoucherWithholding.COLUMNNAME_LCO_WithholdingType_ID)){
+				return docType(ctx, WindowNo, mTab, mField, value);
+			}
+			return null;
 	}
 
 	public String docType (Properties ctx, int WindowNo, GridTab mTab, GridField mField, Object value)
 	{
-		MLCOWithholdingType wtype=new MLCOWithholdingType(ctx,(Integer)value,null);
-		
-		Integer C_DocType_ID = wtype.get_ValueAsInt("C_DocType_ID");
-		
-		if (C_DocType_ID == null || C_DocType_ID.intValue() == 0)
-			return "";
-
-		String sql = "SELECT d.HasCharges,d.IsDocNoControlled," // 1..2
-			+ "d.DocBaseType, " // 3
-			+ "s.AD_Sequence_ID " //4
-			+ "FROM C_DocType d "
-			+ "LEFT OUTER JOIN AD_Sequence s ON (d.DocNoSequence_ID=s.AD_Sequence_ID) "
-			+ "WHERE C_DocType_ID=?";		//	1
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try
-		{
-			pstmt = DB.prepareStatement(sql, null);
-			pstmt.setInt(1, C_DocType_ID.intValue());
-			rs = pstmt.executeQuery();
-			if (rs.next())
+		if(value != null){
+			MLCOWithholdingType wtype=new MLCOWithholdingType(ctx,(Integer)value,null);		
+			Integer C_DocType_ID = wtype.get_ValueAsInt("C_DocType_ID");		
+			if (C_DocType_ID == null || C_DocType_ID.intValue() == 0)
+				return "";
+			String sql = "SELECT d.HasCharges,d.IsDocNoControlled," // 1..2
+					+ "d.DocBaseType, " // 3
+					+ "s.AD_Sequence_ID " //4
+					+ "FROM C_DocType d "
+					+ "LEFT OUTER JOIN AD_Sequence s ON (d.DocNoSequence_ID=s.AD_Sequence_ID) "
+					+ "WHERE C_DocType_ID=?";		//	1
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try
 			{
-				//	Charges - Set Context
-				Env.setContext(ctx, WindowNo, "HasCharges", rs.getString("HasCharges"));
-				//	DocumentNo
-				if (rs.getString("IsDocNoControlled").equals("Y"))
+				pstmt = DB.prepareStatement(sql, null);
+				pstmt.setInt(1, C_DocType_ID.intValue());
+				rs = pstmt.executeQuery();
+				if (rs.next())
 				{
-					int AD_Sequence_ID = rs.getInt("AD_Sequence_ID");
-					mTab.setValue("DocumentNo", MSequence.getPreliminaryNo(mTab, AD_Sequence_ID));
+					//	Charges - Set Context
+					Env.setContext(ctx, WindowNo, "HasCharges", rs.getString("HasCharges"));
+					//	DocumentNo
+					if (rs.getString("IsDocNoControlled").equals("Y"))
+					{
+						int AD_Sequence_ID = rs.getInt("AD_Sequence_ID");
+						mTab.setValue("DocumentNo", MSequence.getPreliminaryNo(mTab, AD_Sequence_ID));
+					}
+					//  DocBaseType - Set Context
+					//	String s = rs.getString("DocBaseType");
+					//	Env.setContext(ctx, WindowNo, "DocBaseType", s);
 				}
-				//  DocBaseType - Set Context
-				//String s = rs.getString("DocBaseType");
-				//Env.setContext(ctx, WindowNo, "DocBaseType", s);
-				
 			}
-		}
-		catch (SQLException e)
-		{
-			
-			return e.getLocalizedMessage();
-		}
-		finally
-		{
-			DB.close(rs, pstmt);
-			rs = null; pstmt = null;
+			catch (SQLException e){
+				return e.getLocalizedMessage();
+			}
+			finally
+			{
+				DB.close(rs, pstmt);
+				rs = null; pstmt = null;
+			}
 		}
 		return "";
 	}	//	docType
