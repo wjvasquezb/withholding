@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--iDempiere(r) Release 3.1_2015-10-31 -Smart Suite ERP, CRM and SCM- (c) 1999-2013 iDempiere(r); Implementation: iDempiere - Supported by iDempiere community--><!--<!DOCTYPE idempiereTrl PUBLIC "-//ComPiere, Inc.//DTD iDempiere Translation 1.0//EN" "http://www.idempiere.com/dtd/idempiereTrl.dtd">--><idempiereTrl language="es_CO" table="C_Tax">
+ <row id="104" trl="Y">
+  <value column="Name" original="Standard">Estándar</value>
+  <value column="Description" original=""/>
+  <value column="TaxIndicator" original=""/>
+ </row>
+ <row id="105" trl="Y">
+  <value column="Name" original="CT Sales">Ventas CT</value>
+  <value column="Description" original=""/>
+  <value column="TaxIndicator" original="6%CT">6%CT</value>
+ </row>
+ <row id="106" trl="Y">
+  <value column="Name" original="GST">GST</value>
+  <value column="Description" original="Canadian Federal Sales Tax">Impuesto Ventas Federal Canadiense</value>
+  <value column="TaxIndicator" original="GST">GST</value>
+ </row>
+ <row id="107" trl="Y">
+  <value column="Name" original="PST">PST</value>
+  <value column="Description" original="Canadian Provintial Tax">Impuesto Provincial Canadiense</value>
+  <value column="TaxIndicator" original="PST">PST</value>
+ </row>
+ <row id="108" trl="Y">
+  <value column="Name" original="GST/PST">GST/PST</value>
+  <value column="Description" original="Canadian Federal &amp; State Tax">Impuesto Canadiense Federal y Estatal</value>
+  <value column="TaxIndicator" original="Tax">Tax</value>
+ </row>
+ <row id="109" trl="Y">
+  <value column="Name" original="Exempt">Exento</value>
+  <value column="Description" original="Used when Business Partners are exempt from tax">Utilizado cuando los terceros son exentos de impuestos</value>
+  <value column="TaxIndicator" original=""/>
+ </row>
+ <row trl="N" uuid="3ef7369e-0691-479a-87cc-c86a6de25387">
+  <value column="Name" original="% RETENCION 1%">% RETENCION 1%</value>
+  <value column="Description" original=""/>
+  <value column="TaxIndicator" original=""/>
+ </row>
+ <row trl="N" uuid="a9df5171-9e7e-4346-8d41-ead60498e934">
+  <value column="Name" original="% RETENCION 100%">% RETENCION 100%</value>
+  <value column="Description" original=""/>
+  <value column="TaxIndicator" original=""/>
+ </row>
+ <row trl="N" uuid="06856902-1998-4d8c-90f3-659115164c3c">
+  <value column="Name" original="% RETENCION 2%">% RETENCION 2%</value>
+  <value column="Description" original=""/>
+  <value column="TaxIndicator" original=""/>
+ </row>
+ <row trl="N" uuid="8130fee5-1ff8-4e7b-be49-ccb96abc8e14">
+  <value column="Name" original="% RETENCION 3%">% RETENCION 3%</value>
+  <value column="Description" original=""/>
+  <value column="TaxIndicator" original=""/>
+ </row>
+ <row trl="N" uuid="0874fd2b-ce52-4d62-bfe1-d8d04c7a7073">
+  <value column="Name" original="% RETENCION 5%">% RETENCION 5%</value>
+  <value column="Description" original=""/>
+  <value column="TaxIndicator" original=""/>
+ </row>
+ <row trl="N" uuid="ec4b56f7-da8e-450b-92ba-e48a278ba371">
+  <value column="Name" original="% RETENCION 75%">% RETENCION 75%</value>
+  <value column="Description" original=""/>
+  <value column="TaxIndicator" original=""/>
+ </row>
+ <row trl="N" uuid="176a24d8-187a-4316-8edc-804410c4f76e">
+  <value column="Name" original="EXENTO">EXENTO</value>
+  <value column="Description" original=""/>
+  <value column="TaxIndicator" original=""/>
+ </row>
+ <row trl="N" uuid="fb068104-9ffb-4cc1-a1a7-c9bb4bee87ac">
+  <value column="Name" original="IVA 8%">IVA 8%</value>
+  <value column="Description" original="IVA 8%">IVA 8%</value>
+  <value column="TaxIndicator" original=""/>
+ </row>
+ <row trl="N" uuid="8d82c652-eae6-49a4-8fb3-2904af429b64">
+  <value column="Name" original="IVA 12%">IVA 12%</value>
+  <value column="Description" original=""/>
+  <value column="TaxIndicator" original=""/>
+ </row>
+ <row trl="N" uuid="98ab949c-a53b-4b01-ad9e-aefa726d2c13">
+  <value column="Name" original="Standard">Standard</value>
+  <value column="Description" original=""/>
+  <value column="TaxIndicator" original=""/>
+ </row>
+ <row trl="N" uuid="f0bfefb9-bf10-4e27-a85f-a76ecfe1bbe0">
+  <value column="Name" original="% RETENCION 1%">% RETENCION 1%</value>
+  <value column="Description" original=""/>
+  <value column="TaxIndicator" original=""/>
+ </row>
+ <row trl="N" uuid="37aa3f4f-ef22-4d0d-84b3-aed6d216aa38">
+  <value column="Name" original="% RETENCION 100%">% RETENCION 100%</value>
+  <value column="Description" original=""/>
+  <value column="TaxIndicator" original=""/>
+ </row>
+ <row trl="N" uuid="f302d472-5b53-4110-b7fd-8458ee805997">
+  <value column="Name" original="% RETENCION 2%">% RETENCION 2%</value>
+  <value column="Description" original=""/>
+  <value column="TaxIndicator" original=""/>
+ </row>
+ <row trl="N" uuid="208b859e-2653-487c-9b49-a40cb0c63491">
+  <value column="Name" original="% RETENCION 3%">% RETENCION 3%</value>
+  <value column="Description" original=""/>
+  <value column="TaxIndicator" original=""/>
+ </row>
+ <row trl="N" uuid="75bc8c6f-83fc-4795-bdd6-9198fd13a0bd">
+  <value column="Name" original="% RETENCION 5%">% RETENCION 5%</value>
+  <value column="Description" original=""/>
+  <value column="TaxIndicator" original=""/>
+ </row>
+ <row trl="N" uuid="8aba365d-ef93-420e-9403-b288959d5d26">
+  <value column="Name" original="% RETENCION 75%">% RETENCION 75%</value>
+  <value column="Description" original=""/>
+  <value column="TaxIndicator" original=""/>
+ </row>
+ <row trl="N" uuid="19f2fb64-c865-4077-ab99-9000eec343b8">
+  <value column="Name" original="EXENTO">EXENTO</value>
+  <value column="Description" original=""/>
+  <value column="TaxIndicator" original=""/>
+ </row>
+ <row trl="N" uuid="6ad71bfc-24c6-4a38-83b9-0b4c55f9f630">
+  <value column="Name" original="IVA 8%">IVA 8%</value>
+  <value column="Description" original="IVA 8%">IVA 8%</value>
+  <value column="TaxIndicator" original=""/>
+ </row>
+ <row trl="N" uuid="61514277-f020-4d4d-ae7a-960118b97212">
+  <value column="Name" original="IVA 12%">IVA 12%</value>
+  <value column="Description" original=""/>
+  <value column="TaxIndicator" original=""/>
+ </row>
+</idempiereTrl>

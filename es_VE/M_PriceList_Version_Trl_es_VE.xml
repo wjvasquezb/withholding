@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--iDempiere(r) Release 3.1_2015-10-31 -Smart Suite ERP, CRM and SCM- (c) 1999-2013 iDempiere(r); Implementation: iDempiere - Supported by iDempiere community--><!--<!DOCTYPE idempiereTrl PUBLIC "-//ComPiere, Inc.//DTD iDempiere Translation 1.0//EN" "http://www.idempiere.com/dtd/idempiereTrl.dtd">--><idempiereTrl language="es_CO" table="M_PriceList_Version">
+ <row id="101" trl="N">
+  <value column="Name" original="Standard 2001">Standard 2001</value>
+ </row>
+ <row id="102" trl="N">
+  <value column="Name" original="Purchase 2001">Purchase 2001</value>
+ </row>
+ <row id="103" trl="N">
+  <value column="Name" original="Purchase 2003">Purchase 2003</value>
+ </row>
+ <row id="104" trl="N">
+  <value column="Name" original="Standard 2003">Standard 2003</value>
+ </row>
+ <row id="105" trl="N">
+  <value column="Name" original="Export 2003">Export 2003</value>
+ </row>
+ <row trl="N" uuid="cf69ffa0-d913-4d51-974d-93bf06b22999">
+  <value column="Name" original="28/09/2016">28/09/2016</value>
+ </row>
+ <row trl="N" uuid="a4daf74a-3a9c-41a7-a7ef-ded2122c4d26">
+  <value column="Name" original="2016-09-28 11:30:22">2016-09-28 11:30:22</value>
+ </row>
+ <row trl="N" uuid="821d5856-cd4d-4afc-a553-0f42b2078cd9">
+  <value column="Name" original="Lista de Precios Compras 1">Lista de Precios Compras 1</value>
+ </row>
+</idempiereTrl>

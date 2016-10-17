@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--iDempiere(r) Release 3.1_2015-10-31 -Smart Suite ERP, CRM and SCM- (c) 1999-2013 iDempiere(r); Implementation: iDempiere - Supported by iDempiere community--><!--<!DOCTYPE idempiereTrl PUBLIC "-//ComPiere, Inc.//DTD iDempiere Translation 1.0//EN" "http://www.idempiere.com/dtd/idempiereTrl.dtd">--><idempiereTrl language="es_CO" table="C_DocType">
+ <row id="0" trl="Y">
+  <value column="Name" original="** New **">** Nuevo **</value>
+  <value column="PrintName" original="** New **">** Nuevo **</value>
+  <value column="DocumentNote" original="** NO INVOICE **">** NO HAY FACTURA AUN **</value>
+ </row>
+ <row id="115" trl="Y">
+  <value column="Name" original="GL Journal">Nota de Contabilidad</value>
+  <value column="PrintName" original="Journal">Nota de Contabilidad</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="116" trl="Y">
+  <value column="Name" original="AR Invoice">Factura de CxC</value>
+  <value column="PrintName" original="Invoice">Factura CxC</value>
+  <value column="DocumentNote" original="Document Type Note for general and promotional text.">Nota de tipo de documento para texto general y promocional</value>
+ </row>
+ <row id="117" trl="Y">
+  <value column="Name" original="AR Invoice Indirect">Facturas de CxC indirecta</value>
+  <value column="PrintName" original="Invoice">Factura CxC Indirecta</value>
+  <value column="DocumentNote" original="Document Type Note for general and promotional text.">Nota de tipo de documento para texto general y promocional</value>
+ </row>
+ <row id="118" trl="Y">
+  <value column="Name" original="AR Credit Memo">Nota Crédito CxC</value>
+  <value column="PrintName" original="Credit Memo">Nota Crédito CxC</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="119" trl="Y">
+  <value column="Name" original="AR Receipt">Comprobante de Ingreso</value>
+  <value column="PrintName" original="Receipt">Comprobante de Ingreso</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="120" trl="Y">
+  <value column="Name" original="MM Shipment">Entrega de Productos</value>
+  <value column="PrintName" original="Delivery Note">Nota de Entrega</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="121" trl="Y">
+  <value column="Name" original="MM Shipment Indirect">Entrega de Productos Indirecto</value>
+  <value column="PrintName" original="Delivery Note">Nota Entrega</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="122" trl="Y">
+  <value column="Name" original="MM Receipt">Recepción de Productos</value>
+  <value column="PrintName" original="Vendor Delivery">Envío Proveedor</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="123" trl="Y">
+  <value column="Name" original="AP Invoice">Factura de CxP</value>
+  <value column="PrintName" original="Vendor Invoice">Factura de CxP</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="124" trl="Y">
+  <value column="Name" original="AP CreditMemo">Nota Crédito Proveedor</value>
+  <value column="PrintName" original="Vendor Credit Memo">Nota Crédito Proveedor</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="125" trl="Y">
+  <value column="Name" original="AP Payment">Comprobante de Egreso</value>
+  <value column="PrintName" original="Vendor Payment">Comprobante de Egreso</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="126" trl="Y">
+  <value column="Name" original="Purchase Order">Orden de compra</value>
+  <value column="PrintName" original="Purchase Order">Orden de compra</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="127" trl="Y">
+  <value column="Name" original="Purchase Requisition">Requisición de compra</value>
+  <value column="PrintName" original="Purchase Requisition">Requisición de compra</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="128" trl="Y">
+  <value column="Name" original="Quotation">Cotización</value>
+  <value column="PrintName" original="Quotation">Cotización</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="129" trl="Y">
+  <value column="Name" original="Proposal">Propuesta</value>
+  <value column="PrintName" original="Proposal">Propuesta</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="130" trl="Y">
+  <value column="Name" original="Prepay Order">Orden Prepagada</value>
+  <value column="PrintName" original="Prepay Order">Orden Prepagada</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="131" trl="Y">
+  <value column="Name" original="Customer Return Material">Retorno de material</value>
+  <value column="PrintName" original="Customer Return Material Authorization">Autorización de Retorno de Material</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="132" trl="Y">
+  <value column="Name" original="Standard Order">Orden Estandar</value>
+  <value column="PrintName" original="Order Confirmation">Confirmación de orden</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="133" trl="Y">
+  <value column="Name" original="On Credit Order">Orden a Crédito</value>
+  <value column="PrintName" original="Order Confirmation">Confirmación de orden</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="134" trl="Y">
+  <value column="Name" original="Warehouse Order">Orden de Almacén</value>
+  <value column="PrintName" original="Order Confirmation">Confirmación de orden</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="135" trl="Y">
+  <value column="Name" original="POS Order">Orden Punto de Venta</value>
+  <value column="PrintName" original="Order Confirmation">Confirmación de orden</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="136" trl="Y">
+  <value column="Name" original="Project Issue">Tópico Proyecto</value>
+  <value column="PrintName" original="Project Issue">Tópico Proyecto</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="137" trl="Y">
+  <value column="Name" original="Payment Allocation">Asignación de pago/recaudo</value>
+  <value column="PrintName" original="Payment Allocation">Asignación de pago/recaudo</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="138" trl="Y">
+  <value column="Name" original="Match Invoice">Asignación de Factura</value>
+  <value column="PrintName" original="Match Invoice">Asignación de Factura</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="139" trl="Y">
+  <value column="Name" original="Material Production">Producción de Material</value>
+  <value column="PrintName" original="Material Production">Producción de material</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="140" trl="Y">
+  <value column="Name" original="GL Document">Documento de Contabilidad General</value>
+  <value column="PrintName" original="GL Document">Documento de contabilidad general</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="141" trl="Y">
+  <value column="Name" original="Cash Journal">Diario Caja PDV</value>
+  <value column="PrintName" original="Cash Journal">Diario Caja PDV</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="142" trl="Y">
+  <value column="Name" original="Match PO">Asignación de Orden de Compra</value>
+  <value column="PrintName" original="Match PO">Asignación de Orden de Compra</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="143" trl="Y">
+  <value column="Name" original="Material Movement">Movimiento de Material</value>
+  <value column="PrintName" original="Material Movement">Movimiento de material</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="144" trl="Y">
+  <value column="Name" original="Material Physical Inventory">Inventario Físico de Material</value>
+  <value column="PrintName" original="Material Physical Inventory">Inventario Físico de Material</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="145" trl="Y">
+  <value column="Name" original="AR Pro Forma Invoice">Factura ProForma CxC</value>
+  <value column="PrintName" original="AR Pro Forma Invoice">Factura ProForma CxC</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="146" trl="Y">
+  <value column="Name" original="Bank Statement">Extracto Bancario</value>
+  <value column="PrintName" original="Bank Statement">Extracto Bancario</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="147" trl="Y">
+  <value column="Name" original="MM Receipt with Confirmation">Recibo de Productos con Confirmación</value>
+  <value column="PrintName" original="Vendor Delivery">Envío Proveedor</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="148" trl="Y">
+  <value column="Name" original="MM Shipment with Pick">Entrega Productos con Recogida</value>
+  <value column="PrintName" original="Delivery Note">Nota de Entrega</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="149" trl="Y">
+  <value column="Name" original="MM Customer Return">Devolución Productos Cliente</value>
+  <value column="PrintName" original="Return Material">Devolución Productos Cliente</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="150" trl="Y">
+  <value column="Name" original="Vendor Return Material">Devolución Productos Proveedor</value>
+  <value column="PrintName" original="Vendor Return Material Authorization">Autorización de devolución de productos proveedor</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="151" trl="Y">
+  <value column="Name" original="MM Vendor Return">Retorno Productos Proveedor</value>
+  <value column="PrintName" original="Vendor Return Material">Retorno Productos Proveedor</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="50000" trl="Y">
+  <value column="Name" original="Payroll">Nómina</value>
+  <value column="PrintName" original="Payroll">Nómina</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="50001" trl="Y">
+  <value column="Name" original="GL Journal Batch">Lote de Notas Contables</value>
+  <value column="PrintName" original="Journal Batch">Lote de Notas Contables</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="50002" trl="Y">
+  <value column="Name" original="Manufacturing Order">Orden de Manufactura</value>
+  <value column="PrintName" original="Manufacturing Order">Orden de Manufactura</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="50010" trl="Y">
+  <value column="Name" original="Maintenance Order">Orden de Mantenimiento</value>
+  <value column="PrintName" original="Maintenance Order">Orden de Mantenimiento</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="50011" trl="Y">
+  <value column="Name" original="Quality Order">Orden de Calidad</value>
+  <value column="PrintName" original="Quality Order">Orden de Calidad</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="50012" trl="Y">
+  <value column="Name" original="Distribution Order">Orden de Distribución</value>
+  <value column="PrintName" original="Distribution Order">Orden de Distribución</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="50013" trl="Y">
+  <value column="Name" original="Manufacturing Cost Collector">Recolector de Costos de Manufactura</value>
+  <value column="PrintName" original="Manufacturing Cost Collector">Recolector de Costos de Manufactura</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="200000" trl="Y">
+  <value column="Name" original="Internal Use Inventory">Inventario Uso Interno</value>
+  <value column="PrintName" original="Internal Use Inventory">Inventario Uso Interno</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="200001" trl="Y">
+  <value column="Name" original="Asset Addition">Adición Activo</value>
+  <value column="PrintName" original="Asset Addition">Adición Activo</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="200002" trl="Y">
+  <value column="Name" original="Asset Depreciation">Depreciación Activo</value>
+  <value column="PrintName" original="Asset Depreciation">Depreciación Activo</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="200003" trl="Y">
+  <value column="Name" original="Asset Disposal">Desechar Activo</value>
+  <value column="PrintName" original="Asset Disposal">Desechar Activo</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row id="200004" trl="Y">
+  <value column="Name" original="Cost Adjustment">Ajuste Costo</value>
+  <value column="PrintName" original="Cost Adjustment">Ajuste Costo</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="12406276-c0c7-4504-b115-6c31b5b8e14c">
+  <value column="Name" original="Sales IVA Withholding">Sales IVA Withholding</value>
+  <value column="PrintName" original="Sales IVA Withholding">Sales IVA Withholding</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="6fcf93c4-1f82-4987-bae7-85c685faa5e1">
+  <value column="Name" original="Sales ISLR Withholding">Sales ISLR Withholding</value>
+  <value column="PrintName" original="Sales ISLR Withholding">Sales ISLR Withholding</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="38d8e5b8-1c66-4569-90c7-6c33c1784c8a">
+  <value column="Name" original="Purchase IVA Withholding">Purchase IVA Withholding</value>
+  <value column="PrintName" original="Purchase IVA Withholding">Purchase IVA Withholding</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="969aae99-a909-496f-8e33-7afd37a46c65">
+  <value column="Name" original="Purchase ISLR Withholding">Purchase ISLR Withholding</value>
+  <value column="PrintName" original="Purchase ISLR Withholding">Purchase ISLR Withholding</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="a111baaa-123c-4789-a8ce-b9c67e734611">
+  <value column="Name" original="AP Withholding">AP Withholding</value>
+  <value column="PrintName" original="AP Withholding">AP Withholding</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="2455790f-5db5-44a2-8019-0f9dfa14ebda">
+  <value column="Name" original="AR Withholding">AR Withholding</value>
+  <value column="PrintName" original="AR Withholding">AR Withholding</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="6b70ca32-3875-403c-929f-a591129eb5a3">
+  <value column="Name" original="GL Journal">GL Journal</value>
+  <value column="PrintName" original="Nota Contable">Nota Contable</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="d4c8849e-83b6-4270-909b-db15ab73a69f">
+  <value column="Name" original="GL Journal Batch">GL Journal Batch</value>
+  <value column="PrintName" original="Lote de Nota Contable">Lote de Nota Contable</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="53ab66a6-2239-4892-887c-96e463f6416b">
+  <value column="Name" original="AR Invoice">AR Invoice</value>
+  <value column="PrintName" original="Factura">Factura</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="2ac3f538-d846-435b-9663-675cbae4acd3">
+  <value column="Name" original="AR Invoice Indirect">AR Invoice Indirect</value>
+  <value column="PrintName" original="Factura">Factura</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="2cdf1bcc-74bc-4068-b40e-f4d3c6d83bfe">
+  <value column="Name" original="AR Credit Memo">AR Credit Memo</value>
+  <value column="PrintName" original="Nota de crédito">Nota de crédito</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="7c1ec27a-1bb4-47f5-9948-fccfdf55e117">
+  <value column="Name" original="AP Invoice">AP Invoice</value>
+  <value column="PrintName" original="Factura">Factura</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="39cca736-2cf9-4230-a296-ec22aa7c9da9">
+  <value column="Name" original="AP CreditMemo">AP CreditMemo</value>
+  <value column="PrintName" original="Nota de crédito">Nota de crédito</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="3c2b321b-9758-40fe-8b57-a2bb77796b6c">
+  <value column="Name" original="Match Invoice">Match Invoice</value>
+  <value column="PrintName" original="Corresponder Factura">Corresponder Factura</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="889f45ab-1f60-4416-b346-c743665cd4d1">
+  <value column="Name" original="AR Receipt">AR Receipt</value>
+  <value column="PrintName" original="Pago">Pago</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="e3d34f76-def3-480d-97f9-089f691e8d11">
+  <value column="Name" original="AP Payment">AP Payment</value>
+  <value column="PrintName" original="Pago">Pago</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="f75deebb-e07f-4cd4-91aa-a6652350c812">
+  <value column="Name" original="Allocation">Allocation</value>
+  <value column="PrintName" original="Allocation">Allocation</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="04482a97-3389-4be4-9af0-f105b58d6e74">
+  <value column="Name" original="MM Shipment">MM Shipment</value>
+  <value column="PrintName" original="Delivery Note">Delivery Note</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="0d21da16-5a8d-4018-af27-bab0d00cbb2a">
+  <value column="Name" original="MM Shipment Indirect">MM Shipment Indirect</value>
+  <value column="PrintName" original="Delivery Note">Delivery Note</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="92ffa120-283c-4184-bb89-96b61bc9c35f">
+  <value column="Name" original="MM Vendor Return">MM Vendor Return</value>
+  <value column="PrintName" original="Vendor Return">Vendor Return</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="7a3b7281-3aab-4264-8603-b9b4336ae1c9">
+  <value column="Name" original="MM Receipt">MM Receipt</value>
+  <value column="PrintName" original="Vendor Delivery">Vendor Delivery</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="2e9569c8-4a48-4431-8dfc-c583f1ce9f62">
+  <value column="Name" original="MM Customer Return">MM Customer Return</value>
+  <value column="PrintName" original="Customer Return">Customer Return</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="edd049d6-d081-492f-a26e-1b52c8e49cb4">
+  <value column="Name" original="Purchase Order">Purchase Order</value>
+  <value column="PrintName" original="Orden de compra">Orden de compra</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="5d03253e-515a-4782-bfd2-3d81be4339a2">
+  <value column="Name" original="Match PO">Match PO</value>
+  <value column="PrintName" original="Corresponder OC">Corresponder OC</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="cb28a89b-54d1-44bf-bcf8-7f9f0f11f92f">
+  <value column="Name" original="Purchase Requisition">Purchase Requisition</value>
+  <value column="PrintName" original="Requisición">Requisición</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="9d63f802-3a4f-42a4-8d79-0198df53a62d">
+  <value column="Name" original="Vendor Return Material">Vendor Return Material</value>
+  <value column="PrintName" original="Vendor Return Material Authorization">Vendor Return Material Authorization</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="558bd976-7c92-4a3a-939f-8b2cf5bbf045">
+  <value column="Name" original="Bank Statement">Bank Statement</value>
+  <value column="PrintName" original="Bank Statement">Bank Statement</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="2c5a8427-98f0-4631-a987-1e260493b6d7">
+  <value column="Name" original="Cash Journal">Cash Journal</value>
+  <value column="PrintName" original="Diario Caja PDV">Diario Caja PDV</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="fb7253f5-9902-40e0-836f-4e16ca460085">
+  <value column="Name" original="Material Movement">Material Movement</value>
+  <value column="PrintName" original="Movimiento">Movimiento</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="b02b88e4-9a4d-4c6c-8682-7f01a693eaab">
+  <value column="Name" original="Physical Inventory">Physical Inventory</value>
+  <value column="PrintName" original="Inventario Físico">Inventario Físico</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="566c4baa-4fb1-475d-b13d-f88325d85eea">
+  <value column="Name" original="Material Production">Material Production</value>
+  <value column="PrintName" original="Producción">Producción</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="c77eb681-a339-435c-9d97-6274850a674f">
+  <value column="Name" original="Project Issue">Project Issue</value>
+  <value column="PrintName" original="Asunto del Proyecto">Asunto del Proyecto</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="497ee1ff-cff0-4d2c-96ed-04c1c6f29c98">
+  <value column="Name" original="Internal Use Inventory">Internal Use Inventory</value>
+  <value column="PrintName" original="Internal Use Inventory">Internal Use Inventory</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="599e2331-ec87-4153-bc61-73ca9a25a9a7">
+  <value column="Name" original="Cost Adjustment">Cost Adjustment</value>
+  <value column="PrintName" original="Cost Adjustment">Cost Adjustment</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="2147ccac-4f29-4896-abb0-31676a4369ae">
+  <value column="Name" original="Binding offer">Binding offer</value>
+  <value column="PrintName" original="Quotation">Quotation</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="c3271b51-40ed-4ab1-a821-3df58405ec4d">
+  <value column="Name" original="Non binding offer">Non binding offer</value>
+  <value column="PrintName" original="Proposal">Proposal</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="021d4cd9-98ab-42d0-aef5-25abcc1c80e3">
+  <value column="Name" original="Prepay Order">Prepay Order</value>
+  <value column="PrintName" original="Prepay Order">Prepay Order</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="c6c97a22-5b1d-42b4-b4cc-95ba0acb8559">
+  <value column="Name" original="Customer Return Material">Customer Return Material</value>
+  <value column="PrintName" original="Customer Return Material Authorization">Customer Return Material Authorization</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="625b0def-ed5e-4766-b90b-0edde74a0b5d">
+  <value column="Name" original="Standard Order">Standard Order</value>
+  <value column="PrintName" original="Order Confirmation">Order Confirmation</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="e5eeb013-344f-4b19-94b5-63771e2f4002">
+  <value column="Name" original="Credit Order">Credit Order</value>
+  <value column="PrintName" original="Order Confirmation">Order Confirmation</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="1097406b-caf1-4ff0-9fdd-fa24ee545e38">
+  <value column="Name" original="Warehouse Order">Warehouse Order</value>
+  <value column="PrintName" original="Order Confirmation">Order Confirmation</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="d948c256-16ea-4e53-8a9a-304e2804028e">
+  <value column="Name" original="Manufacturing Order">Manufacturing Order</value>
+  <value column="PrintName" original="Manufacturing Order">Manufacturing Order</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="ba49a01a-b5cd-413f-b5c2-2a625775e6d0">
+  <value column="Name" original="Manufacturing Cost Collector">Manufacturing Cost Collector</value>
+  <value column="PrintName" original="Cost Collector">Cost Collector</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="9778f301-57ce-4d7c-9fdd-4a4a60a41e9d">
+  <value column="Name" original="Maintenance Order">Maintenance Order</value>
+  <value column="PrintName" original="Maintenance Order">Maintenance Order</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="455a2f0a-dcbe-40bb-982a-f94f5b9cffed">
+  <value column="Name" original="Quality Order">Quality Order</value>
+  <value column="PrintName" original="Quality Order">Quality Order</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="c0876520-47df-42b3-a34c-5d266dc48f50">
+  <value column="Name" original="Distribution Order">Distribution Order</value>
+  <value column="PrintName" original="Distribution Order">Distribution Order</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="fa01c14e-2628-434a-ac66-5ffa9c356ee8">
+  <value column="Name" original="Payroll">Payroll</value>
+  <value column="PrintName" original="Payroll">Payroll</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="10a53c9f-b42c-49e3-bd0e-7dcf3060217c">
+  <value column="Name" original="POS Order">POS Order</value>
+  <value column="PrintName" original="Order Confirmation">Order Confirmation</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="2409ee70-3e92-4260-9a6b-77d844919d72">
+  <value column="Name" original="AR Pro Forma Invoice">AR Pro Forma Invoice</value>
+  <value column="PrintName" original="AR Pro Forma Invoice">AR Pro Forma Invoice</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="b73bdf3a-cebb-4133-b89a-17b7d298bfd4">
+  <value column="Name" original="GL Document">GL Document</value>
+  <value column="PrintName" original="GL Document">GL Document</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="11e0d6d2-9970-41c5-a16d-a017623d68f1">
+  <value column="Name" original="Fixed Assets Disposal">Fixed Assets Disposal</value>
+  <value column="PrintName" original="Fixed Assets Disposal">Fixed Assets Disposal</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="790e0f5d-44e9-490c-94f5-1e810f0e40e7">
+  <value column="Name" original="Fixed Assets Addition">Fixed Assets Addition</value>
+  <value column="PrintName" original="Fixed Assets Addition">Fixed Assets Addition</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="48e5892d-32c5-4c24-9104-e0c88df08ca9">
+  <value column="Name" original="Fixed Assets Depreciation">Fixed Assets Depreciation</value>
+  <value column="PrintName" original="Fixed Assets Depreciation">Fixed Assets Depreciation</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="553eaf06-5018-42ca-94a8-a705a06cce3c">
+  <value column="Name" original="Withholding Type">Withholding Type</value>
+  <value column="PrintName" original="Withholding Type">Withholding Type</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="90042bb3-31e9-4a83-91f5-097859b8547c">
+  <value column="Name" original="Sales IVA Withholding">Sales IVA Withholding</value>
+  <value column="PrintName" original="Sales IVA Withholding">Sales IVA Withholding</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="317278ba-e2a8-41f9-871f-8259f758f49c">
+  <value column="Name" original="Sales ISLR Withholding">Sales ISLR Withholding</value>
+  <value column="PrintName" original="Sales ISLR Withholding">Sales ISLR Withholding</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="6b5dfd2e-af67-45d7-956d-8f6a01b7d44e">
+  <value column="Name" original="Purchase IVA Withholding">Purchase IVA Withholding</value>
+  <value column="PrintName" original="Purchase IVA Withholding">Purchase IVA Withholding</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="8aaea964-9a49-4521-ac1e-e0923f75a2d0">
+  <value column="Name" original="Purchase ISLR Withholding">Purchase ISLR Withholding</value>
+  <value column="PrintName" original="Purchase ISLR Withholding">Purchase ISLR Withholding</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="69fb9d5d-6d03-4338-9358-1003c448c86f">
+  <value column="Name" original="AP Withholding">AP Withholding</value>
+  <value column="PrintName" original="AP Withholding">AP Withholding</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+ <row trl="N" uuid="b7aa5e7e-80b7-4425-89bb-a038e0b2c2fa">
+  <value column="Name" original="AR Withholding">AR Withholding</value>
+  <value column="PrintName" original="AR Withholding">AR Withholding</value>
+  <value column="DocumentNote" original=""/>
+ </row>
+</idempiereTrl>

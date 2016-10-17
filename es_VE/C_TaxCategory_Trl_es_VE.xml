@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--iDempiere(r) Release 3.1_2015-10-31 -Smart Suite ERP, CRM and SCM- (c) 1999-2013 iDempiere(r); Implementation: iDempiere - Supported by iDempiere community--><!--<!DOCTYPE idempiereTrl PUBLIC "-//ComPiere, Inc.//DTD iDempiere Translation 1.0//EN" "http://www.idempiere.com/dtd/idempiereTrl.dtd">--><idempiereTrl language="es_CO" table="C_TaxCategory">
+ <row id="107" trl="Y">
+  <value column="Name" original="Standard">Estándar</value>
+  <value column="Description" original=""/>
+ </row>
+ <row trl="N" uuid="4eb74616-68ba-49e3-b877-046ef351ab0c">
+  <value column="Name" original="EXENTO">EXENTO</value>
+  <value column="Description" original="IMPUESTO EXENTO">IMPUESTO EXENTO</value>
+ </row>
+ <row trl="N" uuid="429b15f4-7141-4698-b896-2fef6a8372b7">
+  <value column="Name" original="Retencion ISLR">Retencion ISLR</value>
+  <value column="Description" original="IMPUESTO SOBRE LA RENTA">IMPUESTO SOBRE LA RENTA</value>
+ </row>
+ <row trl="N" uuid="9180dfe3-e520-4695-8813-9d09344c4195">
+  <value column="Name" original="Retencion IVA">Retencion IVA</value>
+  <value column="Description" original="Retenciones IVA">Retenciones IVA</value>
+ </row>
+ <row trl="N" uuid="ecec3c29-48eb-460c-ad49-530affe60106">
+  <value column="Name" original="% RETENCION">% RETENCION</value>
+  <value column="Description" original="Usado para Agrupar Todos Los Porcentajes de Retenciones usados.">Usado para Agrupar Todos Los Porcentajes de Retenciones usados.</value>
+ </row>
+ <row trl="N" uuid="94fc8fd3-a36c-442c-9e63-92e78f161249">
+  <value column="Name" original="IVA 8%">IVA 8%</value>
+  <value column="Description" original="IVA 8%">IVA 8%</value>
+ </row>
+ <row trl="N" uuid="18be23e6-dc17-4d55-8d21-1aef3a8f4678">
+  <value column="Name" original="IVA 12%">IVA 12%</value>
+  <value column="Description" original="IVA">IVA</value>
+ </row>
+ <row trl="N" uuid="247462c5-fb0b-477c-a839-b2f845e26f9d">
+  <value column="Name" original="Estándar">Estándar</value>
+  <value column="Description" original=""/>
+ </row>
+ <row trl="N" uuid="a4574199-de21-461b-b71c-b079d95c4e87">
+  <value column="Name" original="EXENTO">EXENTO</value>
+  <value column="Description" original="IMPUESTO EXENTO">IMPUESTO EXENTO</value>
+ </row>
+ <row trl="N" uuid="98a1a232-12fc-4937-9d71-e74b6f40ccae">
+  <value column="Name" original="Retencion ISLR">Retencion ISLR</value>
+  <value column="Description" original="IMPUESTO SOBRE LA RENTA">IMPUESTO SOBRE LA RENTA</value>
+ </row>
+ <row trl="N" uuid="f4e348a1-a6ca-4c8e-a722-e88ac490f753">
+  <value column="Name" original="Retencion IVA">Retencion IVA</value>
+  <value column="Description" original="Retenciones IVA">Retenciones IVA</value>
+ </row>
+ <row trl="N" uuid="3f0b7aac-1453-44b5-9c6c-08184999f226">
+  <value column="Name" original="% RETENCION">% RETENCION</value>
+  <value column="Description" original="Usado para Agrupar Todos Los Porcentajes de Retenciones usados.">Usado para Agrupar Todos Los Porcentajes de Retenciones usados.</value>
+ </row>
+ <row trl="N" uuid="1d9bb487-d592-4308-9949-4556409b26e3">
+  <value column="Name" original="IVA 8%">IVA 8%</value>
+  <value column="Description" original="IVA 8%">IVA 8%</value>
+ </row>
+ <row trl="N" uuid="d05bb64f-b09e-432e-bd8d-f96d4df19a80">
+  <value column="Name" original="IVA 12%">IVA 12%</value>
+  <value column="Description" original="IVA">IVA</value>
+ </row>
+</idempiereTrl>

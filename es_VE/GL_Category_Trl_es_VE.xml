@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--iDempiere(r) Release 3.1_2015-10-31 -Smart Suite ERP, CRM and SCM- (c) 1999-2013 iDempiere(r); Implementation: iDempiere - Supported by iDempiere community--><!--<!DOCTYPE idempiereTrl PUBLIC "-//ComPiere, Inc.//DTD iDempiere Translation 1.0//EN" "http://www.idempiere.com/dtd/idempiereTrl.dtd">--><idempiereTrl language="es_CO" table="GL_Category">
+ <row id="0" trl="Y">
+  <value column="Name" original="None">Ninguna</value>
+ </row>
+ <row id="108" trl="N">
+  <value column="Name" original="Manual">Manual</value>
+ </row>
+ <row id="109" trl="N">
+  <value column="Name" original="AR Invoice">AR Invoice</value>
+ </row>
+ <row id="110" trl="N">
+  <value column="Name" original="AR Receipt">AR Receipt</value>
+ </row>
+ <row id="111" trl="N">
+  <value column="Name" original="Material Management">Material Management</value>
+ </row>
+ <row id="112" trl="N">
+  <value column="Name" original="AP Invoice">AP Invoice</value>
+ </row>
+ <row id="113" trl="N">
+  <value column="Name" original="AP Payment">AP Payment</value>
+ </row>
+ <row id="50000" trl="N">
+  <value column="Name" original="Payroll">Payroll</value>
+ </row>
+ <row id="50001" trl="N">
+  <value column="Name" original="Manufacturing">Manufacturing</value>
+ </row>
+ <row id="50002" trl="N">
+  <value column="Name" original="Distribution">Distribution</value>
+ </row>
+ <row trl="N" uuid="4741663e-3185-4943-a813-afae2c95a1f3">
+  <value column="Name" original="Standard">Standard</value>
+ </row>
+ <row trl="N" uuid="1e6dd136-f31e-4662-ba28-0c51c04ae3bc">
+  <value column="Name" original="None">None</value>
+ </row>
+ <row trl="N" uuid="f1d12b3a-c736-42e6-8082-29a1e2b72e10">
+  <value column="Name" original="Manual">Manual</value>
+ </row>
+ <row trl="N" uuid="1f94323d-4a5f-428b-81cd-018967aff42f">
+  <value column="Name" original="AR Invoice">AR Invoice</value>
+ </row>
+ <row trl="N" uuid="43e6c864-3bc1-44c3-9702-67309bfccb84">
+  <value column="Name" original="AR Receipt">AR Receipt</value>
+ </row>
+ <row trl="N" uuid="08cb6578-3ed5-40c1-9dbe-c5335f7aa89a">
+  <value column="Name" original="Material Management">Material Management</value>
+ </row>
+ <row trl="N" uuid="b79ef10e-7a87-469c-8244-86046f619b81">
+  <value column="Name" original="AP Invoice">AP Invoice</value>
+ </row>
+ <row trl="N" uuid="2afe8396-f230-459a-9b99-731c6da517b6">
+  <value column="Name" original="AP Payment">AP Payment</value>
+ </row>
+ <row trl="N" uuid="7eabca26-7608-40ca-b60e-e4b18b49ac71">
+  <value column="Name" original="Cash/Payments">Cash/Payments</value>
+ </row>
+ <row trl="N" uuid="85a7bc99-3e2b-452b-8533-934ea55eef71">
+  <value column="Name" original="Manufacturing">Manufacturing</value>
+ </row>
+ <row trl="N" uuid="6b24944b-706f-4d8d-b954-181be6160f07">
+  <value column="Name" original="Distribution">Distribution</value>
+ </row>
+ <row trl="N" uuid="310ca0f9-0585-4f6a-a13e-1110e12b1191">
+  <value column="Name" original="Payroll">Payroll</value>
+ </row>
+</idempiereTrl>

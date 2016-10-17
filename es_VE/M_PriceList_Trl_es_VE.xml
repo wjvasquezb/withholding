@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--iDempiere(r) Release 3.1_2015-10-31 -Smart Suite ERP, CRM and SCM- (c) 1999-2013 iDempiere(r); Implementation: iDempiere - Supported by iDempiere community--><!--<!DOCTYPE idempiereTrl PUBLIC "-//ComPiere, Inc.//DTD iDempiere Translation 1.0//EN" "http://www.idempiere.com/dtd/idempiereTrl.dtd">--><idempiereTrl language="es_CO" table="M_PriceList">
+ <row id="101" trl="N">
+  <value column="Name" original="Standard">Standard</value>
+  <value column="Description" original="This is the sales price list and we create it based on the Purchase list">This is the sales price list and we create it based on the Purchase list</value>
+ </row>
+ <row id="102" trl="N">
+  <value column="Name" original="Purchase">Purchase</value>
+  <value column="Description" original="This list is created first - the &quot;root&quot; of the other price lists">This list is created first - the "root" of the other price lists</value>
+ </row>
+ <row id="103" trl="N">
+  <value column="Name" original="Export">Export</value>
+  <value column="Description" original="Export Prices in EUR">Export Prices in EUR</value>
+ </row>
+ <row trl="N" uuid="374529cd-8d50-4742-9f55-f5e5a1967caa">
+  <value column="Name" original="Estándar">Estándar</value>
+  <value column="Description" original=""/>
+ </row>
+ <row trl="N" uuid="98cdaf60-a029-4438-9822-0445bb863246">
+  <value column="Name" original="Lista de Precios Ventas">Lista de Precios Ventas</value>
+  <value column="Description" original=""/>
+ </row>
+ <row trl="N" uuid="a36ca700-fef8-4165-926f-029d4d2b8e16">
+  <value column="Name" original="Lista de Precios Compras">Lista de Precios Compras</value>
+  <value column="Description" original=""/>
+ </row>
+</idempiereTrl>
