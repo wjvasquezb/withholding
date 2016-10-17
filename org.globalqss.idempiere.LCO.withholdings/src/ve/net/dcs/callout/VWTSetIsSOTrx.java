@@ -35,8 +35,11 @@ import ve.net.dcs.model.I_LVE_VoucherWithholding;
 public class VWTSetIsSOTrx implements IColumnCallout {
 
 	public String SetIsSOTrx(Properties ctx, int WindowNo, GridTab mTab, GridField mField, Object value) {
-		X_LCO_WithholdingType wTypeID = new X_LCO_WithholdingType(ctx, (Integer) value, null);
-		mTab.setValue(I_LVE_VoucherWithholding.COLUMNNAME_IsSOTrx, wTypeID.isSOTrx());
+		X_LCO_WithholdingType wTypeID = null;
+		if(value != null){
+			wTypeID = new X_LCO_WithholdingType(ctx, (Integer) value, null);
+			mTab.setValue(I_LVE_VoucherWithholding.COLUMNNAME_IsSOTrx, wTypeID.isSOTrx());
+		}
 		return null;
 	}
 
