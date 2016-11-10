@@ -1,14 +1,11 @@
 package ve.net.dcs.component;
 
-import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
-import java.util.logging.Level;
 
 import org.adempiere.base.event.AbstractEventHandler;
 import org.adempiere.base.event.IEventTopics;
@@ -99,7 +96,10 @@ public class VWTModelValidator extends AbstractEventHandler {
 				int value = 0;
 				String cadena = partner.getTaxID();
 				
-				value = DB.getSQLValue(partner.get_TrxName(), "SELECT 1 FROM C_BPartner WHERE LCO_taxIDType_ID = ? AND TaxID = ? AND C_BPartner_ID != ?", partner.get_ValueAsInt("LCO_TaxIDType_ID"),cadena,partner.get_ID());
+				// Se Corrige Validación, tomar en cuenta Grupo Empresarial.
+				//	@contributor Ing. Victor Suárez - victor.suarez.is@gmail.com - 2016/11
+				//value = DB.getSQLValue(partner.get_TrxName(), "SELECT 1 FROM C_BPartner WHERE LCO_taxIDType_ID = ? AND TaxID = ? AND C_BPartner_ID != ?", partner.get_ValueAsInt("LCO_TaxIDType_ID"),cadena,partner.get_ID());
+				value = DB.getSQLValue(partner.get_TrxName(), "SELECT 1 FROM C_BPartner WHERE LCO_taxIDType_ID = ? AND TaxID = ? AND C_BPartner_ID != ? AND AD_Client_ID = ? ", partner.get_ValueAsInt("LCO_TaxIDType_ID"),cadena,partner.get_ID(), partner.getAD_Client_ID());
 				
 				if (value > 0)
 					throw new RuntimeException("Tercero Ya Existe");

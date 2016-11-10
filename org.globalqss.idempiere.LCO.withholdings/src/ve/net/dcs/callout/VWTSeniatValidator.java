@@ -18,8 +18,6 @@
 package ve.net.dcs.callout;
 
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.URL;
@@ -49,6 +47,7 @@ import org.xml.sax.InputSource;
  * 
  * @author Double Click Sistemas C.A. - http://dcs.net.ve
  * @author Saul Pina - spina@dcs.net.ve
+ * @contributor Ing. Victor Suárez - victor.suarez.is@gmail.com - 2016/11
  */
 public class VWTSeniatValidator implements IColumnCallout {
 
@@ -77,8 +76,18 @@ public class VWTSeniatValidator implements IColumnCallout {
 
 		String file = null;
 
-		file = searchRif(urlSeniat, taxidType.getName() + taxid,taxidType.getName());
-		//file = searchRif(urlSeniat, taxid,taxidType.getName());
+		// Validar Valor de RIF - Ing. Victor Suárez - victor.suarez.is@gmail.com - 2016/11
+		if(taxid.substring(0, 1).matches("[VEJG]")) {
+			if(!isNumeric(taxid.substring(1)))
+				return "Valor de RIF inválido: " + taxid;
+			file = searchRif(urlSeniat, taxid, taxidType.getName());
+		}
+		else {
+			if(!isNumeric(taxid))
+				return "Valor de RIF inválido: " + taxidType.getName() + taxid;
+			file = searchRif(urlSeniat, taxidType.getName() + taxid, taxidType.getName());
+		}
+		// Fin Validar Valor de RIF
 
 		if (file == null)
 			return "Contribuyente no encontrado en Seniat";
@@ -211,6 +220,21 @@ public class VWTSeniatValidator implements IColumnCallout {
 			return null;
 		}
 
+	}
+	
+	/**
+	 * 	Evaluate RIF without TaxID Type Letter Is Valid or Not
+	 *  @contributor Ing. Victor Suárez - victor.suarez.is@gmail.com - 2016/11 
+	 *	@param TaxID
+	 *	@return true or false
+	 */
+	private static boolean isNumeric(String taxidN) {
+		try {
+			Integer.parseInt(taxidN);
+			return true;
+		} catch (NumberFormatException nfe){
+			return false;
+		}
 	}
 
 }
