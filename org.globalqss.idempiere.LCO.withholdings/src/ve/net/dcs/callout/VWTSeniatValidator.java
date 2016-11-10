@@ -85,6 +85,9 @@ public class VWTSeniatValidator implements IColumnCallout {
 		else {
 			if(!isNumeric(taxid))
 				return "Valor de RIF inválido: " + taxidType.getName() + taxid;
+			
+			if(MSysConfig.getValue("LVE_ReplaceTaxInfoSeniat","Y",(Integer)mTab.getValue("AD_Client_ID")).compareTo("Y")==0)
+				mTab.setValue("TaxID", taxidType.getName() + taxid);
 			file = searchRif(urlSeniat, taxidType.getName() + taxid, taxidType.getName());
 		}
 		// Fin Validar Valor de RIF
