@@ -169,8 +169,8 @@ public class VWTSeniatValidator implements IColumnCallout {
 		try {
 			URL urlInput = new URL(url);
 			URLConnection con = urlInput.openConnection();
-			con.setConnectTimeout(10000);
-			con.setReadTimeout(10000);
+			con.setConnectTimeout(30000);
+			con.setReadTimeout(30000);
 			BufferedReader buffer = new BufferedReader(new InputStreamReader(con.getInputStream(), Charset.forName("ISO-8859-1")));
 
 			
@@ -232,12 +232,27 @@ public class VWTSeniatValidator implements IColumnCallout {
 	 *	@return true or false
 	 */
 	private static boolean isNumeric(String taxidN) {
-		try {
-			Integer.parseInt(taxidN);
-			return true;
-		} catch (NumberFormatException nfe){
+//		try {
+//			Integer.parseInt(taxidN);
+//			return true;
+//		} catch (NumberFormatException nfe){
+//			return false;
+//		}
+//	}
+		if(taxidN == null || taxidN.isEmpty())
 			return false;
+		int i = 0;
+		if(taxidN.charAt(0) == '-') {
+			if(taxidN.length() > 1)
+				i++;
+			else 
+				return false;
 		}
+		for(; i < taxidN.length(); i++) {
+			if(!Character.isDigit(taxidN.charAt(i)))
+				return false;
+		}
+		return true;
 	}
-
+	
 }
