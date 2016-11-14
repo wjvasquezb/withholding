@@ -213,11 +213,11 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 		}
 
 		// after preparing invoice move invoice withholdings to taxes and recalc grandtotal of invoice
-//		if (po.get_TableName().equals(MInvoice.Table_Name) && type.equals(IEventTopics.DOC_BEFORE_COMPLETE)) {
-//			msg = translateWithholdingToTaxes((MInvoice) po);
-//			if (msg != null)
-//				throw new RuntimeException(msg);
-//		}
+		if (po.get_TableName().equals(MInvoice.Table_Name) && type.equals(IEventTopics.DOC_BEFORE_COMPLETE)) {
+			msg = translateWithholdingToTaxes((MInvoice) po);
+			if (msg != null)
+				throw new RuntimeException(msg);
+		}
 
 		// after completing the invoice fix the dates on withholdings and mark the invoice withholdings as processed
 		if (po.get_TableName().equals(MInvoice.Table_Name) && type.equals(IEventTopics.DOC_AFTER_COMPLETE)) {

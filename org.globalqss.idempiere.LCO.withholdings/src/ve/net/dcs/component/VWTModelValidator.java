@@ -151,7 +151,13 @@ public class VWTModelValidator extends AbstractEventHandler {
 				}
 
 				for (MLVEVoucherWithholding v : listVoucher) {
-					v.completeIt();
+				/** Si es Factura de ventas, solo preparar el comprobante, para que el usuario agregue el número del comprobante que le envíe el cliente.
+				 *	@contributor: Ing. Victor Suárez - victor.suarez.is@gmail.com - 2016/11 
+				 */
+					if(invoice.isSOTrx())
+						v.prepareIt();
+					else
+						v.completeIt();
 					v.saveEx();
 				}
 			}
