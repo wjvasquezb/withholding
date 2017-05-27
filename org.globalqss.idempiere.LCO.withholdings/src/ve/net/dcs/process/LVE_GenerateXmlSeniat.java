@@ -45,7 +45,7 @@ import ve.net.dcs.model.X_LVE_generateXML;
 /**
  * Localizacion Venezuela
  * LVE_GenerateXmlSeniat
- * @author Victor Suarez  -  vsuarez@dcs.net.ve  - Double Click Sistemas C.A.
+ * @author Victor Suarez  -  victor.suarez.is@gmail.com  - Double Click Sistemas C.A.
  * 2012
  *
  */
