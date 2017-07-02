@@ -5,7 +5,6 @@ import java.util.List;
 import org.compiere.model.Query;
 import org.compiere.process.ProcessInfoParameter;
 import org.compiere.process.SvrProcess;
-import org.compiere.util.DB;
 import org.globalqss.model.MLCOInvoiceWithholding;
 import org.globalqss.model.X_LCO_InvoiceWithholding;
 
