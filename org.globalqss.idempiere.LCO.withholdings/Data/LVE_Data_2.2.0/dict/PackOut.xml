@@ -2438,4 +2438,247 @@
             <SubtrahendFactor/>
         </LCO_WithholdingCalc>
     </LCO_WithholdingType>
+        <C_Bank type="table">
+        <AD_Client_ID reference="uuid" reference-key="AD_Client">22240b8e-7116-425f-a881-7494795e4928</AD_Client_ID>
+        <AD_Org_ID reference="uuid" reference-key="AD_Org">ea9b9271-84b2-400d-bbb6-511946b53cbf</AD_Org_ID>
+        <IsActive>Y</IsActive>
+        <Name>CAJA 1</Name>
+        <RoutingNo>0001</RoutingNo>
+        <C_Location_ID reference="id"/>
+        <SwiftCode/>
+        <IsOwnBank>Y</IsOwnBank>
+        <Description/>
+        <C_Bank_UU>cbf96201-cac5-4368-80f6-ff07cabc6c85</C_Bank_UU>
+        <C_BankAccount type="table">
+            <AD_Client_ID reference="uuid" reference-key="AD_Client">22240b8e-7116-425f-a881-7494795e4928</AD_Client_ID>
+            <AD_Org_ID reference="uuid" reference-key="AD_Org">ea9b9271-84b2-400d-bbb6-511946b53cbf</AD_Org_ID>
+            <IsActive>Y</IsActive>
+            <C_Bank_ID reference="uuid" reference-key="C_Bank">cbf96201-cac5-4368-80f6-ff07cabc6c85</C_Bank_ID>
+            <C_Currency_ID reference="id">205</C_Currency_ID>
+            <AccountNo>0001</AccountNo>
+            <CurrentBalance>0</CurrentBalance>
+            <CreditLimit>0</CreditLimit>
+            <IsDefault>N</IsDefault>
+            <BankAccountType>B</BankAccountType>
+            <Description/>
+            <IBAN/>
+            <BBAN/>
+            <PaymentExportClass/>
+            <C_BankAccount_UU>49efdf4c-3fb6-41c8-9b40-849655e607e7</C_BankAccount_UU>
+            <Value>RETENCIONES</Value>
+            <Name>RETENCIONES</Name>
+            <C_BankAccount_Acct type="table">
+                <AD_Org_ID>0</AD_Org_ID>
+                <C_BankAccount_ID reference="uuid" reference-key="C_BankAccount">49efdf4c-3fb6-41c8-9b40-849655e607e7</C_BankAccount_ID>
+                <C_AcctSchema_ID reference="uuid" reference-key="C_AcctSchema">b17ae842-3eb5-49b8-a16f-35c5fcdf693f</C_AcctSchema_ID>
+                <IsActive>Y</IsActive>
+                <B_InTransit_Acct reference="uuid" reference-key="C_ValidCombination">cc16e1e2-1d64-45fa-bc1b-d664d10eed2a</B_InTransit_Acct>
+                <B_Asset_Acct reference="uuid" reference-key="C_ValidCombination">efbe4928-228c-41c6-93c5-24ddbf7f21ca</B_Asset_Acct>
+                <B_InterestRev_Acct reference="uuid" reference-key="C_ValidCombination">6ef3c036-fb67-4b59-ab89-530bca4756ed</B_InterestRev_Acct>
+                <B_InterestExp_Acct reference="uuid" reference-key="C_ValidCombination">bf7d7d1f-cda6-4192-bcf3-e574b6d208fb</B_InterestExp_Acct>
+                <B_PaymentSelect_Acct reference="uuid" reference-key="C_ValidCombination">13157c9b-0391-4b4e-8029-88f95ad2deb2</B_PaymentSelect_Acct>
+                <B_UnallocatedCash_Acct reference="uuid" reference-key="C_ValidCombination">20909885-5e76-4e9f-a33b-e2dbb415d418</B_UnallocatedCash_Acct>
+                <C_BankAccount_Acct_UU>33e613a1-4617-4a96-81ee-8b84571b5b2c</C_BankAccount_Acct_UU>
+            </C_BankAccount_Acct>
+        </C_BankAccount>
+        <C_BankAccount type="table">
+            <AD_Client_ID reference="uuid" reference-key="AD_Client">22240b8e-7116-425f-a881-7494795e4928</AD_Client_ID>
+            <AD_Org_ID reference="uuid" reference-key="AD_Org">ea9b9271-84b2-400d-bbb6-511946b53cbf</AD_Org_ID>
+            <IsActive>Y</IsActive>
+            <C_Bank_ID reference="uuid" reference-key="C_Bank">cbf96201-cac5-4368-80f6-ff07cabc6c85</C_Bank_ID>
+            <C_Currency_ID reference="id">205</C_Currency_ID>
+            <AccountNo>0002</AccountNo>
+            <CurrentBalance>0</CurrentBalance>
+            <CreditLimit>0</CreditLimit>
+            <IsDefault>N</IsDefault>
+            <BankAccountType>B</BankAccountType>
+            <Description/>
+            <IBAN/>
+            <BBAN/>
+            <PaymentExportClass/>
+            <C_BankAccount_UU>b2d3b81b-d864-44a4-bb12-2335e2335eec</C_BankAccount_UU>
+            <Value>CAJA 1</Value>
+            <Name>CAJA 1</Name>
+            <C_BankAccount_Acct type="table">
+                <AD_Org_ID>0</AD_Org_ID>
+                <C_BankAccount_ID reference="uuid" reference-key="C_BankAccount">b2d3b81b-d864-44a4-bb12-2335e2335eec</C_BankAccount_ID>
+                <C_AcctSchema_ID reference="uuid" reference-key="C_AcctSchema">b17ae842-3eb5-49b8-a16f-35c5fcdf693f</C_AcctSchema_ID>
+                <IsActive>Y</IsActive>
+                <B_InTransit_Acct reference="uuid" reference-key="C_ValidCombination">cc16e1e2-1d64-45fa-bc1b-d664d10eed2a</B_InTransit_Acct>
+                <B_Asset_Acct reference="uuid" reference-key="C_ValidCombination">efbe4928-228c-41c6-93c5-24ddbf7f21ca</B_Asset_Acct>
+                <B_InterestRev_Acct reference="uuid" reference-key="C_ValidCombination">6ef3c036-fb67-4b59-ab89-530bca4756ed</B_InterestRev_Acct>
+                <B_InterestExp_Acct reference="uuid" reference-key="C_ValidCombination">bf7d7d1f-cda6-4192-bcf3-e574b6d208fb</B_InterestExp_Acct>
+                <B_PaymentSelect_Acct reference="uuid" reference-key="C_ValidCombination">13157c9b-0391-4b4e-8029-88f95ad2deb2</B_PaymentSelect_Acct>
+                <B_UnallocatedCash_Acct reference="uuid" reference-key="C_ValidCombination">20909885-5e76-4e9f-a33b-e2dbb415d418</B_UnallocatedCash_Acct>
+                <C_BankAccount_Acct_UU>83e05528-5d57-4b5c-9237-e6afd40000dc</C_BankAccount_Acct_UU>
+            </C_BankAccount_Acct>
+        </C_BankAccount>
+    </C_Bank>
+    <AD_SysConfig type="table">
+        <AD_Client_ID reference="uuid" reference-key="AD_Client">22240b8e-7116-425f-a881-7494795e4928</AD_Client_ID>
+        <AD_Org_ID reference="uuid" reference-key="AD_Org">ea9b9271-84b2-400d-bbb6-511946b53cbf</AD_Org_ID>
+        <IsActive>Y</IsActive>
+        <Name>LVE_Withholding_BankAccount</Name>
+        <Value>1000000</Value>
+        <Description/>
+        <EntityType>ve.net.dcs.VoucherWithholdingTax</EntityType>
+        <ConfigurationLevel>O</ConfigurationLevel>
+        <AD_SysConfig_UU>7dd35b6c-5e94-4296-8887-b25702c00b3d</AD_SysConfig_UU>
+    </AD_SysConfig>
+    <GL_Category type="table">
+        <AD_Client_ID reference="uuid" reference-key="AD_Client">22240b8e-7116-425f-a881-7494795e4928</AD_Client_ID>
+        <AD_Org_ID reference="uuid" reference-key="AD_Org">ea9b9271-84b2-400d-bbb6-511946b53cbf</AD_Org_ID>
+        <IsActive>Y</IsActive>
+        <Name>AP Withholding</Name>
+        <Description/>
+        <CategoryType>D</CategoryType>
+        <IsDefault>N</IsDefault>
+        <GL_Category_UU>f0ebb6d5-f622-4a0b-af82-358f18f63e0c</GL_Category_UU>
+        <GL_Category_Trl type="translation">
+            <Name>AP Withholding</Name>
+            <AD_Language>es_CO</AD_Language>
+            <IsActive>Y</IsActive>
+            <IsTranslated>N</IsTranslated>
+        </GL_Category_Trl>
+        <GL_Category_Trl type="translation">
+            <Name>AP Withholding</Name>
+            <AD_Language>es_VE</AD_Language>
+            <IsActive>Y</IsActive>
+            <IsTranslated>N</IsTranslated>
+        </GL_Category_Trl>
+    </GL_Category>
+    <GL_Category type="table">
+        <AD_Client_ID reference="uuid" reference-key="AD_Client">22240b8e-7116-425f-a881-7494795e4928</AD_Client_ID>
+        <AD_Org_ID reference="uuid" reference-key="AD_Org">ea9b9271-84b2-400d-bbb6-511946b53cbf</AD_Org_ID>
+        <IsActive>Y</IsActive>
+        <Name>AR Withholding</Name>
+        <Description/>
+        <CategoryType>D</CategoryType>
+        <IsDefault>N</IsDefault>
+        <GL_Category_UU>4f3294ae-4480-478a-b1ff-e4cd66b77764</GL_Category_UU>
+        <GL_Category_Trl type="translation">
+            <Name>AR Withholding</Name>
+            <AD_Language>es_CO</AD_Language>
+            <IsActive>Y</IsActive>
+            <IsTranslated>N</IsTranslated>
+        </GL_Category_Trl>
+        <GL_Category_Trl type="translation">
+            <Name>AR Withholding</Name>
+            <AD_Language>es_VE</AD_Language>
+            <IsActive>Y</IsActive>
+            <IsTranslated>N</IsTranslated>
+        </GL_Category_Trl>
+    </GL_Category>
+    <C_DocType type="table">
+        <AD_Org_ID>0</AD_Org_ID>
+        <IsActive>Y</IsActive>
+        <Name>AP Withholding</Name>
+        <Description/>
+        <IsDocNoControlled>Y</IsDocNoControlled>
+        <DocNoSequence_ID reference="id"/>
+        <GL_Category_ID reference="uuid" reference-key="GL_Category">f0ebb6d5-f622-4a0b-af82-358f18f63e0c</GL_Category_ID>
+        <PrintName>Comprobante de Retencion de Compra</PrintName>
+        <DocBaseType>APP</DocBaseType>
+        <DocumentNote/>
+        <DocSubTypeSO/>
+        <HasCharges>N</HasCharges>
+        <HasProforma>N</HasProforma>
+        <C_DocTypeProforma_ID reference="id"/>
+        <C_DocTypeShipment_ID reference="id"/>
+        <C_DocTypeInvoice_ID reference="id"/>
+        <IsDefault>N</IsDefault>
+        <DocumentCopies>1</DocumentCopies>
+        <IsSOTrx>N</IsSOTrx>
+        <AD_PrintFormat_ID reference="id"/>
+        <IsDefaultCounterDoc>N</IsDefaultCounterDoc>
+        <IsPickQAConfirm>N</IsPickQAConfirm>
+        <IsShipConfirm>N</IsShipConfirm>
+        <IsInTransit>N</IsInTransit>
+        <C_DocTypeDifference_ID reference="id"/>
+        <IsSplitWhenDifference>N</IsSplitWhenDifference>
+        <IsCreateCounter>Y</IsCreateCounter>
+        <IsIndexed>Y</IsIndexed>
+        <IsOverwriteSeqOnComplete>N</IsOverwriteSeqOnComplete>
+        <DefiniteSequence_ID reference="id"/>
+        <IsOverwriteDateOnComplete>N</IsOverwriteDateOnComplete>
+        <IsPrepareSplitDocument>Y</IsPrepareSplitDocument>
+        <C_DocType_UU>e6337b64-70a5-4aab-b2f2-f65998c08342</C_DocType_UU>
+        <IsChargeOrProductMandatory>N</IsChargeOrProductMandatory>
+        <DocSubTypeInv/>
+        <GenerateWithholding>N</GenerateWithholding>
+        <LVE_ControlNoSequence_ID reference="id"/>
+        <isControlNoDocument>N</isControlNoDocument>
+        <C_DocType_Trl type="translation">
+            <DocumentNote/>
+            <PrintName>Comprobante de Retencion de Compra</PrintName>
+            <Name>Comprobante de Retencion de Compra</Name>
+            <AD_Language>es_CO</AD_Language>
+            <IsActive>Y</IsActive>
+            <IsTranslated>Y</IsTranslated>
+        </C_DocType_Trl>
+        <C_DocType_Trl type="translation">
+            <DocumentNote/>
+            <PrintName>Comprobante de Retencion de Compra</PrintName>
+            <Name>Comprobante de Retencion de Compra</Name>
+            <AD_Language>es_VE</AD_Language>
+            <IsActive>Y</IsActive>
+            <IsTranslated>Y</IsTranslated>
+        </C_DocType_Trl>
+    </C_DocType>
+    <C_DocType type="table">
+        <AD_Org_ID>0</AD_Org_ID>
+        <IsActive>Y</IsActive>
+        <Name>AR Withholding</Name>
+        <Description/>
+        <IsDocNoControlled>Y</IsDocNoControlled>
+        <DocNoSequence_ID reference="id"/>
+        <GL_Category_ID reference="uuid" reference-key="GL_Category">4f3294ae-4480-478a-b1ff-e4cd66b77764</GL_Category_ID>
+        <PrintName>Comprobante de Retencion de Venta</PrintName>
+        <DocBaseType>ARR</DocBaseType>
+        <DocumentNote/>
+        <DocSubTypeSO/>
+        <HasCharges>N</HasCharges>
+        <HasProforma>N</HasProforma>
+        <C_DocTypeProforma_ID reference="id"/>
+        <C_DocTypeShipment_ID reference="id"/>
+        <C_DocTypeInvoice_ID reference="id"/>
+        <IsDefault>N</IsDefault>
+        <DocumentCopies>1</DocumentCopies>
+        <IsSOTrx>Y</IsSOTrx>
+        <AD_PrintFormat_ID reference="id"/>
+        <IsDefaultCounterDoc>N</IsDefaultCounterDoc>
+        <IsPickQAConfirm>N</IsPickQAConfirm>
+        <IsShipConfirm>N</IsShipConfirm>
+        <IsInTransit>N</IsInTransit>
+        <C_DocTypeDifference_ID reference="id"/>
+        <IsSplitWhenDifference>N</IsSplitWhenDifference>
+        <IsCreateCounter>Y</IsCreateCounter>
+        <IsIndexed>Y</IsIndexed>
+        <IsOverwriteSeqOnComplete>N</IsOverwriteSeqOnComplete>
+        <DefiniteSequence_ID reference="id"/>
+        <IsOverwriteDateOnComplete>N</IsOverwriteDateOnComplete>
+        <IsPrepareSplitDocument>Y</IsPrepareSplitDocument>
+        <C_DocType_UU>82753efb-fbfe-438d-8b57-0562bc4476f6</C_DocType_UU>
+        <IsChargeOrProductMandatory>N</IsChargeOrProductMandatory>
+        <DocSubTypeInv/>
+        <GenerateWithholding>N</GenerateWithholding>
+        <LVE_ControlNoSequence_ID reference="id"/>
+        <isControlNoDocument>N</isControlNoDocument>
+        <C_DocType_Trl type="translation">
+            <DocumentNote/>
+            <PrintName>Comprobante de Retencion de Venta</PrintName>
+            <Name>Comprobante de Retencion de Venta</Name>
+            <AD_Language>es_CO</AD_Language>
+            <IsActive>Y</IsActive>
+            <IsTranslated>N</IsTranslated>
+        </C_DocType_Trl>
+        <C_DocType_Trl type="translation">
+            <DocumentNote/>
+            <PrintName>Comprobante de Retencion de Venta</PrintName>
+            <Name>Comprobante de Retencion de Venta</Name>
+            <AD_Language>es_VE</AD_Language>
+            <IsActive>Y</IsActive>
+            <IsTranslated>N</IsTranslated>
+        </C_DocType_Trl>
+    </C_DocType>
 </idempiere>

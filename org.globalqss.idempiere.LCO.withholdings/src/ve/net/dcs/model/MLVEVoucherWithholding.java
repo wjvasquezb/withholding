@@ -137,7 +137,8 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 			//throw new AdempiereException("@NoLines@");
 		}
 
-		int C_BankAccount_ID = MSysConfig.getIntValue("LVE_Withholding_BankAccount", 0, getAD_Client_ID());
+		//int C_BankAccount_ID = MSysConfig.getIntValue("LVE_Withholding_BankAccount", 0, getAD_Client_ID());
+		int C_BankAccount_ID = MSysConfig.getIntValue("LVE_Withholding_BankAccount", 0, getAD_Client_ID(), getAD_Org_ID());
 
 		if (C_BankAccount_ID == 0) {
 			m_processMsg =
@@ -180,28 +181,11 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		payment.setOverUnderAmt(Env.ZERO);
 		payment.setWriteOffAmt(Env.ZERO);
 
-		/*String dtname = isSOTrx() ? "AR Withholding" : "AP Withholding";
-		
-		String sql = "SELECT C_Doctype_ID FROM C_Doctype WHERE Name = '" + dtname + "' AND AD_Client_ID = " + getAD_Client_ID();
+		String dtName = isSOTrx() ? "AR Withholding" : "AP Withholding";
 
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		int C_Doctype_ID = 0;
-		try {
-			pstmt = DB.prepareStatement(sql, get_TrxName());
-			rs = pstmt.executeQuery();
-			while (rs.next())
-				C_Doctype_ID = rs.getInt(1);
-		} catch (Exception e) {
-			s_log.log(Level.SEVERE, sql, e);
-		} finally {
-			DB.close(rs, pstmt);
-			rs = null;
-			pstmt = null;
-		}
-		*/
-		int C_Doctype_ID = 0;
-		C_Doctype_ID = isSOTrx() ? MSysConfig.getIntValue("LVE_ARWithholdingDocTypeId",0,getAD_Client_ID()) : MSysConfig.getIntValue("LVE_APWithholdingDocTypeId",0,getAD_Client_ID());
+		int C_Doctype_ID = new Query(getCtx(), MDocType.Table_Name, "GL_Category.Name = ?", get_TrxName()).
+				addJoinClause("JOIN GL_Category GL_Category ON C_Doctype.GL_Category_ID = GL_Category.GL_Category_ID").setParameters(dtName).firstId();
+//		C_Doctype_ID = isSOTrx() ? MSysConfig.getIntValue("LVE_ARWithholdingDocTypeId",0,getAD_Client_ID()) : MSysConfig.getIntValue("LVE_APWithholdingDocTypeId",0,getAD_Client_ID());
 		payment.setC_DocType_ID(C_Doctype_ID);
 
 		payment.saveEx();
@@ -495,8 +479,8 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 
 		MDocType dt = new MDocType(getCtx(), wt.get_ValueAsInt("C_DocType_ID"), get_TrxName());
 		
-		//String value = DB.getDocumentNo(dt.getC_DocType_ID(), get_TrxName(), false, this);
-		String value = getDocumentNo();
+		String value = DB.getDocumentNo(dt.getC_DocType_ID(), get_TrxName(), false, this);
+		//String value = getDocumentNo();
 		//if (dt.getName().equals("Purchase IVA Withholding")) {
 			String month = new SimpleDateFormat("MM").format(getDateTrx());
 			String year = new SimpleDateFormat("yyyy").format(getDateTrx());
