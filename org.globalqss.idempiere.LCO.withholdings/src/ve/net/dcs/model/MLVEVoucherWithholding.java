@@ -56,7 +56,7 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 	private static final long serialVersionUID = -2297458289364285694L;
 
 	/** Logger */
-	private static CLogger s_log = CLogger.getCLogger(MLVEVoucherWithholding.class);
+	private static CLogger log = CLogger.getCLogger(MLVEVoucherWithholding.class);
 	private MPaymentAllocate pa = null;
 	BigDecimal InvoiceOpenAmt = null; 
 
@@ -184,16 +184,22 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		String dtName = isSOTrx() ? "AR Withholding" : "AP Withholding";
 
 		int C_Doctype_ID = 0;
-		C_Doctype_ID = new Query(getCtx(), MDocType.Table_Name, "GL_Category.Name = ?", get_TrxName()).
-				addJoinClause("JOIN GL_Category GL_Category ON C_Doctype.GL_Category_ID = GL_Category.GL_Category_ID").setParameters(dtName).firstId();
+		C_Doctype_ID = new Query(getCtx(), MDocType.Table_Name, "Name = ?", get_TrxName()).
+				setParameters(dtName).firstId();
 		if(C_Doctype_ID == 0)
-			C_Doctype_ID = isSOTrx() ? MSysConfig.getIntValue("LVE_ARWithholdingDocTypeId",0,getAD_Client_ID()) : MSysConfig.getIntValue("LVE_APWithholdingDocTypeId",0,getAD_Client_ID());
+			C_Doctype_ID = isSOTrx() ? MSysConfig.getIntValue("LVE_ARWithholdingDocTypeId",0,getAD_Client_ID(), getAD_Org_ID()) : MSysConfig.getIntValue("LVE_APWithholdingDocTypeId",0,getAD_Client_ID(), getAD_Org_ID());
 		if(C_Doctype_ID == 0)
-			C_Doctype_ID = new Query(getCtx(), MDocType.Table_Name, "Name = ?", get_TrxName()).
-					setParameters(dtName).firstId();
-		if(C_Doctype_ID == 0)
-			m_processMsg = "No existe Tipo de Documento '" + dtName + "' para Pago de Retención";
+			C_Doctype_ID = new Query(getCtx(), MDocType.Table_Name, "GL_Category.Name = ?", get_TrxName()).
+			addJoinClause("JOIN GL_Category GL_Category ON C_Doctype.GL_Category_ID = GL_Category.GL_Category_ID").setParameters(dtName).firstId();
+		if(C_Doctype_ID == 0) {
+			m_processMsg = "No existe Tipo de Documento '" + dtName + "', "
+					+ "ni Tipo de Comprobante Contable '" + dtName + "',"
+					+ "ni Configurador de Sistema 'LVE_ARWithholdingDocTypeId' o 'LVE_APWithholdingDocTypeId', "
+					+ "para Pago de Retención";
+			log.warning(m_processMsg);
+		}
 		
+		System.out.println("Tipo de Documento: " + C_Doctype_ID);
 		payment.setC_DocType_ID(C_Doctype_ID);
 
 		payment.saveEx();
