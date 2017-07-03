@@ -2575,7 +2575,7 @@
         <Name>AP Withholding</Name>
         <Description/>
         <IsDocNoControlled>Y</IsDocNoControlled>
-        <DocNoSequence_ID reference="id"/>
+		<DocNoSequence_ID reference="uuid" reference-key="AD_Sequence">b162d40d-d3f8-47c2-bcc8-756fe3d38ff7</DocNoSequence_ID>
         <GL_Category_ID reference="uuid" reference-key="GL_Category">f0ebb6d5-f622-4a0b-af82-358f18f63e0c</GL_Category_ID>
         <PrintName>Comprobante de Retencion de Compra</PrintName>
         <DocBaseType>APP</DocBaseType>
@@ -2631,7 +2631,7 @@
         <Name>AR Withholding</Name>
         <Description/>
         <IsDocNoControlled>Y</IsDocNoControlled>
-        <DocNoSequence_ID reference="id"/>
+        <DocNoSequence_ID reference="uuid" reference-key="AD_Sequence">0ed0911c-65b5-41a6-841e-3bbf17d4b698</DocNoSequence_ID>
         <GL_Category_ID reference="uuid" reference-key="GL_Category">4f3294ae-4480-478a-b1ff-e4cd66b77764</GL_Category_ID>
         <PrintName>Comprobante de Retencion de Venta</PrintName>
         <DocBaseType>ARR</DocBaseType>
