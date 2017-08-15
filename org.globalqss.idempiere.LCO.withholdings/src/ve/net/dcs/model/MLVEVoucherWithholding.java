@@ -120,7 +120,9 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		X_LCO_WithholdingType wt = new X_LCO_WithholdingType(getCtx(), getLCO_WithholdingType_ID(), get_TrxName());
 		
 		String type=(String)wt.get_Value("type");
-		if (!wt.isSOTrx() && type.compareTo("IVA")==0){
+		//	Modificado por Jorge Colmenarez, 2017-08-15 2:42 PM jcolmenarez@frontuari.com 
+		//	Soporte para crear nro de retención para los de tipo ISLR según secuencia de documento.
+		if (!wt.isSOTrx() && (type.compareTo("IVA")==0 || type.compareTo("ISLR")==0)){
 			createWithholdingNo(wt);
 		}else if (wt.isSOTrx() && type.compareTo("IVA")!=0 && type.compareTo("ISLR")!=0) {
 			createWithholdingNo(wt);
