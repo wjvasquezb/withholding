@@ -194,7 +194,9 @@ public class VWTModelValidator extends AbstractEventHandler {
 								throw new AdempiereException(msgSeqNotFound);
 							}
 	
-							MSequence seq = new MSequence(Env.getCtx(), (int) docType.get_Value("LVE_ControlNoSequence_ID"), po.get_TrxName());
+							int docTypeID = docType.get_ValueAsInt("LVE_ControlNoSequence_ID");
+							System.out.println("Doctype ID =" + docTypeID);
+							MSequence seq = new MSequence(Env.getCtx(), docTypeID, po.get_TrxName());
 							controlSequence = MSequence.getDocumentNoFromSeq(seq, po.get_TrxName(), invoice);
 	
 							Query query = new Query(Env.getCtx(), MInvoice.Table_Name, where + "AND LVE_controlNumber=?", po.get_TrxName());
