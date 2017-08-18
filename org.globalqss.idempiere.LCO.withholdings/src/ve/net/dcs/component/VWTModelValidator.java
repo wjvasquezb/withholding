@@ -186,17 +186,17 @@ public class VWTModelValidator extends AbstractEventHandler {
 			MDocType docType = (MDocType) invoice.getC_DocType();
 
 			if (invoice.getReversal_ID() == 0)
-				if(MSysConfig.getValue("LVE_ValidateControlNumber", "Y", invoice.getAD_Client_ID(), invoice.getAD_Org_ID()).compareTo("Y")==0){
+				if(docType.get_ValueAsBoolean("isControlNoDocument")) {
 					if (invoice.isSOTrx()) {
 						String controlSequence = null;
 						if (invoice.get_Value("LVE_controlNumber") == null) {
-							if (docType.get_Value("LVE_ControlNoSequence_ID") == null && docType.get_ValueAsBoolean("isControlNoDocument")) {
+							if (docType.get_Value("LVE_ControlNoSequence_ID") == null) {
 								throw new AdempiereException(msgSeqNotFound);
 							}
 	
-							int docTypeID = docType.get_ValueAsInt("LVE_ControlNoSequence_ID");
-							System.out.println("Doctype ID =" + docTypeID);
-							MSequence seq = new MSequence(Env.getCtx(), docTypeID, po.get_TrxName());
+							int controlNoSequence_ID = docType.get_ValueAsInt("LVE_ControlNoSequence_ID");
+							System.out.println("Doctype ID =" + controlNoSequence_ID);
+							MSequence seq = new MSequence(Env.getCtx(), controlNoSequence_ID, po.get_TrxName());
 							controlSequence = MSequence.getDocumentNoFromSeq(seq, po.get_TrxName(), invoice);
 	
 							Query query = new Query(Env.getCtx(), MInvoice.Table_Name, where + "AND LVE_controlNumber=?", po.get_TrxName());
