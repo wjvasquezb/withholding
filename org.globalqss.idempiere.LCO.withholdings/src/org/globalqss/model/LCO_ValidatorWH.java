@@ -30,7 +30,6 @@ import org.compiere.acct.DocLine;
 import org.compiere.acct.DocTax;
 import org.compiere.acct.Fact;
 import org.compiere.acct.FactLine;
-import org.compiere.model.I_C_BPartner;
 import org.compiere.model.MAcctSchema;
 import org.compiere.model.MAllocationHdr;
 import org.compiere.model.MAllocationLine;
@@ -42,7 +41,6 @@ import org.compiere.model.MInvoiceTax;
 import org.compiere.model.MPayment;
 import org.compiere.model.MPaymentAllocate;
 import org.compiere.model.PO;
-import org.compiere.model.X_C_BPartner;
 import org.compiere.util.CLogger;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
@@ -541,11 +539,16 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 						 "i.C_Tax_ID = t.C_Tax_ID "
 				+ "GROUP BY i.C_Tax_ID, t.Name, t.Rate, t.IsSalesTax";
 				*/
+				
+			/**
+			 *	Support for get Convertion with current money to money from acct schema
+			 * @contribuitor Jorge Colmenarez 2017-08-15 3:15 PM, jcolmenarez@frontuari.com, Frontuari, C.A
+			 */
 			String sql = 
 					  "SELECT i.C_Tax_ID,NVL(SUM(i.TaxBaseAmt),0) AS TaxBaseAmt, NVL(SUM(i.TaxAmt),0) AS TaxAmt, " +
-					  "COALESCE(SUM( currencyconvert(i.TaxBaseAmt,ci.c_currency_id, 205, " +
+					  "COALESCE(SUM( currencyconvert(i.TaxBaseAmt,ci.c_currency_id, (SELECT C_Currency_ID FROM C_AcctSchema WHERE AD_Client_ID = i.AD_Client_ID), " +
 					  "i.dateacct, ci.c_conversiontype_id, i.ad_client_id, i.ad_org_id) ),0) AS TaxBaseAmtVE, " +
-					  "COALESCE(SUM(currencyconvert(i.TaxAmt ,ci.c_currency_id, 205, " +
+					  "COALESCE(SUM(currencyconvert(i.TaxAmt ,ci.c_currency_id, (SELECT C_Currency_ID FROM C_AcctSchema WHERE AD_Client_ID = i.AD_Client_ID), " +
 					  "i.dateacct, ci.c_conversiontype_id, i.ad_client_id, i.ad_org_id)),0) AS TaxAmtVE, t.Name, t.Rate, t.IsSalesTax "
 					 + " FROM LCO_InvoiceWithholding i, C_Tax t, C_Invoice ci "
 					+ " WHERE i.C_Invoice_ID = ? AND " +
