@@ -495,6 +495,8 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 
 		MDocType dt = new MDocType(getCtx(), wt.get_ValueAsInt("C_DocType_ID"), get_TrxName());
 		
+		// Setear secuencia al comprobante si no tiene.
+		if(getWithholdingNo() == null || getWithholdingNo() == "") {
 		String value = DB.getDocumentNo(dt.getC_DocType_ID(), get_TrxName(), false, this);
 		//String value = getDocumentNo();
 		//if (dt.getName().equals("Purchase IVA Withholding")) {
@@ -508,7 +510,7 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 			setWithholdingNo(value);
 			//setDocumentNo(value);
 		}
-
+		}
 	}
 
 	/**
