@@ -169,8 +169,11 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		payment.setAD_Org_ID(getAD_Org_ID());
 		payment.setC_BankAccount_ID(C_BankAccount_ID);
 		payment.setDescription("Retencion No: " + getWithholdingNo());
-		payment.setDateAcct(getDateTrx());
-		payment.setDateTrx(getDateTrx());
+		//	Changed by Jorge Colmenarez 2017-08-28 15:15 
+		//	Change getDateTrx to getDateAcct for fixed date accounting into documents 
+		payment.setDateAcct(getDateAcct());
+		payment.setDateTrx(getDateAcct());
+		//	End Jorge Colmenarez
 		payment.setTenderType("X");
 		payment.setC_BPartner_ID(getC_BPartner_ID());
 		MAcctSchema[] m_ass = MAcctSchema.getClientAcctSchema(getCtx(), getAD_Client_ID());

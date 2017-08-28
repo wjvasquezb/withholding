@@ -232,6 +232,16 @@ public class X_LVE_VoucherWithholding extends PO implements I_LVE_VoucherWithhol
 		return (Timestamp)get_Value(COLUMNNAME_DateTrx);
 	}
 
+	/** 
+	 * Get Account Date.
+	 * @author Jorge Colmenarez, 28-08-2017 15:13, jcolmenarez@frontuari.com, Frontuari, C.A.
+	 * @return Account Date
+	 **/
+	public Timestamp getDateAcct () 
+	{
+		return (Timestamp)get_Value("DateAcct");
+	}
+
 	/** DocAction AD_Reference_ID=135 */
 	public static final int DOCACTION_AD_Reference_ID=135;
 	/** Complete = CO */
