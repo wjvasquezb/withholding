@@ -1,20 +1,21 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Localization Colombia - Withholdings
-Bundle-SymbolicName: org.globalqss.idempiere.LCO.withholdings.DCS;singleton:=true
-Bundle-Version: 4.1.0.qualifier
-Bundle-Activator: org.adempiere.plugin.utils.Incremental2PackActivator
-Bundle-Vendor: GlobalQSS
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Require-Bundle: org.adempiere.base;bundle-version="1.0.0",
- org.adempiere.plugin.utils;bundle-version="0.0.0"
-Bundle-ActivationPolicy: lazy
-Export-Package: org.globalqss.model,
- org.globalqss.process,
- ve.net.dcs.model,
- ve.net.dcs.process
-Service-Component: OSGI-INF/lco_calloutswhfactory.xml,OSGI-INF/lcovalidatorwh.xml, OSGI-INF/VWTModelFactory.xml,OSGI-INF/VWTCalloutFactory.xml,
- OSGI-INF/VWTModelValidator.xml
-Import-Package: org.osgi.service.event
+Bundle-Name: Withholdings
+Bundle-SymbolicName: org.globalqss.idempiere.LCO.withholdings;singleton:=true
+Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .,
  lib/jdom-2.0.5.jar
+Bundle-Activator: org.adempiere.plugin.utils.Incremental2PackActivator
+Export-Package: org.globalqss.model,
+ org.globalqss.process,
+ ve.net.dcs.callout,
+ ve.net.dcs.component,
+ ve.net.dcs.info,
+ ve.net.dcs.model,
+ ve.net.dcs.process
+Require-Bundle: org.adempiere.base;bundle-version="1.0.0",
+ org.adempiere.plugin.utils;bundle-version="0.0.0"
+Import-Package: org.osgi.service.event
+Service-Component: OSGI-INF/lco_calloutswhfactory.xml,OSGI-INF/lcovalidatorwh.xml, OSGI-INF/VWTModelFactory.xml,OSGI-INF/VWTCalloutFactory.xml,OSGI-INF/VWTModelValidator.xml
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
