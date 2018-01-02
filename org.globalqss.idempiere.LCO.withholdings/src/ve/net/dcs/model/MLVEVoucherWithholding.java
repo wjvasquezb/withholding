@@ -505,11 +505,10 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		//if (dt.getName().equals("Purchase IVA Withholding")) {
 			String month = new SimpleDateFormat("MM").format(getDateTrx());
 			String year = new SimpleDateFormat("yyyy").format(getDateTrx());
-
-			value = year + month + value;
 		//}
 
 		if (value != null){
+			value = year + month + value;
 			setWithholdingNo(value);
 			//setDocumentNo(value);
 		}
