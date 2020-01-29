@@ -139,8 +139,8 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 			//throw new AdempiereException("@NoLines@");
 		}
 
-		//int C_BankAccount_ID = MSysConfig.getIntValue("LVE_Withholding_BankAccount", 0, getAD_Client_ID());
-		int C_BankAccount_ID = MSysConfig.getIntValue("LVE_Withholding_BankAccount", 0, getAD_Client_ID(), getAD_Org_ID());
+		int C_BankAccount_ID = MSysConfig.getIntValue("LVE_Withholding_BankAccount", 0, getAD_Client_ID());
+		//int C_BankAccount_ID = MSysConfig.getIntValue("LVE_Withholding_BankAccount", 0, getAD_Client_ID(), getAD_Org_ID());
 
 		if (C_BankAccount_ID == 0) {
 			m_processMsg =
