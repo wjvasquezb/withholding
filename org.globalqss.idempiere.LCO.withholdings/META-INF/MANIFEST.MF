@@ -13,10 +13,10 @@ Export-Package: org.globalqss.model,
  ve.net.dcs.info,
  ve.net.dcs.model,
  ve.net.dcs.process
-Require-Bundle: org.adempiere.base;bundle-version="1.0.0",
- org.adempiere.plugin.utils;bundle-version="0.0.0",
+Require-Bundle: org.adempiere.base;bundle-version="7.1.0",
+ org.adempiere.plugin.utils;bundle-version="7.1.0",
  org.jfree.jcommon-osgi;bundle-version="1.0.23"
 Import-Package: org.osgi.service.event
 Service-Component: OSGI-INF/lco_calloutswhfactory.xml,OSGI-INF/lcovalidatorwh.xml, OSGI-INF/VWTModelFactory.xml,OSGI-INF/VWTCalloutFactory.xml,OSGI-INF/VWTModelValidator.xml
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
