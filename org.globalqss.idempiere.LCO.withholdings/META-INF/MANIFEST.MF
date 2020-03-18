@@ -6,7 +6,9 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .,
  lib/jdom-2.0.5.jar
 Bundle-Activator: org.adempiere.plugin.utils.Incremental2PackActivator
-Export-Package: org.globalqss.model,
+Export-Package: net.frontuari.component,
+ org.compiere.acct,
+ org.globalqss.model,
  org.globalqss.process,
  ve.net.dcs.callout,
  ve.net.dcs.component,
@@ -17,6 +19,7 @@ Require-Bundle: org.adempiere.base;bundle-version="7.1.0",
  org.adempiere.plugin.utils;bundle-version="7.1.0",
  org.jfree.jcommon-osgi;bundle-version="1.0.23"
 Import-Package: org.osgi.service.event
-Service-Component: OSGI-INF/lco_calloutswhfactory.xml,OSGI-INF/lcovalidatorwh.xml, OSGI-INF/VWTModelFactory.xml,OSGI-INF/VWTCalloutFactory.xml,OSGI-INF/VWTModelValidator.xml
+Service-Component: OSGI-INF/lco_calloutswhfactory.xml,OSGI-INF/lcovalidatorwh.xml, OSGI-INF/VWTModelFactory.xml,OSGI-INF/VWTCalloutFactory.xml,OSGI-INF/VWTModelValidator.xml,
+ OSGI-INF/LVE_DocFactory.xml
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-11

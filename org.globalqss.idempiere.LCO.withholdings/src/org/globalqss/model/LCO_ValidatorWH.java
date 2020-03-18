@@ -20,13 +20,14 @@ import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 
 import org.adempiere.base.event.AbstractEventHandler;
+import org.adempiere.base.event.FactsEventData;
 import org.adempiere.base.event.IEventTopics;
 import org.compiere.acct.Doc;
-import org.compiere.acct.DocLine;
+import org.compiere.acct.DocLine_Allocation;
 import org.compiere.acct.DocTax;
 import org.compiere.acct.Fact;
 import org.compiere.acct.FactLine;
@@ -79,8 +80,9 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 		registerTableEvent(IEventTopics.DOC_AFTER_COMPLETE, MInvoice.Table_Name);
 		registerTableEvent(IEventTopics.DOC_BEFORE_COMPLETE, MPayment.Table_Name);
 		registerTableEvent(IEventTopics.DOC_AFTER_COMPLETE, MAllocationHdr.Table_Name);
-		registerTableEvent(IEventTopics.DOC_BEFORE_POST, MAllocationHdr.Table_Name);
-		registerTableEvent(IEventTopics.DOC_AFTER_POST, MAllocationHdr.Table_Name);
+		//registerTableEvent(IEventTopics.DOC_BEFORE_POST, MAllocationHdr.Table_Name);
+		//registerTableEvent(IEventTopics.DOC_AFTER_POST, MAllocationHdr.Table_Name);
+		registerTableEvent(IEventTopics.ACCT_FACTS_VALIDATE, MAllocationHdr.Table_Name);
 		registerTableEvent(IEventTopics.DOC_AFTER_VOID, MAllocationHdr.Table_Name);
 		registerTableEvent(IEventTopics.DOC_AFTER_REVERSECORRECT, MAllocationHdr.Table_Name);
 		registerTableEvent(IEventTopics.DOC_AFTER_REVERSEACCRUAL, MAllocationHdr.Table_Name);
@@ -93,8 +95,15 @@ public class LCO_ValidatorWH extends AbstractEventHandler
      */
 	@Override
 	protected void doHandleEvent(Event event) {
-		PO po = getPO(event);
+		PO po = null;
 		String type = event.getTopic();
+		
+		if (type.equals(IEventTopics.ACCT_FACTS_VALIDATE)) {
+			FactsEventData fed = getEventData(event);
+			po = fed.getPo();
+		} else {
+			po = getPO(event);
+		}
 		log.info(po.get_TableName() + " Type: "+type);
 		String msg;
 		
@@ -239,11 +248,19 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 		}
 
 		// before posting the allocation - post the payment withholdings vs writeoff amount  
-		if (po.get_TableName().equals(MAllocationHdr.Table_Name) && type.equals(IEventTopics.DOC_BEFORE_POST)) {
+		/*if (po.get_TableName().equals(MAllocationHdr.Table_Name) && type.equals(IEventTopics.DOC_BEFORE_POST)) {
 			msg = accountingForInvoiceWithholdingOnPayment((MAllocationHdr) po);
 			if (msg != null)
 				throw new RuntimeException(msg);
+		}*/
+		
+		// before posting the allocation - post the payment withholdings vs writeoff amount
+		if (po instanceof MAllocationHdr && type.equals(IEventTopics.ACCT_FACTS_VALIDATE)) {
+			msg = accountingForInvoiceWithholdingOnPayment((MAllocationHdr) po, event);
+			if (msg != null)
+				throw new RuntimeException(msg);
 		}
+		
 
 		// after completing the allocation - complete the payment withholdings  
 		if (po.get_TableName().equals(MAllocationHdr.Table_Name)
@@ -499,15 +516,16 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 		return null;
 	}
 
-	private String accountingForInvoiceWithholdingOnPayment(MAllocationHdr ah) {
+	private String accountingForInvoiceWithholdingOnPayment(MAllocationHdr ah, Event event) {
 		// Accounting like Doc_Allocation
 		// (Write off) vs (invoice withholding where iscalconpayment=Y)
 		// 20070807 - globalqss - instead of adding a new WriteOff post, find the
 		//  current WriteOff and subtract from the posting
 		
 		Doc doc = ah.getDoc();
+		FactsEventData fed = getEventData(event);
+		List<Fact> facts = fed.getFacts();
 		
-		ArrayList<Fact> facts = doc.getFacts();
 		// one fact per acctschema
 		for (int i = 0; i < facts.size(); i++)
 		{
@@ -519,6 +537,7 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 				BigDecimal tottax = new BigDecimal(0);
 				
 				MAllocationLine alloc_line = alloc_lines[j];
+				DocLine_Allocation docLine = new DocLine_Allocation(alloc_line, doc);
 				doc.setC_BPartner_ID(alloc_line.getC_BPartner_ID());
 				
 				int inv_id = alloc_line.getC_Invoice_ID();
@@ -601,16 +620,16 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 							FactLine tl = null;
 							if ((invoice.isSOTrx() && invoice.getC_DocTypeTarget().getDocBaseType().compareTo("ARI")==0)){
 							//if ((invoice.isSOTrx() && invoice.getC_DocTypeTarget().getDocBaseType().compareTo("ARI")==0) || (!invoice.isSOTrx() && invoice.getC_DocTypeTarget().getDocBaseType().compareTo("APC")==0)) {
-								tl = fact.createLine(null, taxLine.getAccount(DocTax.ACCTTYPE_TaxDue, as),
+								tl = fact.createLine(docLine, taxLine.getAccount(DocTax.ACCTTYPE_TaxDue, as),
 										as.getC_Currency_ID(), amountVE, null);
 							} 
 							//** si es NC proveedor es un iva en compras
 							else if (!invoice.isSOTrx() && invoice.getC_DocTypeTarget().getDocBaseType().compareTo("APC")==0){
-								tl = fact.createLine(null, taxLine.getAccount(taxLine.getAPTaxType(), as),
+								tl = fact.createLine(docLine, taxLine.getAccount(taxLine.getAPTaxType(), as),
 										as.getC_Currency_ID(), null, amountVE);
 							}
 							else {
-								tl = fact.createLine(null, taxLine.getAccount(taxLine.getAPTaxType(), as),
+								tl = fact.createLine(docLine, taxLine.getAccount(taxLine.getAPTaxType(), as),
 										as.getC_Currency_ID(), null, amountVE);
 							}
 							if (tl != null)
@@ -662,7 +681,7 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 
 					if (! foundflwriteoff) {
 						// Create a new line
-						DocLine line = new DocLine(alloc_line, doc);
+						DocLine_Allocation line = new DocLine_Allocation(alloc_line, doc);
 						FactLine fl = null;
 						if (invoice.isSOTrx()) {
 							fl = fact.createLine (line, doc.getAccount(Doc.ACCTTYPE_WriteOff, as),

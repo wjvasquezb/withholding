@@ -139,9 +139,11 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 			//throw new AdempiereException("@NoLines@");
 		}
 
-		int C_BankAccount_ID = MSysConfig.getIntValue("LVE_Withholding_BankAccount", 0, getAD_Client_ID());
+		//int C_BankAccount_ID = MSysConfig.getIntValue("LVE_Withholding_BankAccount", 0, getAD_Client_ID());
 		//int C_BankAccount_ID = MSysConfig.getIntValue("LVE_Withholding_BankAccount", 0, getAD_Client_ID(), getAD_Org_ID());
 
+		int C_BankAccount_ID = wt.get_ValueAsInt("C_BankAccount_ID");
+		
 		if (C_BankAccount_ID == 0) {
 			m_processMsg =
 			"Debe Establecer un Caja para las Retenciones, Configurador del Sistema LVE_Withholding_BankAccount";
@@ -186,7 +188,7 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		payment.setOverUnderAmt(Env.ZERO);
 		payment.setWriteOffAmt(Env.ZERO);
 
-		String dtName = isSOTrx() ? "AR Withholding" : "AP Withholding";
+		/*String dtName = isSOTrx() ? "AR Withholding" : "AP Withholding";
 
 		int C_Doctype_ID = 0;
 		C_Doctype_ID = new Query(getCtx(), MDocType.Table_Name, "Name = ?", get_TrxName()).
@@ -204,7 +206,8 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 			log.warning(m_processMsg);
 		}
 		
-		System.out.println("Tipo de Documento: " + C_Doctype_ID);
+		System.out.println("Tipo de Documento: " + C_Doctype_ID);*/
+		int C_Doctype_ID = wt.get_ValueAsInt("C_DocTypeTarget_ID");
 		payment.setC_DocType_ID(C_Doctype_ID);
 
 		payment.saveEx();
