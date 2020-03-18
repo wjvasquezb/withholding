@@ -40,4 +40,20 @@
             class="ve.net.dcs.process.LVE_GenerateXmlSeniat">
       </process>
    </extension>
+   <extension
+         id="ve.net.dcs.process.FTU_GenerateWithholdingVouchers"
+         name="FTU_GenerateWithholdingVouchers"
+         point="org.adempiere.base.Process">
+      <process
+            class="ve.net.dcs.process.FTU_GenerateWithholdingVouchers">
+      </process>
+   </extension>
+   <extension
+         id="ve.net.dcs.process.FTU_GenerateTaxReturn"
+         name="FTU_GenerateTaxReturn"
+         point="org.adempiere.base.Process">
+      <process
+            class="ve.net.dcs.process.FTU_GenerateTaxReturn">
+      </process>
+   </extension>
 </plugin>
