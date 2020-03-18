@@ -66,7 +66,7 @@ public class FTU_GenerateTaxReturn extends SvrProcess {
 		String sql ="SELECT vw.LVE_VoucherWithholding_ID, vw.WithholdingNo,COALESCE(SUM(iw.TaxAmt),0) as TaxAmt "
 					+ " FROM LVE_VoucherWithholding vw "
 					+ " INNER join LCO_InvoiceWithholding iw on iw.lve_voucherwithholding_id = vw.lve_voucherwithholding_id "
-					+ " WHERE vw.datetrx  BETWEEN '"+dateFrom+"' and '"+dateFromTo+"' AND "
+					+ " WHERE vw.datetrx vw.docstatus IN ('CO') AND  BETWEEN '"+dateFrom+"' and '"+dateFromTo+"' AND "
 							+ " NOT EXISTS (SELECT 1 FROM c_invoiceline ci INNER JOIN c_invoice c ON c.c_invoice_id = ci.c_invoice_id"
 							+ " WHERE ci.LVE_VoucherWithholding_ID = vw.LVE_VoucherWithholding_ID AND c.docstatus NOT IN ('RE','VO'))"
 					+ " GROUP BY vw.LVE_VoucherWithholding_ID,vw.WithholdingNo ";
