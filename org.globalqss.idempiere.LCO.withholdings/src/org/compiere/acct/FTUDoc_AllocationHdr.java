@@ -233,10 +233,14 @@ public class FTUDoc_AllocationHdr extends Doc_AllocationHdr {
 							getC_Currency_ID(), line.getAmtSource(), null);
 						if (fl != null && payment != null)
 							fl.setAD_Org_ID(payment.getAD_Org_ID());
-						if (payment.getReversal_ID() > 0 )
-							paymentSelectAmt= paymentSelectAmt.add(fl.getAcctBalance().negate());
-						else
-							paymentSelectAmt= paymentSelectAmt.add(fl.getAcctBalance());
+						// Fixed bug when process Withholding Allocation
+						if(fl != null)
+						{
+							if (payment.getReversal_ID() > 0 )
+								paymentSelectAmt= paymentSelectAmt.add(fl.getAcctBalance().negate());
+							else
+								paymentSelectAmt= paymentSelectAmt.add(fl.getAcctBalance());
+						}
 					}
 					else if (line.getC_CashLine_ID() != 0)
 					{
