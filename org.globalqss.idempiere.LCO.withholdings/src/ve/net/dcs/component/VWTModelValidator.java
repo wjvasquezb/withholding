@@ -1,5 +1,6 @@
 package ve.net.dcs.component;
 
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,14 +13,19 @@ import org.adempiere.base.event.IEventTopics;
 import org.adempiere.exceptions.AdempiereException;
 import org.compiere.model.I_C_BPartner;
 import org.compiere.model.I_C_Invoice;
+import org.compiere.model.I_C_InvoiceLine;
+import org.compiere.model.MAllocationHdr;
+import org.compiere.model.MAllocationLine;
 import org.compiere.model.MDocType;
 import org.compiere.model.MInvoice;
+import org.compiere.model.MInvoiceLine;
 import org.compiere.model.MSequence;
 import org.compiere.model.MSysConfig;
 import org.compiere.model.PO;
 import org.compiere.model.Query;
 import org.compiere.model.X_C_BPartner;
 import org.compiere.process.DocAction;
+import org.compiere.process.DocumentEngine;
 import org.compiere.util.CLogger;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
@@ -33,8 +39,12 @@ import ve.net.dcs.model.I_LVE_VoucherWithholding;
 import ve.net.dcs.model.MLVEVoucherWithholding;
 
 public class VWTModelValidator extends AbstractEventHandler {
-
+	
 	private static CLogger log = CLogger.getCLogger(VWTModelValidator.class);
+	/**	Current Business Partner				*/
+	private int m_Current_C_BPartner_ID 		= 	0;
+	/**	Current Allocation						*/
+	private MAllocationHdr m_Current_Alloc 		= 	null;
 
 	@Override
 	protected void initialize() {
@@ -154,6 +164,16 @@ public class VWTModelValidator extends AbstractEventHandler {
 				}
 			}
 			
+			/**
+			 * Automatic Allocation Between Credit/Debit Notes with DocAffected
+			 * @author Jorge Colmenarez <mailto:jcolmenarez@frontuari.net>, 2020-04-30 09:34
+			 */
+			MDocType m_DocType = (MDocType) invoice.getC_DocTypeTarget();
+			if(!invoice.isPaid() 
+					|| invoice.getReversal_ID() == 0
+					|| m_DocType.get_ValueAsBoolean("IsAutoAllocation"))
+				AutomaticAllocation(invoice);
+			
 
 		} else if (po.get_TableName().equals(I_C_Invoice.Table_Name) && (type.equals(IEventTopics.DOC_BEFORE_VOID) || type.equals(IEventTopics.DOC_BEFORE_REACTIVATE) || type.equals(IEventTopics.DOC_BEFORE_REVERSEACCRUAL) || type.equals(IEventTopics.DOC_BEFORE_REVERSECORRECT))) {
 			MInvoice invoice = (MInvoice) po;
@@ -266,6 +286,160 @@ public class VWTModelValidator extends AbstractEventHandler {
 		return isValidate;
 	}
 
+	/**
+	 * Automatic Allocation between Credit/Debit Notes and Document Affected
+	 * @author Jorge Colmenarez <mailto:jcolmenarez@frontuari.net>, 2020-04-30 09:30
+	 * @param m_Invoice
+	 */
+	private void AutomaticAllocation(MInvoice m_Invoice)
+	{
+		StringBuffer whereClause = new StringBuffer();
+		StringBuffer whereParam = new StringBuffer();
+		List<Object> parameters	= new ArrayList<Object>();;
+		MInvoiceLine[] list  = null;
+		m_Current_Alloc = null;
+			
+		whereClause.append(" AND LVE_invoiceAffected_ID IS NOT NULL");
+		BigDecimal m_InvoiceApplyAmt = Env.ZERO;
+		BigDecimal m_AmtAllocated = Env.ZERO;
+		
+		whereParam.append("C_Invoice_ID=? ");
+		parameters.add(m_Invoice.get_ID());
+		
+		list = getInvoiceLines(m_Invoice,whereClause.toString());
+		BigDecimal invoiceAffectedNewOpenAmt = Env.ZERO;
+		BigDecimal lineAmount = Env.ZERO;
+		for (MInvoiceLine mInvoiceLine : list) {
+			int invoiceID = mInvoiceLine.get_ValueAsInt("LVE_invoiceAffected_ID");
+			MInvoice invoiceAffected = MInvoice.get(m_Invoice.getCtx(), invoiceID);
+			lineAmount = (mInvoiceLine.getLineTotalAmt()).subtract(m_AmtAllocated);
+			
+			BigDecimal invoiceAffectedOpenAmt = invoiceAffected.getOpenAmt(); //invoiceAffectedNewOpenAmt.compareTo(Env.ZERO) <= 0 ? invoiceAffected.getOpenAmt() : invoiceAffectedNewOpenAmt;
+			/*if(invoiceAffected.isCreditMemo())
+				invoiceAffectedOpenAmt = invoiceAffectedOpenAmt.negate();*/
+			
+			if(lineAmount.compareTo(invoiceAffectedOpenAmt) > 0)
+				lineAmount = invoiceAffectedOpenAmt;
+			
+			//	Credit Notes
+			if(m_Invoice.isCreditMemo())
+				invoiceAffectedNewOpenAmt =  invoiceAffectedOpenAmt.subtract(lineAmount);// lineAmount = lineAmount.negate();
+			else	//	Debit Notes
+				invoiceAffectedNewOpenAmt =  invoiceAffectedOpenAmt.add(lineAmount);
+			
+			
+			if(invoiceAffectedNewOpenAmt.compareTo(Env.ZERO) < 0)
+				continue;
+			
+			addAllocation(m_Invoice.getC_BPartner_ID(), lineAmount, invoiceAffectedNewOpenAmt, m_Invoice, invoiceAffected.getC_Invoice_ID());
+			m_InvoiceApplyAmt = m_InvoiceApplyAmt.add(lineAmount.negate());
+		}
+		//	Complete Allocation
+		try {
+			completeAllocation(m_Invoice, m_InvoiceApplyAmt, m_AmtAllocated);
+		} catch (Exception e) {
+			log.warning(e.getMessage());
+			m_Current_Alloc.deleteEx(true);
+		} finally {
+			whereClause = new StringBuffer();
+			whereParam = new StringBuffer();
+			parameters	= new ArrayList<Object>();;
+			list  = null;
+			m_Current_Alloc = null;
+		}
+	}
 	
+	/**
+	 * Complete Allocation
+	 * @author <a href="mailto:dixon.22martinez@gmail.com">Dixon Martinez</a> 10/12/2014, 17:23:23
+	 * @param m_Invoice 
+	 * @param m_AmtAllocated 
+	 * @param openAmt 
+	 * @param newOpenAmt 
+	 * @return void
+	 */
+	private void completeAllocation(MInvoice m_Invoice, BigDecimal m_PayAmt, BigDecimal m_AmtAllocated) throws Exception{
+		if(m_Current_Alloc != null){
+			if(m_Current_Alloc.getDocStatus().equals(DocumentEngine.STATUS_Drafted)){
+				BigDecimal amt = m_Invoice.getOpenAmt();
+				
+				MAllocationLine aLine = null;
+				if(!m_Invoice.isCreditMemo()) {
+					amt = amt.subtract(m_AmtAllocated);
+					aLine = new MAllocationLine (m_Current_Alloc,  amt.negate(),//grandAmount.multiply(multiplier), 
+							Env.ZERO, Env.ZERO, m_PayAmt.negate() );
+				}  else {
+					amt = amt.subtract(m_AmtAllocated.negate());
+					aLine = new MAllocationLine (m_Current_Alloc, m_PayAmt.negate() ,//grandAmount.multiply(multiplier), 
+							Env.ZERO, Env.ZERO, Env.ZERO);
+				}
+				//
+				aLine.setDocInfo(m_Current_C_BPartner_ID, 0, m_Invoice.getC_Invoice_ID());
+				aLine.saveEx();
+				//	
+				if(m_Current_Alloc.getDocStatus().equals(DocumentEngine.STATUS_Drafted)){
+					log.fine("Current Allocation = " + m_Current_Alloc.getDocumentNo());
+					m_Current_Alloc.setDocAction(DocumentEngine.ACTION_Complete);
+					m_Current_Alloc.processIt(DocumentEngine.ACTION_Complete);
+					m_Current_Alloc.saveEx();			
+				}	
+			}
+			m_Current_Alloc = null;
+			m_Current_C_BPartner_ID = -1;
+		}
+	}
+	
+
+	/**
+	 * Add Document Allocation
+	 * @author <a href="mailto:dixon.22martinez@gmail.com">Dixon Martinez</a> 10/12/2014, 17:23:45
+	 * @param p_C_BPartner_ID
+	 * @param amtDocument
+	 * @param openAmt
+	 * @param m_Invoice
+	 * @param p_C_Invoice_ID
+	 * @return void
+	 */
+	private void addAllocation(int p_C_BPartner_ID, BigDecimal openAmt,
+			BigDecimal payAmt, MInvoice m_Invoice, int p_C_Invoice_ID) {
+		if(m_Current_C_BPartner_ID != p_C_BPartner_ID){
+			
+			MDocType dtAll = (MDocType) m_Invoice.getC_DocType();
+			
+			m_Current_Alloc = new MAllocationHdr(Env.getCtx(), true,	//	manual
+					Env.getContextAsDate(m_Invoice.getCtx(), "#Date"), m_Invoice.getC_Currency_ID(), Env.getContext(Env.getCtx(), "#AD_User_Name"), m_Invoice.get_TrxName());
+			m_Current_Alloc.setAD_Org_ID(m_Invoice.getAD_Org_ID());
+			m_Current_Alloc.setC_DocType_ID(dtAll.get_ValueAsInt("C_DocTypeAllocation_ID"));
+			m_Current_Alloc.saveEx();
+		}
+		//	
+		
+		if(m_Invoice.isCreditMemo())
+			openAmt = openAmt.negate();
+		
+		MAllocationLine aLine = new MAllocationLine (m_Current_Alloc, openAmt, 
+				Env.ZERO, Env.ZERO, payAmt);
+		aLine.setDocInfo(p_C_BPartner_ID, 0, p_C_Invoice_ID);
+		aLine.saveEx();
+		//
+		m_Current_C_BPartner_ID = p_C_BPartner_ID;
+	}
+	
+	/**
+	 * 	Get Invoice Lines of Invoice
+	 * 	@param whereClause starting with AND
+	 * 	@return lines
+	 */
+	public MInvoiceLine[] getInvoiceLines (MInvoice mInvoice, String whereClause)
+	{
+		String whereClauseFinal = "C_Invoice_ID=? ";
+		if (whereClause != null)
+			whereClauseFinal += whereClause;
+		List<MInvoiceLine> list = new Query(Env.getCtx(), I_C_InvoiceLine.Table_Name, whereClauseFinal, mInvoice.get_TrxName())
+										.setParameters(mInvoice.getC_Invoice_ID())
+										.setOrderBy(I_C_InvoiceLine.COLUMNNAME_Line)
+										.list();
+		return list.toArray(new MInvoiceLine[list.size()]);
+	}	//	getLines
 	
 }
