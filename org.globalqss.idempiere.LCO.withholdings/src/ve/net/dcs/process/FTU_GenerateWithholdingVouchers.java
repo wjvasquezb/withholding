@@ -63,71 +63,123 @@ public class FTU_GenerateWithholdingVouchers extends SvrProcess {
 	protected String doIt() throws Exception {
 		// TODO Auto-generated method stub
 		
-		String sql = "SELECT i.c_bpartner_id"
-				+ " FROM c_invoice i "
-				+ " WHERE NOT EXISTS (SELECT 1 FROM lco_invoicewithholding iw WHERE iw.c_invoice_id = i.c_invoice_id AND iw.lco_withholdingtype_id = "+withholdingType+")"
-				+ " AND i.ad_org_id="+orgId+" AND i.dateinvoiced BETWEEN '"+dateDocFrom+"' AND '"+dateDocTo+"' ";
 		
-		if(bPartnerId>0)
-			sql = sql+" AND i.C_BPartner_ID="+bPartnerId;
-		if(invoiceId>0)
-			sql = sql+" AND i.C_Invoice_ID="+invoiceId;
+		String sqlwt = "select dt.issotrx ,wt.LCO_WithholdingType_ID,wt.Type from LCO_WithholdingType wt "
+				+" inner join c_doctype dt on wt.c_doctype_id = dt.c_doctype_id where dt.issotrx='N' and wt.isactive = 'Y' ";
+		if(withholdingType>0) 
+			sqlwt += " and wt.LCO_WithholdingType_ID="+withholdingType;
 		
-		sql = sql+" GROUP BY i.c_bpartner_id";
-		
-		MLCOWithholdingType withHoldingType = new MLCOWithholdingType(getCtx(),withholdingType,get_TrxName());
-		
-		int docTypeId = withHoldingType.get_ValueAsInt("C_DocType_ID");
-		
-		MDocType docType = new MDocType(getCtx(),docTypeId,get_TrxName());
-		boolean iSOTrx= docType.isSOTrx() ;
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		PreparedStatement pstmtwt = null;
+		ResultSet rswt = null;
 		
 		try {
 			
-			pstmt= DB.prepareStatement(sql, get_TrxName());
-			rs =  pstmt.executeQuery();
+			pstmtwt= DB.prepareStatement(sqlwt, get_TrxName());
+			rswt =  pstmtwt.executeQuery();
 			
-			while(rs.next()) {
-				int cBPartnerId = rs.getInt("c_bpartner_id");
+			while(rswt.next()) {
+				int withholdingType = rswt.getInt("LCO_WithholdingType_ID");
+				boolean iSOTrx = rswt.getBoolean("issotrx");
+				String type = rswt.getString("Type");
+				String sql = "" ;
 				
-				MLVEVoucherWithholding voucher = new MLVEVoucherWithholding(getCtx(), 0, get_TrxName());
-				voucher.setAD_Org_ID(orgId);
-				voucher.setC_BPartner_ID(cBPartnerId);
-				voucher.setDateFrom(dateDocFrom);
-				voucher.setDateTo(dateDocTo);
-				voucher.setDateTrx(dateTrx);
-				voucher.setLCO_WithholdingType_ID(withholdingType);
-				voucher.setIsSOTrx(iSOTrx);
-				
-				if(invoiceId>0)
-					voucher.setC_Invoice_ID(invoiceId);
-
-				
-				voucher.saveEx(get_TrxName());
-				
-				MInvoice[] invoices = VWT_MInvoice.getOfBPartnerDateFromDateTo(getCtx(), voucher, get_TrxName());
-				
-				for (MInvoice mInvoice : invoices) {	
-					log.info("Prueba "+mInvoice.getDateAcct());
+				if(type.equalsIgnoreCase("IVA")){
 					
-					VWT_MInvoice invoice = new VWT_MInvoice(getCtx(), mInvoice.getC_Invoice_ID(), get_TrxName());
-					cnt += invoice.recalcWithholdings(voucher);
+					sql = "SELECT i.c_bpartner_id"
+							+ " FROM c_invoice i "
+							+ " WHERE NOT EXISTS (SELECT 1 FROM lco_invoicewithholding iw WHERE iw.c_invoice_id = i.c_invoice_id AND iw.lco_withholdingtype_id = "+withholdingType+")"
+							+ " AND i.ad_org_id="+orgId+" AND i.dateinvoiced BETWEEN '"+dateDocFrom+"' AND '"+dateDocTo+"' ";
+					
+				}else if(type.equalsIgnoreCase("ISLR")) {
+					
+					sql = "SELECT i.c_bpartner_id"
+							+ " FROM c_invoice i "
+							+ " inner join c_invoiceline il on i.c_invoice_id = il.c_invoice_id "
+							+ " inner join c_charge c on il.c_charge_id = c.c_charge_id "
+							+ " WHERE NOT EXISTS (SELECT 1 FROM lco_invoicewithholding iw WHERE iw.c_invoice_id = i.c_invoice_id AND iw.lco_withholdingtype_id = "+withholdingType+")"
+							+ " AND i.ad_org_id="+orgId+" AND i.dateinvoiced BETWEEN '"+dateDocFrom+"' AND '"+dateDocTo+"' and c.LCO_WithholdingCategory_ID > 0";
+					
+				}else if(type.equalsIgnoreCase("IAE")) {
+					
+					sql = "SELECT i.c_bpartner_id"
+							+ " FROM c_invoice i "
+							+ " inner join C_BPartner bp on bp.c_bpartner_id = i.c_bpartner_id "
+							+ " WHERE NOT EXISTS (SELECT 1 FROM lco_invoicewithholding iw WHERE iw.c_invoice_id = i.c_invoice_id AND iw.lco_withholdingtype_id = "+withholdingType+")"
+							+ " AND i.ad_org_id="+orgId+" AND i.dateinvoiced BETWEEN '"+dateDocFrom+"' AND '"+dateDocTo+"' and bp.LCO_ISIC_ID > 0";
+					
 				}
-			}
+				
+				
+				
+				if(bPartnerId>0)
+					sql = sql+" AND i.C_BPartner_ID="+bPartnerId;
+				if(invoiceId>0)
+					sql = sql+" AND i.C_Invoice_ID="+invoiceId;
+				
+				sql = sql+" GROUP BY i.c_bpartner_id";
+				
+				/*MLCOWithholdingType withHoldingType = new MLCOWithholdingType(getCtx(),withholdingType,get_TrxName());
+				
+				int docTypeId = withHoldingType.get_ValueAsInt("C_DocType_ID");
+				
+				MDocType docType = new MDocType(getCtx(),docTypeId,get_TrxName());
+				boolean iSOTrx= docType.isSOTrx() ;*/
+				
+				PreparedStatement pstmt = null;
+				ResultSet rs = null;
+				
+				try {
+					
+					pstmt= DB.prepareStatement(sql, get_TrxName());
+					rs =  pstmt.executeQuery();
+					
+					while(rs.next()) {
+						int cBPartnerId = rs.getInt("c_bpartner_id");
+						
+						MLVEVoucherWithholding voucher = new MLVEVoucherWithholding(getCtx(), 0, get_TrxName());
+						voucher.setAD_Org_ID(orgId);
+						voucher.setC_BPartner_ID(cBPartnerId);
+						voucher.setDateFrom(dateDocFrom);
+						voucher.setDateTo(dateDocTo);
+						voucher.setDateTrx(dateTrx);
+						voucher.setLCO_WithholdingType_ID(withholdingType);
+						voucher.setIsSOTrx(iSOTrx);
+						
+						if(invoiceId>0)
+							voucher.setC_Invoice_ID(invoiceId);
 		
+						
+						voucher.saveEx(get_TrxName());
+						
+						MInvoice[] invoices = VWT_MInvoice.getOfBPartnerDateFromDateTo(getCtx(), voucher, get_TrxName());
+						
+						for (MInvoice mInvoice : invoices) {	
+							log.info("Prueba "+mInvoice.getDateAcct());
+							
+							VWT_MInvoice invoice = new VWT_MInvoice(getCtx(), mInvoice.getC_Invoice_ID(), get_TrxName());
+							cnt += invoice.recalcWithholdings(voucher);
+						}
+					}
+				
+				}catch(Exception e) {
+					
+				}finally
+				{
+					DB.close(rs);
+					rs = null;
+					pstmt = null;
+				}
+							
+			}
+			
 		}catch(Exception e) {
 			
 		}finally
 		{
-			DB.close(rs);
-			rs = null;
-			pstmt = null;
+			DB.close(rswt);
+			rswt = null;
+			pstmtwt = null;
 		}
-					
-		
 		
 		return "Retenciones Generadas: "+cnt;
 	}
