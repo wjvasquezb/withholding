@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Withholdings
 Bundle-SymbolicName: org.globalqss.idempiere.LCO.withholdings;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 2.2.3.qualifier
 Bundle-ClassPath: .,
  lib/jdom-2.0.5.jar
 Bundle-Activator: org.adempiere.plugin.utils.Incremental2PackActivator
@@ -23,3 +23,4 @@ Service-Component: OSGI-INF/lco_calloutswhfactory.xml,OSGI-INF/lcovalidatorwh.xm
  OSGI-INF/LVE_DocFactory.xml
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-Vendor: Frontuari, C.A.

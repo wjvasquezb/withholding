@@ -122,9 +122,9 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		String type=(String)wt.get_Value("type");
 //		Modificado por Jorge Colmenarez, 2017-08-15 2:42 PM jcolmenarez@frontuari.com
 //		Soporte para crear nro de retención para los de tipo ISLR según secuencia de documento.
-		if (!wt.isSOTrx() && (type.compareTo("IVA")==0 || type.compareTo("ISLR")==0)){
+		if (!wt.isSOTrx() && (type.compareTo("IVA")==0 || type.compareTo("ISLR")==0 || type.compareTo("IAE")==0)){
 			createWithholdingNo(wt);
-		}else if (wt.isSOTrx() && type.compareTo("IVA")!=0 && type.compareTo("ISLR")!=0) {
+		}else if (wt.isSOTrx() && type.compareTo("IVA")!=0 && type.compareTo("ISLR")!=0 && type.compareTo("IAE")!=0) {
 			createWithholdingNo(wt);
 		} else if (wt.isSOTrx() && getWithholdingNo() == null && type.compareTo("IVA")==0){
 			// m_processMsg = "Asigne un Numero de Comprobante a la Retención";
