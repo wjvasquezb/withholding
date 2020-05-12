@@ -21,7 +21,7 @@ public class VWT_MInvoice extends LCO_MInvoice {
 		super(ctx, C_Invoice_ID, trxName);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	/**
 	 * 	Get Payments Of BPartner
 	 *	@param ctx context

@@ -20,7 +20,6 @@ import org.compiere.model.MDocType;
 import org.compiere.model.MInvoice;
 import org.compiere.model.MInvoiceLine;
 import org.compiere.model.MSequence;
-import org.compiere.model.MSysConfig;
 import org.compiere.model.PO;
 import org.compiere.model.Query;
 import org.compiere.model.X_C_BPartner;
@@ -48,6 +47,8 @@ public class VWTModelValidator extends AbstractEventHandler {
 
 	@Override
 	protected void initialize() {
+		registerTableEvent(IEventTopics.PO_BEFORE_CHANGE, I_C_Invoice.Table_Name);
+		registerTableEvent(IEventTopics.PO_AFTER_NEW, I_C_Invoice.Table_Name);
 		registerTableEvent(IEventTopics.DOC_AFTER_COMPLETE, I_C_Invoice.Table_Name);
 		registerTableEvent(IEventTopics.DOC_BEFORE_COMPLETE, I_C_Invoice.Table_Name);
 		registerTableEvent(IEventTopics.DOC_BEFORE_VOID, I_C_Invoice.Table_Name);
@@ -90,6 +91,28 @@ public class VWTModelValidator extends AbstractEventHandler {
 			}
 			    
 		
+		}
+		
+		if(po.get_TableName().equals(I_C_Invoice.Table_Name) 
+				&& (type.equals(IEventTopics.PO_BEFORE_CHANGE)))
+		{
+			MInvoice inv = (MInvoice) po;
+			if(inv.is_ValueChanged("LVE_POInvoiceNo"))
+			{
+				String reverse = (inv.getReversal_ID() > 0 ? "^" : "");
+				inv.setDocumentNo(inv.get_ValueAsString("LVE_POInvoiceNo")+reverse);
+			}
+		}
+
+		if(po.get_TableName().equals(I_C_Invoice.Table_Name) 
+				&& (type.equals(IEventTopics.PO_AFTER_NEW)))
+		{
+			MInvoice inv = (MInvoice) po;
+			if(!inv.isSOTrx() && !(inv.getDocumentNo().equals(inv.get_ValueAsString("LVE_POInvoiceNo"))))
+			{
+				inv.setDocumentNo(inv.get_ValueAsString("LVE_POInvoiceNo"));
+				inv.saveEx(po.get_TrxName());
+			}
 		}
 		
 		if (po.get_TableName().equals(I_C_BPartner.Table_Name) && (type.equals(IEventTopics.PO_BEFORE_CHANGE) || type.equals(IEventTopics.PO_BEFORE_NEW))) {
@@ -285,6 +308,26 @@ public class VWTModelValidator extends AbstractEventHandler {
 
 		return isValidate;
 	}
+	
+	public BigDecimal getOpenAmt (MInvoice invoice)
+	{
+		BigDecimal m_openAmt = Env.ZERO;
+		
+		if (invoice.isPaid())
+			return Env.ZERO;
+		
+		m_openAmt = invoice.getGrandTotal();
+		
+		BigDecimal allocated = invoice.getAllocatedAmt();
+		if (allocated != null)
+		{
+			m_openAmt = m_openAmt.add(allocated);
+		}
+		//
+		if (invoice.isCreditMemo())
+			return m_openAmt.negate();
+		return m_openAmt;
+	}	//	getOpenAmt
 
 	/**
 	 * Automatic Allocation between Credit/Debit Notes and Document Affected
@@ -295,7 +338,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 	{
 		StringBuffer whereClause = new StringBuffer();
 		StringBuffer whereParam = new StringBuffer();
-		List<Object> parameters	= new ArrayList<Object>();;
+		List<Object> parameters	= new ArrayList<Object>();
 		MInvoiceLine[] list  = null;
 		m_Current_Alloc = null;
 			
@@ -314,11 +357,11 @@ public class VWTModelValidator extends AbstractEventHandler {
 			MInvoice invoiceAffected = MInvoice.get(m_Invoice.getCtx(), invoiceID);
 			lineAmount = (mInvoiceLine.getLineTotalAmt()).subtract(m_AmtAllocated);
 			
-			BigDecimal invoiceAffectedOpenAmt = invoiceAffected.getOpenAmt(); //invoiceAffectedNewOpenAmt.compareTo(Env.ZERO) <= 0 ? invoiceAffected.getOpenAmt() : invoiceAffectedNewOpenAmt;
+			BigDecimal invoiceAffectedOpenAmt = getOpenAmt(invoiceAffected); //invoiceAffectedNewOpenAmt.compareTo(Env.ZERO) <= 0 ? invoiceAffected.getOpenAmt() : invoiceAffectedNewOpenAmt;
 			/*if(invoiceAffected.isCreditMemo())
 				invoiceAffectedOpenAmt = invoiceAffectedOpenAmt.negate();*/
 			
-			if(lineAmount.compareTo(invoiceAffectedOpenAmt) > 0)
+			if(m_Invoice.isCreditMemo() && lineAmount.compareTo(invoiceAffectedOpenAmt) > 0)
 				lineAmount = invoiceAffectedOpenAmt;
 			
 			//	Credit Notes
