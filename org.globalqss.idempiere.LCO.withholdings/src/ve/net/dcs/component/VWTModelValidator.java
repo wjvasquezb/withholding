@@ -14,11 +14,13 @@ import org.adempiere.exceptions.AdempiereException;
 import org.compiere.model.I_C_BPartner;
 import org.compiere.model.I_C_Invoice;
 import org.compiere.model.I_C_InvoiceLine;
+import org.compiere.model.I_M_Movement;
 import org.compiere.model.MAllocationHdr;
 import org.compiere.model.MAllocationLine;
 import org.compiere.model.MDocType;
 import org.compiere.model.MInvoice;
 import org.compiere.model.MInvoiceLine;
+import org.compiere.model.MMovement;
 import org.compiere.model.MSequence;
 import org.compiere.model.PO;
 import org.compiere.model.Query;
@@ -60,6 +62,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 		registerTableEvent(IEventTopics.PO_AFTER_CHANGE, MLVEVoucherWithholding.Table_Name);
 		registerTableEvent(IEventTopics.PO_BEFORE_NEW, MLVEVoucherWithholding.Table_Name);
 		registerTableEvent(IEventTopics.DOC_AFTER_COMPLETE, I_LVE_VoucherWithholding.Table_Name);
+		registerTableEvent(IEventTopics.DOC_BEFORE_COMPLETE, I_M_Movement.Table_Name);
 	}
 
 	@Override
@@ -108,7 +111,8 @@ public class VWTModelValidator extends AbstractEventHandler {
 				&& (type.equals(IEventTopics.PO_AFTER_NEW)))
 		{
 			MInvoice inv = (MInvoice) po;
-			if(!inv.isSOTrx() && !(inv.getDocumentNo().equals(inv.get_ValueAsString("LVE_POInvoiceNo"))))
+			if(!inv.isSOTrx() && !(inv.getDocumentNo().equals(inv.get_ValueAsString("LVE_POInvoiceNo"))) 
+					&& inv.get_ValueAsString("LVE_POInvoiceNo") != null)
 			{
 				inv.setDocumentNo(inv.get_ValueAsString("LVE_POInvoiceNo"));
 				inv.saveEx(po.get_TrxName());
@@ -271,7 +275,43 @@ public class VWTModelValidator extends AbstractEventHandler {
 					}
 				}
 		}
+		else if (po.get_TableName().equals(I_M_Movement.Table_Name) && type.equals(IEventTopics.DOC_BEFORE_COMPLETE)) {
+			String msgExistCN = Msg.translate(Env.getCtx(), "AlreadyExists") + ": " + Msg.getElement(Env.getCtx(), "LVE_controlNumber");
+			String msgSeqNotFound = Msg.translate(Env.getCtx(), "SequenceDocNotFound") + " " + Msg.getElement(Env.getCtx(), "LVE_ControlNoSequence_ID");
 
+			String where = "AD_Org_ID=? AND C_BPartner_ID=? AND M_Movement_ID!=? AND DocStatus IN ('CO','CL') ";
+			MMovement move = (MMovement) po;
+			MDocType docType = (MDocType) move.getC_DocType();
+
+			if (move.getReversal_ID() == 0)
+				if(docType.get_ValueAsBoolean("isControlNoDocument")) {
+					String controlSequence = null;
+					if (move.get_Value("LVE_controlNumber") == null) {
+						if (docType.get_Value("LVE_ControlNoSequence_ID") == null) {
+							throw new AdempiereException(msgSeqNotFound);
+						}
+
+						int controlNoSequence_ID = docType.get_ValueAsInt("LVE_ControlNoSequence_ID");
+						MSequence seq = new MSequence(Env.getCtx(), controlNoSequence_ID, po.get_TrxName());
+						controlSequence = MSequence.getDocumentNoFromSeq(seq, po.get_TrxName(), move);
+
+						Query query = new Query(Env.getCtx(), MMovement.Table_Name, where + "AND LVE_controlNumber=?", po.get_TrxName());
+
+						while (query.setParameters(move.getAD_Org_ID(), move.getC_BPartner_ID(), move.get_ID(), controlSequence).count() > 0) {
+							seq.setCurrentNext(seq.getCurrentNext() + 1);
+							seq.saveEx();
+							controlSequence = MSequence.getDocumentNoFromSeq(seq, po.get_TrxName(), move);
+						}
+						move.set_ValueOfColumn("LVE_controlNumber", controlSequence);
+						move.saveEx();
+					} else {
+						boolean existCN = new Query(Env.getCtx(), MInvoice.Table_Name, where + "AND LVE_controlNumber=?", po.get_TrxName()).setParameters(move.getAD_Org_ID(), move.getC_BPartner_ID(), move.get_ID(), move.get_Value("LVE_controlNumber")).count() > 0;
+						if (existCN) {
+							throw new AdempiereException(msgExistCN);
+						}
+					}
+				}
+		}
 	}
 
 	private boolean validateWithholdingNo(MLVEVoucherWithholding voucher) {
