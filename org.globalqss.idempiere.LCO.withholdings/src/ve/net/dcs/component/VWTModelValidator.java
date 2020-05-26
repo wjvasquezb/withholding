@@ -14,10 +14,12 @@ import org.adempiere.exceptions.AdempiereException;
 import org.compiere.model.I_C_BPartner;
 import org.compiere.model.I_C_Invoice;
 import org.compiere.model.I_C_InvoiceLine;
+import org.compiere.model.I_M_InOut;
 import org.compiere.model.I_M_Movement;
 import org.compiere.model.MAllocationHdr;
 import org.compiere.model.MAllocationLine;
 import org.compiere.model.MDocType;
+import org.compiere.model.MInOut;
 import org.compiere.model.MInvoice;
 import org.compiere.model.MInvoiceLine;
 import org.compiere.model.MMovement;
@@ -61,6 +63,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 		registerTableEvent(IEventTopics.PO_BEFORE_NEW, MLVEVoucherWithholding.Table_Name);
 		registerTableEvent(IEventTopics.DOC_AFTER_COMPLETE, I_LVE_VoucherWithholding.Table_Name);
 		registerTableEvent(IEventTopics.DOC_BEFORE_COMPLETE, I_M_Movement.Table_Name);
+		registerTableEvent(IEventTopics.DOC_BEFORE_COMPLETE, I_M_InOut.Table_Name);
 	}
 
 	@Override
@@ -292,7 +295,44 @@ public class VWTModelValidator extends AbstractEventHandler {
 						move.set_ValueOfColumn("LVE_controlNumber", controlSequence);
 						move.saveEx();
 					} else {
-						boolean existCN = new Query(Env.getCtx(), MInvoice.Table_Name, where + "AND LVE_controlNumber=?", po.get_TrxName()).setParameters(move.getAD_Org_ID(), move.getC_BPartner_ID(), move.get_ID(), move.get_Value("LVE_controlNumber")).count() > 0;
+						boolean existCN = new Query(Env.getCtx(), MMovement.Table_Name, where + "AND LVE_controlNumber=?", po.get_TrxName()).setParameters(move.getAD_Org_ID(), move.getC_BPartner_ID(), move.get_ID(), move.get_Value("LVE_controlNumber")).count() > 0;
+						if (existCN) {
+							throw new AdempiereException(msgExistCN);
+						}
+					}
+				}
+		}
+		else if (po.get_TableName().equals(I_M_InOut.Table_Name) && type.equals(IEventTopics.DOC_BEFORE_COMPLETE)) {
+			String msgExistCN = Msg.translate(Env.getCtx(), "AlreadyExists") + ": " + Msg.getElement(Env.getCtx(), "LVE_controlNumber");
+			String msgSeqNotFound = Msg.translate(Env.getCtx(), "SequenceDocNotFound") + " " + Msg.getElement(Env.getCtx(), "LVE_ControlNoSequence_ID");
+
+			String where = "AD_Org_ID=? AND C_BPartner_ID=? AND M_InOut_ID!=? AND DocStatus IN ('CO','CL') ";
+			MInOut io = (MInOut) po;
+			MDocType docType = (MDocType) io.getC_DocType();
+
+			if (io.getReversal_ID() == 0)
+				if(docType.get_ValueAsBoolean("isControlNoDocument")) {
+					String controlSequence = null;
+					if (io.get_Value("LVE_controlNumber") == null) {
+						if (docType.get_Value("LVE_ControlNoSequence_ID") == null) {
+							throw new AdempiereException(msgSeqNotFound);
+						}
+
+						int controlNoSequence_ID = docType.get_ValueAsInt("LVE_ControlNoSequence_ID");
+						MSequence seq = new MSequence(Env.getCtx(), controlNoSequence_ID, po.get_TrxName());
+						controlSequence = MSequence.getDocumentNoFromSeq(seq, po.get_TrxName(), io);
+
+						Query query = new Query(Env.getCtx(), MInOut.Table_Name, where + "AND LVE_controlNumber=?", po.get_TrxName());
+
+						while (query.setParameters(io.getAD_Org_ID(), io.getC_BPartner_ID(), io.get_ID(), controlSequence).count() > 0) {
+							seq.setCurrentNext(seq.getCurrentNext() + 1);
+							seq.saveEx();
+							controlSequence = MSequence.getDocumentNoFromSeq(seq, po.get_TrxName(), io);
+						}
+						io.set_ValueOfColumn("LVE_controlNumber", controlSequence);
+						io.saveEx();
+					} else {
+						boolean existCN = new Query(Env.getCtx(), MInOut.Table_Name, where + "AND LVE_controlNumber=?", po.get_TrxName()).setParameters(io.getAD_Org_ID(), io.getC_BPartner_ID(), io.get_ID(), io.get_Value("LVE_controlNumber")).count() > 0;
 						if (existCN) {
 							throw new AdempiereException(msgExistCN);
 						}
@@ -469,8 +509,8 @@ public class VWTModelValidator extends AbstractEventHandler {
 			
 			MDocType dtAll = (MDocType) m_Invoice.getC_DocType();
 			
-			m_Current_Alloc = new MAllocationHdr(Env.getCtx(), true,	//	manual
-					Env.getContextAsDate(m_Invoice.getCtx(), "#Date"), m_Invoice.getC_Currency_ID(), Env.getContext(Env.getCtx(), "#AD_User_Name"), m_Invoice.get_TrxName());
+			m_Current_Alloc = new MAllocationHdr(Env.getCtx(), false,	//	automatic
+					Env.getContextAsDate(m_Invoice.getCtx(), "#Date"), m_Invoice.getC_Currency_ID(), Env.getContext(Env.getCtx(), "#AD_User_Name")+" "+Msg.translate(Env.getAD_Language(Env.getCtx()), "IsAutoAllocation"), m_Invoice.get_TrxName());
 			m_Current_Alloc.setAD_Org_ID(m_Invoice.getAD_Org_ID());
 			m_Current_Alloc.setC_DocType_ID(dtAll.get_ValueAsInt("C_DocTypeAllocation_ID"));
 			m_Current_Alloc.saveEx();
