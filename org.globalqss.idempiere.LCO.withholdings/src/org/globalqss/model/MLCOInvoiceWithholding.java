@@ -22,6 +22,7 @@ import java.util.Properties;
 
 import org.compiere.model.MInvoice;
 import org.compiere.util.CLogger;
+import org.compiere.util.DB;
 
 import ve.net.dcs.model.MLVEVoucherWithholding;
 
@@ -123,6 +124,16 @@ public class MLCOInvoiceWithholding extends X_LCO_InvoiceWithholding
 		
 		return LCO_MInvoice.updateHeaderWithholding(getC_Invoice_ID(), get_TrxName());
 	}	//	afterSave
+	
+	
+
+	@Override
+	protected boolean beforeDelete() {
+		
+		DB.executeUpdate("UPDATE C_PaymentAllocate SET LCO_InvoiceWithholding_ID = NULL WHERE LCO_InvoiceWithholding_ID = "+getLCO_InvoiceWithholding_ID(),get_TrxName());
+		
+		return true;
+	}
 
 	/**
 	 * 	After Delete

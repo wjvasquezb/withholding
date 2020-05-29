@@ -26,7 +26,6 @@ import org.compiere.model.MOrgInfo;
 import org.compiere.model.MPayment;
 import org.compiere.model.MPaymentAllocate;
 import org.compiere.model.MPriceList;
-import org.compiere.model.MSysConfig;
 import org.compiere.model.MTax;
 import org.compiere.model.ModelValidationEngine;
 import org.compiere.model.ModelValidator;
@@ -74,8 +73,6 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 	public String prepareIt() {
 		log.info(toString());
 		m_processMsg = ModelValidationEngine.get().fireDocValidate(this, ModelValidator.TIMING_BEFORE_PREPARE);
-//		setDocStatus(DOCSTATUS_Drafted);
-//		setDocAction (DOCACTION_Prepare);
 		if (m_processMsg != null)
 			return DocAction.STATUS_Invalid;
 
@@ -90,8 +87,6 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		if (m_processMsg != null)
 			return DocAction.STATUS_Invalid;
 		m_justPrepared = true;
-		//if (!DOCACTION_Complete.equals(getDocAction()))
-		//	setDocAction(DOCACTION_Complete);
 		return DocAction.STATUS_InProgress;
 	}
 
@@ -102,7 +97,6 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		ModelValidator.TIMING_BEFORE_COMPLETE);
 		if (m_processMsg != null)
 			return DocAction.STATUS_NotApproved;
-		//System.out.println("ENTRÓ A FUNCION COMPLETEIT"+getDocAction());
 
 		if (DOCACTION_Prepare.equals(getDocAction()) || DOCACTION_Re_Activate.equals(getDocAction()))
 		{
@@ -120,8 +114,8 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		X_LCO_WithholdingType wt = new X_LCO_WithholdingType(getCtx(), getLCO_WithholdingType_ID(), get_TrxName());
 		
 		String type=(String)wt.get_Value("type");
-//		Modificado por Jorge Colmenarez, 2017-08-15 2:42 PM jcolmenarez@frontuari.com
-//		Soporte para crear nro de retención para los de tipo ISLR según secuencia de documento.
+		//		Modificado por Jorge Colmenarez, 2017-08-15 2:42 PM jcolmenarez@frontuari.com
+		//		Soporte para crear nro de retención para los de tipo ISLR según secuencia de documento.
 		if (!wt.isSOTrx() && (type.compareTo("IVA")==0 || type.compareTo("ISLR")==0 || type.compareTo("IAE")==0)){
 			createWithholdingNo(wt);
 		}else if (wt.isSOTrx() && type.compareTo("IVA")!=0 && type.compareTo("ISLR")!=0 && type.compareTo("IAE")!=0) {
@@ -136,11 +130,7 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		if (lines.length == 0) {
 			m_processMsg = "@NoLines@";
 			return DocAction.STATUS_Invalid;
-			//throw new AdempiereException("@NoLines@");
 		}
-
-		//int C_BankAccount_ID = MSysConfig.getIntValue("LVE_Withholding_BankAccount", 0, getAD_Client_ID());
-		//int C_BankAccount_ID = MSysConfig.getIntValue("LVE_Withholding_BankAccount", 0, getAD_Client_ID(), getAD_Org_ID());
 
 		int C_BankAccount_ID = wt.get_ValueAsInt("C_BankAccount_ID");
 		
@@ -148,7 +138,6 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 			m_processMsg =
 			"Debe Establecer un Caja para las Retenciones, Configurador del Sistema LVE_Withholding_BankAccount";
 			return DocAction.STATUS_Invalid;
-			//throw new AdempiereException("Debe Establecer un Caja para las Retenciones, Configurador del Sistema LVE_Withholding_BankAccount");
 		}
 
 		MBankAccount baccount = new MBankAccount(getCtx(), C_BankAccount_ID, get_TrxName());
@@ -157,15 +146,7 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 			m_processMsg =
 			"Debe Establecer un Caja para las Retenciones, Configurador del Sistema LVE_Withholding_BankAccount";
 			return DocAction.STATUS_Invalid;
-			//throw new AdempiereException("Debe Establecer un Caja para las Retenciones, Configurador del Sistema LVE_Withholding_BankAccount");
 		}
-
-//		if (baccount.getAD_Org_ID() != getAD_Org_ID()) {
-//			// m_processMsg =
-//			// "Debe Establecer un Caja para las Retenciones, Configurador del Sistema LVE_Withholding_BankAccount";
-//			// return DocAction.STATUS_Invalid;
-//			throw new AdempiereException("Debe Establecer un Caja para las Retenciones, Configurador del Sistema LVE_Withholding_BankAccount");
-//		}
 
 		MPayment payment = new MPayment(getCtx(), 0, get_TrxName());
 		payment.setAD_Org_ID(getAD_Org_ID());
@@ -187,26 +168,7 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		payment.setPayAmt(Env.ZERO);
 		payment.setOverUnderAmt(Env.ZERO);
 		payment.setWriteOffAmt(Env.ZERO);
-
-		/*String dtName = isSOTrx() ? "AR Withholding" : "AP Withholding";
-
-		int C_Doctype_ID = 0;
-		C_Doctype_ID = new Query(getCtx(), MDocType.Table_Name, "Name = ?", get_TrxName()).
-				setParameters(dtName).firstId();
-		if(C_Doctype_ID == 0)
-			C_Doctype_ID = isSOTrx() ? MSysConfig.getIntValue("LVE_ARWithholdingDocTypeId",0,getAD_Client_ID(), getAD_Org_ID()) : MSysConfig.getIntValue("LVE_APWithholdingDocTypeId",0,getAD_Client_ID(), getAD_Org_ID());
-		if(C_Doctype_ID == 0)
-			C_Doctype_ID = new Query(getCtx(), MDocType.Table_Name, "GL_Category.Name = ?", get_TrxName()).
-			addJoinClause("JOIN GL_Category GL_Category ON C_Doctype.GL_Category_ID = GL_Category.GL_Category_ID").setParameters(dtName).firstId();
-		if(C_Doctype_ID == 0) {
-			m_processMsg = "No existe Tipo de Documento '" + dtName + "', "
-					+ "ni Tipo de Comprobante Contable '" + dtName + "',"
-					+ "ni Configurador de Sistema 'LVE_ARWithholdingDocTypeId' o 'LVE_APWithholdingDocTypeId', "
-					+ "para Pago de Retención";
-			log.warning(m_processMsg);
-		}
 		
-		System.out.println("Tipo de Documento: " + C_Doctype_ID);*/
 		int C_Doctype_ID = wt.get_ValueAsInt("C_DocTypeTarget_ID");
 		payment.setC_DocType_ID(C_Doctype_ID);
 
@@ -225,8 +187,6 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 			mWithholding.setDateAcct((Timestamp)get_Value("DateAcct"));
 			
 			if (!mWithholding.save()) {
-				// m_processMsg = "Could not update Withholding Line";
-				// return DocAction.STATUS_Invalid;
 				throw new AdempiereException("Could not update Withholding Line");
 			}
 			
@@ -237,6 +197,8 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 				pa.setAD_Org_ID(mWithholding.getAD_Org_ID());
 				pa.setAmount(Env.ZERO);
 				pa.setC_Payment_ID(payment.getC_Payment_ID());
+				//	Set LCO_InvoiceWithholding_ID
+				pa.set_ValueOfColumn("LCO_InvoiceWithholding_ID", mWithholding.getLCO_InvoiceWithholding_ID());
 
 				sql = "SELECT invoiceOpen(C_Invoice_ID,0)" // 3 #1
 						+ "FROM C_Invoice WHERE C_Invoice_ID=?"; // #4
@@ -248,9 +210,7 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 					pstmt.setInt(1, mWithholding.getC_Invoice_ID());
 					rs = pstmt.executeQuery();
 					if (rs.next()) {
-						InvoiceOpenAmt = rs.getBigDecimal(1); // Set Invoice
-																// Open
-						// Amount
+						InvoiceOpenAmt = rs.getBigDecimal(1);
 						if (InvoiceOpenAmt == null)
 							InvoiceOpenAmt = Env.ZERO;
 					}
@@ -285,25 +245,17 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 
 		payment.saveEx();
 
-		
-		setProcessed(true);
-		setDocAction(DOCACTION_Close);
-		setProcessed(true);
-		setDocStatus(DOCSTATUS_Completed);
-		saveEx();
-
 		// User Validation
 		String valid = ModelValidationEngine.get().fireDocValidate(this,
 		ModelValidator.TIMING_AFTER_COMPLETE);
 		if (valid != null) {
 			m_processMsg = valid;
 			return DocAction.STATUS_Invalid;
-		// return valid;
 		 }
 		//
+		setProcessed(true);
 		setDocAction(DOCACTION_Close);
 		return DocAction.STATUS_Completed;
-		//return "@completed@";
 	}
 
 	public boolean voidIt() {
@@ -334,9 +286,6 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 							mlcoInvoiceWithholding2.setProcessed(false);
 						mlcoInvoiceWithholding2.saveEx();
 					}
-//					mlcoInvoiceWithholding.setC_AllocationLine_ID(0);
-//					mlcoInvoiceWithholding.setProcessed(false);
-//					mlcoInvoiceWithholding.saveEx();
 					VWT_MInvoice.updateHeaderWithholding(mlcoInvoiceWithholding.getC_Invoice_ID(), get_TrxName());
 				}
 				else if (mlcoInvoiceWithholding.isProcessed()) {
@@ -369,8 +318,6 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 			}
 
 		} else {
-			// setDocAction(DOCACTION_None);
-			// setProcessed(false);
 			throw new AdempiereException("Documento no completado");
 		}
 
@@ -378,26 +325,17 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		m_processMsg = ModelValidationEngine.get().fireDocValidate(this,ModelValidator.TIMING_AFTER_VOID);
 		if (m_processMsg != null)
 			return false;
-		/*
+		
 		setDocStatus(DOCSTATUS_Voided);
 		setC_Payment_ID(0);
-		saveEx();
-		return true;
-		*/
 		m_processMsg = Msg.getMsg(getCtx(), "Voided");
 		setProcessed(true);
-		//saveEx();
 		setDocAction(DOCACTION_None);
 		return true;
 	}
 
 	public String reActiveIt() {
 		log.info(toString());
-		// Before Void
-		// m_processMsg = ModelValidationEngine.get().fireDocValidate(this,
-		// ModelValidator.TIMING_BEFORE_VOID);
-		// if (m_processMsg != null)
-		// return false;
 
 		if (getC_Payment_ID() > 0 && getDocStatus().equals(DOCSTATUS_Completed)) {
 			/*
@@ -412,7 +350,6 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 				if (mlcoInvoiceWithholding.getC_AllocationLine().getC_AllocationHdr_ID() > 0) {
 					
 					/** Transaction				*/
-					//Trx	m_trx = Trx.get(Trx.createTrxName("Prueba"), true);
 					allhs.add(mlcoInvoiceWithholding.getC_AllocationLine().getC_AllocationHdr_ID());
 					List<MLCOInvoiceWithholding> iw = new Query(getCtx(), MLCOInvoiceWithholding.Table_Name, "C_AllocationLine_ID = ?", get_TrxName()).setParameters(mlcoInvoiceWithholding.getC_AllocationLine_ID()).list();
 					for (MLCOInvoiceWithholding mlcoInvoiceWithholding2 : iw) {
@@ -422,17 +359,7 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 						else
 							mlcoInvoiceWithholding2.setProcessed(false);
 						mlcoInvoiceWithholding2.saveEx();
-					}
-					//mlcoInvoiceWithholding.set_TrxName(m_trx.getTrxName());
-					
-//					if (mlcoInvoiceWithholding.save()){
-//						m_trx.commit();
-//					}
-//					else{
-//						m_trx.rollback();
-//						throw new AdempiereException("Error al Anular las Retenciones");
-//					}
-//					m_trx.close();						
+					}						
 					VWT_MInvoice.updateHeaderWithholding(mlcoInvoiceWithholding.getC_Invoice_ID(), get_TrxName());
 				}
 				else if (mlcoInvoiceWithholding.isProcessed()) {
@@ -462,21 +389,12 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 			pay.saveEx();
 
 		} else {
-			// setDocAction(DOCACTION_None);
-			// setProcessed(false);
 			throw new AdempiereException("Documento no completado");
 		}
-
-		// After Void
-		// m_processMsg = ModelValidationEngine.get().fireDocValidate(this,
-		// ModelValidator.TIMING_AFTER_VOID);
-		// if (m_processMsg != null)
-		// return false;
 		setDocStatus(DOCSTATUS_Drafted);
 		setProcessed(false);
 		setC_Payment_ID(0);
-		saveEx();
-		return "@Success@";
+		return DOCACTION_Re_Activate;
 	}
 
 	/**
@@ -503,18 +421,14 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		
 		// Setear secuencia al comprobante si no tiene.
 		if(getWithholdingNo() == null || getWithholdingNo() == "") {
-		String value = DB.getDocumentNo(dt.getC_DocType_ID(), get_TrxName(), false, this);
-		//String value = getDocumentNo();
-		//if (dt.getName().equals("Purchase IVA Withholding")) {
+			String value = DB.getDocumentNo(dt.getC_DocType_ID(), get_TrxName(), false, this);
 			String month = new SimpleDateFormat("MM").format(getDateTrx());
 			String year = new SimpleDateFormat("yyyy").format(getDateTrx());
-		//}
-
-		if (value != null){
-			value = year + month + value;
-			setWithholdingNo(value);
-			//setDocumentNo(value);
-		}
+	
+			if (value != null){
+				value = year + month + value;
+				setWithholdingNo(value);
+			}
 		}
 	}
 
@@ -524,7 +438,7 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 	 * @return true if it can be deleted
 	 */
 	protected boolean beforeDelete() {
-			if (isProcessed()) {
+		if (isProcessed()) {
 			log.saveError("Error", Msg.getMsg(getCtx(), "CannotDeleteTrx"));
 			return false;
 		}
@@ -540,13 +454,9 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		MDocType dt = new MDocType(mInvoice.getCtx(), mInvoice.getC_DocTypeTarget_ID(), mInvoice.get_TrxName());
 		BigDecimal taxamttotal = Env.ZERO;
 		String genwh = dt.get_ValueAsString("GenerateWithholding");
-		String nroReten = null;
 
 		if (genwh == null || genwh.equals("N") || genwh.equals(""))
 			return Env.ZERO;
-
-		int noins = 0;
-		BigDecimal totwith = new BigDecimal("0");
 
 		try {
 			// Fill variables normally needed
@@ -905,7 +815,6 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 				if (mlcoInvoiceWithholding.getC_AllocationLine().getC_AllocationHdr_ID() > 0) {
 					
 					/** Transaction				*/
-					//Trx	m_trx = Trx.get(Trx.createTrxName("Prueba"), true);
 					allhs.add(mlcoInvoiceWithholding.getC_AllocationLine().getC_AllocationHdr_ID());
 					List<MLCOInvoiceWithholding> iw = new Query(getCtx(), MLCOInvoiceWithholding.Table_Name, "C_AllocationLine_ID = ?", get_TrxName()).setParameters(mlcoInvoiceWithholding.getC_AllocationLine_ID()).list();
 					for (MLCOInvoiceWithholding mlcoInvoiceWithholding2 : iw) {
@@ -915,17 +824,7 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 						else
 							mlcoInvoiceWithholding2.setProcessed(false);
 						mlcoInvoiceWithholding2.saveEx();
-					}
-					//mlcoInvoiceWithholding.set_TrxName(m_trx.getTrxName());
-					
-//					if (mlcoInvoiceWithholding.save()){
-//						m_trx.commit();
-//					}
-//					else{
-//						m_trx.rollback();
-//						throw new AdempiereException("Error al Anular las Retenciones");
-//					}
-//					m_trx.close();						
+					}		
 					VWT_MInvoice.updateHeaderWithholding(mlcoInvoiceWithholding.getC_Invoice_ID(), get_TrxName());
 				}
 				else if (mlcoInvoiceWithholding.isProcessed()) {
@@ -953,19 +852,24 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 			MPayment pay = new MPayment(getCtx(), getC_Payment_ID(), get_TrxName());
 			pay.voidIt();
 			pay.saveEx();
-
 		} else {
-			// setDocAction(DOCACTION_None);
-			// setProcessed(false);
 			throw new AdempiereException("Documento no completado");
 		}
-
+		//	Clear Payment Reference
+		MLCOInvoiceWithholding[] wth = getLines(null);
+		for(MLCOInvoiceWithholding line : wth)
+		{
+			line.setC_Payment_ID(0);
+			line.saveEx();
+		}
+		setC_Payment_ID(0);
+		
 		// After reActivate
 		m_processMsg = ModelValidationEngine.get().fireDocValidate(this,ModelValidator.TIMING_AFTER_REACTIVATE);
 		if (m_processMsg != null)
 			return false;
 		
-		setDocAction(DOCACTION_Re_Activate);
+		setDocAction(DOCACTION_Complete);
 		setProcessed(false);
 		return true;
 	}

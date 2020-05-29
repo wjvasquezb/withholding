@@ -5,6 +5,7 @@ import java.util.List;
 import org.compiere.model.Query;
 import org.compiere.process.ProcessInfoParameter;
 import org.compiere.process.SvrProcess;
+import org.compiere.util.Msg;
 import org.globalqss.model.MLCOInvoiceWithholding;
 import org.globalqss.model.X_LCO_InvoiceWithholding;
 
@@ -40,18 +41,53 @@ public class VWT_ProcessWithholding extends SvrProcess {
 		if (docAction.equals("CO")){
 			List<MLCOInvoiceWithholding> invoiceW = new Query(voucher.getCtx(), X_LCO_InvoiceWithholding.Table_Name, " LVE_VoucherWithholding_ID = ? ", voucher.get_TrxName()).setOnlyActiveRecords(true).setParameters(voucher.get_ID()).list();
 			if (invoiceW.size() > 0){
-				return voucher.completeIt();
+				if(voucher.completeIt().equals(MLVEVoucherWithholding.DOCACTION_Complete))
+				{
+					voucher.setDocAction(MLVEVoucherWithholding.DOCACTION_Complete);
+					voucher.setProcessed(true);
+					voucher.setDocStatus(MLVEVoucherWithholding.DOCSTATUS_Completed);
+					voucher.saveEx();
+					return "@Completed@";
+				}
+				else
+				{
+					return voucher.getProcessMsg();
+				}
 			}else{
 				return "El Comprobante no tiene Línea de Retenciones Asociadas.";
 			}
 		}
 		else if (docAction.equals("VO")){
-			voucher.voidIt();
-			return "@Voided@";
+			if(voucher.voidIt())
+			{
+				voucher.setDocAction(MLVEVoucherWithholding.DOCACTION_None);
+				voucher.setC_Payment_ID(0);
+				voucher.setProcessed(true);
+				voucher.setDocStatus(MLVEVoucherWithholding.DOCSTATUS_Voided);
+				voucher.saveEx();
+				return "@Voided@";
+			}
+			else
+			{
+				return voucher.getProcessMsg();
+			}
 		}
 			
 		else if (docAction.equals("RE"))
-			return voucher.reActiveIt();
+		{
+			if(voucher.reActiveIt().equals(MLVEVoucherWithholding.DOCACTION_Re_Activate)) {
+				voucher.setDocAction(MLVEVoucherWithholding.DOCACTION_Complete);
+				voucher.setC_Payment_ID(0);
+				voucher.setProcessed(false);
+				voucher.setDocStatus(MLVEVoucherWithholding.DOCSTATUS_Drafted);
+				voucher.saveEx();
+				return "@Success@";
+			}
+			else
+			{
+				return voucher.getProcessMsg();
+			}
+		}
 		else
 			return null;
 	}
