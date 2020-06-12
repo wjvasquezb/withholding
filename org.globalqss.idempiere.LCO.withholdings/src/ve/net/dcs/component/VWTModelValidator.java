@@ -1,6 +1,5 @@
 package ve.net.dcs.component;
 
-import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,26 +12,16 @@ import org.adempiere.base.event.IEventTopics;
 import org.adempiere.exceptions.AdempiereException;
 import org.compiere.model.I_C_BPartner;
 import org.compiere.model.I_C_Invoice;
-import org.compiere.model.I_C_InvoiceLine;
 import org.compiere.model.I_M_InOut;
 import org.compiere.model.I_M_Movement;
-import org.compiere.model.MAllocationHdr;
-import org.compiere.model.MAllocationLine;
 import org.compiere.model.MDocType;
-import org.compiere.model.MInOut;
 import org.compiere.model.MInvoice;
-import org.compiere.model.MInvoiceLine;
-import org.compiere.model.MMovement;
-import org.compiere.model.MSequence;
 import org.compiere.model.PO;
 import org.compiere.model.Query;
 import org.compiere.model.X_C_BPartner;
 import org.compiere.process.DocAction;
-import org.compiere.process.DocumentEngine;
 import org.compiere.util.CLogger;
 import org.compiere.util.DB;
-import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.globalqss.model.MLCOInvoiceWithholding;
 import org.globalqss.model.MLCOWithholdingType;
 import org.globalqss.model.X_LCO_InvoiceWithholding;
@@ -44,10 +33,14 @@ import ve.net.dcs.model.MLVEVoucherWithholding;
 public class VWTModelValidator extends AbstractEventHandler {
 	
 	private static CLogger log = CLogger.getCLogger(VWTModelValidator.class);
+	/* TRANSFER CODE TO net.frontuari.lvedocumentcontrol BY JORGE COLMENAREZ
 	/**	Current Business Partner				*/
+	/*
 	private int m_Current_C_BPartner_ID 		= 	0;
 	/**	Current Allocation						*/
+	/*
 	private MAllocationHdr m_Current_Alloc 		= 	null;
+	*/
 
 	@Override
 	protected void initialize() {
@@ -126,7 +119,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 		} else if (po.get_TableName().equals(I_C_Invoice.Table_Name) && type.equals(IEventTopics.DOC_AFTER_COMPLETE)) {
 
 			MInvoice invoice = (MInvoice) po;
-			
+			/* TRANSFER CODE TO net.frontuari.lvedocumentcontrol BY JORGE COLMENAREZ
 			if(!invoice.isSOTrx() && !(invoice.getDocumentNo().equals(invoice.get_ValueAsString("LVE_POInvoiceNo"))) 
 					&& invoice.get_ValueAsString("LVE_POInvoiceNo") != null)
 			{
@@ -138,7 +131,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 				invoice.setDocumentNo(invoice.get_ValueAsString("LVE_POInvoiceNo"));
 				invoice.saveEx(po.get_TrxName());
 			}
-			
+			*/
 			if (!invoice.isReversal()){
 				String sqlwhere = " C_Invoice_ID = ? AND LVE_VoucherWithholding_ID IS NULL";
 				List<MLCOInvoiceWithholding> invoiceW = new Query(po.getCtx(), X_LCO_InvoiceWithholding.Table_Name, sqlwhere, po.get_TrxName()).setOnlyActiveRecords(true).setParameters(invoice.get_ID()).setOrderBy("LCO_WithholdingType_ID").list();
@@ -185,12 +178,13 @@ public class VWTModelValidator extends AbstractEventHandler {
 			 * Automatic Allocation Between Credit/Debit Notes with DocAffected
 			 * @author Jorge Colmenarez <mailto:jcolmenarez@frontuari.net>, 2020-04-30 09:34
 			 */
+			/* TRANSFER CODE TO net.frontuari.lvedocumentcontrol BY JORGE COLMENAREZ
 			MDocType m_DocType = (MDocType) invoice.getC_DocTypeTarget();
 			if(!invoice.isPaid() 
 					|| invoice.getReversal_ID() == 0
 					|| m_DocType.get_ValueAsBoolean("IsAutoAllocation"))
 				AutomaticAllocation(invoice);
-			
+			*/
 
 		} else if (po.get_TableName().equals(I_C_Invoice.Table_Name) && (type.equals(IEventTopics.DOC_BEFORE_VOID) || type.equals(IEventTopics.DOC_BEFORE_REACTIVATE) || type.equals(IEventTopics.DOC_BEFORE_REVERSEACCRUAL) || type.equals(IEventTopics.DOC_BEFORE_REVERSECORRECT))) {
 			MInvoice invoice = (MInvoice) po;
@@ -209,7 +203,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 					}
 				}
 			}
-		}
+		}/*  TRANSFER CODE TO net.frontuari.lvedocumentcontrol BY JORGE COLMENAREZ
 		else if (po.get_TableName().equals(I_C_Invoice.Table_Name) && type.equals(IEventTopics.DOC_BEFORE_COMPLETE)) {
 
 			String msgExistCN = Msg.translate(Env.getCtx(), "AlreadyExists") + ": " + Msg.getElement(Env.getCtx(), "LVE_controlNumber");
@@ -338,7 +332,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 						}
 					}
 				}
-		}
+		}*/
 	}
 
 	private boolean validateWithholdingNo(MLVEVoucherWithholding voucher) {
@@ -375,7 +369,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 
 		return isValidate;
 	}
-	
+	/*	TRANSFER CODE TO net.frontuari.lvedocumentcontrol BY JORGE COLMENAREZ
 	public BigDecimal getOpenAmt (MInvoice invoice)
 	{
 		BigDecimal m_openAmt = Env.ZERO;
@@ -395,12 +389,13 @@ public class VWTModelValidator extends AbstractEventHandler {
 			return m_openAmt.negate();
 		return m_openAmt;
 	}	//	getOpenAmt
-
+	*/
 	/**
 	 * Automatic Allocation between Credit/Debit Notes and Document Affected
 	 * @author Jorge Colmenarez <mailto:jcolmenarez@frontuari.net>, 2020-04-30 09:30
 	 * @param m_Invoice
 	 */
+	/*
 	private void AutomaticAllocation(MInvoice m_Invoice)
 	{
 		StringBuffer whereClause = new StringBuffer();
@@ -455,7 +450,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 			m_Current_Alloc = null;
 		}
 	}
-	
+	*/
 	/**
 	 * Complete Allocation
 	 * @author <a href="mailto:dixon.22martinez@gmail.com">Dixon Martinez</a> 10/12/2014, 17:23:23
@@ -463,6 +458,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 	 * @param m_AmtAllocated 
 	 * @return void
 	 */
+	/*
 	private void completeAllocation(MInvoice m_Invoice, BigDecimal m_PayAmt) throws Exception{
 		if(m_Current_Alloc != null){
 			if(m_Current_Alloc.getDocStatus().equals(DocumentEngine.STATUS_Drafted)){
@@ -491,7 +487,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 			m_Current_C_BPartner_ID = -1;
 		}
 	}
-	
+	*/
 
 	/**
 	 * Add Document Allocation
@@ -503,6 +499,7 @@ public class VWTModelValidator extends AbstractEventHandler {
 	 * @param p_C_Invoice_ID
 	 * @return void
 	 */
+	/*
 	private void addAllocation(int p_C_BPartner_ID, BigDecimal openAmt,
 			BigDecimal payAmt, MInvoice m_Invoice, int p_C_Invoice_ID) {
 		if(m_Current_C_BPartner_ID != p_C_BPartner_ID){
@@ -527,12 +524,13 @@ public class VWTModelValidator extends AbstractEventHandler {
 		//
 		m_Current_C_BPartner_ID = p_C_BPartner_ID;
 	}
-	
+	*/
 	/**
 	 * 	Get Invoice Lines of Invoice
 	 * 	@param whereClause starting with AND
 	 * 	@return lines
 	 */
+	/*
 	public MInvoiceLine[] getInvoiceLines (MInvoice mInvoice, String whereClause)
 	{
 		String whereClauseFinal = "C_Invoice_ID=? ";
@@ -544,5 +542,5 @@ public class VWTModelValidator extends AbstractEventHandler {
 										.list();
 		return list.toArray(new MInvoiceLine[list.size()]);
 	}	//	getLines
-	
+	*/
 }
