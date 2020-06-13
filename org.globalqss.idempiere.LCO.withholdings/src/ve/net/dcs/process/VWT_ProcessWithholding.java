@@ -5,7 +5,7 @@ import java.util.List;
 import org.compiere.model.Query;
 import org.compiere.process.ProcessInfoParameter;
 import org.compiere.process.SvrProcess;
-import org.compiere.util.Msg;
+import org.compiere.util.DB;
 import org.globalqss.model.MLCOInvoiceWithholding;
 import org.globalqss.model.X_LCO_InvoiceWithholding;
 
@@ -43,10 +43,7 @@ public class VWT_ProcessWithholding extends SvrProcess {
 			if (invoiceW.size() > 0){
 				if(voucher.completeIt().equals(MLVEVoucherWithholding.DOCACTION_Complete))
 				{
-					voucher.setDocAction(MLVEVoucherWithholding.DOCACTION_Complete);
-					voucher.setProcessed(true);
-					voucher.setDocStatus(MLVEVoucherWithholding.DOCSTATUS_Completed);
-					voucher.saveEx();
+					DB.executeUpdate("UPDATE LVE_VoucherWithholding SET DocAction='CL',Processed='Y',DocStatus='CO' WHERE LVE_VoucherWithholding_ID = "+voucher.get_ID(),get_TrxName());
 					return "@Completed@";
 				}
 				else
@@ -60,11 +57,7 @@ public class VWT_ProcessWithholding extends SvrProcess {
 		else if (docAction.equals("VO")){
 			if(voucher.voidIt())
 			{
-				voucher.setDocAction(MLVEVoucherWithholding.DOCACTION_None);
-				voucher.setC_Payment_ID(0);
-				voucher.setProcessed(true);
-				voucher.setDocStatus(MLVEVoucherWithholding.DOCSTATUS_Voided);
-				voucher.saveEx();
+				DB.executeUpdate("UPDATE LVE_VoucherWithholding SET DocAction='--',C_Payment_ID=null,Processed='Y',DocStatus='VO' WHERE LVE_VoucherWithholding_ID = "+voucher.get_ID(),get_TrxName());
 				return "@Voided@";
 			}
 			else
@@ -76,11 +69,7 @@ public class VWT_ProcessWithholding extends SvrProcess {
 		else if (docAction.equals("RE"))
 		{
 			if(voucher.reActiveIt().equals(MLVEVoucherWithholding.DOCACTION_Re_Activate)) {
-				voucher.setDocAction(MLVEVoucherWithholding.DOCACTION_Complete);
-				voucher.setC_Payment_ID(0);
-				voucher.setProcessed(false);
-				voucher.setDocStatus(MLVEVoucherWithholding.DOCSTATUS_Drafted);
-				voucher.saveEx();
+				DB.executeUpdate("UPDATE LVE_VoucherWithholding SET DocAction='CO',C_Payment_ID=null,Processed='N',DocStatus='DR' WHERE LVE_VoucherWithholding_ID = "+voucher.get_ID(),get_TrxName());
 				return "@Success@";
 			}
 			else

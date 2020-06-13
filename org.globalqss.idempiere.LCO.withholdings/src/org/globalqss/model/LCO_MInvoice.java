@@ -456,7 +456,7 @@ public class LCO_MInvoice extends MInvoice
 
 		} // while type
 		LCO_MInvoice.updateHeaderWithholding(getC_Invoice_ID(), get_TrxName());
-		saveEx();
+		//saveEx();
 
 		return noins;
 	}
