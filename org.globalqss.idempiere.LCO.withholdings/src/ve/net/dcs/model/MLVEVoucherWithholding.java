@@ -159,10 +159,13 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		//	End Jorge Colmenarez
 		payment.setTenderType("X");
 		payment.setC_BPartner_ID(getC_BPartner_ID());
-		MAcctSchema[] m_ass = MAcctSchema.getClientAcctSchema(getCtx(), getAD_Client_ID());
-		int C_Currency_ID = 0;
-		if (m_ass.length > 0)
-			C_Currency_ID = m_ass[0].getC_Currency_ID();
+		/** changed by Adonis Castellanos 12/08/2020 14:48**/
+		//MAcctSchema[] m_ass = MAcctSchema.getClientAcctSchema(getCtx(), getAD_Client_ID());
+		MBankAccount bank = new MBankAccount(getCtx(),C_BankAccount_ID,get_TrxName());
+		int C_Currency_ID =bank.getC_Currency_ID();
+		/*if (m_ass.length > 0)
+			C_Currency_ID = m_ass[0].getC_Currency_ID();*/
+		/** end Adonis **/
 
 		payment.setC_Currency_ID(C_Currency_ID);
 		payment.setPayAmt(Env.ZERO);

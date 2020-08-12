@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 
+import org.compiere.model.MBPartner;
 import org.compiere.model.MCharge;
 import org.compiere.model.MDocType;
 import org.compiere.model.MInvoice;
@@ -67,6 +68,10 @@ public class FTU_GenerateTaxReturn extends SvrProcess {
 					+ " FROM LVE_VoucherWithholding vw "
 					+ " INNER join LCO_InvoiceWithholding iw on iw.lve_voucherwithholding_id = vw.lve_voucherwithholding_id "
 					+ " WHERE vw.docstatus IN ('CO') AND vw.datetrx BETWEEN '"+dateFrom+"' AND '"+dateFromTo+"' AND vw.LCO_WithholdingType_ID="+withholdingType+" AND "
+							+ "vw.ad_org_id in (SELECT DISTINCT Node_ID FROM getnodes("+orgId+"," + 
+							" (SELECT AD_Tree_ID FROM AD_Tree WHERE TreeType ='OO' AND AD_Client_ID="+getAD_Client_ID()+"),"+getAD_Client_ID()+") AS N (Parent_ID numeric,Node_ID numeric) " + 
+							" WHERE Parent_ID = "+orgId+")"
+							+ "AND "
 							+ " NOT EXISTS (SELECT 1 FROM c_invoiceline ci INNER JOIN c_invoice c ON c.c_invoice_id = ci.c_invoice_id"
 							+ " WHERE ci.LVE_VoucherWithholding_ID = vw.LVE_VoucherWithholding_ID AND c.docstatus NOT IN ('RE','VO'))"
 					+ " GROUP BY vw.LVE_VoucherWithholding_ID,vw.WithholdingNo ";
@@ -77,6 +82,9 @@ public class FTU_GenerateTaxReturn extends SvrProcess {
 		int cBPartnerId = withHoldingType.get_ValueAsInt("C_BPartner_ID");
 		int chargeId = withHoldingType.get_ValueAsInt("C_Charge_ID");
 		MCharge charge = new MCharge(getCtx(),chargeId,get_TrxName());
+		
+
+		MBPartner partner = new MBPartner(getCtx(),cBPartnerId,get_TrxName());
 		
 		MDocType docType = new MDocType(getCtx(),docTypeId,get_TrxName());
 		boolean iSOTrx= docType.isSOTrx() ;
@@ -108,6 +116,7 @@ public class FTU_GenerateTaxReturn extends SvrProcess {
 		
 		invoice.setC_Currency_ID(C_Currency_ID);
 		invoice.setPaymentRule("T");
+		invoice.setC_PaymentTerm_ID(partner.getPO_PaymentTerm_ID());
 		invoice.setAD_User_ID(getAD_User_ID());
 		invoice.saveEx(get_TrxName());
 		
