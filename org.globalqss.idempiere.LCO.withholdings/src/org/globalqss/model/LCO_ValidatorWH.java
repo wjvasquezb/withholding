@@ -439,7 +439,7 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 				MPaymentAllocate[] pa = MPaymentAllocate.get((MPayment)al.getC_Payment());	
 				for(MPaymentAllocate line : pa)
 				{
-					MLCOInvoiceWithholding iwh = new MLCOInvoiceWithholding(
+					/*MLCOInvoiceWithholding iwh = new MLCOInvoiceWithholding(
 							ah.getCtx(), line.get_ValueAsInt("LCO_InvoiceWithholding_ID"), ah.get_TrxName());
 					iwh.setC_AllocationLine_ID(al.getC_AllocationLine_ID());
 					iwh.setDateAcct(ah.getDateAcct());
@@ -447,6 +447,9 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 					iwh.setProcessed(true);
 					if (!iwh.save())
 						return "Error saving LCO_InvoiceWithholding completePaymentWithholdings";
+						*/
+					String sql = "UPDATE LCO_InvoiceWithholding SET C_AllocationLine_ID=?,DateAcct=?,DateTrx=?,Processed='Y' WHERE C_Payment_ID = ? ";
+					DB.executeUpdate(sql,new Object[] {al.getC_AllocationLine_ID(),ah.getDateAcct(),ah.getDateTrx(),al.getC_Payment_ID()},true,line.get_TrxName());
 				}
 			}
 		}
@@ -598,16 +601,16 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 							if ((invoice.isSOTrx() && invoice.getC_DocTypeTarget().getDocBaseType().compareTo("ARI")==0)){
 							//if ((invoice.isSOTrx() && invoice.getC_DocTypeTarget().getDocBaseType().compareTo("ARI")==0) || (!invoice.isSOTrx() && invoice.getC_DocTypeTarget().getDocBaseType().compareTo("APC")==0)) {
 								tl = fact.createLine(docLine, taxLine.getAccount(DocTax.ACCTTYPE_TaxDue, as),
-										as.getC_Currency_ID(), amountVE, null);
+										docLine.getC_Currency_ID(), amount, null);
 							} 
 							//** si es NC proveedor es un iva en compras
 							else if (!invoice.isSOTrx() && invoice.getC_DocTypeTarget().getDocBaseType().compareTo("APC")==0){
 								tl = fact.createLine(docLine, taxLine.getAccount(taxLine.getAPTaxType(), as),
-										as.getC_Currency_ID(), null, amountVE);
+										docLine.getC_Currency_ID(), null, amount);
 							}
 							else {
 								tl = fact.createLine(docLine, taxLine.getAccount(taxLine.getAPTaxType(), as),
-										as.getC_Currency_ID(), null, amountVE);
+										docLine.getC_Currency_ID(), null, amount);
 							}
 							if (tl != null)
 								tl.setC_Tax_ID(taxLine.getC_Tax_ID());

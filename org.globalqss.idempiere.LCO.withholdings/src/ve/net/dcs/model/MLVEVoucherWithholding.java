@@ -18,6 +18,7 @@ import org.compiere.model.MAllocationHdr;
 import org.compiere.model.MBPartner;
 import org.compiere.model.MBPartnerLocation;
 import org.compiere.model.MBankAccount;
+import org.compiere.model.MConversionType;
 import org.compiere.model.MDocType;
 import org.compiere.model.MFactAcct;
 import org.compiere.model.MInvoice;
@@ -168,6 +169,9 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		/** end Adonis **/
 
 		payment.setC_Currency_ID(C_Currency_ID);
+		//	Added by Jorge Colmenarez, 2020-08-12 15:42 set ConversionType by Default
+		payment.setC_ConversionType_ID(MConversionType.getDefault(getAD_Client_ID()));
+		//	End Jorge Colmenarez
 		payment.setPayAmt(Env.ZERO);
 		payment.setOverUnderAmt(Env.ZERO);
 		payment.setWriteOffAmt(Env.ZERO);
