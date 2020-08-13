@@ -331,12 +331,14 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 				}
 			}
 
+			for (MLCOInvoiceWithholding line : getLines(null)) {
+				//line.deleteEx(true);
+				line.setC_Payment_ID(0);
+				line.save(get_TrxName());
+			}
+			
 			MPayment pay = new MPayment(getCtx(), getC_Payment_ID(), get_TrxName());
 			pay.delete(true);
-			
-			for (MLCOInvoiceWithholding line : getLines(null)) {
-				line.deleteEx(true);
-			}
 
 		} else {
 			throw new AdempiereException("Documento no completado");

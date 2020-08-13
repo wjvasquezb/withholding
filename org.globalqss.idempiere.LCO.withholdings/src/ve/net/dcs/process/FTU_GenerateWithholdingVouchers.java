@@ -1,17 +1,19 @@
 package ve.net.dcs.process;
 
-import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.util.List;
 
-import org.compiere.model.MDocType;
+import org.adempiere.exceptions.AdempiereException;
 import org.compiere.model.MInvoice;
+import org.compiere.model.Query;
 import org.compiere.process.ProcessInfoParameter;
 import org.compiere.process.SvrProcess;
 import org.compiere.util.DB;
-import org.globalqss.model.LCO_MInvoice;
-import org.globalqss.model.MLCOWithholdingType;
+import org.compiere.util.Msg;
+import org.globalqss.model.MLCOInvoiceWithholding;
+import org.globalqss.model.X_LCO_InvoiceWithholding;
 
 import ve.net.dcs.model.MLVEVoucherWithholding;
 import ve.net.dcs.model.VWT_MInvoice;
@@ -26,6 +28,7 @@ public class FTU_GenerateWithholdingVouchers extends SvrProcess {
 	private Timestamp dateDocFrom;
 	private Timestamp dateDocTo;
 	private Timestamp dateTrx;
+	private String docAction = "DR";
 	private int cnt = 0;
 
 	@Override
@@ -52,6 +55,8 @@ public class FTU_GenerateWithholdingVouchers extends SvrProcess {
 				invoiceId = Integer.parseInt(para[i].getParameter().toString());
 			else if (name.equals("AD_Org_ID"))
 				orgId =Integer.parseInt(para[i].getParameter().toString());
+			else if (name.equals("DocAction"))
+				docAction =para[i].getParameter().toString();
 			else
 				log.severe("Unknown Parameter: " + name);
 		}
@@ -61,8 +66,8 @@ public class FTU_GenerateWithholdingVouchers extends SvrProcess {
 
 	@Override
 	protected String doIt() throws Exception {
-		// TODO Auto-generated method stub
 		
+		String msg = Msg.parseTranslation(getCtx(), "@LVE_VoucherWithholding_ID@");
 		
 		String sqlwt = "select dt.issotrx ,wt.LCO_WithholdingType_ID,wt.Type from LCO_WithholdingType wt "
 				+" inner join c_doctype dt on wt.c_doctype_id = dt.c_doctype_id where dt.issotrx='N' and wt.isactive = 'Y' ";
@@ -107,9 +112,7 @@ public class FTU_GenerateWithholdingVouchers extends SvrProcess {
 							+ " WHERE NOT EXISTS (SELECT 1 FROM lco_invoicewithholding iw WHERE iw.c_invoice_id = i.c_invoice_id AND iw.lco_withholdingtype_id = "+withholdingType+")"
 							+ " AND i.ad_org_id="+orgId+" AND i.dateinvoiced BETWEEN '"+dateDocFrom+"' AND '"+dateDocTo+"' and bp.LCO_ISIC_ID > 0";
 					
-				}
-				
-				
+				}				
 				
 				if(bPartnerId>0)
 					sql = sql+" AND i.C_BPartner_ID="+bPartnerId;
@@ -142,6 +145,7 @@ public class FTU_GenerateWithholdingVouchers extends SvrProcess {
 						voucher.setDateFrom(dateDocFrom);
 						voucher.setDateTo(dateDocTo);
 						voucher.setDateTrx(dateTrx);
+						voucher.set_ValueOfColumn("DateAcct",dateTrx);
 						voucher.setLCO_WithholdingType_ID(withholdingType);
 						voucher.setIsSOTrx(iSOTrx);
 						
@@ -153,12 +157,17 @@ public class FTU_GenerateWithholdingVouchers extends SvrProcess {
 						
 						MInvoice[] invoices = VWT_MInvoice.getOfBPartnerDateFromDateTo(getCtx(), voucher, get_TrxName());
 						
-						for (MInvoice mInvoice : invoices) {	
-							log.info("Prueba "+mInvoice.getDateAcct());
-							
+						for (MInvoice mInvoice : invoices) {								
 							VWT_MInvoice invoice = new VWT_MInvoice(getCtx(), mInvoice.getC_Invoice_ID(), get_TrxName());
 							cnt += invoice.recalcWithholdings(voucher);
 						}
+						
+						if(docAction.equals("CO"))
+							processWithholding(voucher);
+						
+						voucher.saveEx(get_TrxName());
+						String WithholdingNo = DB.getSQLValueString(get_TrxName(), "SELECT WithholdingNo FROM LVE_VoucherWithholding WHERE LVE_VoucherWithholding_ID=?", voucher.get_ID());
+						addBufferLog(voucher.get_ID(), new Timestamp(System.currentTimeMillis()), null, msg+": "+WithholdingNo, voucher.get_Table_ID(), voucher.get_ID());
 					}
 				
 				}catch(Exception e) {
@@ -182,6 +191,25 @@ public class FTU_GenerateWithholdingVouchers extends SvrProcess {
 		}
 		
 		return "Retenciones Generadas: "+cnt;
+	}
+	
+	private void processWithholding(MLVEVoucherWithholding voucher)
+	{
+		if (docAction.equals("CO")){
+			List<MLCOInvoiceWithholding> invoiceW = new Query(voucher.getCtx(), X_LCO_InvoiceWithholding.Table_Name, " LVE_VoucherWithholding_ID = ? ", get_TrxName()).setOnlyActiveRecords(true).setParameters(voucher.get_ID()).list();
+			if (invoiceW.size() > 0){
+				if(voucher.completeIt().equals(MLVEVoucherWithholding.DOCACTION_Complete))
+				{
+					DB.executeUpdate("UPDATE LVE_VoucherWithholding SET DocAction='CL',Processed='Y',DocStatus='CO' WHERE LVE_VoucherWithholding_ID = "+voucher.get_ID(),get_TrxName());
+				}
+				else
+				{
+					throw new AdempiereException(voucher.getProcessMsg());
+				}
+			}else{
+				throw new AdempiereException("El Comprobante no tiene Línea de Retenciones Asociadas.");
+			}
+		}
 	}
 
 }

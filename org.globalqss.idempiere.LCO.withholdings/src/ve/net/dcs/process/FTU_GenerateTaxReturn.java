@@ -14,11 +14,8 @@ import org.compiere.process.ProcessInfoParameter;
 import org.compiere.process.SvrProcess;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
-import org.globalqss.model.LCO_MInvoice;
+import org.compiere.util.Msg;
 import org.globalqss.model.MLCOWithholdingType;
-
-import ve.net.dcs.model.MLVEVoucherWithholding;
-import ve.net.dcs.model.VWT_MInvoice;
 
 public class FTU_GenerateTaxReturn extends SvrProcess {
 	
@@ -28,6 +25,8 @@ public class FTU_GenerateTaxReturn extends SvrProcess {
 	private Timestamp dateDoc;
 	private Timestamp dateFrom;
 	private Timestamp dateFromTo;
+	private int currencyId = 0;
+	private int conversionTypeId = 0;
 	private String docAction ;
 
 	@Override
@@ -50,6 +49,11 @@ public class FTU_GenerateTaxReturn extends SvrProcess {
 			}
 			else if (name.equals("AD_Org_ID"))
 				orgId =Integer.parseInt(para[i].getParameter().toString());
+
+			else if (name.equals("C_Currency_ID"))
+				currencyId =Integer.parseInt(para[i].getParameter().toString());
+			else if (name.equals("C_ConversionType_ID"))
+				conversionTypeId =Integer.parseInt(para[i].getParameter().toString());
 			else if (name.equals("DocAction"))
 				docAction =para[i].getParameter().toString();
 			else
@@ -64,7 +68,7 @@ public class FTU_GenerateTaxReturn extends SvrProcess {
 		// TODO Auto-generated method stub
 		
 		
-		String sql ="SELECT vw.LVE_VoucherWithholding_ID, vw.WithholdingNo,COALESCE(SUM(iw.TaxAmt),0) as TaxAmt "
+		String sql ="SELECT vw.AD_Org_ID, vw.LVE_VoucherWithholding_ID, vw.WithholdingNo,COALESCE(SUM(iw.TaxAmt),0) as TaxAmt "
 					+ " FROM LVE_VoucherWithholding vw "
 					+ " INNER join LCO_InvoiceWithholding iw on iw.lve_voucherwithholding_id = vw.lve_voucherwithholding_id "
 					+ " WHERE vw.docstatus IN ('CO') AND vw.datetrx BETWEEN '"+dateFrom+"' AND '"+dateFromTo+"' AND vw.LCO_WithholdingType_ID="+withholdingType+" AND "
@@ -74,7 +78,7 @@ public class FTU_GenerateTaxReturn extends SvrProcess {
 							+ "AND "
 							+ " NOT EXISTS (SELECT 1 FROM c_invoiceline ci INNER JOIN c_invoice c ON c.c_invoice_id = ci.c_invoice_id"
 							+ " WHERE ci.LVE_VoucherWithholding_ID = vw.LVE_VoucherWithholding_ID AND c.docstatus NOT IN ('RE','VO'))"
-					+ " GROUP BY vw.LVE_VoucherWithholding_ID,vw.WithholdingNo ";
+					+ " GROUP BY vw.AD_Org_ID,vw.LVE_VoucherWithholding_ID,vw.WithholdingNo ";
 		
 		MLCOWithholdingType withHoldingType = new MLCOWithholdingType(getCtx(),withholdingType,get_TrxName());
 		
@@ -104,7 +108,7 @@ public class FTU_GenerateTaxReturn extends SvrProcess {
 		
 		
 		MInvoice invoice = new MInvoice(getCtx(), 0, get_TrxName());
-		invoice.setAD_Org_ID(orgId);
+		invoice.setAD_Org_ID(getOrgTaxDeclare(orgId));
 		invoice.setC_BPartner_ID(cBPartnerId);
 		invoice.setC_BPartner_Location_ID(bpLocatorId);
 		invoice.setC_DocType_ID(docTypeId);
@@ -112,12 +116,15 @@ public class FTU_GenerateTaxReturn extends SvrProcess {
 		invoice.setDateAcct(dateDoc);
 		invoice.setDateInvoiced(dateDoc);
 		invoice.setIsSOTrx(iSOTrx);
-		int C_Currency_ID = Env.getContextAsInt(getCtx(), "$C_Currency_ID");
-		
+		int C_Currency_ID = (currencyId > 0 ? currencyId : Env.getContextAsInt(getCtx(), "$C_Currency_ID"));
 		invoice.setC_Currency_ID(C_Currency_ID);
+		invoice.setC_ConversionType_ID(conversionTypeId);
 		invoice.setPaymentRule("T");
 		invoice.setC_PaymentTerm_ID(partner.getPO_PaymentTerm_ID());
 		invoice.setAD_User_ID(getAD_User_ID());
+		invoice.saveEx(get_TrxName());
+		
+		invoice.set_ValueOfColumn("LVE_POInvoiceNo", invoice.getDocumentNo());
 		invoice.saveEx(get_TrxName());
 		
 		
@@ -135,7 +142,7 @@ public class FTU_GenerateTaxReturn extends SvrProcess {
 				
 				MInvoiceLine invoiceLine = new MInvoiceLine(getCtx(),0,get_TrxName());
 				invoiceLine.setC_Invoice_ID(invoice.get_ID());
-				invoiceLine.setAD_Org_ID(orgId);
+				invoiceLine.setAD_Org_ID(rs.getInt("AD_Org_ID"));
 				invoiceLine.setC_Charge_ID(chargeId);
 				invoiceLine.setQty(BigDecimal.ONE);
 				invoiceLine.setQtyEntered(BigDecimal.ONE);
@@ -166,7 +173,24 @@ public class FTU_GenerateTaxReturn extends SvrProcess {
 			return "No se encontraron comprobantes validos para la declaracion";
 		}
 		
-		return "Documento No:"+invoice.getDocumentNo();
+		String msg = Msg.parseTranslation(getCtx(), "@C_Invoice_ID@");
+		addBufferLog(invoice.get_ID(), new Timestamp(System.currentTimeMillis()), null, msg+": "+invoice.getDocumentNo(), invoice.get_Table_ID(), invoice.get_ID());
+		
+		return "@OK@";
+	}
+	
+	private int getOrgTaxDeclare(int orgId)
+	{
+		int orgID = 0;
+		
+		orgID = DB.getSQLValue(get_TrxName(), "SELECT AD_Org_ID FROM AD_OrgInfo WHERE IsOrgTaxDeclare = 'Y' AND Parent_Org_ID=?", orgId);
+		
+		if(orgID <=0)
+		{
+			orgID = orgId;
+		}
+		
+		return orgID;
 	}
 
 }
