@@ -67,7 +67,7 @@ public class VWT_MInvoice extends LCO_MInvoice {
 			sqlwhere += " AND ISPaid = 'N' ";
 		}
 		
-		sqlwhere += " AND "+COLUMNNAME_C_Invoice_ID+" NOT IN (SELECT lw.C_Invoice_ID FROM LCO_InvoiceWithholding lw JOIN LVE_VoucherWithholding vw ON lw.LVE_VoucherWithholding_ID = vw.LVE_VoucherWithholding_ID WHERE  vw.DocStatus IN ('CO','DR') AND lw.LCO_WithholdingType_ID = ? AND lw.AD_Org_ID = ?) ";
+		sqlwhere += " AND "+COLUMNNAME_C_Invoice_ID+" NOT IN (SELECT lw.C_Invoice_ID FROM LCO_InvoiceWithholding lw JOIN LVE_VoucherWithholding vw ON lw.LVE_VoucherWithholding_ID = vw.LVE_VoucherWithholding_ID WHERE  vw.DocStatus IN ('CO','DR','VO') AND lw.LCO_WithholdingType_ID = ? AND lw.AD_Org_ID = ?) ";
 		
 		parameters.add(voucher.getAD_Org_ID());
 		parameters.add(voucher.getLCO_WithholdingType_ID());

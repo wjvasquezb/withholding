@@ -28,6 +28,8 @@ public class FTU_GenerateWithholdingVouchers extends SvrProcess {
 	private Timestamp dateDocFrom;
 	private Timestamp dateDocTo;
 	private Timestamp dateTrx;
+	private int currencyId = 0;
+	private int conversiontypeId = 0;
 	private String docAction = "DR";
 	private int cnt = 0;
 
@@ -55,6 +57,10 @@ public class FTU_GenerateWithholdingVouchers extends SvrProcess {
 				invoiceId = Integer.parseInt(para[i].getParameter().toString());
 			else if (name.equals("AD_Org_ID"))
 				orgId =Integer.parseInt(para[i].getParameter().toString());
+			else if (name.equals("C_Currency_ID"))
+				currencyId =Integer.parseInt(para[i].getParameter().toString());
+			else if (name.equals("C_ConversionType_ID"))
+				conversiontypeId =Integer.parseInt(para[i].getParameter().toString());
 			else if (name.equals("DocAction"))
 				docAction =para[i].getParameter().toString();
 			else
@@ -121,13 +127,6 @@ public class FTU_GenerateWithholdingVouchers extends SvrProcess {
 				
 				sql = sql+" GROUP BY i.c_bpartner_id";
 				
-				/*MLCOWithholdingType withHoldingType = new MLCOWithholdingType(getCtx(),withholdingType,get_TrxName());
-				
-				int docTypeId = withHoldingType.get_ValueAsInt("C_DocType_ID");
-				
-				MDocType docType = new MDocType(getCtx(),docTypeId,get_TrxName());
-				boolean iSOTrx= docType.isSOTrx() ;*/
-				
 				PreparedStatement pstmt = null;
 				ResultSet rs = null;
 				
@@ -148,6 +147,8 @@ public class FTU_GenerateWithholdingVouchers extends SvrProcess {
 						voucher.set_ValueOfColumn("DateAcct",dateTrx);
 						voucher.setLCO_WithholdingType_ID(withholdingType);
 						voucher.setIsSOTrx(iSOTrx);
+						voucher.setC_Currency_ID(currencyId);
+						voucher.setC_ConversionType_ID(conversiontypeId);
 						
 						if(invoiceId>0)
 							voucher.setC_Invoice_ID(invoiceId);

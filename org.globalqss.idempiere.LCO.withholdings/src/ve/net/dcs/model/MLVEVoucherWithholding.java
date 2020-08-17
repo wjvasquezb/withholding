@@ -952,8 +952,10 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 
 	@Override
 	public int getC_Currency_ID() {
-		// TODO Auto-generated method stub
-		return 0;
+		Integer ii = (Integer)get_Value(COLUMNNAME_C_Currency_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
 	}
 
 	@Override

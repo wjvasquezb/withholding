@@ -24,6 +24,7 @@ import java.util.Properties;
 
 import org.compiere.model.MBPartner;
 import org.compiere.model.MBPartnerLocation;
+import org.compiere.model.MConversionRate;
 import org.compiere.model.MDocType;
 import org.compiere.model.MInvoice;
 import org.compiere.model.MLocation;
@@ -435,17 +436,26 @@ public class LCO_MInvoice extends MInvoice
 							wc.getAmountRefunded().compareTo(Env.ZERO) > 0) {
 						taxamt = taxamt.subtract(wc.getAmountRefunded());
 					}
-					iwh.setTaxAmt(taxamt);
-					iwh.setTaxBaseAmt(base);
-					iwh.set_ValueOfColumn("Subtrahend", wc.getAmountRefunded());
 					
-					//SUBTRAHEND
-//					iwh.set_ValueOfColumn("Subtrahend", Subtrahend.setScale(stdPrecision, BigDecimal.ROUND_HALF_UP));
-//					iwh.setTaxAmt(taxamt.subtract(Subtrahend).setScale(stdPrecision, BigDecimal.ROUND_HALF_UP));
-//					iwh.setTaxBaseAmt(base);
-					//SUBTRAHEND
+					if(getC_Currency_ID()!=voucher.getC_Currency_ID())
+					{
+						taxamt = MConversionRate.convert(getCtx(), taxamt, getC_Currency_ID(), voucher.getC_Currency_ID(), 
+								getDateInvoiced(), voucher.getC_ConversionType_ID(), getAD_Client_ID(), getAD_Org_ID());
+						iwh.setTaxAmt(taxamt);
+						iwh.setTaxBaseAmt(MConversionRate.convert(getCtx(), base, getC_Currency_ID(), voucher.getC_Currency_ID(), 
+								getDateInvoiced(), voucher.getC_ConversionType_ID(), getAD_Client_ID(), getAD_Org_ID()));
+						iwh.set_ValueOfColumn("Subtrahend", MConversionRate.convert(getCtx(), wc.getAmountRefunded(), getC_Currency_ID(), voucher.getC_Currency_ID(), 
+								getDateInvoiced(), voucher.getC_ConversionType_ID(), getAD_Client_ID(), getAD_Org_ID()));
+						totwith = totwith.add(taxamt);
+					}
+					else
+					{
+						iwh.setTaxAmt(taxamt);
+						iwh.setTaxBaseAmt(base);
+						iwh.set_ValueOfColumn("Subtrahend", wc.getAmountRefunded());
+						totwith = totwith.add(taxamt);
+					}
 
-					totwith = totwith.add(taxamt);
 					if (voucher != null)
 						iwh.set_ValueOfColumn("LVE_VoucherWithholding_ID", voucher.getLVE_VoucherWithholding_ID());
 					iwh.saveEx();
@@ -471,7 +481,9 @@ public class LCO_MInvoice extends MInvoice
 		String sql = 
 			"UPDATE C_Invoice "
 			+ " SET WithholdingAmt="
-				+ "(SELECT COALESCE(SUM(TaxAmt),0) FROM LCO_InvoiceWithholding iw WHERE iw.IsActive = 'Y' " +
+				+ "(SELECT COALESCE(SUM(currencyconvert(TaxAmt,vw.C_Currency_ID,C_Invoice.C_Currency_ID,C_Invoice.DateInvoiced,vw.C_ConversionType_ID,C_Invoice.AD_Client_ID,C_Invoice.AD_Org_ID)),0) FROM LCO_InvoiceWithholding iw "
+				+ "JOIN LVE_VoucherWithholding vw ON iw.LVE_VoucherWithholding_ID = vw.LVE_VoucherWithholding_ID "
+				+ "	WHERE iw.IsActive = 'Y' " +
 						"AND iw.IsCalcOnPayment = 'N' AND C_Invoice.C_Invoice_ID=iw.C_Invoice_ID) "
 			+ "WHERE C_Invoice_ID=?";
 		int no = DB.executeUpdateEx(sql, new Object[] {C_Invoice_ID}, trxName);
