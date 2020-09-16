@@ -51,11 +51,8 @@ import ve.net.dcs.model.X_LVE_generateXML;
  */
 public class LVE_GenerateXmlSeniat extends SvrProcess {
 
-	/**
-	 * 
-	 */
 	public LVE_GenerateXmlSeniat() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	/**Organization                  */
@@ -113,9 +110,12 @@ public class LVE_GenerateXmlSeniat extends SvrProcess {
 	   
 		sql=("SELECT *, to_char(fecha,'DD/MM/YYYY') as fechaoperacion "
 				+ " FROM lve_xmlislr " 
-				+ " WHERE " 
-				+ " lve_xmlislr.org = '" + p_AD_Org_ID + "' AND "
-				+ " (lve_xmlislr.fecha BETWEEN '" + p_ValidFrom + "' AND '"+ p_ValidTo +"')" 
+				+ " WHERE (" 
+				//+ " lve_xmlislr.org = '" + p_AD_Org_ID + "' AND "
+					+ " lve_xmlislr.org IN  (SELECT DISTINCT Node_ID FROM getnodes("+p_AD_Org_ID+",(SELECT AD_Tree_ID FROM AD_Tree WHERE TreeType ='OO' "
+					+ "AND AD_Client_ID="+getAD_Client_ID()+"),"+getAD_Client_ID()+") AS N (Parent_ID numeric,Node_ID numeric) " 
+					+ " WHERE Parent_ID = "+p_AD_Org_ID+") OR lve_xmlislr.org="+p_AD_Org_ID+")"		
+				+ " AND (lve_xmlislr.fecha BETWEEN '" + p_ValidFrom + "' AND '"+ p_ValidTo +"')" 
 				);
 		
 		PreparedStatement pstmt = null;
@@ -146,12 +146,12 @@ public class LVE_GenerateXmlSeniat extends SvrProcess {
 					 detalleRetencion.addContent(new Element("NumeroControl").setText(rs.getString(3).trim()));
 				 else
 					 detalleRetencion.addContent(new Element("NumeroControl").setText("Vacio"));
-				 
+				 /* commented by Adonis Castellanos 11-09-2020 
 				 if (rs.getString(11) != null)
 					 detalleRetencion.addContent(new Element("FechaOperacion").setText(rs.getString(11).trim()));
 				 else
 					 detalleRetencion.addContent(new Element("FechaOperacion").setText("Vacio"));
-			    
+			    */
 				 if (rs.getString(4) != null)
 					 detalleRetencion.addContent(new Element("CodigoConcepto").setText(rs.getString(4).trim()));
 				 else

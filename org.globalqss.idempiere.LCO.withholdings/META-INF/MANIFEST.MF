@@ -10,6 +10,7 @@ Export-Package: net.frontuari.component,
  org.compiere.acct,
  org.globalqss.model,
  org.globalqss.process,
+ org.jdom2,
  ve.net.dcs.callout,
  ve.net.dcs.component,
  ve.net.dcs.info,
@@ -19,8 +20,7 @@ Require-Bundle: org.adempiere.base;bundle-version="7.1.0",
  org.adempiere.plugin.utils;bundle-version="7.1.0",
  org.jfree.jcommon-osgi;bundle-version="1.0.23"
 Import-Package: org.osgi.service.event
-Service-Component: OSGI-INF/lco_calloutswhfactory.xml,OSGI-INF/lcovalidatorwh.xml, OSGI-INF/VWTModelFactory.xml,OSGI-INF/VWTCalloutFactory.xml,OSGI-INF/VWTModelValidator.xml,
- OSGI-INF/LVE_DocFactory.xml
+Service-Component: OSGI-INF/lco_calloutswhfactory.xml,OSGI-INF/lcovalidatorwh.xml, OSGI-INF/VWTModelFactory.xml,OSGI-INF/VWTCalloutFactory.xml,OSGI-INF/VWTModelValidator.xml,OSGI-INF/LVE_DocFactory.xml
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-Vendor: Frontuari, C.A.

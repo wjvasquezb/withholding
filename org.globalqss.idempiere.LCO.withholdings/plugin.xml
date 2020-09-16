@@ -21,23 +21,20 @@
    </extension>
    <extension
          id="ve.net.dcs.process.VWT_ProcessWithholding"
+         name="VWT_ProcessWithholding"
          point="org.adempiere.base.Process">
       <process
-            class="ve.net.dcs.process.VWT_ProcessWithholding">
+            class="ve.net.dcs.process.VWT_ProcessWithholding"
+            priority="0">
       </process>
    </extension>
    <extension
          id="ve.net.dcs.process.LVE_GenerateTxtSeniat"
+         name="LVE_GenerateTxtSeniat"
          point="org.adempiere.base.Process">
       <process
-            class="ve.net.dcs.process.LVE_GenerateTxtSeniat">
-      </process>
-   </extension>
-   <extension
-         id="ve.net.dcs.process.LVE_GenerateXmlSeniat"
-         point="org.adempiere.base.Process">
-      <process
-            class="ve.net.dcs.process.LVE_GenerateXmlSeniat">
+            class="ve.net.dcs.process.LVE_GenerateTxtSeniat"
+            priority="0">
       </process>
    </extension>
    <extension
@@ -45,7 +42,8 @@
          name="FTU_GenerateWithholdingVouchers"
          point="org.adempiere.base.Process">
       <process
-            class="ve.net.dcs.process.FTU_GenerateWithholdingVouchers">
+            class="ve.net.dcs.process.FTU_GenerateWithholdingVouchers"
+            priority="0">
       </process>
    </extension>
    <extension
@@ -53,7 +51,26 @@
          name="FTU_GenerateTaxReturn"
          point="org.adempiere.base.Process">
       <process
-            class="ve.net.dcs.process.FTU_GenerateTaxReturn">
+            class="ve.net.dcs.process.FTU_GenerateTaxReturn"
+            priority="0">
+      </process>
+   </extension>
+   <extension
+         id="ve.net.dcs.process.LVE_GenerateXmlSeniat"
+         name="LVE_GenerateXmlSeniat"
+         point="org.adempiere.base.Process">
+      <process
+            class="ve.net.dcs.process.LVE_GenerateXmlSeniat"
+            priority="0">
+      </process>
+   </extension>
+   <extension
+         id="ve.net.dcs.process.FTU_GenerateWithholdingVouchersFromInvoice"
+         name="FTU_GenerateWithholdingVouchersFromInvoice"
+         point="org.adempiere.base.Process">
+      <process
+            class="ve.net.dcs.process.FTU_GenerateWithholdingVouchersFromInvoice"
+            priority="0">
       </process>
    </extension>
 </plugin>

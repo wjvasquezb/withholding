@@ -5,12 +5,17 @@ import java.util.logging.Level;
 import org.compiere.model.MInvoice;
 import org.compiere.process.ProcessInfoParameter;
 import org.compiere.process.SvrProcess;
+import org.compiere.util.CLogger;
 
 import ve.net.dcs.model.MLVEVoucherWithholding;
 import ve.net.dcs.model.VWT_MInvoice;
 
 public class VWT_GenerateInvoiceWithholding extends SvrProcess {
 	
+
+	/**	Logger			*/
+	private static CLogger log = CLogger.getCLogger(VWT_GenerateInvoiceWithholding.class);
+
 	/** The Record						*/
 	private int		p_Record_ID = 0;
 

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 
+import org.adempiere.exceptions.AdempiereException;
 import org.compiere.model.MBPartner;
 import org.compiere.model.MCharge;
 import org.compiere.model.MDocType;
@@ -12,12 +13,17 @@ import org.compiere.model.MInvoice;
 import org.compiere.model.MInvoiceLine;
 import org.compiere.process.ProcessInfoParameter;
 import org.compiere.process.SvrProcess;
+import org.compiere.util.CLogger;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
 import org.compiere.util.Msg;
 import org.globalqss.model.MLCOWithholdingType;
 
 public class FTU_GenerateTaxReturn extends SvrProcess {
+	
+
+	/**	Logger			*/
+	private static CLogger log = CLogger.getCLogger(FTU_GenerateTaxReturn.class);
 	
 	/** The Record						*/
 	private int withholdingType = 0;
@@ -27,6 +33,7 @@ public class FTU_GenerateTaxReturn extends SvrProcess {
 	private Timestamp dateFromTo;
 	private int currencyId = 0;
 	private int conversionTypeId = 0;
+	private int C_Invoice_ID =0;
 	private String docAction ;
 
 	@Override
@@ -54,6 +61,9 @@ public class FTU_GenerateTaxReturn extends SvrProcess {
 				currencyId =Integer.parseInt(para[i].getParameter().toString());
 			else if (name.equals("C_ConversionType_ID"))
 				conversionTypeId =Integer.parseInt(para[i].getParameter().toString());
+
+			else if (name.equals("C_Invoice_ID"))
+				C_Invoice_ID =Integer.parseInt(para[i].getParameter().toString());
 			else if (name.equals("DocAction"))
 				docAction =para[i].getParameter().toString();
 			else
@@ -71,10 +81,10 @@ public class FTU_GenerateTaxReturn extends SvrProcess {
 		String sql ="SELECT vw.AD_Org_ID, vw.LVE_VoucherWithholding_ID, vw.WithholdingNo,COALESCE(SUM(iw.TaxAmt),0) as TaxAmt "
 					+ " FROM LVE_VoucherWithholding vw "
 					+ " INNER join LCO_InvoiceWithholding iw on iw.lve_voucherwithholding_id = vw.lve_voucherwithholding_id "
-					+ " WHERE vw.docstatus IN ('CO') AND vw.datetrx BETWEEN '"+dateFrom+"' AND '"+dateFromTo+"' AND vw.LCO_WithholdingType_ID="+withholdingType+" AND "
+					+ " WHERE vw.docstatus IN ('CO') AND vw.datetrx BETWEEN '"+dateFrom+"' AND '"+dateFromTo+"' AND vw.LCO_WithholdingType_ID="+withholdingType+" AND ("
 							+ "vw.ad_org_id in (SELECT DISTINCT Node_ID FROM getnodes("+orgId+"," + 
 							" (SELECT AD_Tree_ID FROM AD_Tree WHERE TreeType ='OO' AND AD_Client_ID="+getAD_Client_ID()+"),"+getAD_Client_ID()+") AS N (Parent_ID numeric,Node_ID numeric) " + 
-							" WHERE Parent_ID = "+orgId+")"
+							" WHERE Parent_ID = "+orgId+") OR vw.ad_org_id="+orgId +")"
 							+ "AND "
 							+ " NOT EXISTS (SELECT 1 FROM c_invoiceline ci INNER JOIN c_invoice c ON c.c_invoice_id = ci.c_invoice_id"
 							+ " WHERE ci.LVE_VoucherWithholding_ID = vw.LVE_VoucherWithholding_ID AND c.docstatus NOT IN ('RE','VO'))"
@@ -85,14 +95,25 @@ public class FTU_GenerateTaxReturn extends SvrProcess {
 		int docTypeId = (int)withHoldingType.get_Value("C_DocTypeInvoice_ID");
 		int cBPartnerId = withHoldingType.get_ValueAsInt("C_BPartner_ID");
 		int chargeId = withHoldingType.get_ValueAsInt("C_Charge_ID");
-		MCharge charge = new MCharge(getCtx(),chargeId,get_TrxName());
 		
+		if(docTypeId<=0)
+			throw new AdempiereException("El tipo de retención no tiene un tipo de documento asignado para la declaración");		
+		if(cBPartnerId<=0)
+			throw new AdempiereException("El tipo de retención no tiene un tercero asignado para la declaración");		
+		if(chargeId<=0)
+			throw new AdempiereException("El tipo de retención no tiene un cargo asignado para la declaración");
+		
+		MCharge charge = new MCharge(getCtx(),chargeId,get_TrxName());		
 
 		MBPartner partner = new MBPartner(getCtx(),cBPartnerId,get_TrxName());
 		
-		MDocType docType = new MDocType(getCtx(),docTypeId,get_TrxName());
-		boolean iSOTrx= docType.isSOTrx() ;
+		if(partner.getPaymentRulePO()==null || partner.getPaymentRulePO().equals(""))
+				throw new AdempiereException("El tercero asignado para la declaración no tiene una regla de pago configurada");
+		if(!(partner.getPO_PaymentTerm_ID()>0))
+				throw new AdempiereException("El tercero asignado para la declaración no tiene un término de pago configurado");
 		
+		MDocType docType = new MDocType(getCtx(),docTypeId,get_TrxName());
+		boolean iSOTrx= docType.isSOTrx() ;		
 		
 		String sqlbpd = "SELECT C_BPartner_Location_ID FROM C_BPartner_Location WHERE IsBillTo='Y' AND C_BPartner_ID="+cBPartnerId;
 		
@@ -102,30 +123,33 @@ public class FTU_GenerateTaxReturn extends SvrProcess {
 		
 		int C_UOM_ID = DB.getSQLValue(get_TrxName(), sqlcuom);
 		
-		String sqltax = "SELECT C_Tax_ID FROM C_Tax WHERE IsDefault='Y' AND C_TaxCategory_ID="+charge.getC_TaxCategory_ID();
+		String sqltax = "SELECT C_Tax_ID FROM C_Tax WHERE C_TaxCategory_ID="+charge.getC_TaxCategory_ID()+" ORDER BY IsDefault DESC";
 		
 		int C_Tax_ID = DB.getSQLValue(get_TrxName(), sqltax);
 		
 		
-		MInvoice invoice = new MInvoice(getCtx(), 0, get_TrxName());
-		invoice.setAD_Org_ID(getOrgTaxDeclare(orgId));
-		invoice.setC_BPartner_ID(cBPartnerId);
-		invoice.setC_BPartner_Location_ID(bpLocatorId);
-		invoice.setC_DocType_ID(docTypeId);
-		invoice.setC_DocTypeTarget_ID(docTypeId);
-		invoice.setDateAcct(dateDoc);
-		invoice.setDateInvoiced(dateDoc);
-		invoice.setIsSOTrx(iSOTrx);
-		int C_Currency_ID = (currencyId > 0 ? currencyId : Env.getContextAsInt(getCtx(), "$C_Currency_ID"));
-		invoice.setC_Currency_ID(C_Currency_ID);
-		invoice.setC_ConversionType_ID(conversionTypeId);
-		invoice.setPaymentRule("T");
-		invoice.setC_PaymentTerm_ID(partner.getPO_PaymentTerm_ID());
-		invoice.setAD_User_ID(getAD_User_ID());
-		invoice.saveEx(get_TrxName());
+		MInvoice invoice = new MInvoice(getCtx(), C_Invoice_ID, get_TrxName());
 		
-		invoice.set_ValueOfColumn("LVE_POInvoiceNo", invoice.getDocumentNo());
-		invoice.saveEx(get_TrxName());
+		if(C_Invoice_ID<=0) {
+			invoice.setAD_Org_ID(getOrgTaxDeclare(orgId));
+			invoice.setC_BPartner_ID(cBPartnerId);
+			invoice.setC_BPartner_Location_ID(bpLocatorId);
+			invoice.setC_DocType_ID(docTypeId);
+			invoice.setC_DocTypeTarget_ID(docTypeId);
+			invoice.setDateAcct(dateDoc);
+			invoice.setDateInvoiced(dateDoc);
+			invoice.setIsSOTrx(iSOTrx);
+			int C_Currency_ID = (currencyId > 0 ? currencyId : Env.getContextAsInt(getCtx(), "$C_Currency_ID"));
+			invoice.setC_Currency_ID(C_Currency_ID);
+			invoice.setC_ConversionType_ID(conversionTypeId);
+			invoice.setPaymentRule(partner.getPaymentRulePO());
+			invoice.setC_PaymentTerm_ID(partner.getPO_PaymentTerm_ID());
+			invoice.setAD_User_ID(getAD_User_ID());
+			invoice.saveEx(get_TrxName());
+			
+			invoice.set_ValueOfColumn("LVE_POInvoiceNo", invoice.getDocumentNo());
+			invoice.saveEx(get_TrxName());
+		}
 		
 		
 		PreparedStatement pstmt = null;
@@ -157,7 +181,8 @@ public class FTU_GenerateTaxReturn extends SvrProcess {
 			}
 		
 		}catch(Exception e) {
-			
+			log.warning(e.toString());
+			throw new AdempiereException("No se pudo completar el proceso, Error:"+e.toString());
 		}finally
 		{
 			DB.close(rs);

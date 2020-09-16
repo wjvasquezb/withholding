@@ -275,6 +275,11 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 			return false;
 
 		if (getC_Payment_ID() > 0 && getDocStatus().equals(DOCSTATUS_Completed)) {
+
+			//add validation when the invoice has paid don't let me reactivate it or void it
+			ValidateInvoicesPayed();
+			
+			ValidateDeclarationGenerated();
 			/*
 			 * globalqss - 2317928 - Reactivating/Voiding order must reset
 			 * posted
@@ -357,10 +362,40 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		return true;
 	}
 
+	public void ValidateInvoicesPayed() {
+		for(MLCOInvoiceWithholding iw:getLines("")) {
+			if(iw.getC_Invoice_ID()>0) {
+				MInvoice inv = (MInvoice)iw.getC_Invoice();
+				if(inv.isPaid())
+					throw new AdempiereException("No se puede anular o re-activar el documento porque la factura Nro:"+inv.getDocumentNo()+", ya ha sido pagada");
+			}
+		}
+		
+	}
+	
+
+	public void ValidateDeclarationGenerated() {
+		String sql = "SELECT i.C_Invoice_ID FROM C_InvoiceLine il"
+				+ " JOIN C_Invoice i ON il.C_Invoice_ID = i.C_Invoice_ID"
+				+ " WHERE i.DocStatus IN ('CO','CL','IP','DR') AND LVE_VoucherWithholding_ID ="+getLVE_VoucherWithholding_ID();
+		int C_Invoice_ID = DB.getSQLValueEx(get_TrxName(), sql);
+		if(C_Invoice_ID>0) {
+			MInvoice inv = new MInvoice(getCtx(),C_Invoice_ID,get_TrxName());
+			throw new AdempiereException("No se puede anular o re-activar el documento porque este ya fue declarado en el documento no:"+inv.getDocumentNo());
+		}
+			
+	}
+	
 	public String reActiveIt() {
 		log.info(toString());
 
 		if (getC_Payment_ID() > 0 && getDocStatus().equals(DOCSTATUS_Completed)) {
+			
+			//add validation when the invoice has paid don't let me reactivate it or void it
+			ValidateInvoicesPayed();
+			
+			ValidateDeclarationGenerated();
+			
 			/*
 			 * globalqss - 2317928 - Reactivating/Voiding order must reset
 			 * posted
@@ -444,7 +479,9 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 		String whereClauseFinal = "LVE_VoucherWithholding_ID=? ";
 		if (whereClause != null)
 			whereClauseFinal += whereClause;
-		List<MLCOInvoiceWithholding> list = new Query(getCtx(), MLCOInvoiceWithholding.Table_Name, whereClauseFinal, get_TrxName()).setParameters(getLVE_VoucherWithholding_ID()).setOrderBy(MLCOInvoiceWithholding.COLUMNNAME_C_Invoice_ID).list();
+		List<MLCOInvoiceWithholding> list = new Query(getCtx(), MLCOInvoiceWithholding.Table_Name, whereClauseFinal, get_TrxName())
+				.setParameters(getLVE_VoucherWithholding_ID())
+				.setOrderBy(MLCOInvoiceWithholding.COLUMNNAME_C_Invoice_ID).list();
 		return list.toArray(new MLCOInvoiceWithholding[list.size()]);
 	} // getLines
 
@@ -840,6 +877,13 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 			return false;
 
 		if (getC_Payment_ID() > 0 && getDocStatus().equals(DOCSTATUS_Completed)) {
+			
+
+			//add validation when the invoice has paid don't let me reactivate it or void it
+			ValidateInvoicesPayed();
+			
+			ValidateDeclarationGenerated();
+			
 			/*
 			 * globalqss - 2317928 - Reactivating/Voiding order must reset
 			 * posted

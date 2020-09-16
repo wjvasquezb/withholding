@@ -44,11 +44,6 @@ import java.util.logging.Level;
  */
 public class LVE_GenerateTxtSeniat extends SvrProcess {
 
-	public LVE_GenerateTxtSeniat() {
-		// TODO Auto-generated constructor stub
-		
-		
-	}
 	/**	Organization			*/
 	private int	p_AD_Org_ID = 0;	
 	/** ValidFrom               */
@@ -110,9 +105,12 @@ public class LVE_GenerateTxtSeniat extends SvrProcess {
     
 		sql=("SELECT *"
 				+ " FROM lve_txtiva " 
-				+ " WHERE " 
-				+ " lve_txtiva.org = '" + p_AD_Org_ID + "' AND "
-				+ " (lve_txtiva.fechareten BETWEEN '" + p_ValidFrom + "' AND '"+ p_ValidTo +"') AND"
+				+ " WHERE (" 
+				//+ " lve_txtiva.org = '" + p_AD_Org_ID + "' AND "
+					+ " lve_txtiva.org IN  (SELECT DISTINCT Node_ID FROM getnodes("+p_AD_Org_ID+",(SELECT AD_Tree_ID FROM AD_Tree WHERE TreeType ='OO' "
+					+ "AND AD_Client_ID="+getAD_Client_ID()+"),"+getAD_Client_ID()+") AS N (Parent_ID numeric,Node_ID numeric) " 
+					+ " WHERE Parent_ID = "+p_AD_Org_ID+") OR lve_txtiva.org="+p_AD_Org_ID+")"		
+				+ " AND (lve_txtiva.fechareten BETWEEN '" + p_ValidFrom + "' AND '"+ p_ValidTo +"') AND"
 				+ " lve_txtiva.tipooperacion= '" + p_TypeOperation + "' " 
 				);
 		PreparedStatement pstmt = null;

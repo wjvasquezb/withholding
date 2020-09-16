@@ -203,6 +203,8 @@ public class VWTModelValidator extends AbstractEventHandler {
 					}
 				}
 			}
+			
+			ValidateDeclarationDocument(invoice);
 		}/*  TRANSFER CODE TO net.frontuari.lvedocumentcontrol BY JORGE COLMENAREZ
 		else if (po.get_TableName().equals(I_C_Invoice.Table_Name) && type.equals(IEventTopics.DOC_BEFORE_COMPLETE)) {
 
@@ -335,6 +337,11 @@ public class VWTModelValidator extends AbstractEventHandler {
 		}*/
 	}
 
+	private void ValidateDeclarationDocument(MInvoice invoice) {
+		MDocType dt = (MDocType) invoice.getC_DocType();
+		
+	}
+	
 	private boolean validateWithholdingNo(MLVEVoucherWithholding voucher) {
 		
 		MLCOWithholdingType withHoldingType = new MLCOWithholdingType(voucher.getCtx(), voucher.getLCO_WithholdingType_ID(), voucher.get_TrxName());	

@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.adempiere.exceptions.AdempiereException;
 import org.compiere.model.MInvoice;
+import org.compiere.model.MSysConfig;
 import org.compiere.model.Query;
 import org.compiere.process.ProcessInfoParameter;
 import org.compiere.process.SvrProcess;
@@ -90,42 +91,62 @@ public class FTU_GenerateWithholdingVouchers extends SvrProcess {
 			
 			while(rswt.next()) {
 				int withholdingType = rswt.getInt("LCO_WithholdingType_ID");
-				boolean iSOTrx = rswt.getBoolean("issotrx");
+				boolean iSOTrx = rswt.getBoolean("IsSOTrx");
 				String type = rswt.getString("Type");
 				String sql = "" ;
 				
 				if(type.equalsIgnoreCase("IVA")){
 					
-					sql = "SELECT i.c_bpartner_id"
+					sql = "SELECT i.c_bpartner_id,i.ad_org_id"
 							+ " FROM c_invoice i "
-							+ " WHERE NOT EXISTS (SELECT 1 FROM lco_invoicewithholding iw WHERE iw.c_invoice_id = i.c_invoice_id AND iw.lco_withholdingtype_id = "+withholdingType+")"
-							+ " AND i.ad_org_id="+orgId+" AND i.dateinvoiced BETWEEN '"+dateDocFrom+"' AND '"+dateDocTo+"' ";
+							+ " JOIN c_doctype cd  ON cd.c_doctype_id = i.c_doctype_id "
+							+ " WHERE NOT EXISTS (SELECT 1 FROM lco_invoicewithholding iw join LVE_VoucherWithholding vo ON iw.LVE_VoucherWithholding_ID = vo.LVE_VoucherWithholding_ID   WHERE iw.c_invoice_id = i.c_invoice_id AND vo.DocStatus IN ('CO','CL') AND iw.lco_withholdingtype_id = "+withholdingType+")"
+							+ " AND cd.GenerateWithholding='Y' AND ("
+								+ " i.ad_org_id IN  (SELECT DISTINCT Node_ID FROM getnodes("+orgId+",(SELECT AD_Tree_ID FROM AD_Tree WHERE TreeType ='OO' "
+								+ "AND AD_Client_ID="+getAD_Client_ID()+"),"+getAD_Client_ID()+") AS N (Parent_ID numeric,Node_ID numeric) " 
+								+ " WHERE Parent_ID = "+orgId+") OR i.ad_org_id="+orgId+")"					
+							+ " AND i.dateinvoiced BETWEEN '"+dateDocFrom+"' AND '"+dateDocTo+"' ";
 					
-				}else if(type.equalsIgnoreCase("ISLR")) {
-					
-					sql = "SELECT i.c_bpartner_id"
+				}else if(type.equalsIgnoreCase("ISLR")) {					
+					sql = "SELECT i.c_bpartner_id,i.ad_org_id"
 							+ " FROM c_invoice i "
+							+ " JOIN c_doctype cd  ON cd.c_doctype_id = i.c_doctype_id "
 							+ " inner join c_invoiceline il on i.c_invoice_id = il.c_invoice_id "
-							+ " inner join c_charge c on il.c_charge_id = c.c_charge_id "
-							+ " WHERE NOT EXISTS (SELECT 1 FROM lco_invoicewithholding iw WHERE iw.c_invoice_id = i.c_invoice_id AND iw.lco_withholdingtype_id = "+withholdingType+")"
-							+ " AND i.ad_org_id="+orgId+" AND i.dateinvoiced BETWEEN '"+dateDocFrom+"' AND '"+dateDocTo+"' and c.LCO_WithholdingCategory_ID > 0";
+							+ " left join c_charge c on il.c_charge_id = c.c_charge_id "
+							+ " left join m_product p on il.m_product_id = p.m_product_id "
+							+ " WHERE NOT EXISTS (SELECT 1 FROM lco_invoicewithholding iw join LVE_VoucherWithholding vo ON iw.LVE_VoucherWithholding_ID = vo.LVE_VoucherWithholding_ID   WHERE iw.c_invoice_id = i.c_invoice_id AND vo.DocStatus IN ('CO','CL') AND iw.lco_withholdingtype_id = "+withholdingType+")"
+							+ " AND cd.GenerateWithholding='Y'"
+							+ " AND (" //i.ad_org_id="+orgId+" "
+								+ " i.ad_org_id IN  (SELECT DISTINCT Node_ID FROM getnodes("+orgId+",(SELECT AD_Tree_ID FROM AD_Tree WHERE TreeType ='OO' "
+									+ "AND AD_Client_ID="+getAD_Client_ID()+"),"+getAD_Client_ID()+") AS N (Parent_ID numeric,Node_ID numeric) " 
+									+ " WHERE Parent_ID = "+orgId+") OR i.ad_org_id="+orgId+")"						
+							+ " AND i.dateinvoiced BETWEEN '"+dateDocFrom+"' AND '"+dateDocTo+"' and (c.LCO_WithholdingCategory_ID > 0 OR p.LCO_WithholdingCategory_ID>0)";
 					
-				}else if(type.equalsIgnoreCase("IAE")) {
-					
-					sql = "SELECT i.c_bpartner_id"
+				}else if(type.equalsIgnoreCase("IAE")) {					
+					sql = "SELECT i.c_bpartner_id,i.ad_org_id"
 							+ " FROM c_invoice i "
+							+ " JOIN c_doctype cd  ON cd.c_doctype_id = i.c_doctype_id "
 							+ " inner join C_BPartner bp on bp.c_bpartner_id = i.c_bpartner_id "
-							+ " WHERE NOT EXISTS (SELECT 1 FROM lco_invoicewithholding iw WHERE iw.c_invoice_id = i.c_invoice_id AND iw.lco_withholdingtype_id = "+withholdingType+")"
-							+ " AND i.ad_org_id="+orgId+" AND i.dateinvoiced BETWEEN '"+dateDocFrom+"' AND '"+dateDocTo+"' and bp.LCO_ISIC_ID > 0";
-					
+							+ " WHERE NOT EXISTS (SELECT 1 FROM lco_invoicewithholding iw join LVE_VoucherWithholding vo ON iw.LVE_VoucherWithholding_ID = vo.LVE_VoucherWithholding_ID   WHERE iw.c_invoice_id = i.c_invoice_id AND vo.DocStatus IN ('CO','CL') AND iw.lco_withholdingtype_id = "+withholdingType+")"
+							+ " AND cd.GenerateWithholding='Y' AND ("
+								+ " i.ad_org_id IN  (SELECT DISTINCT Node_ID FROM getnodes("+orgId+",(SELECT AD_Tree_ID FROM AD_Tree WHERE TreeType ='OO' "
+								+ "AND AD_Client_ID="+getAD_Client_ID()+"),"+getAD_Client_ID()+") AS N (Parent_ID numeric,Node_ID numeric) " 
+								+ " WHERE Parent_ID = "+orgId+") OR i.ad_org_id="+orgId+")"					
+							+ " AND i.dateinvoiced BETWEEN '"+dateDocFrom+"' AND '"+dateDocTo+"' and bp.LCO_ISIC_ID > 0";
 				}				
 				
 				if(bPartnerId>0)
-					sql = sql+" AND i.C_BPartner_ID="+bPartnerId;
+					sql += " AND i.C_BPartner_ID="+bPartnerId;
 				if(invoiceId>0)
-					sql = sql+" AND i.C_Invoice_ID="+invoiceId;
+					sql += " AND i.C_Invoice_ID="+invoiceId;
 				
-				sql = sql+" GROUP BY i.c_bpartner_id";
+				sql += " AND i.IsSOTrx= '"+(iSOTrx?"Y":"N")+"' AND i.docstatus IN ('CO','CL') ";
+				
+				if(MSysConfig.getValue("LVE_GenerateInvoiceWithholdingIsPaid","N",getAD_Client_ID()).compareTo("N")==0){
+					sql += " AND i.ISPaid = 'N' ";
+				}
+				
+				sql = sql+" GROUP BY i.c_bpartner_id,i.ad_org_id";
 				
 				PreparedStatement pstmt = null;
 				ResultSet rs = null;
@@ -134,12 +155,15 @@ public class FTU_GenerateWithholdingVouchers extends SvrProcess {
 					
 					pstmt= DB.prepareStatement(sql, get_TrxName());
 					rs =  pstmt.executeQuery();
-					
+					int ins = 0;
+					int vins = 0;
 					while(rs.next()) {
+						vins = 0;
 						int cBPartnerId = rs.getInt("c_bpartner_id");
+						int AD_Org_ID = rs.getInt("AD_Org_ID");
 						
 						MLVEVoucherWithholding voucher = new MLVEVoucherWithholding(getCtx(), 0, get_TrxName());
-						voucher.setAD_Org_ID(orgId);
+						voucher.setAD_Org_ID(AD_Org_ID);
 						voucher.setC_BPartner_ID(cBPartnerId);
 						voucher.setDateFrom(dateDocFrom);
 						voucher.setDateTo(dateDocTo);
@@ -160,19 +184,26 @@ public class FTU_GenerateWithholdingVouchers extends SvrProcess {
 						
 						for (MInvoice mInvoice : invoices) {								
 							VWT_MInvoice invoice = new VWT_MInvoice(getCtx(), mInvoice.getC_Invoice_ID(), get_TrxName());
-							cnt += invoice.recalcWithholdings(voucher);
+							 ins = invoice.recalcWithholdings(voucher);
+							 vins +=  ins;
+							 cnt += ins;
 						}
 						
-						if(docAction.equals("CO"))
-							processWithholding(voucher);
-						
-						voucher.saveEx(get_TrxName());
-						String WithholdingNo = DB.getSQLValueString(get_TrxName(), "SELECT WithholdingNo FROM LVE_VoucherWithholding WHERE LVE_VoucherWithholding_ID=?", voucher.get_ID());
-						addBufferLog(voucher.get_ID(), new Timestamp(System.currentTimeMillis()), null, msg+": "+WithholdingNo, voucher.get_Table_ID(), voucher.get_ID());
+						if(vins>0) {
+							if(docAction.equals("CO"))
+								processWithholding(voucher);
+							
+							voucher.saveEx(get_TrxName());
+							String WithholdingNo = DB.getSQLValueString(get_TrxName(), "SELECT WithholdingNo FROM LVE_VoucherWithholding WHERE LVE_VoucherWithholding_ID=?", voucher.get_ID());
+							//String WithholdingNo = voucher.getWithholdingNo();
+							addBufferLog(voucher.get_ID(), new Timestamp(System.currentTimeMillis()), null, msg+": "+WithholdingNo, voucher.get_Table_ID(), voucher.get_ID());
+						}else {
+							voucher.deleteEx(true, get_TrxName());
+						}
 					}
 				
 				}catch(Exception e) {
-					
+					throw new AdempiereException(e);
 				}finally
 				{
 					DB.close(rs);
@@ -183,7 +214,7 @@ public class FTU_GenerateWithholdingVouchers extends SvrProcess {
 			}
 			
 		}catch(Exception e) {
-			
+			throw new AdempiereException(e);
 		}finally
 		{
 			DB.close(rswt);

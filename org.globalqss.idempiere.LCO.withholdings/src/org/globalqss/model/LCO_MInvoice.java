@@ -22,18 +22,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import org.adempiere.exceptions.AdempiereException;
 import org.compiere.model.MBPartner;
 import org.compiere.model.MBPartnerLocation;
 import org.compiere.model.MConversionRate;
 import org.compiere.model.MDocType;
 import org.compiere.model.MInvoice;
 import org.compiere.model.MLocation;
+import org.compiere.model.MOrg;
 import org.compiere.model.MOrgInfo;
 import org.compiere.model.MPriceList;
 import org.compiere.model.MTax;
 import org.compiere.model.Query;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
+
 import ve.net.dcs.model.MLVEVoucherWithholding;
 
 /**
@@ -69,6 +72,7 @@ public class LCO_MInvoice extends MInvoice
 		MBPartner bp = new MBPartner(getCtx(), getC_BPartner_ID(), get_TrxName());
 		int bp_isic_id = bp.get_ValueAsInt("LCO_ISIC_ID");
 		int bp_taxpayertype_id = bp.get_ValueAsInt("LCO_TaxPayerType_ID");
+		int FTU_Municipality_ID = bp.get_ValueAsInt("FTU_Municipality_ID");
 		MBPartnerLocation mbpl = new MBPartnerLocation(getCtx(), getC_BPartner_Location_ID(), get_TrxName());
 		MLocation bpl = MLocation.get(getCtx(), mbpl.getC_Location_ID(), get_TrxName());
 		int bp_city_id = bpl.getC_City_ID();
@@ -96,7 +100,7 @@ public class LCO_MInvoice extends MInvoice
 			.setParameters(params)
 			.list();
 		
-		for (X_LCO_WithholdingType wt : wts)
+		for (X_LCO_WithholdingType wt : wts.toArray(new X_LCO_WithholdingType[wts.size()]))
 		{
 			
 			String sql = "DELETE FROM LCO_InvoiceWithholding iw USING LVE_VoucherWithholding vw WHERE iw.C_Invoice_ID=? AND (vw.DocStatus = 'DR' OR vw.DocStatus = 'IP' OR iw.LVE_VoucherWithholding_ID IS NULL) AND iw.LCO_WithholdingType_ID=? ";
@@ -154,6 +158,17 @@ public class LCO_MInvoice extends MInvoice
 				paramsr.add(org_city_id);
 				if (org_city_id <= 0)
 					log.warning("Possible configuration error org city is used but not set");
+			}
+			if(wrc.get_ValueAsBoolean("IsUseBPMunicipality")) {
+				String sqlo = "SELECT FTU_Municipality_ID FROM AD_OrgInfo WHERE AD_Org_ID="+getAD_Org_ID();
+				int ORG_Municipality_ID = DB.getSQLValue(get_TrxName(), sqlo);
+				if (FTU_Municipality_ID==ORG_Municipality_ID)
+					continue;
+			}
+			//add support to filter of withholding rules by organization
+			if(voucher.getAD_Org_ID()>0) {
+				wherer.append(" AND (AD_Org_ID=? OR AD_Org_ID=0)");
+				paramsr.add(voucher.getAD_Org_ID());
 			}
 
 			// Add withholding categories of lines
@@ -439,8 +454,11 @@ public class LCO_MInvoice extends MInvoice
 					
 					if(getC_Currency_ID()!=voucher.getC_Currency_ID())
 					{
+						
 						taxamt = MConversionRate.convert(getCtx(), taxamt, getC_Currency_ID(), voucher.getC_Currency_ID(), 
 								getDateInvoiced(), voucher.getC_ConversionType_ID(), getAD_Client_ID(), getAD_Org_ID());
+						if(taxamt==null)
+							throw new AdempiereException("No se pudo convertir el monto del impuesto");
 						iwh.setTaxAmt(taxamt);
 						iwh.setTaxBaseAmt(MConversionRate.convert(getCtx(), base, getC_Currency_ID(), voucher.getC_Currency_ID(), 
 								getDateInvoiced(), voucher.getC_ConversionType_ID(), getAD_Client_ID(), getAD_Org_ID()));
