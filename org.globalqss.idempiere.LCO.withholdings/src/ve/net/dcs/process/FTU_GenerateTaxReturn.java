@@ -11,6 +11,7 @@ import org.compiere.model.MCharge;
 import org.compiere.model.MDocType;
 import org.compiere.model.MInvoice;
 import org.compiere.model.MInvoiceLine;
+import org.compiere.process.DocAction;
 import org.compiere.process.ProcessInfoParameter;
 import org.compiere.process.SvrProcess;
 import org.compiere.util.CLogger;
@@ -191,7 +192,8 @@ public class FTU_GenerateTaxReturn extends SvrProcess {
 		}
 					
 		if(cont>0) {
-			invoice.processIt(docAction);
+			if(!docAction.equals(DocAction.ACTION_None))
+				invoice.processIt(docAction);
 			invoice.saveEx(get_TrxName());
 		}else {
 			invoice.deleteEx(true, get_TrxName());

@@ -78,7 +78,7 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 		registerTableEvent(IEventTopics.DOC_BEFORE_PREPARE, MInvoice.Table_Name);
 		registerTableEvent(IEventTopics.DOC_BEFORE_COMPLETE, MInvoice.Table_Name);
 		registerTableEvent(IEventTopics.DOC_AFTER_COMPLETE, MInvoice.Table_Name);
-		registerTableEvent(IEventTopics.DOC_BEFORE_COMPLETE, MPayment.Table_Name);
+		//registerTableEvent(IEventTopics.DOC_BEFORE_COMPLETE, MPayment.Table_Name);
 		registerTableEvent(IEventTopics.DOC_AFTER_COMPLETE, MAllocationHdr.Table_Name);
 		//registerTableEvent(IEventTopics.DOC_BEFORE_POST, MAllocationHdr.Table_Name);
 		//registerTableEvent(IEventTopics.DOC_AFTER_POST, MAllocationHdr.Table_Name);
@@ -140,49 +140,51 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 		if (po.get_TableName().equals(MInvoice.Table_Name)
 				&& type.equals(IEventTopics.DOC_BEFORE_PREPARE)) {
 			MInvoice inv = (MInvoice) po;
-			if (inv.isReversal()) {
-				int invid = inv.getReversal_ID();
-				
-				if (invid > 0) {
-					MInvoice invreverted = new MInvoice(inv.getCtx(), invid, inv.get_TrxName());
-					String sql = 
-						  "SELECT LCO_InvoiceWithholding_ID "
-						 + " FROM LCO_InvoiceWithholding "
-						+ " WHERE C_Invoice_ID = ? "
-						+ " ORDER BY LCO_InvoiceWithholding_ID";
-					PreparedStatement pstmt = null;
-					ResultSet rs = null;
-					try
-					{
-						pstmt = DB.prepareStatement(sql, inv.get_TrxName());
-						pstmt.setInt(1, invreverted.getC_Invoice_ID());
-						rs = pstmt.executeQuery();
-						while (rs.next()) {
-							MLCOInvoiceWithholding iwh = new MLCOInvoiceWithholding(inv.getCtx(), rs.getInt(1), inv.get_TrxName());
-							MLCOInvoiceWithholding newiwh = new MLCOInvoiceWithholding(inv.getCtx(), 0, inv.get_TrxName());
-							newiwh.setAD_Org_ID(iwh.getAD_Org_ID());
-							newiwh.setC_Invoice_ID(inv.getC_Invoice_ID());
-							newiwh.setLCO_WithholdingType_ID(iwh.getLCO_WithholdingType_ID());
-							newiwh.setPercent(iwh.getPercent());
-							newiwh.setTaxAmt(iwh.getTaxAmt().negate());
-							newiwh.setTaxBaseAmt(iwh.getTaxBaseAmt().negate());
-							newiwh.setC_Tax_ID(iwh.getC_Tax_ID());
-							newiwh.setIsCalcOnPayment(iwh.isCalcOnPayment());
-							newiwh.setIsActive(iwh.isActive());	// Reviewme
-							if (!newiwh.save())
-								throw new RuntimeException("Error saving LCO_InvoiceWithholding docValidate");
+			if(!inv.isSOTrx()){//added by Adonis Castellanos 24/09/2020 
+				if (inv.isReversal()) {
+					int invid = inv.getReversal_ID();
+					
+					if (invid > 0) {
+						MInvoice invreverted = new MInvoice(inv.getCtx(), invid, inv.get_TrxName());
+						String sql = 
+							  "SELECT LCO_InvoiceWithholding_ID "
+							 + " FROM LCO_InvoiceWithholding "
+							+ " WHERE C_Invoice_ID = ? "
+							+ " ORDER BY LCO_InvoiceWithholding_ID";
+						PreparedStatement pstmt = null;
+						ResultSet rs = null;
+						try
+						{
+							pstmt = DB.prepareStatement(sql, inv.get_TrxName());
+							pstmt.setInt(1, invreverted.getC_Invoice_ID());
+							rs = pstmt.executeQuery();
+							while (rs.next()) {
+								MLCOInvoiceWithholding iwh = new MLCOInvoiceWithholding(inv.getCtx(), rs.getInt(1), inv.get_TrxName());
+								MLCOInvoiceWithholding newiwh = new MLCOInvoiceWithholding(inv.getCtx(), 0, inv.get_TrxName());
+								newiwh.setAD_Org_ID(iwh.getAD_Org_ID());
+								newiwh.setC_Invoice_ID(inv.getC_Invoice_ID());
+								newiwh.setLCO_WithholdingType_ID(iwh.getLCO_WithholdingType_ID());
+								newiwh.setPercent(iwh.getPercent());
+								newiwh.setTaxAmt(iwh.getTaxAmt().negate());
+								newiwh.setTaxBaseAmt(iwh.getTaxBaseAmt().negate());
+								newiwh.setC_Tax_ID(iwh.getC_Tax_ID());
+								newiwh.setIsCalcOnPayment(iwh.isCalcOnPayment());
+								newiwh.setIsActive(iwh.isActive());	// Reviewme
+								if (!newiwh.save())
+									throw new RuntimeException("Error saving LCO_InvoiceWithholding docValidate");
+							}
+						} catch (Exception e) {
+							log.log(Level.SEVERE, sql, e);
+							throw new RuntimeException("Error creating LCO_InvoiceWithholding for reversal invoice");
+						} finally {
+							DB.close(rs, pstmt);
+							rs = null; pstmt = null;
 						}
-					} catch (Exception e) {
-						log.log(Level.SEVERE, sql, e);
-						throw new RuntimeException("Error creating LCO_InvoiceWithholding for reversal invoice");
-					} finally {
-						DB.close(rs, pstmt);
-						rs = null; pstmt = null;
+					} else {
+						throw new RuntimeException("Can't get the number of the invoice reversed");
 					}
-				} else {
-					throw new RuntimeException("Can't get the number of the invoice reversed");
 				}
-			}
+			}	
 		}
 
 		// before preparing invoice validate if withholdings has been generated
@@ -190,47 +192,55 @@ public class LCO_ValidatorWH extends AbstractEventHandler
 				&& type.equals(IEventTopics.DOC_BEFORE_PREPARE)) {
 			MInvoice inv = (MInvoice) po;
 			/* @TODO: Change this to IsReversal & Reversal_ID on 3.5 */
-			if (inv.getDescription() != null 
-					&& inv.getDescription().contains("{->")
-					&& inv.getDescription().endsWith(")")) {
-				// don't validate this for autogenerated reversal invoices
-			} else {
-				if (inv.get_Value("WithholdingAmt") == null) {
-					MDocType dt = new MDocType(inv.getCtx(), inv.getC_DocTypeTarget_ID(), inv.get_TrxName());
-					String genwh = dt.get_ValueAsString("GenerateWithholding");
-					if (genwh != null) {
-
-//						if (genwh.equals("Y")) {
-//							// document type configured to compel generation of withholdings
-//							throw new RuntimeException(Msg.getMsg(inv.getCtx(), "LCO_WithholdingNotGenerated"));
-//						}
-						
-						if (genwh.equals("A")) {
-							// document type configured to generate withholdings automatically
-							LCO_MInvoice lcoinv = new LCO_MInvoice(inv.getCtx(), inv.getC_Invoice_ID(), inv.get_TrxName());
-							try {
-								lcoinv.recalcWithholdings(null);
-							} catch (SQLException e) {
-								e.printStackTrace();
+			if(!inv.isSOTrx()){//added by Adonis Castellanos 24/09/2020 
+				if (inv.getDescription() != null 
+						&& inv.getDescription().contains("{->")
+						&& inv.getDescription().endsWith(")")) {
+					// don't validate this for autogenerated reversal invoices
+				} else {
+					if (inv.get_Value("WithholdingAmt") == null) {
+						MDocType dt = new MDocType(inv.getCtx(), inv.getC_DocTypeTarget_ID(), inv.get_TrxName());
+						String genwh = dt.get_ValueAsString("GenerateWithholding");
+						if (genwh != null) {
+	
+	//						if (genwh.equals("Y")) {
+	//							// document type configured to compel generation of withholdings
+	//							throw new RuntimeException(Msg.getMsg(inv.getCtx(), "LCO_WithholdingNotGenerated"));
+	//						}
+							
+							if (genwh.equals("A")) {
+								// document type configured to generate withholdings automatically
+								LCO_MInvoice lcoinv = new LCO_MInvoice(inv.getCtx(), inv.getC_Invoice_ID(), inv.get_TrxName());
+								try {
+									lcoinv.recalcWithholdings(null);
+								} catch (SQLException e) {
+									e.printStackTrace();
+								}
 							}
 						}
 					}
 				}
-			}
+			}	
 		}
 
 		// after preparing invoice move invoice withholdings to taxes and recalc grandtotal of invoice
 		if (po.get_TableName().equals(MInvoice.Table_Name) && type.equals(IEventTopics.DOC_BEFORE_COMPLETE)) {
-			msg = translateWithholdingToTaxes((MInvoice) po);
-			if (msg != null)
-				throw new RuntimeException(msg);
+			MInvoice inv = (MInvoice) po;
+			if(!inv.isSOTrx()){//added by Adonis Castellanos 24/09/2020 
+				msg = translateWithholdingToTaxes(inv);
+				if (msg != null)
+					throw new RuntimeException(msg);
+			}	
 		}
 
 		// after completing the invoice fix the dates on withholdings and mark the invoice withholdings as processed
 		if (po.get_TableName().equals(MInvoice.Table_Name) && type.equals(IEventTopics.DOC_AFTER_COMPLETE)) {
-			msg = completeInvoiceWithholding((MInvoice) po);
-			if (msg != null)
-				throw new RuntimeException(msg);
+			MInvoice inv = (MInvoice) po;
+			if(!inv.isSOTrx()){//added by Adonis Castellanos 24/09/2020 
+				msg = completeInvoiceWithholding((MInvoice) po);
+				if (msg != null)
+					throw new RuntimeException(msg);
+			}	
 		}
 
 		// before completing the payment - validate that writeoff amount must be greater than sum of payment withholdings  

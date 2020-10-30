@@ -83,6 +83,10 @@ public class LCO_MInvoice extends MInvoice
 		MLocation ol = MLocation.get(getCtx(), oi.getC_Location_ID(), get_TrxName());
 		int org_city_id = ol.getC_City_ID();
 
+		//Added by Adonis Castellanos 30/10/2020
+		StringBuffer sqllcaWhereClause = new StringBuffer("");
+		//End Adonis
+		
 		// Search withholding types applicable depending on IsSOTrx
 		List<Object> params = new ArrayList<Object>();
 		
@@ -134,6 +138,7 @@ public class LCO_MInvoice extends MInvoice
 			if (wrc.isUseBPISIC()) {
 				wherer.append(" AND LCO_BP_ISIC_ID=? ");
 				paramsr.add(bp_isic_id);
+				sqllcaWhereClause.append(" AND il.M_Product_ID IN (SELECT prod.M_Product_ID FROM M_Product prod WHERE prod.ProductType IN ('S') AND prod.M_Product_ID=il.M_Product_ID) ");
 			}
 			if (wrc.isUseBPTaxPayerType()) {
 				wherer.append(" AND LCO_BP_TaxPayerType_ID=? ");
@@ -360,7 +365,8 @@ public class LCO_MInvoice extends MInvoice
 							+ "  FROM C_InvoiceLine il "
 							+ " WHERE IsActive='Y' AND C_Invoice_ID = ? ";
 					}
-					base = DB.getSQLValueBD(get_TrxName(), sqllca, paramslca);
+					
+					base = DB.getSQLValueBD(get_TrxName(), sqllca+sqllcaWhereClause, paramslca);
 					
 					//SUBTRAHEND
 //					if (MinAmount.compareTo(Env.ZERO) > 0) {
