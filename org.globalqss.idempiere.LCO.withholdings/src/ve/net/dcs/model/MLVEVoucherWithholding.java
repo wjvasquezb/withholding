@@ -489,8 +489,17 @@ public class MLVEVoucherWithholding extends X_LVE_VoucherWithholding implements 
 	 * Set the definite document number after completed
 	 */
 	private void createWithholdingNo(X_LCO_WithholdingType wt) {
-
-		MDocType dt = new MDocType(getCtx(), wt.get_ValueAsInt("C_DocType_ID"), get_TrxName());
+		int C_DocType_ID = 0;//= wt.get_ValueAsInt("C_DocType_ID");
+		
+		String sql = "SELECT wdt.C_DocType_ID FROM LVE_WithholdingDocType wdt "
+				+ " WHERE wdt.LCO_WithholdingType_ID="+wt.getLCO_WithholdingType_ID()+" "
+						+ " AND wdt.Parent_Org_ID IN (SELECT Parent_Org_ID FROM AD_OrgInfo WHERE AD_Org_ID="+getAD_Org_ID()+")";
+		C_DocType_ID = DB.getSQLValue(get_TrxName(), sql);
+		
+		if(C_DocType_ID<=0)
+			throw new AdempiereException("No se pudo encontrar el tipo de documento para la retención");
+		
+		MDocType dt = new MDocType(getCtx(), C_DocType_ID, get_TrxName());
 		
 		// Setear secuencia al comprobante si no tiene.
 		if(getWithholdingNo() == null || getWithholdingNo() == "") {
