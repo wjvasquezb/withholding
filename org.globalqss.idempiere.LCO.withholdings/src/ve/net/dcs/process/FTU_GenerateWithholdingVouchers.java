@@ -161,6 +161,7 @@ public class FTU_GenerateWithholdingVouchers extends SvrProcess {
 						vins = 0;
 						int cBPartnerId = rs.getInt("c_bpartner_id");
 						int AD_Org_ID = rs.getInt("AD_Org_ID");
+						System.out.println(cBPartnerId);
 						
 						MLVEVoucherWithholding voucher = new MLVEVoucherWithholding(getCtx(), 0, get_TrxName());
 						voucher.setAD_Org_ID(AD_Org_ID);
@@ -184,6 +185,7 @@ public class FTU_GenerateWithholdingVouchers extends SvrProcess {
 						
 						for (MInvoice mInvoice : invoices) {								
 							VWT_MInvoice invoice = new VWT_MInvoice(getCtx(), mInvoice.getC_Invoice_ID(), get_TrxName());
+							System.out.println(invoice.getDocumentNo());
 							 ins = invoice.recalcWithholdings(voucher);
 							 vins +=  ins;
 							 cnt += ins;

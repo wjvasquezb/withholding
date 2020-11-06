@@ -38,10 +38,10 @@ public class VWT_MInvoice extends LCO_MInvoice {
 		X_LCO_WithholdingType wt = new X_LCO_WithholdingType(ctx, voucher.getLCO_WithholdingType_ID(), trxName);
 		String isIssotrx = wt.isSOTrx() ? "Y": "N";
 		
-		String sqlwhere = COLUMNNAME_C_BPartner_ID+"=? AND IsSoTrx = ? ";
+		String sqlwhere = COLUMNNAME_C_BPartner_ID+"="+voucher.getC_BPartner_ID()+" AND IsSoTrx = '"+isIssotrx+"' ";
 		
-		parameters.add(voucher.getC_BPartner_ID());
-		parameters.add(isIssotrx);
+		//parameters.add(voucher.getC_BPartner_ID());
+		//parameters.add(isIssotrx);
 		
 		if (voucher.get_ValueAsInt("C_Invoice_ID") != 0){
 			sqlwhere += " AND "+COLUMNNAME_C_Invoice_ID+"=? ";
@@ -49,9 +49,9 @@ public class VWT_MInvoice extends LCO_MInvoice {
 		}
 		
 		if (voucher.getDateTo() != null && voucher.getDateFrom() != null){
-			sqlwhere += " AND "+COLUMNNAME_DateAcct+" BETWEEN ? AND ? ";
-			parameters.add(voucher.getDateFrom());
-			parameters.add(voucher.getDateTo());
+			sqlwhere += " AND "+COLUMNNAME_DateAcct+" BETWEEN '"+voucher.getDateFrom()+"' AND '"+voucher.getDateTo()+"' ";
+			/*parameters.add(voucher.getDateFrom());
+			parameters.add(voucher.getDateTo());*/
 		}
 		else if (voucher.getDateFrom() != null) {
 			sqlwhere += " AND "+COLUMNNAME_DateAcct+" >= ? ";
@@ -61,17 +61,19 @@ public class VWT_MInvoice extends LCO_MInvoice {
 			parameters.add(voucher.getDateTo());
 		}
 		
-		sqlwhere += " AND AD_Org_ID = ? AND DOCSTATUS IN ('CO','CL') ";
+		sqlwhere += " AND AD_Org_ID = "+voucher.getAD_Org_ID()+" AND DOCSTATUS IN ('CO','CL') ";
 		
 		if(MSysConfig.getValue("LVE_GenerateInvoiceWithholdingIsPaid","N",voucher.getAD_Client_ID()).compareTo("N")==0){
 			sqlwhere += " AND ISPaid = 'N' ";
 		}
 		
-		sqlwhere += " AND "+COLUMNNAME_C_Invoice_ID+" NOT IN (SELECT lw.C_Invoice_ID FROM LCO_InvoiceWithholding lw JOIN LVE_VoucherWithholding vw ON lw.LVE_VoucherWithholding_ID = vw.LVE_VoucherWithholding_ID WHERE  vw.DocStatus IN ('CO','DR') AND lw.LCO_WithholdingType_ID = ? AND lw.AD_Org_ID = ?) ";
+		sqlwhere += " AND "+COLUMNNAME_C_Invoice_ID+" NOT IN (SELECT lw.C_Invoice_ID FROM LCO_InvoiceWithholding lw "
+				+ "	JOIN LVE_VoucherWithholding vw ON lw.LVE_VoucherWithholding_ID = vw.LVE_VoucherWithholding_ID "
+				+ "WHERE  vw.DocStatus IN ('CO','DR') AND lw.LCO_WithholdingType_ID = "+voucher.getLCO_WithholdingType_ID()+" AND lw.AD_Org_ID = "+voucher.getAD_Org_ID()+") ";
 		
-		parameters.add(voucher.getAD_Org_ID());
+		/*parameters.add(voucher.getAD_Org_ID());
 		parameters.add(voucher.getLCO_WithholdingType_ID());
-		parameters.add(voucher.getAD_Org_ID());
+		parameters.add(voucher.getAD_Org_ID());*/
 		
 		List<MInvoice> list = new Query(ctx, Table_Name, sqlwhere, trxName)
 									.setParameters(parameters)
